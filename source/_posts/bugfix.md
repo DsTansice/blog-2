@@ -35,4 +35,5 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
 
 &emsp;&emsp;为了方便开发，下面附上旋转的正方向。
 
-(X Y轴旋转正方向)[https://cdn.jsdelivr.net/gh/EmptyDreams/resources/post/fx.png]
+!(X Y轴旋转正方向)[https://cdn.jsdelivr.net/gh/EmptyDreams/resources/post/fx.png]
+
