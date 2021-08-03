@@ -33,7 +33,10 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
 
 &emsp;&emsp;另外，经测试，旋转模型时不论书写顺序如何，都会按照先X后Y的顺序旋转模型。所以笔者建议书写json文件时也按照先写X轴后写Y轴的顺序，防止错误的发生。
 
-&emsp;&emsp;为了方便开发，下面附上旋转的正方向。
+&emsp;&emsp;为了方便开发，这里再说一下旋转轴的位置以及方向：
 
-![X Y轴旋转正方向](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/post/fx.png)
+<ul>
+    <li><b>Y轴</b>：Y轴再竖直方向上，从上向下看顺时针为正方向</li>
+    <li><b>X轴</b>：X轴在东西方向上，从东看向西顺时针为正方向</li>
+</ul>
 
