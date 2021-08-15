@@ -15,7 +15,7 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
 
 &emsp;&emsp;笔者开发环境为forge-1.12.2-**14.23.5.2768**，如果版本号不一样，笔者不能保证该指南的内容对你仍然准确。
 
-&emsp;&emsp;如果你发现指南中有错误、不足之处或其它任何问题，都可以发送邮件到[minedreams_ed@outlook.com]。
+&emsp;&emsp;如果你发现指南中有错误、不足之处或其它任何问题，都可以发送邮件到minedreams_ed@outlook.com。
 
 &emsp;&emsp;我会尽量为指南中的问题进行分类，如果你无法从分类中找到你要的问题，请善用浏览器的搜索功能（ctrl + F）。如果指南中没有你的问题，日后如果你自行解决了问题，也欢迎发送邮件给我，帮助我完善指南，同时也帮助其他人开发模组。
 
@@ -23,9 +23,9 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
 
 ---
 
-# ☼&emsp;JSON
+# ☼&ensp;JSON
 
-## ☽ &emsp;BlockStates
+## ☽ &ensp;BlockStates
 
 ### 模型旋转问题
 
@@ -39,9 +39,9 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
     <li><b>Y轴</b>：Y轴再竖直方向上，从上向下看顺时针为正方向</li>
     <li><b>X轴</b>：X轴在东西方向上，从东看向西顺时针为正方向</li>
 </ul>
-# ☼ &emsp;双端问题
+# ☼ &ensp;双端问题
 
-## ☽&emsp;客户端IBlockState数据异常
+## ☽&ensp;客户端IBlockState数据异常
 
 &emsp;&emsp;笔者在开发模组时遇到了一个特别奇怪的情况：在游戏执行一段时间后我的方块的`IBlockState`在客户端的数据就变成了默认值，从而导致获取选择框时返回值错误。经过检查，`TileEntity`和服务端数据均正常，后我又检查了我的所有代码，并在`World#setBlockState`、`Chunk#setBlcokState`以及`ExtendedBlockStorage#set`中均打了断点，发现并没有代码触发这些方法。随后我检查了可能更改Chunk数据的位置，最终发现是`Chunk#read`方法将客户端数据错误的修改了。
 
