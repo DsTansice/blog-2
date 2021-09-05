@@ -50,7 +50,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 &emsp;&emsp;**注意：这里目标文件夹同样要是空的！**
 
-<img src="https://upload-images.jianshu.io/upload_images/25389123-25939036504215a8.png?imageMogr2/auto-orient/strip|imageView2/2/w/494/format/webp" style="zoom:99%;" />
+<img src="https://upload-images.jianshu.io/upload_images/25389123-25939036504215a8.png" style="zoom:99%;" />
 
 &emsp;&emsp;接下来这个界面是让很多人迷惑的界面，简单说一下各个选项的作用：
 
@@ -64,11 +64,11 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 
 
-<img src="https://upload-images.jianshu.io/upload_images/25389123-56ffa51ff1a4e7eb.png?imageMogr2/auto-orient/strip|imageView2/2/w/728/format/webp" style="zoom: 67%;" />
+<img src="https://upload-images.jianshu.io/upload_images/25389123-56ffa51ff1a4e7eb.png" style="zoom: 67%;" />
 
 &emsp;&emsp;进入最后一个界面的时候可以先把`Run PyCharm`取消掉，点击`Finish`就完成安装了
 
-<img src="https://upload-images.jianshu.io/upload_images/25389123-e7d38392706758b1.png?imageMogr2/auto-orient/strip|imageView2/2/w/727/format/webp" style="zoom:67%;" />
+<img src="https://upload-images.jianshu.io/upload_images/25389123-e7d38392706758b1.png" style="zoom:67%;" />
 
 # 配置Anaconda环境变量
 
