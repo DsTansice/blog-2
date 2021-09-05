@@ -50,25 +50,13 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 &emsp;&emsp;**注意：这里目标文件夹同样要是空的！**
 
-<img src="https://upload-images.jianshu.io/upload_images/25389123-25939036504215a8.png" style="zoom:99%;" />
+<img src="https://pic4.zhimg.com/80/v2-8fa2ab72964bc9a979b31d562012e45b_720w.jpg" style="zoom:67%;" />
 
-&emsp;&emsp;接下来这个界面是让很多人迷惑的界面，简单说一下各个选项的作用：
+&emsp;&emsp;接下来这个界面是让很多人迷惑的界面，你们的界面跟这个应该有一点不太一样，没有32位的选项，也没有最下面安装JRE的选项，不影响安装。
 
-<ul>
-    <li>Create Desktop Shortcut: 创建桌面快捷方式（最好选上）</li>
-    <li>Add "Open Folder as Project": 添加打开文件夹作为项目（一般不用选）</li>
-    <li>Create Associations: 关联指定文件（可以选）</li>
-    <li>Update PATH variable: 更新系统环境（一般不用选）</li>
-</ul>
-
-
-
-
-<img src="https://upload-images.jianshu.io/upload_images/25389123-56ffa51ff1a4e7eb.png" style="zoom: 67%;" />
+<img src="https://pic2.zhimg.com/80/v2-4adeead66fe9a9ac358d2ef6e1984b2d_720w.jpg" style="zoom: 67%;" />
 
 &emsp;&emsp;进入最后一个界面的时候可以先把`Run PyCharm`取消掉，点击`Finish`就完成安装了
-
-<img src="https://upload-images.jianshu.io/upload_images/25389123-e7d38392706758b1.png" style="zoom:67%;" />
 
 # 配置Anaconda环境变量
 
