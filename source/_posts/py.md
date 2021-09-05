@@ -7,6 +7,7 @@ tags:
 
 cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b5.png
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
+
 ---
 
 # 下载
@@ -62,6 +63,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 
 
+
 <img src="https://upload-images.jianshu.io/upload_images/25389123-56ffa51ff1a4e7eb.png?imageMogr2/auto-orient/strip|imageView2/2/w/728/format/webp" style="zoom: 67%;" />
 
 &emsp;&emsp;进入最后一个界面的时候可以先把`Run PyCharm`取消掉，点击`Finish`就完成安装了
@@ -95,6 +97,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
     <li>修改文件内容</li>
     <li>命令提示符中执行“conda clean -i ”指令</li>
 </ol>
+
 
 &emsp;&emsp;修改后的`.condarc`应该长下面这个样子：
 
@@ -136,6 +139,7 @@ custom_channels:
     <li>Material Theme UI: 界面美化插件（名字后面带个Lite的是免费版，不带的是付费版）</li>
     <li>Translation: 翻译插件</li>
 </ul>
+
 
 # PyCharm优化
 
