@@ -14,7 +14,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 &emsp;&emsp;首先，我们需要下载Anaconda3和PyCharm的安装包，班群的小伙伴可以直接在群文件里面下载，其他人可以去官网下载，这里列出下载链接：[Anaconda3](https://www.anaconda.com/products/individual)、[PyCharm](https://www.jetbrains.com/zh-cn/pycharm/download/#section=windows)
 
-&emsp;&emsp;温馨提示：PyCharm下载社区版（Community）就够用了。
+&emsp;&emsp;温馨提示：PyCharm下载社区版（Community）就够用了，安装Anaconda3就不需要手动安装Python了。
 
 # 安装
 
