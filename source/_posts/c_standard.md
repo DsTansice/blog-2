@@ -1,7 +1,6 @@
 ---
 title: 浅读C语言代码规范
 date: 2021-09-05 16:49:06
-toc_number: false
 categories:
   - C
 tags:
