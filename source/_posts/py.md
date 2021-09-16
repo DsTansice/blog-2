@@ -4,7 +4,7 @@ date: 2021-09-05 13:58:13
 categories:
   - Python
 tags:
-  - py
+  - 教程
 cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b5.png
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
 

@@ -3,9 +3,8 @@ title: 《我的世界：Minecraft模组开发指南》读后感
 date: 2020-07-23 17:54:24
 tags:
 	- Java
-	- MC
 categories:
-	- Java
+    - MC
 cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b2.png
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 ---

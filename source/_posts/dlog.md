@@ -4,9 +4,9 @@ date: 2020-08-15 20:31:38
 toc_number: false
 categories:
 	- Java
-	- 现代工业
 tags: 
 	- 现代工业
+    - MC
 cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b1.png
 description: 有关“现代工业”的所有代码更新记录以及简单介绍
 ---

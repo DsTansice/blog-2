@@ -4,7 +4,6 @@ date: 2021-09-05 16:49:06
 categories:
   - C
 tags:
-  - C
   - 代码规范
 cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b6.jpg
 description: 这里简单描述了C语言的代码规范，部分规则其他语言也可参考。
