@@ -203,8 +203,8 @@ reward:
   enable: true
   QR_code:
      - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/afd.png
-        link: https://afdian.net/@emptydreams
-        text: 爱发电
+       link: https://afdian.net/@emptydreams
+       text: 爱发电
     # - img: /img/alipay.jpg
     #   link:
     #   text: alipay
