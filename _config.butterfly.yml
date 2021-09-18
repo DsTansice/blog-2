@@ -50,7 +50,7 @@ social:
 
 # Algolia search
 algolia_search:
-  enable: false
+  enable: true
   hits:
     per_page: 6
 
@@ -190,7 +190,7 @@ toc:
   enable: true
   number: true
   auto_open: true # auto open the sidebar
-  style_simple: true
+  style_simple: false
 
 post_copyright:
   enable: true
