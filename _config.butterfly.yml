@@ -61,7 +61,7 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: true
+  enable: false
   labels:
     input_placeholder: 输入搜索内容
     hits_empty: "很抱歉，没有找到相关内容(；′⌒`): ${query}" # if there are no result
