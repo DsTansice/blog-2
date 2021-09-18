@@ -43,28 +43,28 @@ copy:
 #   icon: link || the description
 social:
   fab fa-github: https://github.com/EmptyDreams || Github
-  fas fa-envelope: mailto:minedreams@gmail.com || Email
+  fas fa-envelope: mailto:minedreams@qq.com || Email
 
 # search (搜索)
 # --------------------------------------
 
 # Algolia search
 algolia_search:
-  enable: false
+  enable: true
   hits:
     per_page: 6
 
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
-    hits_stats: '${hits} results found in ${time} ms'
+    input_placeholder: 输入搜索内容
+    hits_empty: "很抱歉，没有找到相关内容o(TヘTo): ${query}" # if there are no result
+    hits_stats: '${hits} 在 ${time} ms 内找到了结果'
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
+    input_placeholder: 输入搜索内容
+    hits_empty: "很抱歉，没有找到相关内容(；′⌒`): ${query}" # if there are no result
 
 # Math (數學)
 # --------------------------------------
@@ -92,7 +92,7 @@ favicon: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/logo.png
 
 # Avatar (頭像)
 avatar:
-  img: /img/avatar.png
+  img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/qqavatar.jpg
   effect: false
 
 # The banner image of home page
@@ -157,7 +157,7 @@ post_meta:
     date_type: created # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     date_format: date # date/relative 顯示日期還是相對日期
     categories: true # true or false 主頁是否顯示分類
-    tags: false # true or false 主頁是否顯示標籤
+    tags: true # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
@@ -202,9 +202,15 @@ post_copyright:
 reward:
   enable: true
   QR_code:
+     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/vcode.jpg
+       link:
+       text: 微信
      - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/afd.png
        link: https://afdian.net/@emptydreams
        text: 爱发电
+     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/zfbcode.jpg
+       link:
+       text: 支付宝
     # - img: /img/alipay.jpg
     #   link:
     #   text: alipay
@@ -216,7 +222,7 @@ related_post:
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
 # figcaption (圖片描述文字)
-photofigcaption: false
+photofigcaption: true
 
 # anchor
 # when you scroll in post, the URL will update according to header id.
@@ -517,11 +523,11 @@ enter_transitions: true
 # canvas_ribbon (靜止彩帶背景)
 # See: https://github.com/hustcc/ribbon.js
 canvas_ribbon:
-  enable: false
+  enable: true
   size: 150
   alpha: 0.6
   zIndex: -1
-  click_to_change: false
+  click_to_change: true
   mobile: false
 
 # Fluttering Ribbon (動態彩帶)
@@ -560,7 +566,7 @@ click_heart:
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
 ClickShowText:
-  enable: true
+  enable: false
   text:
      - JAVA
      - MI
