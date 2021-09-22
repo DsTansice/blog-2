@@ -4,7 +4,8 @@
     - name: Bilibili
       link: https://space.bilibili.com/66951474
       avatar: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bilibili.png
-      descr: 可以在这里找到我发布的视频，另外不定时直播写代码哦~
+      descr: 探索我的视频~
+      siteshot: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bilibiliSite.jpg
 
 - class_name: 拓展
   class_desc: 大佬专区
@@ -13,3 +14,4 @@
       link: https://www.yuque.com/probius
       avatar: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/tj.png
       descr: 妄想全栈的fw碳基酱（
+      siteshot: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/tjSite.png

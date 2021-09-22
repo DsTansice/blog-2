@@ -45,6 +45,9 @@ social:
   fab fa-github: https://github.com/EmptyDreams || Github
   fas fa-envelope: mailto:minedreams@qq.com || Email
 
+# 友链样式，butterfly为默认样式，volantis为站点卡片样式.flexcard为弹性卡片样式
+flink_style: flexcard # butterfly | volantis | flexcard
+
 # search (搜索)
 # --------------------------------------
 
