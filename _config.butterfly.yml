@@ -855,7 +855,7 @@ inject:
       - <link rel="stylesheet" href="/self/kimbie-dark.css">
       - <link rel="stylesheet" href="/self/copyright.css">
   bottom:
-      - <script src="/js/smooth-scrolling.js"></script>
+      - <script src="/self/smooth-scrolling.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN
