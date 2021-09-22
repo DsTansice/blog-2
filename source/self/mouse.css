@@ -17,7 +17,7 @@ input:hover{
 }
 /* 悬停按钮时的鼠标指针 */
 button:hover{
-    cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/ayuda.cur'),auto;
+    cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto;
 }
 /* 悬停列表标签时的鼠标指针 */
 i:hover{
