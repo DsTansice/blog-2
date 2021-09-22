@@ -509,7 +509,7 @@ tag_ui: # 留空或 index
 background: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bgcs.jpg)
 
 # Footer Background
-footer_bg: false
+footer_bg: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/footer.png
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
