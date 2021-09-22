@@ -207,13 +207,13 @@ post_copyright:
 reward:
   enable: true
   QR_code:
-     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/vcode.jpg
+     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/vcode.jpg
        link:
        text: 微信
-     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/afd.png
+     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/afd.png
        link: https://afdian.net/@emptydreams
        text: 爱发电
-     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/zfbcode.jpg
+     - img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/zfbcode.jpg
        link:
        text: 支付宝
     # - img: /img/alipay.jpg
@@ -870,6 +870,9 @@ CDN:
   jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js
   main: /js/main.js
   utils: /js/utils.js
+  # 打赏按钮投币效果
+  coin_js: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/coin.js
+  coin_css: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/coin.css
 
   # pjax
   pjax: https://cdn.jsdelivr.net/npm/pjax/pjax.min.js
