@@ -838,7 +838,7 @@ inject:
   head:
       - <link rel="stylesheet" href="/self/kimbie-dark.css">
       - <link rel="stylesheet" href="/self/copyright.css">
-      - <link rel="stylesheet" href="/self/custom.css"  media="defer" onload="this.media='all'">
+      - <link rel="stylesheet" href="/self/custom.css">
   bottom:
     # - <script src="xxxx"></script>
 
