@@ -839,7 +839,7 @@ inject:
       - <link rel="stylesheet" href="/self/kimbie-dark.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/copyright.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/mouse.css"  media="defer" onload="this.media='all'">
-#      - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
+      - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
   bottom:
     # - <script src="xxxx"></script>
 
