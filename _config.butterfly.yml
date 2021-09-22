@@ -417,7 +417,7 @@ footer:
 
 # Baidu Analytics
 # https://tongji.baidu.com/web/welcome/login
-baidu_analytics:
+baidu_analytics: code-c6wpamBYNV
 
 # Google Analytics
 # https://analytics.google.com/analytics/web/
@@ -855,7 +855,6 @@ inject:
       - <link rel="stylesheet" href="/self/kimbie-dark.css">
       - <link rel="stylesheet" href="/self/copyright.css">
   bottom:
-      - <script src="/self/smooth-scrolling.js"></script>
     # - <script src="xxxx"></script>
 
 # CDN
