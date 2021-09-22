@@ -114,6 +114,7 @@ deploy:
   type: git
   repo: https://github.com/EmptyDreams/blog.git
   branch: master
+  type: baidu_url_submitter
 
 Plugins:
 - hexo-generator-baidu-sitemap
