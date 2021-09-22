@@ -115,7 +115,6 @@ deploy:
 Plugins:
 - hexo-generator-baidu-sitemap
 - hexo-generator-sitemap
-- hexo-butterfly-wowjs
 
 baidusitemap:
     path: baidusitemap.xml
