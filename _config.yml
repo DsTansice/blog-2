@@ -21,6 +21,13 @@ pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
+#baidu
+baidu_url_submit:
+  count: 500 ## 提交最新的一个链接
+  host: blog.emptydreams.xyz ## 在百度站长平台中注册的域名
+  token: J6CJzjr45CAxOvB5 ## 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  path: baidu_urls.txt ## 文本文档的地址， 新链接会保存在此文本文档里
+
 # Directory
 source_dir: source
 public_dir: public
