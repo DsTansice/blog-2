@@ -452,12 +452,8 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-
-# Baidu Webmaster tools verification setting
-# See: https://ziyuan.baidu.com/site/
-
-  - name: baidu_site_verification
-    content: code-c6wpamBYNV
+ - name: baidu_site_verification
+   content: code-c6wpamBYNV
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
