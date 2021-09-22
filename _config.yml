@@ -111,14 +111,12 @@ theme: butterfly
 #  repo: https://e.coding.net/emptydreams/kongmeng.coding.me.git
 #  branch: master
 deploy:
-  type: git
-  repo: https://github.com/EmptyDreams/blog.git
-  branch: master
   type: baidu_url_submitter
 
 Plugins:
 - hexo-generator-baidu-sitemap
 - hexo-generator-sitemap
+- hexo-baidu-url-submit
 
 baidusitemap:
     path: baidusitemap.xml
