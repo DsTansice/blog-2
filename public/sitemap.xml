@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/dlog/</loc>
+    
+    <lastmod>2021-09-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/binary/</loc>
+    
+    <lastmod>2021-09-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/bugfix/</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/c_standard/</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/LocalInnerClass/</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/py/</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/ReviewOfDevelopmentGuide/</loc>
+    
+    <lastmod>2021-09-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/index.html</loc>
+    
+    <lastmod>2020-10-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/index.html</loc>
+    
+    <lastmod>2020-10-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/admin/config.json</loc>
+    
+    <lastmod>2020-07-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/admin/index.html</loc>
+    
+    <lastmod>2020-07-15</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>https://blog.emptydreams.xyz/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/Java/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/%E7%B1%BB/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/MC/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/tags/%E7%8E%B0%E4%BB%A3%E5%B7%A5%E4%B8%9A-MC/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/MC/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/Java/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/%E9%80%9A%E7%94%A8/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/C/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.emptydreams.xyz/categories/Python/</loc>
+    <lastmod>2021-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>
