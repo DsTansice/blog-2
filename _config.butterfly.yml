@@ -67,7 +67,7 @@ local_search:
   enable: true
   labels:
     input_placeholder: 输入搜索内容
-    hits_empty: "很抱歉，没有找到相关内容(；′⌒`): ${query}" # if there are no result
+    hits_empty: "很抱歉，没有找到相关内容o(TヘTo): ${query}" # if there are no result
 
 # Math (數學)
 # --------------------------------------
@@ -227,7 +227,7 @@ related_post:
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
 # figcaption (圖片描述文字)
-photofigcaption: true
+photofigcaption: false
 
 # anchor
 # when you scroll in post, the URL will update according to header id.
@@ -276,8 +276,8 @@ comments:
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: true
-  count: false # Display comment count in top_img
+  lazyload: false
+  count: true # Display comment count in top_img
 
 # disqus
 # https://disqus.com/
@@ -516,7 +516,7 @@ background:
   mobilenight: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mobileDarkBG.png)  #【可选】移动端夜间模式背景
 
 # Footer Background
-footer_bg: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/footer.png
+footer_bg: rgba(0,0,0,0)
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
