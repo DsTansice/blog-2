@@ -28,6 +28,11 @@ search:
   content: true
   template: ./search.xml
 
+#播放器
+aplayer:
+  meting: true
+  asset_inject: false
+
 # Directory
 source_dir: source
 public_dir: public

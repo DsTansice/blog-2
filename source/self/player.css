@@ -1,0 +1,17 @@
+/* 默认情况下缩进左侧66px，只留一点箭头部分 */
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+/* 鼠标悬停是左侧缩进归零，完全显示按钮 */
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0 !important;
+}
+
+/* 颜色配置 */
+span#aplayer-list-cur{
+  background:rgba(250,250,250,0.85)!important;
+}
+[data-theme="dark"]
+  span#aplayer-list-cur{
+    background:rgba(50,50,50,0.75)!important;
+  }
