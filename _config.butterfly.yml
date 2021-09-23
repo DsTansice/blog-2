@@ -512,11 +512,9 @@ tag_ui: # 留空或 index
 background:
   default: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/pcDayBG.jpg)  #【必选】默认背景
   darkmode: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/pcDarkBG.jpg)  #【可选】PC端夜间模式背景
-  mobileday: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mobileDayBG.jpg)  #【可选】移动端日间默认背景
-  mobilenight: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mobileDarkBG.png)  #【可选】移动端夜间模式背景
 
 # Footer Background
-footer_bg: rgba(0,0,0,0)
+footer_bg: url(https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png)
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -589,7 +587,7 @@ display_mode: dark
 beautify:
   enable: true
   field: post # site/post
-  title-prefix-icon: '\f0c1'
+  title-prefix-icon: '\f51f'
   title-prefix-icon-color: '#F47466'
 
 # Global font settings
@@ -862,6 +860,8 @@ inject:
       - <link rel="stylesheet" href="/self/mouse.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/topFilter.css"  media="defer" onload="this.media='all'">
+      - <link rel="stylesheet" href="/self/sidebar.css"  media="defer" onload="this.media='all'">
+      - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
   bottom:
     # - <script src="xxxx"></script>
 
