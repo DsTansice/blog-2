@@ -509,7 +509,11 @@ tag_ui: # 留空或 index
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bgcs.jpg)
+background:
+  default: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/pcDayBG.jpg)  #【必选】默认背景
+  darkmode: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/pcDarkBG.jpg)  #【可选】PC端夜间模式背景
+  mobileday: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mobileDayBG.jpg)  #【可选】移动端日间默认背景
+  mobilenight: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mobileDarkBG.png)  #【可选】移动端夜间模式背景
 
 # Footer Background
 footer_bg: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/footer.png
