@@ -864,7 +864,7 @@ inject:
       - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
   bottom:
-    - <div class="aplayer no-destroy" data-id="6682859963" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-order="random" data-preload="auto" data-volume="0.1" data-lrctype="1" muted></div>
+    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-order="random" data-preload="auto" data-volume="0.1" data-autoplay="true" muted></div>
     # - <script src="xxxx"></script>
 
 # CDN
@@ -879,6 +879,8 @@ CDN:
   # 打赏按钮投币效果
   coin_js: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/coin.js
   coin_css: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/coin.css
+  # aplayer 拓展
+  my_player_js: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/playerShrinker.js
 
   # pjax
   pjax: https://cdn.jsdelivr.net/npm/pjax/pjax.min.js
