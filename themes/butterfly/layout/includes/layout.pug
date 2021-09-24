@@ -16,22 +16,23 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
 
     if theme.background
       #web_bg
-        style.
-          #web_bg{
-            background: #{DefaultBg} !important;
-            background-attachment: local!important;
-            background-position: center!important;
-            background-size: cover!important;
-            background-repeat: no-repeat!important;
-          }
-          [data-theme="dark"]
+        if page.defaultbg || page.darkmodebg
+          style.
             #web_bg{
-              background: #{DarkmodeBg} !important;
+              background: #{DefaultBg} !important;
               background-attachment: local!important;
               background-position: center!important;
               background-size: cover!important;
               background-repeat: no-repeat!important;
             }
+            [data-theme="dark"]
+              #web_bg{
+                background: #{DarkmodeBg} !important;
+                background-attachment: local!important;
+                background-position: center!important;
+                background-size: cover!important;
+                background-repeat: no-repeat!important;
+              }
 
     !=partial('includes/sidebar', {}, {cache: true})
 
