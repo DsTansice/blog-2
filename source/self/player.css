@@ -3,7 +3,7 @@
   left: -66px !important;
 }
 /* 鼠标悬停是左侧缩进归零，完全显示按钮 */
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:click {
   left: 0 !important;
 }
 
@@ -14,8 +14,16 @@
     background:rgba(25,25,25,0.85)!important;
   }
 [data-theme="dark"]
-  .aplayer:hover{
-    background:rgba(50,50,50,0.85)!important;
+  .aplayer-list{
+    border: rgb(50,50,50)!important;
+  }
+[data-theme="dark"]
+  li:hover{
+    background:rgba(70,70,70,0.75)!important;
+  }
+[data-theme="dark"]
+  span:hover{
+    background:rgba(80,80,80,0.75)!important;
   }
 /* 正在播放的歌曲的背景 */
 [data-theme="dark"]
