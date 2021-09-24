@@ -19,6 +19,9 @@ input:hover{
 button:hover{
     cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
 }
+div#scroll-down:hover{
+    cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
 /* 悬停列表标签时的鼠标指针 */
 i:hover{
     cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto;
@@ -34,4 +37,50 @@ i:hover{
 /* 悬停菜单栏时的鼠标指针 */
 #nav .site-page:hover{
       cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/Alternative2.cur'),auto;
+}
+/* 播放器 */
+.aplayer:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+.aplayer-list li:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-pic:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-body:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+.aplayer-icon:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-info:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+.aplayer-list-index:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-list-author:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-author:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+.aplayer-title:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+.aplayer-music:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+.aplayer-bar-wrap div:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-bar-wrap span:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-bar-wrap svg:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+.aplayer-bar-wrap path:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
 }

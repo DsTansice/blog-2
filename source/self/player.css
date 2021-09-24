@@ -13,10 +13,7 @@
   .aplayer{
     background:rgba(25,25,25,0.85)!important;
   }
-[data-theme="dark"]
-  .aplayer-list{
-    border: rgb(50,50,50)!important;
-  }
+/* 鼠标选取背景 */
 [data-theme="dark"]
   .aplayer-list li:hover{
     background:rgba(70,70,70,0.75)!important;
@@ -54,6 +51,7 @@
   .aplayer-author{
     color: #ffffff!important;
   }
+/* 列表歌手信息 */
 [data-theme="dark"]
   .aplayer-list-author{
     color: #c8c8c8!important;
