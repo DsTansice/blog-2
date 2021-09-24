@@ -32,5 +32,8 @@
     "hexo-renderer-stylus": "^1.1.0",
     "hexo-server": "^1.0.0",
     "hexo-wordcount": "^6.0.1"
+  },
+  "devDependencies": {
+    "netlify-plugin-subfont": "^6.0.0"
   }
 }
