@@ -864,7 +864,6 @@ inject:
       - <link rel="stylesheet" href="/self/mouse.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/topFilter.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/sidebar.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/icon.css"  media="defer" onload="this.media='all'">
