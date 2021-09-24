@@ -514,7 +514,7 @@ background:
   darkmode: url(https://cdn.jsdelivr.net/gh/EmptyDreams/resources/pcDarkBG.jpg)  #【可选】PC端夜间模式背景
 
 # Footer Background
-footer_bg: url(https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png)
+footer_bg: rgba(255,255,255,0)
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
