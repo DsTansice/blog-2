@@ -18,11 +18,11 @@
     border: rgb(50,50,50)!important;
   }
 [data-theme="dark"]
-  li:hover{
+  .aplayer-list li:hover{
     background:rgba(70,70,70,0.75)!important;
   }
 [data-theme="dark"]
-  span:hover{
+  .aplayer-list-light:hover{
     background:rgba(80,80,80,0.75)!important;
   }
 /* 正在播放的歌曲的背景 */
