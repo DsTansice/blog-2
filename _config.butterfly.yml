@@ -864,7 +864,7 @@ inject:
       - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
   bottom:
-    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-order="random" data-preload="auto" data-volume="0.1" data-autoplay="true" data-mutex="false" muted></div>
+    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" data-order="random" data-preload="auto" data-volume="0.1" muted></div>
     # - <script src="xxxx"></script>
 
 # CDN
