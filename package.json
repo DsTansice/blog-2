@@ -1,15 +1,45 @@
 {
-  "engines": {
-    "node": ">= 0.10.0"
+  "name": "hexo-site",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server"
+  },
+  "hexo": {
+    "version": "5.4.0"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "hexo": "^5.0.0",
+    "hexo-algoliasearch": "^1.0.0",
+    "hexo-asset-image": "^1.0.0",
+    "hexo-butterfly-tag-plugins-plus": "^1.0.3",
+    "hexo-butterfly-wowjs": "^1.0.4",
+    "hexo-deployer-git": "^2.1.0",
+    "hexo-generator-archive": "^1.0.0",
+    "hexo-generator-baidu-sitemap": "^0.1.6",
+    "hexo-generator-category": "^1.0.0",
+    "hexo-generator-index": "^1.0.0",
+    "hexo-generator-json-content": "^4.1.6",
+    "hexo-generator-search": "^2.4.3",
+    "hexo-generator-searchdb": "^1.4.0",
+    "hexo-generator-sitemap": "^2.1.0",
+    "hexo-generator-tag": "^1.0.0",
+    "hexo-renderer-ejs": "^1.0.0",
+    "hexo-renderer-kramed": "^0.1.4",
+    "hexo-renderer-pug": "^1.0.0",
+    "hexo-renderer-stylus": "^1.1.0",
+    "hexo-server": "^1.0.0",
+    "hexo-wordcount": "^6.0.1",
+    "workbox-build": "^6.3.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-qunit": "~0.5.2",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-font-spider": "^0.1.5",
-    "grunt-hexo": "^0.2.2"
+    "gulp-clean-css": "^4.3.0",
+    "gulp-html-minifier-terser": "^6.0.1",
+    "gulp-htmlclean": "^2.7.22",
+    "gulp-terser": "^2.1.0"
   }
 }

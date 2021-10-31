@@ -1,0 +1,78 @@
+/* 全局默认鼠标指针 */
+body,
+html, li:hover::before{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+/* 选择链接、标签、图片、按钮时的鼠标指针 */
+a:hover, a#site-name:hover, img, button:hover, div#scroll-down:hover, i:hover{
+    cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 选中输入框时的鼠标指针 */
+input:hover{
+    cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/texto.cur'),auto;
+}
+/* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */
+#footer-wrap a:hover{
+      cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto;
+}
+/* 悬停页码时的鼠标指针 */
+#pagination .page-number:hover{
+      cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/Alternative2.cur'),auto;
+}
+/* 悬停菜单栏时的鼠标指针 */
+#nav .site-page:hover{
+      cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/Alternative2.cur'),auto;
+}
+/* 播放器 */
+/* 总体 */
+.aplayer:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+/* 歌单列表 */
+.aplayer-list li:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 歌曲封面 */
+.aplayer-pic:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 控制台 */
+.aplayer-body:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+/* 按钮图标 */
+.aplayer-icon:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 信息栏 */
+.aplayer-info:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+/* 列表数字标号 */
+.aplayer-list-index:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto;
+}
+/* 列表歌手名称 */
+.aplayer-list-author:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 控制台歌手信息 */
+.aplayer-author:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+/* 控制台歌曲名称 */
+.aplayer-title:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto;
+}
+/* 控制台歌曲信息背景 */
+.aplayer-music:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
+/* 进度条 */
+.aplayer-bar-wrap div:hover, .aplayer-bar-wrap span:hover, .aplayer-bar-wrap svg:hover, .aplayer-bar-wrap path:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/link.cur'),auto !important;
+}
+/* 音量条 */
+.aplayer-volume-bar-wrap:hover{
+  cursor: url('https://cdn.jsdelivr.net/gh/EmptyDreams/resources/mouse/normal.cur'),auto !important;
+}
