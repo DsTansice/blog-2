@@ -165,7 +165,7 @@ int (*p2)[10] = array;		//2
 
 <div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">该图来自网络，侵删</font></div>
 
-![指针数组](http://c.biancheng.net/uploads/allimg/180906/2-1PZ6092I9D6.jpg)
+![指针数组](https://dwz.date/fhdr)
 
 #### (*)[] - 数组指针
 
@@ -173,13 +173,21 @@ int (*p2)[10] = array;		//2
 
 <div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">该图来自网络，侵删</font></div>
 
-![指针数组](http://c.biancheng.net/uploads/allimg/180906/2-1PZ6092Q4443.jpg)
+![指针数组](https://dwz.date/fhdq)
 
 ---
 
 &emsp;&emsp;现在，已知上面两种写法其中一种是正确的，读者可以尝试根据这两种内存结构推理一下哪一种是可以通过编译的。
 
 &emsp;&emsp;答案是第二种，为什么呢？我们将二维数组带入进去可以发现，第二种写法只是存储了数组中第一个元素的地址，这和二维数组的内存结构是一致的，所以可以正确运行。而第一种写法其实其内存结构和二级指针构成的数组大差不差。
+
+# 参考资料
+
+>[C语言中的二级指针和二维数组问题](https://www.linuxidc.com/Linux/2015-03/115055.htm)
+>
+>[C语言中指针和数组](https://www.cnblogs.com/downey-blog/p/10469906.html)
+>
+>[数组指针和指针数组的区别](https://dwz.date/fhdp)
 
 
 
