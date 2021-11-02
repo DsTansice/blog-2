@@ -12,17 +12,17 @@ description: 什么是指针？指针和数组的关系是什么？
 ---
 
 
-{% tip warning faa-horizontal animated %}本篇博客内容有待论证，如果不是前来查误的请勿阅读！{% endtip %}
+{% tip warning faa-horizontal animated %}<div class="text" style=" text-align:center;">本篇博客内容有待论证，如果不是前来查误的请勿阅读！</div>{% endtip %}
 
-<div class="text" style=" text-align:center;"><font size="4px" font color="#66ccff">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</font></div>
+{% tip info %}<p><div class="text" style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</div>
 
-<div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</font></div>
+<p><div class="text" style=" text-align:center;"><font size="2px">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</font></div>{% endtip %}
 
 # 内存
 
-<div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">这里只是对内存简单并片面的进行了简单的介绍，更多内容还请自行搜索</font></div>
+{% tip info %}<div class="text" style=" text-align:center;"><font size="2px" font color="#ffffff">这里只是对内存简单并片面的进行了简单的介绍，更多内容还请自行搜索</font></div>{% endtip %}
 
-&emsp;&emsp;说到指针，肯定无法避免的和内存扯上关系。从硬件层面来说，内存是用来临时（断电丢失数据）存储数据的高速存储设备。从软件层面来说，内存相当于一个容量巨大的一维数组，下标从`0`开始，依次向后排列，这个下标也就是我们经常说的“内存地址”。
+&emsp;&emsp;说到指针，肯定无法避免的和内存扯上关系。从硬件层面来说，内存是用来临时（断电丢失数据）存储程序运行时数据的高速存储设备。从软件层面来说，内存相当于一个容量巨大的一维数组，下标从`0`开始，依次向后排列，这个下标也就是我们经常说的“内存地址”。
 
 &emsp;&emsp;需要注意的是，实际开发中（仅限于win10平台，win从什么版本开始这个设计和其它平台的我不清楚）所有程序的内存地址都是从`0`开始的，这是因为操作系统为了安全性考虑没有将真实的内存地址暴露给程序，程序访问到的是其实是一个虚拟的内存地址，程序的内存地址表示的是该内存在操作系统给程序分配的内存空间中的位置。
 
@@ -95,7 +95,7 @@ int *arrayPoint = array;
 int *array = malloc(10 * sizeof(int));
 ```
 
-&emsp;&emsp;`malloc`在堆分配了一个长度为`10 * sizeof(int)`的内存空间，并且返回这段内存的启示位置的地址。由此可知，我们将数组的地址存储到了`array`中，实际的内容分配到了堆中。结构如下：
+&emsp;&emsp;`malloc`在堆分配了一个长度为`10 * sizeof(int)`的内存空间，并且返回这段内存的起始位置的地址。由此可知，我们将数组的地址存储到了`array`中，实际的内容分配到了堆中。结构如下：
 
 ![指针](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/point/op.png)
 
@@ -140,7 +140,7 @@ int arr2[3][3];
 
 ![二维数组内存结构](https://www.linuxidc.com/upload/2015_03/15031621526830.png)
 
-<div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">该图片引用自：https://www.linuxidc.com/Linux/2015-03/115055.htm，侵删</font></div>
+{% span center blue, 该图来自网络，侵删 %}
 
 ### 小结
 
@@ -163,17 +163,17 @@ int (*p2)[10] = array;		//2
 
 &emsp;&emsp;指针数组实际上是一个数组，其中存储了一些指针的值，内存结构如下：
 
-<div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">该图来自网络，侵删</font></div>
-
 ![指针数组](https://dwz.date/fhdr)
+
+{% span center blue, 该图来自网络，侵删 %}
 
 #### (*)[] - 数组指针
 
 &emsp;&emsp;数组指针实际上是一个指针，指针指向数组所在的内存地址，内存结构如下：
 
-<div class="text" style=" text-align:center;"><font size="2px" font color="#66ccff">该图来自网络，侵删</font></div>
-
 ![指针数组](https://dwz.date/fhdq)
+
+{% span center blue, 该图来自网络，侵删 %}
 
 ---
 
