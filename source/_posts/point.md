@@ -11,12 +11,10 @@ cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b16.jpeg
 description: 什么是指针？指针和数组的关系是什么？
 ---
 
+{% tip info %}<div class="text" style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</div><br>
 
-{% tip warning faa-horizontal animated %}<div class="text" style=" text-align:center;">本篇博客内容有待论证，如果不是前来查误的请勿阅读！</div>{% endtip %}
+<div class="text" style=" text-align:center;">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</div>{% endtip %}
 
-{% tip info %}<p><div class="text" style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</div>
-
-<p><div class="text" style=" text-align:center;"><font size="2px">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</font></div>{% endtip %}
 
 # 内存
 
