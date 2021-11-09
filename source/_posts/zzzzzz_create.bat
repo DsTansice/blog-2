@@ -1,1 +1,1 @@
-java -jar zzzzzz_creater.jar
+@java -jar zzzzzz_creater.jar
