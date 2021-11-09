@@ -11,6 +11,7 @@ menu:
   归档: /archives/ || icon-guidang
   标签: /tags/ || icon-biaoqian
   分类: /categories/ || icon-fenlei
+  留言板: /comments/ || icon-liuyan
   # List||fas fa-list:
   #   - Music || /music/ || fas fa-music
   #   - Movie || /movies/ || fas fa-video
@@ -887,7 +888,7 @@ inject:
       - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
       - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
   bottom:
-    - <script src="//at.alicdn.com/t/font_2833129_oi3xr8rt9k.js"></script>
+    - <script src="//at.alicdn.com/t/font_2833129_pt4y60afxkn.js"></script>
     - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" data-order="random" data-volume="0.1" muted></div>
 #    - <div class="aplayer no-destroy" data-id="7675104902" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false" data-order="random" data-volume="0.1" muted></div>
 # - <script src="xxxx"></script>

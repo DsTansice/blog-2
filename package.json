@@ -16,6 +16,7 @@
     "hexo": "^5.0.0",
     "hexo-algoliasearch": "^1.0.0",
     "hexo-asset-image": "^1.0.0",
+    "hexo-butterfly-envelope": "^1.0.7",
     "hexo-butterfly-footer-beautify": "^1.0.4",
     "hexo-butterfly-tag-plugins-plus": "^1.0.3",
     "hexo-butterfly-wowjs": "^1.0.4",
