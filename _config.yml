@@ -30,7 +30,7 @@ search:
 
 #播放器
 aplayer:
-  meting: true
+  meting: false
   asset_inject: false
 
 # Directory
