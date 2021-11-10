@@ -118,13 +118,6 @@ theme: butterfly
 deploy:
 
 Plugins:
-- hexo-generator-baidu-sitemap
-- hexo-generator-sitemap
-
-baidusitemap:
-    path: baidusitemap.xml
-sitemap:
-    path: sitemap.xml
 
 jsonContent:
     meta: false
@@ -185,6 +178,11 @@ font:
     # boolean to add local font. default = false
     local: false
 
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
 # envelope_comment
 # see https://akilar.top/posts/58900a8/
 envelope_comment:
@@ -233,9 +231,6 @@ footer_beautify:
     - link: https://butterfly.js.org/
       shields: https://img.shields.io/badge/Theme-Butterfly-6513df?style=plastic&logo=bitdefender
       message: 主题版本Butterfly_v3.8.3
-    - link: https://www.jsdelivr.com/
-      shields: https://img.shields.io/badge/CDN-jsDelivr-orange?style=plastic&logo=jsDelivr
-      message: 本站使用JsDelivr为静态资源提供CDN加速
     - link: https://github.com/EmptyDreams/blog
       shields: https://img.shields.io/badge/Source-Github-d021d6?style=plastic&logo=GitHub
       message: 本站项目由Gtihub托管

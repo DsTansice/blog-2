@@ -486,12 +486,21 @@ google_adsense:
 #   aside:
 #   post:
 
-# Verification (站長驗證)
+# Verification (站长验证)
 # --------------------------------------
-
 site_verification:
+ #百度
  - name: baidu-site-verification
    content: code-c6wpamBYNV
+ #搜狗
+ - name: sogou_site_verification
+   content: OLjI7xoRfY
+ #必应
+ - name: msvalidate.01
+   content: 4D0452C80638B0C50B1895BDDD28341D
+ #头条
+ - name: bytedance-verification-code
+   content: gJaFb+Tv3E1+DC46qTXQ
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
@@ -888,7 +897,7 @@ inject:
       - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
   bottom:
     - <script src="//at.alicdn.com/t/font_2833129_pt4y60afxkn.js"></script>
-    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" data-order="random" data-volume="0.1" muted></div>
+#    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" data-order="random" data-volume="0.1" muted></div>
 #    - <div class="aplayer no-destroy" data-id="7675104902" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false" data-order="random" data-volume="0.1" muted></div>
 # - <script src="xxxx"></script>
 
