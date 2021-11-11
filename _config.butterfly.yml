@@ -80,8 +80,7 @@ tag_plugins:
     anima: https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css #动画标签anima的依赖
     jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js #issues标签依赖
     issues: https://cdn.jsdelivr.net/npm/hexo-theme-volantis@latest/source/js/issues.min.js #issues标签依赖
-    #iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
-    icon: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/alfontCDN.js
+    iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
     carousel: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js
 
 # Math (數學)
@@ -889,15 +888,16 @@ fragment_cache: true
 inject:
   head:
       - <link rel="stylesheet" href="/self/icon.css">
-      - <link rel="stylesheet" href="/self/font.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/kimbie-dark.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/copyright.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/mouse.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
-      - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/font.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/kimbie-dark.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/copyright.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/mouse.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/backgroundA.css"  media="defer" onload="this.media='all'">
+#      - <link rel="stylesheet" href="/self/pageIcon.css"  media="defer" onload="this.media='all'">
+      - <link rel="stylesheet" href="/self/all_zip.css"  media="defer" onload="this.media='all'">
 #      - <link rel="stylesheet" href="/self/player.css"  media="defer" onload="this.media='all'">
   bottom:
-    - <script src="https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/alfont.js"></script>
+    - <script src="//at.alicdn.com/t/font_2833129_pt4y60afxkn.js"></script>
 #    - <div class="aplayer no-destroy" data-id="3211357658" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="true" data-order="random" data-volume="0.1" muted></div>
 #    - <div class="aplayer no-destroy" data-id="7675104902" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-autoplay="false" data-order="random" data-volume="0.1" muted></div>
 # - <script src="xxxx"></script>
