@@ -5,7 +5,7 @@ categories:
   - 随心记
 tags:
   - 日记
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b14.jpeg
+cover: https://image.emptydreams.xyz/bg/b14.jpg
 description: 谈一谈从编程小白到现在的心路历程
 ---
 

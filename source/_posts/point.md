@@ -7,7 +7,7 @@ tags:
   - 教程
   - 数组
   - 指针
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b16.jpeg
+cover: https://image.emptydreams.xyz/bg/b16.jpg
 description: 什么是指针？指针和数组的关系是什么？
 ---
 

@@ -6,7 +6,7 @@ categories:
 tags:
   - 递归
   - 教程
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b15.jfif
+cover: https://image.emptydreams.xyz/bg/b15.jpg
 description: 简要说明递归的用法和递归的思想。
 ---
 

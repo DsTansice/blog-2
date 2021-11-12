@@ -6,7 +6,7 @@ categories:
 tags:
   - 教程
   - 进制
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b13.jpeg
+cover: https://image.emptydreams.xyz/bg/b13.jpg
 description: 简单描述IEEE754标准的浮点数的二进制表示方式
 ---
 

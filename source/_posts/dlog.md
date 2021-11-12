@@ -8,7 +8,7 @@ tags:
   - 现代工业
   - MC
   - 日志
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b1.png
+cover: https://image.emptydreams.xyz/bg/b1.jpg
 description: 有关“现代工业”的所有代码更新记录以及简单介绍
 ---
 

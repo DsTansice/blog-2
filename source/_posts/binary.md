@@ -6,7 +6,7 @@ categories:
 tags:
   - 进制
   - 教程
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b7.jpeg
+cover: https://image.emptydreams.xyz/bg/b7.jpg
 description: 被二进制秀的团团转？来这里寻找二进制的本质。
 ---
 

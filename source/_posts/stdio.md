@@ -6,7 +6,7 @@ categories:
 tags:
   - 函数
   - 教程
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b9.jpeg
+cover: https://image.emptydreams.xyz/bg/b9.jpg
 description: 简要讲解控制台输入/输出的相关内容
 ---
 

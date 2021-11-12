@@ -6,7 +6,7 @@ categories:
   - 通用
 tags:
   - 教程
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b8.jpeg
+cover: https://image.emptydreams.xyz/bg/b8.jpg
 ---
 
 

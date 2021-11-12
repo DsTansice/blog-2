@@ -6,7 +6,7 @@ categories:
 tags:
   - 规范
   - 教程
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b12.jpeg
+cover: https://image.emptydreams.xyz/bg/b12.jpg
 description: 简单总结一下我对一些代码的建议。
 ---
 

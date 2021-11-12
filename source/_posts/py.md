@@ -6,7 +6,7 @@ categories:
 tags:
   - 教程
   - 环境
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b5.png
+cover: https://image.emptydreams.xyz/bg/b5.jpg
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
 
 ---

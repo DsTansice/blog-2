@@ -5,7 +5,7 @@ tags:
 	- Java
 categories:
     - MC
-cover: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bg/b2.png
+cover: https://image.emptydreams.xyz/bg/b2.jpg
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 ---
 
