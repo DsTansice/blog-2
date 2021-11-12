@@ -143,6 +143,8 @@ description: 简单描述IEEE754标准的浮点数的二进制表示方式
 
 &emsp;&emsp;为此，在`math.h`中定义了一个函数`isnan(x)`，该函数用于判断数字是否为NaN。还有一个于其对应的函数`isnormal(x)`，该函数用于判断数字是否为一个正常的数字，当数字为`0`、无穷数、NaN时会返回`false`，否则返回`true`。
 
+---
+
 # 参考资料
 
 >[IEEE 754 - Standard binary floating point arithmetic](http://www.softelectro.ru/ieee754_en.html)

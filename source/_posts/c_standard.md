@@ -339,7 +339,9 @@ int main(int argc, char *argv[], char *envp[])
 
 &emsp;&emsp;尽量将编译器警告调到最高级别，这样你更容易发现自己代码的问题。
 
-### 参考资料：
+---
+
+# 参考资料：
 
 &emsp;&emsp;按参考程度排序，程度越深越靠前。
 
