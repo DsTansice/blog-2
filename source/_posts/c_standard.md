@@ -1,12 +1,13 @@
 ---
 title: 浅读C语言代码规范
 date: 2021-09-05 16:49:06
+top_img: false
 categories:
   - C/C++
 tags:
   - 规范
   - 教程
-cover: https://image.emptydreams.xyz/bg/b6.jpg
+cover: https://image.emptydreams.xyz/bg/b6.jpg!/fxfn2/300x300
 description: 这里简单描述了C语言的代码规范，部分规则其他语言也可参考。
 ---
 

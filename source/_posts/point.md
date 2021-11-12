@@ -1,13 +1,14 @@
 ---
 title: 指针&数组
 date: 2021-11-01 10:27:06
+top_img: false
 categories:
   - C/C++
 tags:
   - 教程
   - 数组
   - 指针
-cover: https://image.emptydreams.xyz/bg/b16.jpg
+cover: https://image.emptydreams.xyz/bg/b16.jpg!/fxfn2/300x300
 description: 什么是指针？指针和数组的关系是什么？
 ---
 

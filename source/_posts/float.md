@@ -1,12 +1,13 @@
 ---
 title: 浮点数的二进制表示
 date: 2021-10-20 21:42:32
+top_img: false
 categories:
   - 通用
 tags:
   - 教程
   - 进制
-cover: https://image.emptydreams.xyz/bg/b13.jpg
+cover: https://image.emptydreams.xyz/bg/b13.jpg!/fxfn2/300x300
 description: 简单描述IEEE754标准的浮点数的二进制表示方式
 ---
 

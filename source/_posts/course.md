@@ -1,11 +1,12 @@
 ---
 title: 从小白到如今的心理变化
 date: 2021-10-25 21:25:21
+top_img: false
 categories:
   - 随心记
 tags:
   - 日记
-cover: https://image.emptydreams.xyz/bg/b14.jpg
+cover: https://image.emptydreams.xyz/bg/b14.jpg!/fxfn2/300x300
 description: 谈一谈从编程小白到现在的心路历程
 ---
 

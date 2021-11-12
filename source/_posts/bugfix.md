@@ -1,12 +1,13 @@
 ---
 title: MC模组开发漏洞修复指南
 date: 2021-08-03 17:12:54
+top_img: false
 categories:
   - Java
 tags:
   - MC
   - 教程
-cover: https://image.emptydreams.xyz/bg/b4.jpg
+cover: https://image.emptydreams.xyz/bg/b4.jpg!/fxfn2/300x300
 description: 这里会写一些我开发模组时遇到的问题以及解决方法，遇到问题的小伙伴可以尝试在这里寻找解决方案。
 ---
 

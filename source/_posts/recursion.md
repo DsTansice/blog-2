@@ -1,12 +1,13 @@
 ---
 title: 什么是递归
 date: 2021-10-29 22:33:33
+top_img: false
 categories:
   - 通用
 tags:
   - 递归
   - 教程
-cover: https://image.emptydreams.xyz/bg/b15.jpg
+cover: https://image.emptydreams.xyz/bg/b15.jpg!/fxfn2/300x300
 description: 简要说明递归的用法和递归的思想。
 ---
 

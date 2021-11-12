@@ -1,12 +1,14 @@
 ---
 title: 简单概述自加操作
 date: 2021-09-24 15:43:59
+top_img: false
 toc_number: false
 categories:
   - 通用
 tags:
   - 教程
-cover: https://image.emptydreams.xyz/bg/b8.jpg
+cover: https://image.emptydreams.xyz/bg/b8.jpg!/fxfn2/300x300
+description: 简单描述两种自加操作的区别，自减操作类比
 ---
 
 

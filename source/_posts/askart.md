@@ -1,12 +1,13 @@
 ---
 title: 提问的艺术
 date: 2021-11-12 13:12:08
+top_img: false
 categories:
   - 随心记
 tags:
   - 规范
   - 日记
-cover: https://image.emptydreams.xyz/bg/b17.jpg
+cover: https://image.emptydreams.xyz/bg/b17.jpg!/fxfn2/300x300
 description: 前些日子和别人争论了一下提问的问题，心有所感，这里写一些感想。
 ---
 
@@ -135,7 +136,6 @@ public static void main(String[] args) {
     <li>别人没有为你解答问题的义务，注意礼貌用语</li>
     <li>提问之前自己先好好思考以下，很多问题自己可以解决</li>
 </ol>
-
 
 
 

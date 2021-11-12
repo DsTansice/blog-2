@@ -1,6 +1,7 @@
 ---
 title: 现代工业|开发日志
 date: 2020-08-15 20:31:38
+top_img: false
 toc_number: false
 categories:
   - Java
@@ -8,7 +9,7 @@ tags:
   - 现代工业
   - MC
   - 日志
-cover: https://image.emptydreams.xyz/bg/b1.jpg
+cover: https://image.emptydreams.xyz/bg/b1.jpg!/fxfn2/300x300
 description: 有关“现代工业”的所有代码更新记录以及简单介绍
 ---
 

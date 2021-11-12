@@ -1,12 +1,13 @@
 ---
 title: 形象的简述电流
 date: 2021-09-30 20:35:53
+top_img: false
 categories:
   - 物理
 tags:
   - 电流
   - 教程
-cover: https://image.emptydreams.xyz/bg/b11.jpg
+cover: https://image.emptydreams.xyz/bg/b11.jpg!/fxfn2/300x300
 description: 使用“小球模型”简述电流的本质
 ---
 
