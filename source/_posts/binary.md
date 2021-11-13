@@ -25,11 +25,11 @@ description: 被二进制秀的团团转？来这里寻找二进制的本质。
 
 &emsp;&emsp;如图所示，十进制的`500`转换为二进制后就变为了`111110100(2)`。十进制转换为其他进制将除数`2`换成其他进制的值即可。
 
-![十进制转二进制图解](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/binary/10t2.jpg)
+![十进制转二进制图解](https://image.emptydreams.xyz/binary/10t2.jpg)
 
 &emsp;&emsp;二进制转换为十进制则是二进制数从低位到高位（即从右往左）计算，第0位的权值是2的0次方，第1位的权值是2的1次方，第2位的权值是2的2次方，依次递增下去，把最后的结果相加的值就是十进制的值了。
 
-![二进制转十进制](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/binary/2t10.jpg)
+![二进制转十进制](https://image.emptydreams.xyz/binary/2t10.jpg)
 
 &emsp;&emsp;其他进制转换为十进制的方法与二进制转十进制类似，只不过将`2^n*m`中的`2`换成对应的进制值就可以了。
 

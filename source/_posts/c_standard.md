@@ -63,7 +63,7 @@ unsigned int cnm(int n, int m) {
 
 &emsp;&emsp;比如上面几行代码完成的是一个功能，下面几行代码完成的是另一个功能，那么它们中间就要加空行。这样看起来更清晰。因为C语言的例子我没有找到，这里拿Java写的一个例子来充个数。
 
-![](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/standard/dmk.jpg)
+![](https://image.emptydreams.xyz/standard/dmk.jpg)
 
 ### 集中的变量声明后添加空行
 

@@ -38,7 +38,7 @@ description: 使用“小球模型”简述电流的本质
 
 &emsp;&emsp;首先，让我们搭建一条简单的线路（因为绘图的问题，所以有些小球看起来并不是紧贴在一起，当作是贴在一起毫无缝隙就行）：
 
-<img src="https://cdn.jsdelivr.net/gh/EmptyDreams/resources/current/jiandan.png" alt="示例" style="zoom:67%;" />
+![示例](https://image.emptydreams.xyz/current/jiandan.png!/scale/67)
 
 ## 电流等大原则
 

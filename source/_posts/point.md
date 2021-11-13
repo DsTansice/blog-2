@@ -111,7 +111,7 @@ int *array = malloc(10 * sizeof(int));
 
 &emsp;&emsp;`malloc`在堆分配了一个长度为`10 * sizeof(int)`的内存空间，并且返回这段内存的起始位置的地址。由此可知，我们将数组的地址存储到了`array`中，实际的内容分配到了堆中。结构如下：
 
-![指针](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/point/op.png)
+![指针](https://image.emptydreams.xyz/point/op.png)
 
 
 
@@ -139,7 +139,7 @@ for (int i = 0; i < 3; ++i) {
 
 &emsp;&emsp;其内存结构如下：
 
-![内存结构](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/point/tp.png)
+![内存结构](https://image.emptydreams.xyz/point/tp.png)
 
 &emsp;&emsp;这里解释一下为什么会这样。首先，我们在栈中存储了数组的地址。然后为数组分配了一个内存空间，这里要注意，我们分配空间的时候先使用`malloc`分配了一个长度为`3 * sizeof(int*)`的空间，随后再遍历这个一维数组，继续分配二维空间。可以理解为我们创建了四个数组，其中一个用于存储剩余数组的起始内存地址。
 
@@ -177,7 +177,7 @@ int (*p2)[10] = array;		//2
 
 &emsp;&emsp;指针数组实际上是一个数组，其中存储了一些指针的值，内存结构如下：
 
-![指针数组](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/point/zs.jpg)
+![指针数组](https://image.emptydreams.xyz/point/zs.jpg)
 
 {% span center blue, 该图来自网络，侵删 %}
 
@@ -185,7 +185,7 @@ int (*p2)[10] = array;		//2
 
 &emsp;&emsp;数组指针实际上是一个指针，指针指向数组所在的内存地址，内存结构如下：
 
-![指针数组](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/point/sz.jpg)
+![指针数组](https://image.emptydreams.xyz/point/sz.jpg)
 
 {% span center blue, 该图来自网络，侵删 %}
 

@@ -73,7 +73,7 @@ description: 简单描述IEEE754标准的浮点数的二进制表示方式
 
 &emsp;&emsp;存储形式见下图：
 
-![浮点数内存结构示意图](https://cdn.jsdelivr.net/gh/EmptyDreams/resources/float/ieee754_1.jpg)
+![浮点数内存结构示意图](https://image.emptydreams.xyz/float/ieee754_1.jpg)
 
 ## 符号位
 
