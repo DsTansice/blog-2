@@ -7,7 +7,7 @@ categories:
   - 通用
 tags:
   - 教程
-cover: https://image.emptydreams.xyz/bg/b8.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b8.jpg!/fxfn2/550x500
 description: 简单描述两种自加操作的区别，自减操作类比
 ---
 

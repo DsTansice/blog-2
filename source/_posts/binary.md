@@ -7,7 +7,7 @@ categories:
 tags:
   - 进制
   - 教程
-cover: https://image.emptydreams.xyz/bg/b7.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b7.jpg!/fxfn2/550x500
 description: 被二进制秀的团团转？来这里寻找二进制的本质。
 ---
 

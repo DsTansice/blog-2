@@ -7,7 +7,7 @@ categories:
 tags:
   - 电流
   - 教程
-cover: https://image.emptydreams.xyz/bg/b11.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b11.jpg!/fxfn2/550x500
 description: 使用“小球模型”简述电流的本质
 ---
 

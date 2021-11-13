@@ -7,7 +7,7 @@ categories:
 tags:
   - 规范
   - 教程
-cover: https://image.emptydreams.xyz/bg/b12.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b12.jpg!/fxfn2/550x500
 description: 简单总结一下我对一些代码的建议。
 ---
 

@@ -7,7 +7,7 @@ categories:
 tags:
   - 函数
   - 教程
-cover: https://image.emptydreams.xyz/bg/b9.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b9.jpg!/fxfn2/550x500
 description: 简要讲解控制台输入/输出的相关内容
 ---
 

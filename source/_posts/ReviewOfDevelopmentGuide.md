@@ -6,7 +6,7 @@ tags:
 	- Java
 categories:
     - MC
-cover: https://image.emptydreams.xyz/bg/b2.jpg!/fxfn2/300x300
+cover: https://image.emptydreams.xyz/bg/b2.jpg!/fxfn2/550x500
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 ---
 
