@@ -11,11 +11,9 @@ cover: https://image.emptydreams.xyz/bg/b18.jpg!/fxfn2/550x500
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
 ---
 
-
-
 # 注意
 
-&emsp;&emsp;[点击查看题目列表](https://pintia.cn/problem-sets/1456526446360133632/problems/type/7)
+&emsp;&emsp;[点击查看题目列表](https://www.yuque.com/zzulic/exam/dyb7pq)
 
 &emsp;&emsp;为了避免不必要的问题，这里不再列出题目信息，只说明标题。同时该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
 
