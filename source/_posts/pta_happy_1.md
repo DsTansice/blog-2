@@ -468,7 +468,7 @@ int create(int min) {
 
 ## 方法二
 
-&emsp;&emsp;当时写的时候有些地方写乱了，现在也懒得重构了，直接上代码，能看懂的看懂，看不懂的就自己试试暴力算法吧：
+&emsp;&emsp;这道题优解难度较大，直接上代码，能看懂的看懂，看不懂的就自己试试暴力算法吧：
 
 ```C
 //将数组形式的数转换为整型
@@ -525,23 +525,16 @@ lu createMinPalindrome(int minNum) {
         //初始化cache
         memset(cache, 0, sizeof(int) * length);
         cache[0] = cache[length - 1] = 1;   //首尾位置的数替换成1
-        value = arrayToInt(cache, length);  //更新int值
-        if (value > minNum) return value;   //判断是否大于
         int k = length / 2; //计算中点下标，奇偶情况分别处理
-        if (length % 2 == 0) {
-            int i = k - 1;
-            //循环自增，直到比minNum大
-            while (plus(cache, length, i , k)) {
-                value = arrayToInt(cache, length);
-                if (value > minNum) return value;
-            }
-        } else {
-            //循环自增，直到比minNum大
-            while (plus(cache, length, k , k)) {
-                value = arrayToInt(cache, length);
-                if (value > minNum) return value;
-            }
-        }
+        int left = (length % 2 == 0 ? k - 1 : k);
+        //循环自增，直到比minNum大
+        //do-while的条件是为了在所有位都为9后进入下一次外部循环
+        //这道题很明显只有minNum各个位上均为9时会进入第二次外部循环
+        //因为概率出现较低，提前判断会让平均运行时间增大，就不提前判断了
+        do {
+            value = arrayToInt(cache, length);
+            if (value > minNum) return value;
+        } while (plus(cache, length, left, k));
     }
 }
 
@@ -558,11 +551,9 @@ int main () {
 
 
 
+---
 
-
-
-
-
+{% tip info %}<div class="text" style=" text-align:center;">创作不易，扫描下方打赏二维码支持一下吧ヾ(≧▽≦*)o</div>{% endtip %}
 
 
 
