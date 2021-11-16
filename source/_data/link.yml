@@ -3,18 +3,18 @@
   link_list:
     - name: Bilibili
       link: https://space.bilibili.com/66951474
-      avatar: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bilibili.png
+      avatar: https://image.emptydreams.xyz/links/bilibili.png!/max/200
       descr: 探索我的视频~
-      siteshot: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/bilibiliSite.jpg
+      siteshot: https://image.emptydreams.xyz/links/bilibiliSite.jpg!/max/350
 
 - class_name: 拓展
   class_desc: 大佬专区
   link_list:
     - name: 碳基的小天地
       link: https://www.yuque.com/probius
-      avatar: https://image.emptydreams.xyz/tj.png
+      avatar: https://image.emptydreams.xyz/links/tj.png!/max/200
       descr: 妄想全栈的fw碳基酱（
-      siteshot: https://image.emptydreams.xyz/tjSite.png
+      siteshot: https://image.emptydreams.xyz/links/tjSite.png!/max/350
     - name: There,hello大大
       link: https://www.therehello.top/
       avatar: https://z3.ax1x.com/2021/11/04/IeChpF.jpg
@@ -25,3 +25,8 @@
       avatar: https://akilar.top/img/siteicon/favicon.png
       descr: 欢迎光临糖果屋
       siteshot: https://cdn.jsdelivr.net/gh/Akilarlxh/ScreenShot@gh-pages/akilar.top.jpg
+    - name: 锦瑟的糖果屋
+      link: https://www.ijinse.cn
+      avatar: https://resource.ijinse.cn/2021/11/20211105115121673.png
+      descr: 锦瑟无端五十弦，一弦一柱思华年
+      siteshot: https://image.emptydreams.xyz/links/jinseSite.jpg!/max/350
