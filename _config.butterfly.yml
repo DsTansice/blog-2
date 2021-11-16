@@ -221,13 +221,13 @@ reward:
   enable: true
   QR_code:
      - img: https://image.emptydreams.xyz/reward/vcode.jpg
-       link:
+       link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/vcode.jpg
        text: 微信
      - img: https://image.emptydreams.xyz/reward/afd.png
        link: https://afdian.net/@emptydreams
        text: 爱发电
      - img: https://image.emptydreams.xyz/reward/zfbcode.jpg
-       link:
+       link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/zfbcode.jpg
        text: 支付宝
     # - img: /img/alipay.jpg
     #   link:

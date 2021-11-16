@@ -1,0 +1,99 @@
+/* 首页文章卡片 */
+[data-theme="light"]
+  #recent-posts > .recent-post-item{
+    background:rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  #recent-posts > .recent-post-item{
+    background:rgba(20, 20, 20, 0.75);
+}
+/* 首页侧栏卡片 */
+[data-theme="light"]
+  .card-widget{
+    background:rgba(250, 250, 250, 0.85)!important;
+}
+[data-theme="dark"]
+  .card-widget{
+    background:rgba(20, 20, 20, 0.75)!important;
+}
+/* 文章页面正文背景 */
+[data-theme="light"]
+  div#post{
+    background: rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  div#post{
+    background: rgba(20, 20, 20, 0.75);
+}
+/* 分页页面 */
+[data-theme="light"]
+  div#page{
+    background: rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  div#page{
+    background: rgba(20, 20, 20, 0.75);
+}
+/* 归档页面 */
+[data-theme="light"]
+  div#archive{
+    background: rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  div#archive{
+    background: rgba(20, 20, 20, 0.75);
+}
+/* 标签页面 */
+[data-theme="light"]
+  div#tag{
+    background: rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  div#tag{
+    background: rgba(20, 20, 20, 0.75);
+}
+/* 分类页面 */
+[data-theme="light"]
+  div#category{
+    background: rgba(250, 250, 250, 0.85);
+}
+[data-theme="dark"]
+  div#category{
+    background: rgba(20, 20, 20, 0.75);
+}
+/* 页脚背景 */
+#footer:before {
+    background: rgba(0,0,0,0.1) !important;
+}
+/* 有序列表序号 */
+[data-theme="dark"]
+  li::before{
+    background: #2e2e2e !important;
+    box-shadow: 0 0 1px blue !important;
+  }
+/* 引入背景 */
+[data-theme="dark"]
+  blockquote{
+    background-color: rgba(20,20,20,0.65) !important;
+  }
+/* 阅读模式代码框文字背景 */
+[data-theme="light"]
+  #article-container figure.highlight .hljs{
+    background: rgba(0,0,0,0) !important;
+  }
+[data-theme="light"]
+  div#sidebar-menus{
+    background: rgba(255,255,255,0.8) !important;
+  }
+[data-theme="dark"]
+  div#sidebar-menus{
+    background: rgba(18,18,18,0.8) !important;
+  }
+[data-theme="dark"]
+  div#menu-mask{
+    background: rgba(0,0,0,0.6) !important;
+  }
+[data-theme="dark"]
+  div#sidebar-menus.site-page{
+    background: rgba(255,255,255,0.5);
+  }
