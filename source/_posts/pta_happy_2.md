@@ -17,7 +17,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 &emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
 
-# 输出10个不重复的英文字母
+# #1 输出10个不重复的英文字母
 
 ## 题干
 
@@ -39,7 +39,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% note success no-icon %}poemp134567
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例1
 
@@ -47,7 +47,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% note success no-icon %}not found
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输入样例2
 
@@ -55,7 +55,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% note success no-icon %}This 156is a test example
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例2
 
@@ -63,7 +63,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% note success no-icon %}Thisaexmpl
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -97,7 +97,7 @@ int main() {
 }
 ```
 
-# 显示指定范围的素数并求和
+# #2 显示指定范围的素数并求和
 
 ## 题干
 
@@ -119,7 +119,7 @@ int main() {
 
 {% note success no-icon %}4 30
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
@@ -131,7 +131,7 @@ int main() {
 
 amount=8 sum=124
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -170,7 +170,7 @@ int main() {
 }
 ```
 
-# 输入一个整数，在一行中输出相应个数的星号
+# #3 输入一个整数，在一行中输出相应个数的星号
 
 ## 题干
 
@@ -178,13 +178,13 @@ int main() {
 
 {% note success no-icon %}5
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note success no-icon %}\*\*\*\*\*
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -197,7 +197,7 @@ int main() {
 }
 ```
 
-# 跳一跳
+# #4 跳一跳
 
 ## 题干
 
@@ -217,13 +217,13 @@ int main() {
 
 2 3 1 1 4
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note success no-icon %}2
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 解释
 
@@ -280,7 +280,7 @@ int main() {
 }
 ```
 
-# 数据类型转换
+# #5 数据类型转换
 
 ## 题干
 
@@ -300,13 +300,13 @@ int main() {
 
 {% note success no-icon %}12.15
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note success no-icon %}1.80
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -323,7 +323,7 @@ int main() {
 }
 ```
 
-# 位1的个数
+# #6 位1的个数
 
 ## 题干
 
@@ -345,7 +345,7 @@ int main() {
 
 {% note success no-icon %}37
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例1
 
@@ -353,7 +353,7 @@ int main() {
 
 {% note success no-icon %}3
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输入样例2
 
@@ -361,7 +361,7 @@ int main() {
 
 {% note success no-icon %}0
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例2
 
@@ -369,7 +369,7 @@ int main() {
 
 {% note success no-icon %}0
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -389,7 +389,7 @@ int main() {
 }
 ```
 
-# 求π的近似值
+# #7 求π的近似值
 
 ## 题干
 
@@ -413,7 +413,7 @@ int main() {
 
 {% note success no-icon %}0.00000001
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
@@ -421,7 +421,7 @@ int main() {
 
 {% note success no-icon %}3.141497
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -442,7 +442,7 @@ int main() {
 }
 ```
 
-# 查验身份证
+# #8 查验身份证
 
 ## 题干
 
@@ -479,7 +479,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 37070419881216001X
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例1
 
@@ -489,7 +489,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 37070419881216001X
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输入样例2
 
@@ -499,13 +499,13 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 110108196711301862
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例2
 
 {% note success no-icon %}All passed
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -538,7 +538,7 @@ int main() {
 }
 ```
 
-# 输入数据范围的简单判断
+# #9 输入数据范围的简单判断
 
 ## 题干
 
@@ -558,13 +558,13 @@ int main() {
 
 {% note success no-icon %}123
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note success no-icon %}11233
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
@@ -583,7 +583,7 @@ int main() {
 }
 ```
 
-# 计算 21+22+23+...+m
+# #10 计算 21+22+23+...+m
 
 ## 题干
 
@@ -605,7 +605,7 @@ int main() {
 
 {% note success no-icon %}90
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
@@ -613,7 +613,7 @@ int main() {
 
 {% note success no-icon %}sum = 3885
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %}结尾无空行{% endnote %}
+{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ## 题解
 
