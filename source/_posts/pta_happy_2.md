@@ -2,7 +2,7 @@
 title: 网安、人工智能21级班级团体训练欢乐赛(二)
 date: 2021-11-20 15:18:44
 top_img: false
-toc_number: false;
+toc_number: false
 categories:
   - C/C++
 tags:
