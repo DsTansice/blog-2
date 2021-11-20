@@ -1,5 +1,5 @@
 ---
-title: 指针&数组
+title: 指针的使用及解析
 date: 2021-11-01 10:27:06
 top_img: false
 categories:
@@ -8,8 +8,9 @@ tags:
   - 教程
   - 数组
   - 指针
+  - 内存
 cover: https://image.emptydreams.xyz/bg/b16.jpg!/fxfn2/550x500
-description: 什么是指针？指针和数组的关系是什么？
+description: 什么是指针？指针和数组的区别是什么？
 ---
 
 {% tip info %}<div class="text" style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</div><br>
