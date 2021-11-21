@@ -4,7 +4,6 @@ const workbox = require("workbox-build");
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-html-minifier-terser');
 var htmlclean = require('gulp-htmlclean');
-var imagemin = require("gulp-imagemin");
 // gulp-tester
 var terser = require('gulp-terser');
 
