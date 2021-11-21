@@ -113,9 +113,7 @@ avatar:
   effect: false
 
 # The banner image of home page
-#index_img: https://api.btstu.cn/sjbz/api.php?lx=dongman&type=zsy&format=images
 index_img: https://image.emptydreams.xyz/bg.jpg
-#index_img: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/b0.png
 
 # If the banner of page not setting, it will show the top_img
 default_top_img: false
