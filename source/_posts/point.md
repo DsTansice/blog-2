@@ -13,9 +13,9 @@ cover: https://image.emptydreams.xyz/bg/b16.jpg!/fxfn2/550x500
 description: 什么是指针？指针和数组的区别是什么？
 ---
 
-{% tip info %}<div class="text" style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</div><br>
+{% tip info %}<p style=" text-align:center;">本篇博客所指的所有内存均不区分高级缓存、内存、虚拟内存</p>
 
-<div class="text" style=" text-align:center;">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</div>{% endtip %}
+<p style=" text-align:center;">本篇博客也不会单独讲解数组，阅读之前请确保自己已经掌握了数组的基本内容</p>{% endtip %}
 
 
 # 内存

@@ -4,6 +4,7 @@ const workbox = require("workbox-build");
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-html-minifier-terser');
 var htmlclean = require('gulp-htmlclean');
+var imagemin = require("gulp-imagemin");
 // gulp-tester
 var terser = require('gulp-terser');
 
@@ -58,5 +59,21 @@ gulp.task('minify-html', () => {
         }))
         .pipe(gulp.dest('./public'))
 });
+//压缩图片
+gulp.task("compressImage", function () {
+    var option = {
+        optimizationLevel: 4, //类型：Number 默认：3 取值范围：0-7（优化等级）
+        progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+        interlaced: false, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+        multipass: false //类型：Boolean 默认：false 多次优化svg直到完全优化
+    };
+    return gulp
+        .src("./public/medias/**/*.*")
+        .pipe(gulpif(!isScriptAll, changed("./public/medias")))
+        .pipe(gulpif(isDebug, debug({ title: "Compress Images:" })))
+        .pipe(plumber())
+        .pipe(imagemin(option))
+        .pipe(gulp.dest("./public"));
+});
 
-gulp.task("default", gulp.series("generate-service-worker"), gulp.parallel('compress', 'minify-css', 'minify-html'));
+gulp.task("default", gulp.series("generate-service-worker"), gulp.parallel('compress', 'minify-css', 'minify-html', 'compressImage'));
