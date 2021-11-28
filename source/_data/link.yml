@@ -27,6 +27,11 @@
       avatar: https://resource.ijinse.cn/2021/11/20211105115121673.png
       descr: 锦瑟无端五十弦，一弦一柱思华年
       siteshot: https://image.emptydreams.xyz/links/jinseSite.jpg!/max/350
+    - name: Xin's Blog
+      link: https://blog.xinmouren.cn
+      avatar: https://info.xinmouren.cn/custom.gif
+      descr: 嵌入式的日子真不好过！
+      screenshot: https://image.thum.io/get/https://blog.xinmouren.cn
 - class_name: 笔趣楼
   link_list:
     - name: kaiboshi
