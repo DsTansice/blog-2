@@ -1,0 +1,67 @@
+---
+title: 数组内存结构论证
+date: 2021-11-25 18:04:40
+top_img: false
+categories:
+  - C/C++
+tags:
+  - 教程
+  - 数组
+  - 内存
+  - 指针
+cover: https://image.emptydreams.xyz/bg/b20.jpg!/fxfn2/550x500
+description: 之前的博客提到了数组的内存结构，这里我们详细论证一下。
+---
+
+# 前言
+
+&emsp;&emsp;在[《指针的使用及解析》](https://blog.emptydreams.xyz/point/)中我们说明了数组的内存结构，在这里我们详细论证一下这个结构的合理性。
+
+# 描述和论证
+
+&emsp;&emsp;我们再来回顾一下数组的内存形式：
+
+![二维数组内存结构](https://www.linuxidc.com/upload/2015_03/15031621526830.png)
+
+&emsp;&emsp;可以看到，一维数组的内存结构非常简单。而二维数组在排列时，会先将第一个一维数组全部排列到内存中，然后接着排列第二个一维数组，以此类推，直到所有数据都存放完毕。让我们用代码论证一下这个结构：
+
+```C
+int main() {
+    int index[3][3] = {
+            {0, 1, 2},
+            {3, 4, 5},
+            {6, 7, 8}
+    };
+    for (int i = 0; i != 9; ++i) {
+        printf("%d", index[0][i]);
+    }
+    return 0;
+}
+```
+
+&emsp;&emsp;小伙伴们可以试一下这个代码的运行结果是什么，显而易见，结果是`012345678`。由此可见，上述的结构是合理的。
+
+&emsp;&emsp;现在我们设：有一个三维数组array3d，访问时格式为：array3d[z][y][x]，所以可得下图：
+
+![三维数组](https://image.emptydreams.xyz/array_memory/3d.jpg!/fw/350)
+
+&emsp;&emsp;验证这个结构的代码也很简单：
+
+```c
+int main() {
+    int a[2][2][2] = {
+            {{0,1},{2,3}},
+            {{4,5},{6,7}},
+    };
+    for (int i = 0; i != 8; ++i) {
+        printf("%d ", a[0][0][i]);
+    }
+    return 0;
+}
+```
+
+&emsp;&emsp;这段代码的输出结果是：`0 1 2 3 4 5 6 7 `。
+
+---
+
+{% tip success %}<div class="text" style=" text-align:center;">创作不易，扫描下方打赏二维码支持一下吧ヾ(≧▽≦*)o</div>{% endtip %}
