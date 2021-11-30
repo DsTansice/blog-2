@@ -286,19 +286,19 @@ const double ASPECT_RATIO = 1.653;
 ```c
 //该代码摘自：https://blog.csdn.net/m0_38106923/article/details/105042594
 int g_var;
- 
+
 int fun1()
 {
     g_var += 10;
     return g_var;
 }
- 
+
 int fun2()
 {
     g_var += 100;
     return g_var;
 }
- 
+
 int main(int argc, char *argv[], char *envp[])
 {
     g_var = 1;
@@ -352,5 +352,3 @@ int main(int argc, char *argv[], char *envp[])
     <li>https://zhuanlan.zhihu.com/p/54121195</li>
     <li>http://www.360doc.com/content/18/0830/08/11881101_782310615.shtml</li>
 </ul>
-
-

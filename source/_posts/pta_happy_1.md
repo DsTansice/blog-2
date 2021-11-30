@@ -1,9 +1,10 @@
 ---
+
 title: PTA-21班级团体训练欢乐赛(一)题解
 date: 2021-11-15 20:31:10
 top_img: false
 toc_number: false
-categories: 
+categories:
   - C/C++
 tags:
   - 教程
@@ -11,6 +12,7 @@ tags:
   - PTA
 cover: https://image.emptydreams.xyz/bg/b18.jpg!/fxfn2/550x500
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
+
 ---
 
 # 注意
@@ -554,24 +556,3 @@ int main () {
 ---
 
 {% tip info %}<div class="text" style=" text-align:center;">创作不易，扫描下方打赏二维码支持一下吧ヾ(≧▽≦*)o</div>{% endtip %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

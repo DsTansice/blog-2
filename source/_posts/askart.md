@@ -136,9 +136,3 @@ public static void main(String[] args) {
     <li>别人没有为你解答问题的义务，注意礼貌用语</li>
     <li>提问之前自己先好好思考以下，很多问题自己可以解决</li>
 </ol>
-
-
-
-
-
-

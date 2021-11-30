@@ -11,8 +11,6 @@ cover: https://image.emptydreams.xyz/bg/b13.jpg!/fxfn2/550x500
 description: 简单描述IEEE754标准的浮点数的二进制表示方式
 ---
 
-
-
 **注意：阅读本文前请务必了解基本的二进制知识，详情可见：[二进制运算从入门到入坟](https://blog.emptydreams.xyz/binary/)。**
 
 **&emsp;&emsp;&emsp;如果没有明确指出，本文均使用`double`作为例子**

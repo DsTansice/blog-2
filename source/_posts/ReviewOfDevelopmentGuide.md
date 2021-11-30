@@ -247,7 +247,7 @@ protected void onImact(RayTraceResult result)
         this.setDead();
         return;
     }
-    
+
     float amount = 6.0F;
     DamageSource source = DamageSource.causeThrownDamage(this, getThrower());
     if (result.entityHit instanceof EntityLivingBase)
@@ -300,7 +300,7 @@ private static final FMLEventChannel CHANNEL =
 &emsp;&emsp;这里我罗列出一些我看过的感觉还不错的编程书，大家可以根据自己的需求阅读：
 
 | 归类 |                                  书籍名称 |
-| :--: | ----------------------------------------: |
+|:----:| -----------------------------------------:|
 | 入门 |                          Java从入门到精通 |
 | 入门 |                              Java编程思想 |
 | 提升 |                            Effective Java |

@@ -11,10 +11,6 @@ cover: https://image.emptydreams.xyz/bg/b8.jpg!/fxfn2/550x500
 description: 简单描述两种自加操作的区别，自减操作类比
 ---
 
-
-
-
-
 &emsp;&emsp;自加操作有两种，`++i`和`i++`，很多新手都分不清这两个的区别，这里简单说一下这两个写法有什么不同。
 
 # 普通解法
@@ -81,8 +77,3 @@ int main() {
     return 0;
 }
 ```
-
-
-
-
-

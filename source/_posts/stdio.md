@@ -11,8 +11,6 @@ cover: https://image.emptydreams.xyz/bg/b9.jpg!/fxfn2/550x500
 description: 简要讲解控制台输入/输出的相关内容
 ---
 
-
-
 # scanf的使用
 
 &emsp;&emsp;`scanf`声明在`stdio.h`头文件中，其声明为` int scanf(const char \*format, ...)`。从声明可以看出，`scanf`接收如下参数：
@@ -209,10 +207,3 @@ a
 >1. 《C Primer Plus》相关章节
 >2. 菜鸟教程相关章节：[1](https://www.runoob.com/cprogramming/c-function-printf.html)、[2](https://www.runoob.com/cprogramming/c-function-scanf.html)
 >3. [c语言里缓冲区的理解-CSDN博客](https://blog.csdn.net/qq_36532097/article/details/70197061)
-
-
-
-
-
-
-

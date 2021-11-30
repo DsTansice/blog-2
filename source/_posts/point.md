@@ -205,16 +205,3 @@ int (*p2)[10] = array;		//2
 >[C语言中指针和数组](https://www.cnblogs.com/downey-blog/p/10469906.html)
 >
 >[数组指针和指针数组的区别](https://dwz.date/fhdp)
-
-
-
-
-
-
-
-
-
-
-
-
-
