@@ -679,7 +679,7 @@ void printAll(vector<node>& record) {
 int main() {
     string str;
     int start = -1, end = -1;
-    while (~getline(cin, str)) {
+    while (getline(cin, str)) {
         str.push_back(',');
         vector<node> record;
         int k;
