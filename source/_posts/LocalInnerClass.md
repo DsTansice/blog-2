@@ -3,9 +3,9 @@ title: 个人对局部内部类的一些理解
 date: 2020-01-15 20:31:38
 top_img: false
 categories:
-	- Java
-tags: 
-	- 类
+  - Java
+tags:
+  - 类
 cover: https://image.emptydreams.xyz/bg/b0.jpg!/fxfn2/550x500
 description: 有关局部内部类访问局部变量的限制的简单解释
 ---

@@ -9,7 +9,6 @@ tags:
   - 环境
 cover: https://image.emptydreams.xyz/bg/b5.jpg!/fxfn2/550x500
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
-
 ---
 
 # 下载
