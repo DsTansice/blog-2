@@ -1,0 +1,17 @@
+#aside-content #card-toc .toc-content .toc-item.active .toc-child {
+  margin-left: 0.3rem !important;
+}
+[data-theme="dark"]
+  #aside-content #card-toc .toc-content .toc-link:hover {
+    background: #009d9266;
+  }
+[data-theme="light"]
+  #aside-content #card-toc .toc-content .toc-link:hover {
+    background: #e2cbff66 !important;
+  }
+[data-theme="light"]
+  #aside-content #card-toc .toc-content .toc-link.active {
+    color: black;
+    background: #e2cbff99;
+    border-left-color: #9e91ff;
+  }

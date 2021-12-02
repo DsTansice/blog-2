@@ -1,5 +1,5 @@
 ---
-title: 网安、人工智能21级班级团体训练欢乐赛(二)
+title: 网安、人工智能21级班级团体训练欢乐赛(二)题解
 date: 2021-11-20 15:18:44
 top_img: false
 toc_number: false
@@ -17,7 +17,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 &emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
 
-# #1 输出10个不重复的英文字母
+# 输出10个不重复的英文字母
 
 ## 题干
 
@@ -37,7 +37,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 在这里给出一组输入。例如：
 
-{% note success no-icon %}poemp134567
+{% note simple %}poemp134567
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -45,7 +45,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 在这里给出相应的输出。例如：
 
-{% note success no-icon %}not found
+{% note simple %}not found
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -53,7 +53,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 在这里给出一组输入。例如：
 
-{% note success no-icon %}This 156is a test example
+{% note simple %}This 156is a test example
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -61,7 +61,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 在这里给出相应的输出。例如：
 
-{% note success no-icon %}Thisaexmpl
+{% note simple %}Thisaexmpl
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -97,7 +97,7 @@ int main() {
 }
 ```
 
-# #2 显示指定范围的素数并求和
+# 显示指定范围的素数并求和
 
 ## 题干
 
@@ -117,7 +117,7 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note success no-icon %}4 30
+{% note simple %}4 30
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -125,7 +125,7 @@ int main() {
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note success no-icon %}5 7 11 13 17
+{% note simple %}5 7 11 13 17
 
 19 23 29
 
@@ -170,19 +170,19 @@ int main() {
 }
 ```
 
-# #3 输入一个整数，在一行中输出相应个数的星号
+# 输入一个整数，在一行中输出相应个数的星号
 
 ## 题干
 
 ### 输入样例
 
-{% note success no-icon %}5
+{% note simple %}5
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
-{% note success no-icon %}\*\*\*\*\*
+{% note simple %}\*\*\*\*\*
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -197,7 +197,7 @@ int main() {
 }
 ```
 
-# #4 跳一跳
+# 跳一跳
 
 ## 题干
 
@@ -213,7 +213,7 @@ int main() {
 
 ### 输入样例
 
-{% note success no-icon %}5
+{% note simple %}5
 
 2 3 1 1 4
 
@@ -221,7 +221,7 @@ int main() {
 
 ### 输出样例
 
-{% note success no-icon %}2
+{% note simple %}2
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -280,7 +280,7 @@ int main() {
 }
 ```
 
-# #5 数据类型转换
+# 数据类型转换
 
 ## 题干
 
@@ -298,13 +298,13 @@ int main() {
 
 ### 输入样例
 
-{% note success no-icon %}12.15
+{% note simple %}12.15
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
-{% note success no-icon %}1.80
+{% note simple %}1.80
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -323,7 +323,7 @@ int main() {
 }
 ```
 
-# #6 位1的个数
+# 位1的个数
 
 ## 题干
 
@@ -343,7 +343,7 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note success no-icon %}37
+{% note simple %}37
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -351,7 +351,7 @@ int main() {
 
 在这里给出相应的输出。例如：
 
-{% note success no-icon %}3
+{% note simple %}3
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -359,7 +359,7 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note success no-icon %}0
+{% note simple %}0
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -367,7 +367,7 @@ int main() {
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note success no-icon %}0
+{% note simple %}0
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -389,7 +389,7 @@ int main() {
 }
 ```
 
-# #7 求π的近似值
+# 求π的近似值
 
 ## 题干
 
@@ -411,7 +411,7 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note success no-icon %}0.00000001
+{% note simple %}0.00000001
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -419,7 +419,7 @@ int main() {
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note success no-icon %}3.141497
+{% note simple %}3.141497
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -442,7 +442,7 @@ int main() {
 }
 ```
 
-# #8 查验身份证
+# 查验身份证
 
 ## 题干
 
@@ -469,7 +469,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 ### 输入样例1
 
-{% note success no-icon %}4
+{% note simple %}4
 
 320124198808240056
 
@@ -483,7 +483,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 ### 输出样例1
 
-{% note success no-icon %}12010X198901011234
+{% note simple %}12010X198901011234
 
 110108196711301866
 
@@ -493,7 +493,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 ### 输入样例2
 
-{% note success no-icon %}2
+{% note simple %}2
 
 320124198808240056
 
@@ -503,7 +503,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 ### 输出样例2
 
-{% note success no-icon %}All passed
+{% note simple %}All passed
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -538,7 +538,7 @@ int main() {
 }
 ```
 
-# #9 输入数据范围的简单判断
+# 输入数据范围的简单判断
 
 ## 题干
 
@@ -556,13 +556,13 @@ int main() {
 
 ### 输入样例
 
-{% note success no-icon %}123
+{% note simple %}123
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
-{% note success no-icon %}11233
+{% note simple %}11233
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
@@ -583,7 +583,7 @@ int main() {
 }
 ```
 
-# #10 计算 21+22+23+...+m
+# 计算 21+22+23+...+m
 
 ## 题干
 
@@ -603,7 +603,7 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note success no-icon %}90
+{% note simple %}90
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 

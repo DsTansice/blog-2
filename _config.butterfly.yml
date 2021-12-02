@@ -126,7 +126,7 @@ archive_img:
 tag_img:
 
 # The banner image of tag page
-# format: 
+# format:
 #  - tag name: xxxxx
 tag_per_img:
 
@@ -135,7 +135,7 @@ tag_per_img:
 category_img:
 
 # The banner image of category page
-# format: 
+# format:
 #  - category name: xxxxx
 category_per_img:
 
@@ -282,7 +282,6 @@ comments:
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
   use:
     - Twikoo
-    - Waline
   # - Valine
   # - Disqus
   text: true # Display the comment name next to the button
@@ -616,7 +615,7 @@ display_mode: dark
 beautify:
   enable: true
   field: post # site/post
-  title-prefix-icon: '\f51f'
+  title-prefix-icon: '\f121'
   title-prefix-icon-color: '#F47466'
 
 # Global font settings
@@ -884,9 +883,11 @@ fragment_cache: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
+    - <link rel="stylesheet" href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.css">
   bottom:
-    - <script src="//at.alicdn.com/t/font_2833129_pt4y60afxkn.js"></script>
-    - <script defer src="https://cdn.jsdelivr.net/gh/EmptyDreams/resources/live2d-widget/autoload.min.js"></script>
+    - <script src="//at.alicdn.com/t/font_2833129_hwithdyzo4b.js"></script>
+    - <script defer src="https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/live2ds/live2d-widget/autoload.min.js"></script>
+    - <link href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 # - <script src="xxxx"></script>
 
 # CDN

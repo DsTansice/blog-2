@@ -14,7 +14,11 @@
 }
 [data-theme="dark"]
   .card-widget{
-    background:rgba(20, 20, 20, 0.75)!important;
+    background:rgba(20, 20, 20, 0.9)!important;
+}
+[data-theme="dark"]
+  #aside-content #card-toc .toc-content .toc-link.active {
+    background:#313534;
 }
 /* 文章页面正文背景 */
 [data-theme="light"]

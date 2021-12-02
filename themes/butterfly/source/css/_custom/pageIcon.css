@@ -1,66 +1,34 @@
-/* 文章页H1-H6图标样式效果 */
-h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
-    -webkit-animation: ccc 1.6s linear infinite ;
-    animation: ccc 1.6s linear infinite ;
+#article-container.post-content h1:before {
+  font-family: "iconfont" !important;
+  content: '\e625' !important;
+  font-size: 2rem !important;
+  margin-left: -1.8rem !important;
+  margin-top: -0.55rem !important;
 }
-@-webkit-keyframes ccc {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg)
-    }
-    to {
-        -webkit-transform: rotate(-1turn);
-        transform: rotate(-1turn)
-    }
+#article-container.post-content h2:before {
+  font-family: "iconfont" !important;
+  content: '\e624' !important;
+  margin-left: -1.35rem !important;
+  margin-top: -0.35rem !important;
+  font-size: 1.45rem !important;
 }
-@keyframes ccc {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg)
-    }
-    to {
-        -webkit-transform: rotate(-1turn);
-        transform: rotate(-1turn)
-    }
+#article-container.post-content h3:before,
+#article-container.post-content h4:before,
+#article-container.post-content h5:before,
+#article-container.post-content h6:before {
+  font-family: "iconfont" !important;
+  content: '\e781' !important;
+  margin-top: 0rem !important;
 }
 
-#content-inner.layout h1::before {
-    color: #ef50a8 ;
-    margin-left: -1.55rem;
-    font-size: 1.45rem;
-    margin-top: -0.23rem;
-}
-#content-inner.layout h2::before {
-    color: #fb7061 ;
-    margin-left: -1.35rem;
-    font-size: 1.2rem;
-    margin-top: -0.12rem;
-}
-#content-inner.layout h3::before {
-    color: #ffbf00 ;
-    margin-left: -1.22rem;
-    font-size: 1.0rem;
-    margin-top: -0.09rem;
-}
-#content-inner.layout h4::before {
-    color: #a9e000 ;
-    margin-left: -1.05rem;
-    font-size: 0.85rem;
-    margin-top: -0.09rem;
-}
-#content-inner.layout h5::before {
-    color: #57c850 ;
-    margin-left: -0.9rem;
-    font-size: 0.7rem;
-    margin-top: 0.0rem;
-}
-#content-inner.layout h6::before {
-    color: #5ec1e0 ;
-    margin-left: -0.9rem;
-    font-size: 0.6rem;
-    margin-top: 0.0rem;
+#article-container.post-content h3,
+#article-container.post-content h3,
+#article-container.post-content h3,
+#article-container.post-content h3 {
+  margin-left: 0.2rem !important;
 }
 
 #content-inner.layout h1:hover, #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
     color: #49b1f5 ;
+    margin-left: 0.35rem;
 }

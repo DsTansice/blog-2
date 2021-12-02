@@ -6,3 +6,10 @@ svg.icon {
    overflow: hidden;
    text-shadow: 0 0 1px black;
 }
+[data-theme="light"]
+  div#menus span, a#site-name, span#subtitle, .author-info__name{
+    text-shadow: 0 0 2px black !important;
+}
+a#site-name {
+  font-size: xx-large;
+}
