@@ -2,7 +2,7 @@
 title: pta_dry
 top_img: false
 toc_number: false
-cover: 'https://image.emptydreams.xyz/bg/23.jpg!/fxfn2/550x500'
+cover: 'https://image.emptydreams.xyz/bg/b23.jpg!/fxfn2/550x500'
 date: 2021-12-02 22:07:01
 categories:
   - C/C++
