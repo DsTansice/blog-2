@@ -178,6 +178,9 @@ font:
     # boolean to add local font. default = false
     local: false
 
+graphviz:
+  enable: true
+
 sitemap:
   path: sitemap.xml
 baidusitemap:
