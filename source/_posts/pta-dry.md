@@ -810,4 +810,74 @@ int main() {
 
 ## 题解
 
-暂无
+```c
+//根据当前符号获取对应的符号
+//参数：
+//  input - 当前符号，使用*表示/*，使用/表示*/
+//返回值：
+//  int - 对应的反符号，使用*表示/*，使用/表示*/
+int opposite(int input) {
+    switch (input) {
+        case '{': return '}';
+        case '[': return ']';
+        case '(': return ')';
+        case '}': return '{';
+        case ']': return '[';
+        case ')': return '(';
+        case '*': return '/';
+        case '/': return '*';
+        default: return input;
+    }
+}
+
+int main() {
+    int index = 0;  //当前写入位点
+    int before[100] = {-1}; //符号栈
+    int input;
+    bool onlyPoint = false; //表示该行开头是否为点
+    int lineIndex = 0;  //字符在当前行中的下标
+    while (true) {
+        input = getchar();
+        if (lineIndex == 0 && input == '.') onlyPoint = true;
+        else if (input == '\n' && onlyPoint) break;
+        hear:
+        ++lineIndex;
+        switch (input) {
+            case '/':
+                input = getchar();
+                if (input != '*') goto hear;
+            case '{': case '[': case '(':
+                before[index++] = input;
+                break;
+            case '*':
+                input = getchar();
+                if (input != '/') goto hear;
+            case '}': case ']': case ')': {
+                if (index == 0) {
+                    if (input == '/') printf("NO\n?-*/");
+                    else printf("NO\n?-%c", input);
+                    return 0;
+                }
+                int expected = before[--index];
+                if (expected != opposite(input)) {
+                    if (expected == '*') printf("NO\n/*-?");
+                    else printf("NO\n%c-?", expected);
+                    return 0;
+                }
+                break;
+            }
+            case '\n':
+                lineIndex = 0;
+                onlyPoint = false;
+                break;
+            default: break;
+        }
+    }
+    if (index == 0) printf("YES");
+    else {
+        if (before[--index] == '*') printf("NO\n/*-?");
+        else printf("NO\n%c-?", before[index]);
+    }
+    return 0;
+}
+```
