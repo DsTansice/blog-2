@@ -640,14 +640,14 @@ int main() {
     int n;
     scanf("%d", &n);
     int s1[n];
-    char s2[n-1];
+    char s2[n - 1];
     for (int i = 0; i != n; ++i) scanf("%d", &s1[i]);
     for (int i = 0; i != n - 1; ++i) {
         getchar();
         scanf("%c", &s2[i]);
     }
     for (int i = n - 1, k = n - 2; i != 0; --i, --k) {
-        if (task(&s1[i - 1], s1[i], s2[k], err)) {
+        if (task(&s1[i - 1], s1[i], s2[k])) {
             printf("ERROR: %d/0", s1[i-1]);
             return 0;
         }
@@ -881,3 +881,7 @@ int main() {
     return 0;
 }
 ```
+
+---
+
+{% tip success %}<div class="text" style=" text-align:center;">创作不易，扫描下方打赏二维码支持一下吧ヾ(≧▽≦*)o</div>{% endtip %}
