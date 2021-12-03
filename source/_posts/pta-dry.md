@@ -1,5 +1,5 @@
 ---
-title: pta_dry
+title: 2021年天梯赛（热身赛）详细题解
 top_img: false
 toc_number: false
 cover: 'https://image.emptydreams.xyz/bg/b23.jpg!/fxfn2/550x500'
