@@ -13,35 +13,35 @@ cover: https://image.emptydreams.xyz/bg/b21.jpg!/fxfn2/550x500
 description:
 ---
 
-# 注意
+## 注意
 
 &emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
 
-# 数油桶
+## 数油桶
 
-## 题干
+### 题干
 
 &emsp;&emsp;工人师傅将油桶码成如下图所示的梯形，数了数底层的油桶数和层数，就知道有多少油桶了。你知道他是怎么算的吗？
 
 ![](https://images.ptausercontent.com/344)
 
-## 输入格式
+### 输入格式
 
 {% note simple %}底层油桶和层数{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}油桶的数量{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}7 4{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}22{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，不解释，直接上代码：
 
@@ -54,31 +54,31 @@ int main() {
 }
 ```
 
-# 混合算数
+## 混合算数
 
-## 题干
+### 题干
 
 &emsp;&emsp;编程输出一个形如AXBXC的四则运算式的结果。例如：1+2*3、5*6+7、100-50/5。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}在一行内包含一个算式。算式中有2个运算符，3个操作数。运算符保证是“+、-、*、/”之一，所有的操作数都是非负整数。除法运算结果与C语言整数除法规则一致，所有测试数据中保证除数不为0。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}输出算式结果。{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}1+2*3
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}7
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题有一个点需要我们注意，即“除法运算结果与C语言整数除法规则一致”。这时候我们思考一下，C语言的整数除法规则是什么？是向下取整，比如`1 / 2 = 0`、`3 / 2 = 1`。
 
@@ -89,7 +89,7 @@ int main() {
 &emsp;&emsp;由此，我们可得如下代码：
 
 ```c
-#include <stdlib.h>
+##include <stdlib.h>
 
 void task(char op, int a, long long* result) {
     switch (op) {
@@ -133,9 +133,9 @@ int main() {
 }
 ```
 
-# 小H的思维题
+## 小H的思维题
 
-## 题干
+### 题干
 
 &emsp;&emsp;先来一题思维题，给你四个整数，`a`、`b`、`x`、`y`。一开始，`a≥x`和`b≥y`。您可以执行以下操作不超过`n`次。
 
@@ -147,18 +147,18 @@ int main() {
 
 &emsp;&emsp;你得回答`t`次独立的`case`。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}输入的第一行包含一个整数。`t` (1≥t≥2∗10^4^)测试用例的数量。然后接下来是`t`个测试用例。{% endnote %}
 
 {% note simple %}测试用例的唯一行包含五个整数。`a`、`b`、`x`、
 `y`和`n`(1≤a,b,x,y,n≤10^9^)。对输入的附加限制：a≥x和b≥y一直都是。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}对每个测试用例，打印一个整数：通过不超过`n`次操作后，最小化`a∗b`{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}7
 10 10 8 5 3
@@ -169,7 +169,7 @@ int main() {
 10 11 2 1 5
 10 11 9 1 10{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}70
 77
@@ -180,7 +180,7 @@ int main() {
 10
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 样例解释
+### 样例解释
 
 &emsp;&emsp;在示例的第一个测试用例中，需要减少`b`三次`10*7=70`。
 
@@ -190,7 +190,7 @@ int main() {
 
 &emsp;&emsp;在示例的第七个测试用例中，需要减少`b`十次`10*1=10`。
 
-## 题解
+### 题解
 
 &emsp;&emsp;我们来列出一些情况分类讨论：
 
@@ -238,32 +238,32 @@ int main() {
 }
 ```
 
-# 字符串A-B
+## 字符串A-B
 
-## 题干
+### 题干
 
 &emsp;&emsp;本题要求你计算A-B。不过麻烦的是，A和B都是字符串 —— 即从字符串A中把字符串B所包含的字符全删掉，剩下的字符组成的就是字符串A-B。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}输入在2行中先后给出字符串`A`和`B`。每个字符串都是由可见的ASCII码组成，最后以换行符结束。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}在一行中打印出`A-B`的结果字符串。{% endnote %}
 
-## 输入样例：
+### 输入样例：
 
 {% note simple %}I love Python!  It's a fun game!
 aeiou
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 输出样例：
+### 输出样例：
 
 {% note simple %}I lv Pythn!  It's  fn gm!
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题有些人可能会想复杂，即先删除字符串内容再打印字符串，实际上我们只需要一个字符一个字符打印，在打印的过程中处理字符串就行了。
 
@@ -291,29 +291,29 @@ int main() {
 }
 ```
 
-# 魔镜
+## 魔镜
 
-## 题干
+### 题干
 
 &emsp;&emsp;传说魔镜可以把任何接触镜面的东西变成原来的两倍，不过增加的那部分是反的。例如，对于字符串`XY`，若把`Y`端接触镜面，则魔镜会把这个字符串变为`XYYX`；若再用`X`端接触镜面，则会变成`XYYXXYYX`。对于一个最终得到的字符串（可能未接触魔镜），请输出没使用魔镜之前，该字符串最初可能的最小长度。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}测试数据有多组，处理到文件尾。每组测试输入一个字符串（长度小于100，且由大写英文字母构成）。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}对于每组测试数据，在一行上输出一个整数，表示没使用魔镜前，最初字符串可能的最小长度。{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}XYYXXYYX{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}2{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题说的很复杂，实际上就是判断是否为对称字符串。我们来考虑一下对称字符串需要满足什么条件。
 
@@ -345,39 +345,39 @@ int main() {
 }
 ```
 
-# 求n以内最大的k个素数以及它们的和
+## 求n以内最大的k个素数以及它们的和
 
-## 题干
+### 题干
 
 &emsp;&emsp;本题要求计算并输出不超过n的最大的k个素数以及它们的和。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}输入在一行中给出`n`（`10≤n≤10000`）和`k`（`1≤k≤10`）的值。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}在一行中按下列格式输出:
 素数1+素数2+…+素数k=总和值
 其中素数按递减顺序输出。若n以内不够k个素数，则按实际个数输出。{% endnote %}
 
-## 输入样例1
+### 输入样例1
 
 {% note simple %}1000 10{% endnote %}
 
-## 输出样例1
+### 输出样例1
 
 {% note simple %}997+991+983+977+971+967+953+947+941+937=9664{% endnote %}
 
-## 输入样例2
+### 输入样例2
 
 {% note simple %}12 6{% endnote %}
 
-## 输出样例2
+### 输出样例2
 
 {% note simple %}11+7+5+3+2=28{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，不解释，上代码：
 
@@ -401,23 +401,23 @@ int main() {
 }
 ```
 
-# 判断上三角矩阵
+## 判断上三角矩阵
 
-## 题干
+### 题干
 
 &emsp;&emsp;上三角矩阵指主对角线以下的元素都为0的矩阵；主对角线为从矩阵的左上角至右下角的连线。
 
 &emsp;&emsp;本题要求编写程序，判断一个给定的方阵是否上三角矩阵。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}输入第一行给出一个正整数`T`，为待测矩阵的个数。接下来给出`T`个矩阵的信息：每个矩阵信息的第一行给出一个不超过10的正整数`n`。随后`n`行，每行给出`n`个整数，其间以空格分隔。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}每个矩阵的判断结果占一行。如果输入的矩阵是上三角矩阵，输出“YES”，否则输出“NO”。{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}3
 3
@@ -432,13 +432,13 @@ int main() {
 1 4 5
 0 -1 6{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}YES
 NO
 NO{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题也很简单，不过很多人可能会选择将输入的矩阵存储起来，实际上我们不需要存储矩阵的内容。
 
@@ -461,39 +461,39 @@ int main() {
 }
 ```
 
-# 一元多项式的乘法与加法运算
+## 一元多项式的乘法与加法运算
 
-## 题干
+### 题干
 
 &emsp;&emsp;设计函数分别求两个一元多项式的乘积与和。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过`1000`的整数）。数字间以空格分隔。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出`0 0`。{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}4 3 4 -5 2  6 1  -2 0
 3 5 20  -7 4  3 1
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}15 24 -25 22 30 21 -10 20 -21 8 35 6 -33 5 14 4 -15 3 18 2 -6 1
 5 20 -4 4 -5 2 9 1 -2 0
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题用到了很多的数组，所以我们使用`c++`来写，想要`c`的解法可以参考[这篇博客](https://www.cnblogs.com/sser-invincible/p/5300126.html)。
 
 ```c++
 //万能头
-#include <bits/stdc++.h>
+##include <bits/stdc++.h>
 
 using std::string;  //字符串
 using std::vector;  //变长数组
@@ -592,43 +592,43 @@ int main() {
 }
 ```
 
-# 石子合并
+## 石子合并
 
-## 题干
+### 题干
 
 &emsp;&emsp;在一个圆形操场的四周摆放 N 堆石子,现要将石子有次序地合并成一堆.规定每次只能选相邻的 2 堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。
 
 &emsp;&emsp;试设计出一个算法,计算出将 N 堆石子合并成 1 堆的最小得分和最大得分。
 
-## 输入格式
+### 输入格式
 
 {% note simple %}数据的第 1 行是正整数`N`，表示有`N`堆石子。
 第 2 行有`N`个整数，第`i`个整数 a~i~表示第`i`堆石子的个数。{% endnote %}
 
-## 输出格式
+### 输出格式
 
 {% note simple %}输出共 2 行，第 1 行为最小得分，第 2 行为最大得分。{% endnote %}
 
-## 输入样例
+### 输入样例
 
 {% note simple %}4
 4 5 9 4
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 输出样例
+### 输出样例
 
 {% note simple %}43
 54
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题用的是区间DP，网上搜“环形石子合并”能搜到很多题解，想学习的同学可以先学习动态规划思想，然后学习“直线型石子合并”，最后再学习本道例题。
 
 &emsp;&emsp;网上的“环形石子合并”大多选择将数据复制一遍来模拟环形，这里我选择了另一种方法，巧妙的利用了数组中的空余空间，节省了内存。题太难，不解释，直接上代码：
 
 ```c++
-#include <bits/stdc++.h>
+##include <bits/stdc++.h>
 
 int n;
 

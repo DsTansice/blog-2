@@ -13,11 +13,11 @@ cover: https://image.emptydreams.xyz/bg/b20.jpg!/fxfn2/550x500
 description: 之前的博客提到了数组的内存结构，这里我们详细论证一下。
 ---
 
-# 前言
+## 前言
 
 &emsp;&emsp;在[《指针的使用及解析》](https://blog.emptydreams.xyz/point/)中我们说明了数组的内存结构，在这里我们详细论证一下这个结构的合理性。
 
-# 描述和论证
+## 描述和论证
 
 &emsp;&emsp;我们再来回顾一下数组的内存形式：
 

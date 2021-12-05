@@ -13,27 +13,27 @@ cover: https://image.emptydreams.xyz/bg/b19.jpg!/fxfn2/550x500
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
 ---
 
-# 注意
+## 注意
 
 &emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
 
-# 输出10个不重复的英文字母
+## 输出10个不重复的英文字母
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;随机输入一个字符串，把最左边的10个不重复的英文字母（不区分大小写）挑选出来。 如没有10个英文字母，显示信息“not found”。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;在一行中输入字符串。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;在一行中输出最左边的10个不重复的英文字母或显示信息“not found"。
 
-### 输入样例1
+#### 输入样例1
 
 在这里给出一组输入。例如：
 
@@ -41,7 +41,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例1
+#### 输出样例1
 
 在这里给出相应的输出。例如：
 
@@ -49,7 +49,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输入样例2
+#### 输入样例2
 
 在这里给出一组输入。例如：
 
@@ -57,7 +57,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例2
+#### 输出样例2
 
 在这里给出相应的输出。例如：
 
@@ -65,7 +65,7 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）�
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接上代码，不解释：
 
@@ -97,23 +97,23 @@ int main() {
 }
 ```
 
-# 显示指定范围的素数并求和
+## 显示指定范围的素数并求和
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;本题要求显示给定整数M和N区间内素数并对它们求和。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;在一行输入两个正整数M和N（1≤M≤N≤1000）。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;显示指定范围的素数，素数间空一格，每五个换一行。 单独一行输出素数的个数及素数的和。
 
-### 输入样例
+#### 输入样例
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
@@ -121,7 +121,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
@@ -133,7 +133,7 @@ amount=8 sum=124
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接贴代码，不解释：
 
@@ -170,23 +170,23 @@ int main() {
 }
 ```
 
-# 输入一个整数，在一行中输出相应个数的星号
+## 输入一个整数，在一行中输出相应个数的星号
 
-## 题干
+### 题干
 
-### 输入样例
+#### 输入样例
 
 {% note simple %}5
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 {% note simple %}\*\*\*\*\*
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 ```c
 int main() {
@@ -197,21 +197,21 @@ int main() {
 }
 ```
 
-# 跳一跳
+## 跳一跳
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;**Drizzle** 面前有一条由一堆`非负整数`组成的道路，从第一个数字起步，每次他都能跳出不大于当前数字的距离，每个数字之间的距离为1，那么他最少需要跳多少次才能到达终点？
 
-### 要求
+#### 要求
 
 输入：第一行输入道路中数字的个数`n`也就是道路的长度，第二行输入这n个数字
 
 输出：输出一个数字，表示最少跳跃次数
 
-### 输入样例
+#### 输入样例
 
 {% note simple %}5
 
@@ -219,17 +219,17 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 {% note simple %}2
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 解释
+#### 解释
 
 &emsp;&emsp;解释: 跳到最后一个位置的最小跳跃数是 2。从下标为 0 跳到下标为 1 的位置，跳 1 步，然后跳 3 步到达数组的最后一个位置。
 
-### 范围
+#### 范围
 
 对于 20% 的数据：n≤100
 
@@ -237,7 +237,7 @@ int main() {
 
 所有整数元素在`int`范围内
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题也不难，只要保证每次跳跃都是最优解就能保证最终得到最优解。
 
@@ -280,35 +280,35 @@ int main() {
 }
 ```
 
-# 数据类型转换
+## 数据类型转换
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;本题目要求定义一个float类型变量，键盘输入大于0且小于100的实数，拆分成整数部分和小数部分。输出乘积。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;输入一个正的实数。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;拆分成整数部分和小数部分，输出乘积，保留两位小数。
 
-### 输入样例
+#### 输入样例
 
 {% note simple %}12.15
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 {% note simple %}1.80
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接贴代码，不解释：
 
@@ -323,23 +323,23 @@ int main() {
 }
 ```
 
-# 位1的个数
+## 位1的个数
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;输入一个非负整数，求它变成二进制后1的个数（提示：用bin函数）。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;输入一个正整数。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;输出`1`的个数。
 
-### 输入样例1
+#### 输入样例1
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
@@ -347,7 +347,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例1
+#### 输出样例1
 
 在这里给出相应的输出。例如：
 
@@ -355,7 +355,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输入样例2
+#### 输入样例2
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
@@ -363,7 +363,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例2
+#### 输出样例2
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
@@ -371,7 +371,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;虽然题干上说使用`bin`函数，但是我们直接使用位运算就能解决问题了。
 
@@ -389,25 +389,25 @@ int main() {
 }
 ```
 
-# 求π的近似值
+## 求π的近似值
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;用公式求*π*的近似值：*π*2/6=1+1/22+1/32+1/42+……
 
 &emsp;&emsp;用公式求*π*的近似值：*π*2/6=1+1/22+1/32+1/42+。。。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;在一行输入误差范围。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;在一行输出*π*的近似值（保留6位小数）。
 
-### 输入样例
+#### 输入样例
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
@@ -415,7 +415,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
@@ -423,7 +423,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接上代码，不解释：
 
@@ -442,11 +442,11 @@ int main() {
 }
 ```
 
-# 查验身份证
+## 查验身份证
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;一个合法的身份证号码由17位地区、日期编号和顺序编号加1位校验码组成。校验码的计算规则如下：
 
@@ -459,15 +459,15 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 &emsp;&emsp;现在给定一些身份证号码，请你验证校验码的有效性，并输出有问题的号码。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;现在给定一些身份证号码，请你验证校验码的有效性，并输出有问题的号码。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;按照输入的顺序每行输出1个有问题的身份证号码。这里并不检验前17位是否合理，只检查前17位是否全为数字且最后1位校验码计算准确。如果所有号码都正常，则输出`All passed`。
 
-### 输入样例1
+#### 输入样例1
 
 {% note simple %}4
 
@@ -481,7 +481,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例1
+#### 输出样例1
 
 {% note simple %}12010X198901011234
 
@@ -491,7 +491,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输入样例2
+#### 输入样例2
 
 {% note simple %}2
 
@@ -501,13 +501,13 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例2
+#### 输出样例2
 
 {% note simple %}All passed
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;这道题难点在加权求和，可能很多人不知道加权求和是什么。加权求和就是每个数乘上其权重再求和，知道这个之后代码就很好写了：
 
@@ -538,35 +538,35 @@ int main() {
 }
 ```
 
-# 输入数据范围的简单判断
+## 输入数据范围的简单判断
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;输入一个三位整数，按照对称原则扩充为5位整数。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;输入一个三位整数。 注意：如果输入的不是三位数（两位或者四位）则不处理，没有任何输出。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;当输入三位整数时则输出一个5位整数，将这个三位数的前后各增加一位，分别复制三位数的百位和个位。 当输入数据不是三位时，没有输出信息。
 
-### 输入样例
+#### 输入样例
 
 {% note simple %}123
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 {% note simple %}11233
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接贴代码，不解释：
 
@@ -583,23 +583,23 @@ int main() {
 }
 ```
 
-# 计算 21+22+23+...+m
+## 计算 21+22+23+...+m
 
-## 题干
+### 题干
 
-### 描述
+#### 描述
 
 &emsp;&emsp;输入一个正整数m(30<=m<=100)，计算表达式 21+22+23+...+m 的值。
 
-### 输入格式
+#### 输入格式
 
 &emsp;&emsp;在一行输入一个正整数m。
 
-### 输出格式
+#### 输出格式
 
 &emsp;&emsp;在一行中按照格式“sum = S”输出对应的和S。
 
-### 输入样例
+#### 输入样例
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
@@ -607,7 +607,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-### 输出样例
+#### 输出样例
 
 在这里给出相应的输出。例如：
 
@@ -615,7 +615,7 @@ int main() {
 
 {% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
 
-## 题解
+### 题解
 
 &emsp;&emsp;很简单，直接贴代码，不解释：
 

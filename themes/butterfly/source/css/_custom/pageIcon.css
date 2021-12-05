@@ -1,18 +1,17 @@
-#article-container.post-content h1:before {
+#article-container.post-content h2:before {
   font-family: "iconfont" !important;
   content: '\e625' !important;
   font-size: 2rem !important;
   margin-left: -1.8rem !important;
   margin-top: -0.55rem !important;
 }
-#article-container.post-content h2:before {
+#article-container.post-content h3:before {
   font-family: "iconfont" !important;
   content: '\e624' !important;
   margin-left: -1.35rem !important;
   margin-top: -0.35rem !important;
   font-size: 1.45rem !important;
 }
-#article-container.post-content h3:before,
 #article-container.post-content h4:before,
 #article-container.post-content h5:before,
 #article-container.post-content h6:before {
@@ -21,14 +20,22 @@
   margin-top: 0rem !important;
 }
 
-#article-container.post-content h3,
-#article-container.post-content h3,
-#article-container.post-content h3,
-#article-container.post-content h3 {
-  margin-left: 0.2rem !important;
+#article-container.post-content h2{
+  font-size: 1.6rem !important;
 }
-
-#content-inner.layout h1:hover, #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
+#article-container.post-content h3 {
+  font-size: 1.3rem !important;
+}
+#article-container.post-content h4 {
+  font-size: 1rem !important;
+}
+#article-container.post-content h5 {
+  font-size: 0.9rem !important;
+}
+#article-container.post-content h6 {
+  font-size: 0.8rem !important;
+}
+#content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
     color: #49b1f5 ;
-    margin-left: 0.35rem;
+    margin-left: 0.4rem;
 }

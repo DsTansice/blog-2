@@ -11,7 +11,7 @@ cover: https://image.emptydreams.xyz/bg/b4.jpg!/fxfn2/550x500
 description: 这里会写一些我开发模组时遇到的问题以及解决方法，遇到问题的小伙伴可以尝试在这里寻找解决方案。
 ---
 
-# 前言
+## 前言
 
 &emsp;&emsp;笔者开发环境为forge-1.12.2-**14.23.5.2768**，如果版本号不一样，笔者不能保证该指南的内容对你仍然准确。
 
@@ -23,11 +23,11 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
 
 ---
 
-# ☼&ensp;JSON
+## ☼&ensp;JSON
 
-## ☽ &ensp;BlockStates
+### ☽ &ensp;BlockStates
 
-### 模型旋转问题
+#### 模型旋转问题
 
 &emsp;&emsp;笔者开发模组时一开始尝试使用`"x": *, "y": *, "z": *`表示模型的旋转角度，但是测试时却发现模型显示异常。后经过更细致的测试，发现blockstates中的json无法绕Z轴旋转模型，只可以通过X Y轴的旋转组合来旋转模型。开始时笔者怀疑是否是因为万向节死锁导致该问题的出现，但是事实证明只旋转Z轴任意角度（45/90/180/270）依然不会有任何效果，所以大概率无法旋转Z轴。
 
@@ -40,9 +40,9 @@ description: 这里会写一些我开发模组时遇到的问题以及解决方�
     <li><b>X轴</b>：X轴在东西方向上，从东看向西顺时针为正方向</li>
 </ul>
 
-# ☼ &ensp;双端问题
+## ☼ &ensp;双端问题
 
-## ☽&ensp;客户端IBlockState数据异常
+### ☽&ensp;客户端IBlockState数据异常
 
 &emsp;&emsp;笔者在开发模组时遇到了一个特别奇怪的情况：在游戏执行一段时间后我的方块的`IBlockState`在客户端的数据就变成了默认值，从而导致获取选择框时返回值错误。经过检查，`TileEntity`和服务端数据均正常，后我又检查了我的所有代码，并在`World#setBlockState`、`Chunk#setBlcokState`以及`ExtendedBlockStorage#set`中均打了断点，发现并没有代码触发这些方法。随后我检查了可能更改Chunk数据的位置，最终发现是`Chunk#read`方法将客户端数据错误的修改了。
 

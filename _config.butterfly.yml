@@ -678,7 +678,7 @@ aside:
       link: https://github.com/EmptyDreams
   card_announcement:
     enable: true
-    content: <p>评论通知的邮箱很容易被拦截<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。<p>另外直接回复邮件是没有用的，记得来博客回复评论。
+    content: <p>我通过我自己写的代码把所有文章的标题等级向后迁移了一层，如果你发现有的文章出现了显示错误，还请通过评论告诉我QAQ。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all

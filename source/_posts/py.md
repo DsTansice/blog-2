@@ -11,17 +11,17 @@ cover: https://image.emptydreams.xyz/bg/b5.jpg!/fxfn2/550x500
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
 ---
 
-# 下载
+## 下载
 
 &emsp;&emsp;首先，我们需要下载Anaconda3和PyCharm的安装包，班群的小伙伴可以直接在群文件里面下载，其他人可以去官网下载，这里列出下载链接：[Anaconda3](https://www.anaconda.com/products/individual)、[PyCharm](https://www.jetbrains.com/zh-cn/pycharm/download/#section=windows)
 
 &emsp;&emsp;温馨提示：PyCharm下载社区版（Community）就够用了，安装Anaconda3就不需要手动安装Python了。
 
-# 安装
+## 安装
 
 **声明：本章所有图片均来源于网络，若有侵权可以联系我删除。因为来源与网络，可能图片中的信息会与文字描述有部分不相符的内容，如果两者不一样则优先听从文字内容。**
 
-## Anaconda3
+### Anaconda3
 
 &emsp;&emsp;打开安装包，可以看到下图所示的界面
 
@@ -45,7 +45,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 <img src="https://pic2.zhimg.com/v2-6ed983e8cedf48dc0c0870d3de2c620d_r.jpg" style="zoom:67%;" />
 
-## Pycharm
+### Pycharm
 
 &emsp;&emsp;打开安装包，进入修改安装路径的界面，这里随意选择自己想要的安装路径即可。
 
@@ -59,7 +59,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 &emsp;&emsp;进入最后一个界面的时候可以先把`Run PyCharm`取消掉，点击`Finish`就完成安装了
 
-# 配置Anaconda环境变量
+## 配置Anaconda环境变量
 
 &emsp;&emsp;此电脑——属性——高级系统设置——环境变量——系统变量——[双击Path]
 
@@ -78,7 +78,7 @@ description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答
 
 ![](https://image.emptydreams.xyz/py/check.png!/scale/67)
 
-# 添加Anaconda中国镜像
+## 添加Anaconda中国镜像
 
 <ol>
     <li>打开命令提示符，执行“conda config --set show_channel_urls yes”指令</li>
@@ -107,7 +107,7 @@ custom_channels:
   simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
 ```
 
-# PyCharm的汉化
+## PyCharm的汉化
 
 **注意：本章中所有图片均来源于网络，侵删！若图片信息与文本描述不相符，则优先听从文本指令。**
 
@@ -121,7 +121,7 @@ custom_channels:
 
 &emsp;&emsp;然后按照图中所示，点击`Install`，等待安装完毕后重启PyCharm，你就会发现界面变成中文了。
 
-# PyCharm插件推荐
+## PyCharm插件推荐
 
 <ul>
     <li>Key Promoter X: 快捷键提示插件，如果你的鼠标操作可以用快捷键替代则会在右下角提醒你</li>
@@ -130,7 +130,7 @@ custom_channels:
 </ul>
 
 
-# PyCharm优化
+## PyCharm优化
 
 **注意：本章仅针对16G内存的电脑，若你的电脑内存比较小，请自己抉择最大内存设置。**
 
