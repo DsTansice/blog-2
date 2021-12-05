@@ -186,6 +186,13 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
+markdown:
+  plugins:
+    - plugin:
+      name: '@neilsustc/markdown-it-katex'
+      options:
+        strict: false
+
 # envelope_comment
 # see https://akilar.top/posts/58900a8/
 envelope_comment:
