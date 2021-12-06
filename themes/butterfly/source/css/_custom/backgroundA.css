@@ -27,7 +27,7 @@
 }
 [data-theme="dark"]
   div#post{
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.8);
 }
 /* 分页页面 */
 [data-theme="light"]
@@ -36,7 +36,7 @@
 }
 [data-theme="dark"]
   div#page{
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.8);
 }
 /* 归档页面 */
 [data-theme="light"]
@@ -45,7 +45,7 @@
 }
 [data-theme="dark"]
   div#archive{
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.8);
 }
 /* 标签页面 */
 [data-theme="light"]
@@ -54,7 +54,7 @@
 }
 [data-theme="dark"]
   div#tag{
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.8);
 }
 /* 分类页面 */
 [data-theme="light"]
@@ -63,7 +63,7 @@
 }
 [data-theme="dark"]
   div#category{
-    background: rgba(20, 20, 20, 0.75);
+    background: rgba(20, 20, 20, 0.8);
 }
 /* 页脚背景 */
 #footer:before {
@@ -78,26 +78,5 @@
 /* 引入背景 */
 [data-theme="dark"]
   blockquote{
-    background-color: rgba(20,20,20,0.65) !important;
-  }
-/* 阅读模式代码框文字背景 */
-[data-theme="light"]
-  #article-container figure.highlight .hljs{
-    background: rgba(0,0,0,0) !important;
-  }
-[data-theme="light"]
-  div#sidebar-menus{
-    background: rgba(255,255,255,0.8) !important;
-  }
-[data-theme="dark"]
-  div#sidebar-menus{
-    background: rgba(18,18,18,0.8) !important;
-  }
-[data-theme="dark"]
-  div#menu-mask{
-    background: rgba(0,0,0,0.6) !important;
-  }
-[data-theme="dark"]
-  div#sidebar-menus.site-page{
-    background: rgba(255,255,255,0.5);
+    background-color: rgba(30,30,30,0.65) !important;
   }
