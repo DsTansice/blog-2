@@ -1,5 +1,5 @@
 ---
-title: pta_happy_3
+title: 网安、人工智能21级班级团体训练欢乐赛(三)题解
 date: 2021-12-02 00:03:14
 top_img: false
 toc_number: false

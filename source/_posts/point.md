@@ -178,7 +178,7 @@ int (*p2)[10] = array;		//2
 
 &emsp;&emsp;指针数组实际上是一个数组，其中存储了一些指针的值，内存结构如下：
 
-![指针数组](https://image.emptydreams.xyz/point/zs.jpg)
+![指针数组](https://image.emptydreams.xyz/point/sz.jpg)
 
 {% span center blue, 该图来自网络，侵删 %}
 
