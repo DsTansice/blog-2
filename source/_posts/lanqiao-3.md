@@ -1,0 +1,1180 @@
+---
+title: 蓝桥选拔赛(三)题解
+top_img: false
+toc_number: false
+cover: 'https://image.emptydreams.xyz/bg/b26.jpg!/fxfn2/550x500'
+date: 2021-12-09 20:34:13
+categories:
+    - C/C++
+tags:
+    - 题解
+    - PTA
+    - 教程
+description: 蓝桥选拔赛（三）暨2020级新生赛详细题解
+---
+
+## 注意
+
+&emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
+
+&emsp;&emsp;为了减轻工作量，本篇题解中不再完全模仿PTA的题目格式，没有特殊说明均表示输入输出结尾无空行。
+
+## 小A与泉水([OJ2779](http://acm.zzuli.edu.cn/problem.php?id=2779))
+
+&emsp;&emsp;小A遇到了一座神奇的泉水，在泉水中洗涤会大幅增加他的精力。在一次洗涤中，泉水增加力量的数值为当前力量二进制表示中的最低位的1对应的值。
+
+&emsp;例如：
+
+&emsp;&emsp;如果当前力量为9（1001 最低位1对应的值为1），增加的力量为1；
+
+&emsp;&emsp;如果当前力量为12（1100 最低位1对应的值为100），增加的力量为4。
+
+&emsp;&emsp;小A想要将他的力量变为2的幂次数，他需要在泉水中洗涤多少次呢？
+
+### 输入格式
+
+&emsp;&emsp;多样例测试。
+
+&emsp;&emsp;第一行输入`T`（`T` <= 100,000），代表样例数；
+
+剩余`T`行，每行输入一个数`n`（`n` < 1,000,000,000）代表小A当前的力量。
+
+### 输出格式
+
+&emsp;&emsp;对于每次询问，输出小A需要在泉水中洗涤的次数。
+
+### 输入样例
+
+> 4
+> 1
+> 2
+> 3
+> 5
+
+### 输出样例
+
+> 0
+> 0
+> 1
+> 2
+
+### 题解
+
+{% tabs xayqs %}
+
+<!-- tab 循环解法 -->
+
+{% folding 多写了的内容 %}
+
+&emsp;&emsp;这道题涉及到2的整数次幂的运算，我们科普一个知识点，就是2的整数次幂的特点。仔细观察2的整数次幂可以发现，每一个2的整数次幂的二进制表达式都只有一个`1`。
+
+&emsp;&emsp;比如：`1`的二进制表达是`0b1`，`2`的二进制表达是`0b10`，`4`的二进制表达是`0b100`，以此类推。
+
+&emsp;&emsp;所以我们也可以得到一种`O(1)`复杂度计算2的整数次幂的方法：<code>2<sup>n</sup> = 1 << n</code>。
+
+{% endfolding %}
+
+&emsp;&emsp;这道题需要判断是否是2的整数次幂，我们可以把`int`范围内的所有值都列出来（打表打表，都可以打表{% inlineimage https://cdn.jsdelivr.net/gh/EmptyDreams/resources/icon/doge0.png %}），这样我们判断是否是二进制的时候直接查表就可以了，不需要再计算。
+
+&emsp;&emsp;这里我们写一个函数（`int check(int n, int start)`）来判断一个数是否为2的整数次幂。其中`n`是要进行判断的数，`start`是从表中哪个位置开始搜索，返回值是返回返回下一次从哪个地方开始搜索，返回`-1`表示当前值已经是2的整数次幂了，返回`-2`表明计算错误。`start`的存在意义是减小搜索范围，通过观察我们不难发现，每次运算过后值只会变大不会变小，所以当前搜索过的地方下一次在这里也不会搜索到结果。
+
+&emsp;&emsp;中间的`k`为什么只初始化了一次也单独强调一下，观察计算过程可以发现，`k`每次只会变大不会变小，所以我们每次运算从上一次结束的地方开始就可以了，不需要从头开始，也可以节省运算资源。
+
+```c
+int t[] = {1,2,4,8,16,32,64,128,256,512,
+           1024,2048,4096,8192,16384,32768,
+           65536,131072,262144,524288,1048576,
+           2097152,4194304,8388608,16777216,
+           33554432,67108864,134217728,
+           268435456,536870912,1073741824};
+
+int check(int n, int start) {
+    for (int i = start; i != 31; ++i) {
+        if (t[i] == n) return -1;
+        else if (t[i] > n) return i;
+    }
+    return -2;
+}
+
+int main() {
+    int a;
+    scanf("%d", &a);
+    bool start = false;
+    while (a--) {
+        if (start) printf("\n");
+        else start = true;
+        int n;
+        int i = 0;
+        int k = 1;  //存储这次要加的值
+        scanf("%d", &n);
+        int result = 0; //存储运算了几次
+        int preStart = 0;   //存储下一次搜索从哪个地方开始
+        //当preStart==-1时表明n是2的整数次幂
+        while ((preStart = check(n, preStart)) != -1) {
+            ++result;
+            //使用for计算k的值
+            for (; i != 30; ++i) {
+                //判断二进制表达式中当前位置是否为1
+                if (((n >> i) & 1) == 1) break;
+                k <<= 1;
+            }
+            n += k; //更新n的值
+        }
+        printf("%d", result);
+    }
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab lowbit -->
+
+&emsp;&emsp;该解法的代码由群友——ty提供：
+
+&emsp;&emsp;其中`lowbit`的原理见：[lowbit的原理及证明](https://blog.csdn.net/weixin_45750972/article/details/105613159)
+
+```c
+//使用lowbit取最低位的1
+int lowbit(int x) {
+    return x & (-x);
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    int i;
+    while (n--) {
+        int x;
+        scanf("%d", &x);
+        int t = 0;
+        while (true) {
+            //当x==lowbit(x)时表明整个数的二进制表达式中只有一个1
+            //此时x就是2的整数次幂
+            if (x == lowbit(x)) break;
+            x = x + lowbit(x);  //更新值
+            t++;
+        }
+        printf("%d\n", t);
+    }
+    return 0;
+}
+```
+<!-- endtab -->
+
+{% endtabs %}
+
+## 小A的魔法([OJ2781](http://acm.zzuli.edu.cn/problem.php?id=2781))
+
+&emsp;&emsp;小A踏上了AK这场新生赛的旅程。但对方太狡猾，将小A传送到了一个不知名的地方。经过探查，小A发现了一座很大的迷宫。这座迷宫从上方看竟然是正方形的，而且内部被分为了1000∗1000个同等大小房间，而狡猾的敌人则隐藏在某些房间中，准备偷袭小A.
+
+&emsp;&emsp;幸好小A提前发现了对方的阴谋，准备解决所有的敌人。但敌人太多了，小A准备使用高级魔法---“这题我会”。这个魔法的作用范围是正好是一个矩形，能够覆盖`W∗H`个房间(注意：`W∗H`与`H∗W`是不同的，如：2∗3与3∗2是两种魔法)，处于该范围内的敌人将会被魔法消灭魔法的边界必须与房间的墙壁重合，否则狡猾的敌人会躲在墙边，从而躲开此次攻击。小A只能发动一次该魔法，他希望魔法发动时能攻击到更多的敌人。小A选择寻求你的帮助，他告诉你了`n`个敌人的位置，你能告诉他，发动魔法最多能消灭多少个敌人吗？
+
+&emsp;&emsp;例如：小A魔法的范围是3*2，他共探查到了5个敌人，位置如下，他最多可以消灭4个敌人。
+
+![](https://images.ptausercontent.com/93cf0b14-5d23-4d9b-988a-68c0abb66c1f.jpg)
+
+### 输入格式
+
+&emsp;&emsp;第一行包含3个整数`n`, `W`, `H`(1 ≤ `n` ≤ 100, 1 ≤ `W`, `H` ≤ 1000)。代表共有`n`个敌人，魔法的打击范围是`W∗H`。
+
+&emsp;&emsp;接下来`n`行，每行包含两个整数<code>x<sub>i</sub>, y<sub>i</sub></code>(1 ≤ <code>x<sub>i</sub>, y<sub>i</sub></code> ≤ 1000), 代表第`i`个敌人位于坐标(<code>x<sub>i</sub></code>, <code>y<sub>i</sub></code>)的房间。保证每个房间最多只有一个敌人。
+
+### 输出格式
+
+&emsp;&emsp;输出一个整数。代表小A发动魔法，最多消灭的敌人的数量。
+
+### 输入样例1
+
+> 5 3 2
+> 1 1
+> 2 1
+> 3 1
+> 4 1
+> 4 2
+
+### 输出样例1
+
+> 4
+
+### 输入样例2
+
+> 5 2 3
+> 1 1
+> 2 1
+> 3 1
+> 4 1
+> 4 2
+
+### 输出样例2
+
+> 3
+
+### 题解
+
+{% tabs xadmf %}
+
+<!-- tab 一维前缀和 -->
+
+&emsp;&emsp;这个方法比二位前缀和的方法更容易理解，但是时间复杂度更高。
+
+&emsp;&emsp;为了节省运算资源，我们中间做了一个优化，就是裁剪掉没有人的区域，减少遍历范围，效果如图所示：
+
+![效果图](https://image.emptydreams.xyz/lanqiao/yh.jpg)
+
+&emsp;&emsp;这个代码其实还有优化的余地，但是有些复杂就不写了。
+
+```c++
+//存储地图
+//使用方式：[y][x]
+int map[1001][1001];
+
+//存储前缀和
+//使用方式：[y][x]
+//  表示在纵坐标为y的一行中，从起始位置到x的人的数量
+int sumX[1001][1001];
+
+int main() {
+    int n, w, h, x, y;
+    scanf("%d %d %d", &n, &w, &h);
+    //startX和startY分别表示有效区域的起始X轴、Y轴坐标
+    int startX = 1001, startY = 1001;
+    //存储X轴、Y轴上最大的值
+    int maxX = 0, maxY = 0;
+    for (int i = 0; i != n; ++i) {
+        scanf("%d %d", &x, &y);
+        map[y][x] = 1;
+        if (x < startX) startX = x;
+        if (y < startY) startY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+    }
+    //最小化w和h的值
+    w = min(w, maxX - startX + 1);
+    h = min(h, maxY - startY + 1);
+    //计算前缀和
+    for (x = startX; x <= maxX; ++x) {
+        for (y = startY; y <= maxY; ++y) {
+            sumX[y][x] = sumX[y][x - 1] + map[y][x];
+        }
+    }
+    //计算遍历结束的位置
+    int endX = max(startX, maxX - w + 1) + 1;
+    int endY = max(startY, maxY - h + 1) + 1;
+    int maxResult = min(w * h, n);  //计算可能包含的最大人数
+    int result = 0; //存储结果
+    for (x = startX; x != endX; ++x) {
+        for (y = startY; y != endY; ++y) {
+            int temp = 0;
+            //计算当前区域内的人数
+            for (int k = 0; k != h; ++k) {
+                temp += sumX[y + k][x + w - 1] - sumX[y + k][x - 1];
+            }
+            if (temp > result) {
+                result = temp;
+                //如果当前人数和最大人数相等，说明不可能再包含更多的神了
+                if (result == maxResult) goto hear;
+            }
+        }
+    }
+    hear:
+    printf("%d", result);
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab 二维前缀和 -->
+
+{%p center blue, 等待补充…… %}
+
+<!-- endtab -->
+
+{% endtabs %}
+
+## 小A的宝藏([OJ2780](http://acm.zzuli.edu.cn/problem.php?id=2780))
+
+&emsp;&emsp;小A和小B历经千辛万苦，终于在一个洞穴中找到了宝藏。
+
+&emsp;&emsp;在洞穴深处，他们发现了一颗价值连城的宝石，他们决定做一个游戏以决定宝石属于谁。
+
+&emsp;&emsp;游戏规则如下：
+
+&emsp;&emsp;&emsp;每人在自己的回合必须选择其中一个操作：
+
+1. 拿走一块或者两块银子；
+2. 拿走一块金子。
+
+&emsp;&emsp;无法继续进行操作的人被认为失败（即银子和金子都已经拿完）。
+
+&emsp;&emsp;谁将得到宝石呢？
+
+
+### 输入格式
+
+&emsp;&emsp;多样例测试。
+
+&emsp;&emsp;第一行输入`T`（`T` <= 100,000），代表样例数；
+
+&emsp;&emsp;剩余`T`行，每行输入`n`, `m`(`n` < 1,000,000,000, `m` < 1,000,000,000) 代表银子和金子的数量。
+
+### 输出格式
+
+&emsp;&emsp;如果小A胜利，输出`Alice`，否则输出`Bob`。
+
+### 输入样例
+
+> 3
+> 1 0
+> 3 0
+> 3 1
+
+### 输出样例
+
+> Alice
+> Bob
+> Alice
+
+### 题解
+
+&emsp;&emsp;这道题是一道博弈题（~~听说还是小学奥数题{% inlineimage https://cdn.jsdelivr.net/gh/EmptyDreams/resources/icon/bleed.png %}~~）。
+
+&emsp;&emsp;我们先假设只有一堆金子或者一堆银子的情况。
+
+&emsp;&emsp;首先我们先考虑金子那一堆，很显然，如果金子为偶数，那么先拿的人会输，否则先拿的人会赢。
+
+&emsp;&emsp;接着我们再来看复杂一点的银子，如果有人玩过类似的游戏应该会很清楚，只要自己能够抢到一些特定的数就可以保证自己能够赢，下文中我们称这些数为“系列数”。我们很容易可以发现，只需要让自己拿到最后一个银子就能赢，那么如何保证自己能够拿到最后一个呢？只需要拿到倒数第四个就可以，因为假如我们拿到了倒数第四个，不论另一个人拿几个，我们都可以拿到最后一个。以此类推，可以发现我们只需要拿到`1 4 7 10 ...`一系列数字就可以了。
+
+&emsp;&emsp;通过以上推算，我们很容易就可以判断假如自己先手能否抢到这一系列数字，很显然，当银子的数量不是3的倍数时我们就可以做到。
+
+&emsp;&emsp;这时候我们再倒过来考虑一下，如果自己先手，有没有办法保证自己一定输？当然有，只要我们拿倒数第二个银子，就能保证对方拿最后一个，这样我们就一定会输。同理，我们可以知道，当我们拿到`2 5 8 13 ...`一系列数字时可以保证自己会输，那么很明显，如果我们先手并且银子的数量减一不是3的倍数时就可以了。
+
+&emsp;&emsp;现在让我们回归题目，有两堆需要考虑，再让我们假设一个情况，就是两个人都先把其中一堆拿完，然后再拿另一堆。很明显，金子的结果是固定的，而银子相对而言却有周旋的空间，所以先手的人拿银子会更容易掌控局面。
+
+&emsp;&emsp;那就让我们假设两个人都先拿银子。不难发现，如果想赢，我们还需要判断一下金子的数量。假如我们在金子堆先手的时候能够赢，那么我们应当让我们在银子堆输掉，这样才能保证我们先拿金子；如果我们在金子堆后手能赢，那么我们应当在银子堆胜利，这样才能让对方先拿金子。
+
+&emsp;&emsp;有了这个思路就非常清晰了，很容易就能写出来下面的代码：
+
+```c
+int main() {
+    int t, n, m;
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d %d", &n, &m);
+        if (m % 2 == 0) {
+            if (n % 3 == 0) printf("Bob\n");
+            else printf("Alice\n");
+        } else {
+            if ((n - 1) % 3 == 0) printf("Bob\n");
+            else printf("Alice\n");
+        }
+    }
+    return 0;
+}
+```
+
+&emsp;&emsp;现在我们再来考虑一下中间可能会有人去拿金子的情况，很显然，拿金子只能拿一个，并且下一次我们还能选择拿金子还是银子。所以我们不妨认为中间对方跑去拿金子只是改变了一下金子堆的总数，我们根据新的数量重新制定我们的计划就可以了。
+
+&emsp;&emsp;现在的问题就变成了如果计划发生变化，我们能否保证自己依然能够拿到新的系列数？我们假设我们现在已经拿到了目前的系列数，比如是`1 4 7 ...`，当情况发生变化的时候我们应该拿到`2 5 8 ...`，很明显，这两个系列数的差值只有一，我们是可以从任意一个系列数中跳到另一个系列数中的。那么假如我们当前没有拿到系列数，比如现在的系列数为`1 4 7 ...`，新的系列数是`2 5 8 ...`，很明显，是有可能拿到新的系列数的
+
+&emsp;&emsp;但是我们不要忘记这个游戏的两边是都想赢得，所以任意一方都不会走可能让自己输的一步的，如果我们能拿到系列数我们按照系列数走就一定能赢，如果拿不到系列数只要对方不给机会就永远都拿不到系列数。
+
+&emsp;&emsp;综上所述，我们先前假设的先拿银子再拿金子的情况依然适用于两堆混合拿的情况，最终的代码我们就得出来了。
+
+## 靶场射击2.0([OJ2782](http://acm.zzuli.edu.cn/problem.php?id=2782))
+
+&emsp;&emsp;“欢迎来到靶场射击2.0.”
+
+&emsp;&emsp;小A正在挑战一款叫做《靶场射击2.0》的游戏。游戏内共有两种靶子，一种是金色靶子，击中可以获得`a`积分，一种是普通靶子，击中可以获得`b`积分(`a` ≥ `b`)。每个靶子上都有一个字母，金色靶子上的为大写字母，普通靶子上的为小写字母。
+
+&emsp;&emsp;当按下按键时，能得到所有对应字母相同的靶子的积分。如"WWWAAaa"，按下键'A'，则能得到`2∗a + 2∗b`积分，按下键'W'，则能得到`3∗a`积分。
+
+&emsp;&emsp;小A想挑战点不一样的，他想知道当前局面，按哪个键能得到的积分最多。
+
+### 输入格式
+
+&emsp;&emsp;第一行包含三个整数`n`, `a`, `b`(1 <= `n` <= 100000, 1 ≤ `b` ≤ `a` ≤ 10)，代表`n`代表靶子数量，击中金色靶子获得的积分，击中普通靶子获得的积分。
+
+&emsp;&emsp;第二行有`n`个字母，代表当前`n`个靶子上的字母。其中大写字母代表金色靶子，小写字母代表普通靶子。
+
+### 输出格式
+
+&emsp;&emsp;输出一个大写字符。代表小新按下该字符，能得到最多的积分。若有多个按键可以得到相同的积分，则输出字典序最小的那个字符。
+
+### 输入样例1
+
+> 7 3 2
+> WWWAAaa
+
+### 输出样例1
+
+> A
+
+### 输入样例2
+
+> 7 5 2
+> WWWAAaa
+
+### 输出样例2
+
+> W
+
+### 题解
+
+```c
+int main() {
+    int score[26] = {0};
+    int n, a, b;
+    char s;
+    scanf("%d %d %d%*c", &n, &a, &b);
+    int maxScore = 0;
+    while (n--) {
+        scanf("%c", &s);
+        if (islower(s)) {
+            score[s - 'a'] += b;
+            if (score[s - 'a'] > maxScore) {
+                maxScore = score[s - 'a'];
+            }
+        } else {
+            score[s - 'A'] += a;
+            if (score[s - 'A'] > maxScore) {
+                maxScore = score[s - 'A'];
+            }
+        }
+    }
+    for (int i = 0; i != 26; ++i) {
+        if (score[i] == maxScore) {
+            printf("%c", 'A' + i);
+            break;
+        }
+    }
+    return 0;
+}
+```
+
+## 这是一个数学题([OJ2786](http://acm.zzuli.edu.cn/problem.php?id=2786))
+
+&emsp;&emsp;一个数通过最小次数交换数位变成20的倍数。问最少交换次数是多少？
+
+### 输入格式
+
+&emsp;&emsp;一个正整数`T`(1 <= `T` <= 10000)，代表有`T`组输入。每个输入包含一个正整数`N`（1 <= `N` <= 10<sup>18</sup>），`N`没有前导0。
+
+### 输出格式
+
+&emsp;&emsp;最小的交换次数，每个占一行。如果不能交换出20的倍数，输出-1。
+
+### 输入样例
+
+> 2
+> 707
+> 680
+
+### 输出样例
+
+> -1
+> 0
+
+### 题解
+
+&emsp;&emsp;通过找规律可以发现，当一个数最后一个数是`0`，并且倒数第二个数是偶数时这个数一定是`20`的倍数。
+
+&emsp;&emsp;这道题输入范围比较大，所以我们选择使用字符串来进行计算。
+
+{% tabs zsygsxt %}
+
+<!-- tab C语言 -->
+```c
+int main() {
+    int n;
+    scanf("%d", &n);
+    char str[20];
+    while (n--) {
+        scanf("%s", str);
+        //记录第一个0和偶数出现的位置（两个数一定不一样）
+        int startZero = -1, startOdd = -1;
+        int zero = 0, odd = 0;  //记录0和偶数的数量（偶数包括0）
+        int len = strlen(str);
+        for (int i = len - 1; i != -1; --i) {
+            int item = str[i] - '0';
+            if (item == 0) {
+                ++zero;
+                ++odd;
+                if (startZero == -1) startZero = i;
+                else if (startOdd == -1) startOdd = i;
+            } else if (item % 2 == 0) {
+                ++odd;
+                if (startOdd == -1) startOdd = i;
+            }
+        }
+        //如果一个数中不同时包含0和除这个零以外的偶数
+        //那么一定无法换成一个20的倍数
+        if (startZero == -1 || startOdd == -1) {
+            printf("-1\n");
+            continue;
+        }
+        int end = len - 1;
+        if (startZero == end) { //如果第一个0在结尾
+            //如果倒数第二位是偶数那么不需要进行交换，否则需要进行一次交换
+            if (startOdd == end - 1) printf("0\n");
+            else printf("1\n");
+        } else if (startZero == end - 1) {  //如果第一个0在倒数第二位
+            //如果最后一位是偶数或者0的数量大于1，那么只需要交换1次
+            //否则需要交换两次
+            if (startOdd == end || zero != 1) printf("1\n");
+            else printf("2\n");
+        } else if ((str[end - 1] - '0') % 2 == 0) { //如果倒数第二位是偶数
+            printf("1\n");
+        } else printf("2\n");
+    }
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab C++ -->
+```c++
+int main() {
+    int n;
+    scanf("%d", &n);
+    string str;
+    while (n--) {
+        cin >> str;
+        //记录第一个0和偶数出现的位置（两个数一定不一样）
+        int startZero = -1, startOdd = -1;
+        int zero = 0, odd = 0;  //记录0和偶数的数量（偶数包括0）
+        for (int i = str.length() - 1; i != -1; --i) {
+            int item = str[i] - '0';
+            if (item == 0) {
+                ++zero;
+                ++odd;
+                if (startZero == -1) startZero = i;
+                else if (startOdd == -1) startOdd = i;
+            } else if (item % 2 == 0) {
+                ++odd;
+                if (startOdd == -1) startOdd = i;
+            }
+        }
+        //如果一个数中不同时包含0和除这个零以外的偶数
+        //那么一定无法换成一个20的倍数
+        if (startZero == -1 || startOdd == -1) {
+            printf("-1\n");
+            continue;
+        }
+        int end = str.length() - 1;
+        if (startZero == end) { //如果第一个0在结尾
+            //如果倒数第二位是偶数那么不需要进行交换，否则需要进行一次交换
+            if (startOdd == end - 1) printf("0\n");
+            else printf("1\n");
+        } else if (startZero == end - 1) {  //如果第一个0在倒数第二位
+            //如果最后一位是偶数或者0的数量大于1，那么只需要交换1次
+            //否则需要交换两次
+            if (startOdd == end || zero != 1) printf("1\n");
+            else printf("2\n");
+        } else if ((str[end - 1] - '0') % 2 == 0) { //如果倒数第二位是偶数
+            printf("1\n");
+        } else printf("2\n");
+    }
+    return 0;
+}
+```
+<!-- endtab -->
+
+{% endtabs %}
+
+## 代码格式化([OJ2784](http://acm.zzuli.edu.cn/problem.php?id=2784))
+
+&emsp;&emsp;学弟给了学长一份c语言代码，让学长帮忙debug，可是这段代码却是这样的:
+
+```c
+#include<stdio.h>
+int main(){int a,b;int c=a+b;printf("Hello world!\n");return 0;}
+```
+
+&emsp;&emsp;这段代码机器能看懂，但是学长看不懂。 这代码有两个问题：没有换行缩进，二元运算符附近没有空格。 显然这是一段未格式化的代码，将其格式化成符合要求的格式。花括号不包含嵌套的情况。 格式要求：
+
+1. 分号后都需要换行
+2. 四个空格作为一个缩进单位
+3. 花括号{不换行，跟在前一个语句之后，但是隔开一个空格。
+4. 二元运算符周围需要放空格，因为学弟的代码只包含=，+，-，*，/,%这六个二元运算符
+
+&emsp;&emsp;格式化后的代码：
+
+```c
+#include<stdio.h>
+int main() {
+    int a,b;
+    int c = a + b;
+    printf("Hello world!\n");
+    return 0;
+}
+```
+
+&emsp;&emsp;注意：代码中不包含多余的分号。代码中只调用printf函数，printf函数内不会出现花括号和二元运算符。
+
+### 输入格式
+
+&emsp;&emsp;两行可以编译的但是格式不符合的要求的代码，一行为头文件(保证只有一个头文件)，一行为主函数代码。代码的问题如上所述，代码长度小于1000。代码中的花括号只包含主函数中的一对。保证代码主函数中有语句。
+
+### 输出格式
+
+&emsp;&emsp;满足格式格式要求的代码。
+
+### 输入样例
+
+> #include<stdio.h>
+> int main(){int a, b;a=9900,b=99;int c=a+b;int d=1,e;int ans=a+b+c/d%a*a-89+e;return 0;}
+
+### 输出样例
+
+> #include<stdio.h>
+> int main() {
+> &nbsp;&nbsp;&nbsp;&nbsp;int a, b;
+> &nbsp;&nbsp;&nbsp;&nbsp;a = 9900,b = 99;
+> &nbsp;&nbsp;&nbsp;&nbsp;int c = a + b;
+> &nbsp;&nbsp;&nbsp;&nbsp;int d = 1,e;
+> &nbsp;&nbsp;&nbsp;&nbsp;int ans = a + b + c / d % a * a - 89 + e;
+> &nbsp;&nbsp;&nbsp;&nbsp;return 0;
+> }
+
+### 题解
+
+```c
+int main() {
+    char str[1001];
+    gets(str);
+    printf("%s\n", str);
+    gets(str);
+    bool newLine = false;
+    bool space = false;
+    bool inStr = false;
+    for (int i = 0; i != str.length(); ++i) {
+        char item = str[i];
+        if (inStr && item != '"') goto hear;
+        switch (item) {
+            case '+': case '-': case '*': case '/': case '=': case '%': case '^':
+                if (str[i - 1] == ' ') {
+                    printf("%c ", item);
+                } else {
+                    printf(" %c ", item);
+                }
+                space = true;
+                break;
+            case ';':
+                printf("%c\n", ';');
+                newLine = true;
+                break;
+            case '&': case '|':
+                if (str[i + 1] == item) {
+                    printf("%c%c ", item, item);
+                    ++i;
+                } else {
+                    printf(" %c ", item);
+                }
+                space = true;
+                break;
+            case '{':
+                if (space) printf("{\n");
+                else printf(" {\n");
+                newLine = true;
+                break;
+            case '}':
+                printf("}");
+                break;
+            case '!': case '~':
+                if (str[i - 1] == ' ') printf("%c", item);
+                else printf(" %c", item);
+                break;
+            case ' ':
+                if (!(space || newLine)) {
+                    printf(" ");
+                    space = true;
+                }
+                break;
+            case '"':
+                inStr = !inStr;
+                printf("\"");
+                break;
+            default:
+                hear:
+                space = false;
+                if (newLine) {
+                    newLine = false;
+                    printf("    ");
+                    space = true;
+                }
+                printf("%c", item);
+                break;
+        }
+    }
+    return 0;
+}
+```
+
+## 贪心的小H([OJ2785](http://acm.zzuli.edu.cn/problem.php?id=2785))
+
+&emsp;&emsp;小H是一个考古学家，有一天他发现了海盗的宝藏，但是他只带了一个背包。现在摆在面前的宝物有100多件，每个宝物都有一个类型值（`type`）和一个珍贵程度（`value`）。现在要求选择若干个宝物（可以是0个）放进背包使得`x * y`最大，`x`为选择的不同`type`的数量，`y`为总的`value`值之和（同一种宝物`value`值一致，只计算一次`value`值）。
+
+### 输入格式
+
+&emsp;&emsp;第一行输入一个整数`n`表示物品的数量(1 ≤ `n` ≤ 200)。
+
+&emsp;&emsp;第二行输入`n`个整数`type_i`表示每个物品的类型(1 ≤ `type_i` ≤ 200)。
+
+&emsp;&emsp;第三行输入`n`个整数`value_i`(-100000 ≤ `value_i` ≤ 100000)。
+
+### 输出格式
+
+&emsp;&emsp;输出一个整数。
+
+### 输入样例
+
+> 2
+> 1 2
+> 4 7
+
+### 输出样例
+
+> 22
+
+### 题解
+
+&emsp;&emsp;这道题将输入按照`value`从大到小排序后，以贪心的思想就可以写出来了。注意：`value`为负值时不一定不取！
+
+{% tabs txdxh %}
+
+<!-- tab C++ -->
+```c++
+typedef long long LL;
+
+struct node {
+    LL value = LLONG_MIN;
+    LL type = 0;
+
+    bool operator <(const node& obj) const {
+        return value > obj.value;
+    }
+};
+
+int main() {
+    int n, temp;
+    scanf("%d", &n);
+    vector<node> key(n);
+    for (auto& item : key) scanf("%lld", &item.type);
+    for (auto& item : key) scanf("%lld", &item.value);
+    sort(key.begin(), key.end());
+    LL x = 0, y = 0;
+    vector<LL> reType;
+    for (int i = 0; i != n; ++i) {
+        node& item = key[i];
+        bool nonType = find(reType.begin(), reType.end(), item.type) == reType.end();
+        LL k = (x + (nonType ? 1 : 0)) * (y + item.value);
+        if (k > x * y) {
+            if (nonType) {
+                ++x;
+                reType.push_back(item.type);
+            }
+            if (i == 0 || key[i - 1].value != item.value) {
+                y += item.value;
+            }
+        }
+    }
+    printf("%lld", x * y);
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab C语言 -->
+```c
+typedef long long LL;
+
+struct node {
+    LL value = LLONG_MIN;
+    LL type = 0;
+
+    bool operator <(const node& obj) const {
+        return value > obj.value;
+    }
+};
+
+int compare(const void* a, const void* b) {
+    LL result = ((node*) b)->value - ((node*) a)->value;
+    if (result < 0) return -1;
+    else if (result > 0) return 1;
+    return 0;
+}
+
+bool contain(LL reType[], int length, LL type) {
+    for (int i = 0; i != length; ++i) {
+        if (reType[i] == type) return true;
+    }
+    return false;
+}
+
+int main() {
+    int n, temp;
+    scanf("%d", &n);
+    struct node key[n];
+    for (int i = 0; i != n; ++i) scanf("%lld", &key[i].type);
+    for (int i = 0; i != n; ++i) scanf("%lld", &key[i].value);
+    qsort(key, n, sizeof(node), compare);
+    LL x = 0, y = 0;
+    LL reType[n];
+    int reLength = 0;
+    memset(reType, 0, sizeof(reType));
+    for (int i = 0; i != n; ++i) {
+        bool hasType = contain(reType, reLength, key[i].type);
+        LL k = (x + (hasType ? 0 : 1)) * (y + key[i].value);
+        if (k > x * y) {
+            if (!hasType) {
+                ++x;
+                reType[reLength++] = key[i].type;
+            }
+            if (i == 0 || key[i - 1].value != key[i].value) {
+                y += key[i].value;
+            }
+        }
+    }
+    printf("%lld", x * y);
+    return 0;
+}
+```
+<!-- endtab -->
+
+{% endtabs %}
+
+## #define int long long([OJ2788](http://acm.zzuli.edu.cn/problem.php?id=2788))
+
+&emsp;&emsp;小A和队友一起比赛时，偷偷的加了一句"#define int long long"。导致队友`wrong answer`了三个小时。赛后被队友发现，小A的队友为了惩罚小A，决定让他抄2147483647遍"#define int long long"。绝望的小A希望你能帮他抄写10遍，你能帮帮他吗？
+
+### 题解
+
+```c
+int main() {
+    for (int i = 0; i != 10; ++i)
+        printf("#define int long long\n");
+    return 0;
+}
+```
+
+## 小A的魔力([OJ2787](http://acm.zzuli.edu.cn/problem.php?id=2787))
+
+&emsp;&emsp;众所周知，小A学长是郑轻全能王，新来的学弟学妹们都特别崇拜小A学长，大家在每次比赛前都会摸一摸小A学长，为自己祈福。新生赛即将来临，`n`名同学为了能够获得更好的成绩，纷纷来找小A学长讨教算法并得到学长的祝福，小A学长为第i名学生辅导<code>a<sub>i</sub></code>分钟。小A学长有一项神奇的本领，为任意两名同学辅导的时间都不相同。小A学长会认为被辅导时间最长的同学将获得冠军，但是小A学长忙于辅导同学，没有时间计算谁会获得冠军，小A学长希望你帮他算一下。
+
+### 输入格式
+
+&emsp;&emsp;输入第一行包含一个整数`n`(1 <= `n` <= 5000)，代表被小A学长辅导的同学的个数。接下来`n`行，每行包含一个字符串`s`(1 <= len(s) <= 20)和一个正整数(`int`范围内)，分别代表学生的姓名和被辅导的时长。
+
+### 输出格式
+
+&emsp;&emsp;输出将会获得冠军的学生的姓名。
+
+### 输入样例
+
+> 4
+> Bob 20
+> William 46
+> Mark 8
+> Bill 10
+
+### 输出样例
+
+> William
+
+### 题解
+
+{% tabs xadml %}
+
+<!-- tab C语言 -->
+
+&emsp;&emsp;通过`swap`减少数据的复制次数，同时简化代码。
+
+```c
+void swap(char** a, char** b) {
+    char* temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    char* maxName = malloc(21 * sizeof(char));
+    int maxTime = -1;
+    char* now = malloc(21 * sizeof(char));
+    int nowTime;
+    while (n--) {
+        scanf("%s %d", now, &nowTime);
+        if (nowTime > maxTime) {
+            swap(&maxName, &now);
+            maxTime = nowTime;
+        }
+    }
+    printf("%s",maxName);
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab C++ -->
+
+&emsp;&emsp;C语言中减少数据复制次数的优化在这里同样适用，不过数据量不大，并且直接复制数据写出来会更直观，所以这里就直接复制了。
+
+```c++
+int main() {
+    int n;
+    scanf("%d", &n);
+    string maxName;
+    int maxTime = -1;
+    string now;
+    int nowTime;
+    while (n--) {
+        cin >> now >> nowTime;
+        if (nowTime > maxTime) {
+            maxTime = nowTime;
+            maxName = now;
+        }
+    }
+    cout << maxName;
+    return 0;
+}
+```
+<!-- endtab -->
+
+{% endtabs %}
+
+## 魔法药水([OJ2783](http://acm.zzuli.edu.cn/problem.php?id=2783))
+
+&emsp;&emsp;小A终于来到了最后一题。小明翻找自己的背包，发现了很多能够提升自己能力值的药水。小A共发现了`n`种药水，第`i`种药水有a<sub>i</sub>瓶，使用后能使能力值加b<sub>i</sub>。但相同种类的药水，是不能连续使用的。小A觉得自己至少将能力值提升`X`(`X` >= 1)，才有把握AK这场新生赛。药水的味道并不好，小明想尽量少的使用药水。你能告诉小A，他至少使用多少瓶药水， 才能使自己的能力提升至少`X`？
+
+### 输入格式
+
+&emsp;&emsp;第一行包含两个整数`n`, `X`(1 ≤ `n` ≤ 1000, 1 ≤ `X` ≤ 10,000,000,000,000,000)；接下来`n`行，每行包括两个整数a<sub>i</sub>,b<sub>i</sub>(1≤a<sub>i</sub>,b<sub>i</sub>≤10,000,000)，代表第`i`种药水有a<sub>i</sub>瓶，使用后能提示能力值b<sub>i</sub>。
+
+### 输出格式
+
+&emsp;&emsp;如果小A不能使自己的能力提升至少`X`，输出`-1`；否则输出小A最少使用的药水的数量。
+
+### 输入样例1
+
+> 3 1000
+> 1 10
+> 2 14
+> 3 4
+
+### 输出样例1
+
+> -1
+
+### 输入样例2
+
+> 2 1000
+> 10 200
+> 5 1
+
+### 输出样例2
+
+> 9
+
+### 题解
+
+&emsp;&emsp;这道题我们使用二分法进行求解，设定一个值`mid`为当前取出的药水的数量，每次计算检查取出这个数量的药水能否达到`X`，可以的话就让`mid`向左移动，不可以的话就向右移动，直到确定最小可以达到`X`的`mid`。
+
+&emsp;&emsp;很显然，求解前我们需要对药水按照增加的能力值进行排序，取得时候尽量取增加得能力值大的。我们排序时取一个巧，把数量为`0`的药水放到最后面，这样可以去掉一部分运算。
+
+&emsp;&emsp;这道题最难的地方是如何确定取哪些药水，因为根据题意，我们不能连续拿同一种药水，假如输入数据为：
+
+> 3 45
+> 5 4
+> 5 3
+> 5 2
+
+&emsp;&emsp;如果我们一味的先取最大的，就会导致最后一种药水只能取一个，使得计算结果错误。
+
+&emsp;&emsp;我们不妨换一种思路，计算一下一种药水最多能够取多少。经过找规律，我们不难发现，假如我们要取`mid`瓶药水，当前还能够取`now`瓶药水，除去当前正在取得药水，其它药水总量为`other`，当前药水数量为`amount`，我们能取出当前药水的最大数量可以由下面这段代码计算：（`LL`是`unsigned long long`）
+
+```c
+LL minA = min((mid + 1) / 2, other + 1);
+return min(minA, min(amount, now));
+```
+
+{% folding 解释 %}
+
+&emsp;&emsp;对于`(mid + 1) / 2`，是根据`mid - minA + 1 >= minA`推出来的，即拿这个药水的数量不能超过要拿的药水的总量的一半，不然是不可能取出来的。
+
+&emsp;&emsp;对于`other + 1`，是因为拿这个药水的数量也不能超过其它药水的总量+1，不然也是不可能取出来的。
+
+&emsp;&emsp;`min(amount, now)`就很好理解了，这里不再解释。
+
+{% endfolding %}
+
+&emsp;&emsp;根据上述内容，我们就能写出代码了：
+
+{% tabs mfys %}
+
+<!-- tab C++ -->
+```c++
+typedef unsigned long long LL;
+
+struct potion {
+
+    LL amount;
+    LL cap;
+
+    bool operator <(const potion& obj) const {
+        if (amount == 0) {
+            return false;
+        } else if (obj.amount == 0) {
+            return true;
+        }
+        return cap > obj.cap;
+    }
+
+    LL max(LL mid, LL now, LL other) const {
+        LL minA = min((mid + 1) / 2, other + 1);
+        return min(minA, min(amount, now));
+    }
+
+};
+
+int main() {
+    LL n, x;
+    LL sumAmount = 0;
+    scanf("%llu %llu", &n, &x);
+    vector<potion> list(n);
+    for (auto& it : list) {
+        scanf("%llu %llu", &it.amount, &it.cap);
+        sumAmount += it.amount;
+    }
+    sort(list.begin(), list.end());
+    LL mid = sumAmount / 2;
+    LL sum;
+    LL right = sumAmount + 1, left = 0;
+    bool can = false;
+    do {
+        LL now = mid;
+        sum = 0;
+        for (LL i = 0; i != n; ++i) {
+            LL take = list[i].max(mid, now, sumAmount - list[i].amount);
+            now -= take;
+            sum += list[i].cap * take;
+        }
+        if (sum == x) {
+            can = true;
+            break;
+        }
+        if (sum > x) {
+            can = true;
+            if (right == mid) {
+                mid = left;
+                break;
+            }
+            right = mid;
+            mid = (left + mid) / 2;
+        } else {
+            if (left == mid) {
+                mid = right;
+                break;
+            }
+            left = mid;
+            mid = (right - mid) / 2 + mid;
+        }
+    } while (true);
+    if (can) printf("%llu", mid);
+    else printf("-1");
+    return 0;
+}
+```
+<!-- endtab -->
+
+<!-- tab C语言 -->
+```c
+typedef unsigned long long LL;
+
+struct potion {
+
+    LL amount;
+    LL cap;
+
+    bool operator <(const potion& obj) const {
+        if (amount == 0) {
+            return false;
+        } else if (obj.amount == 0) {
+            return true;
+        }
+        return cap > obj.cap;
+    }
+
+};
+
+LL potionMax(struct potion p, LL mid, LL now, LL other) {
+    LL minA = min((mid + 1) / 2, other + 1);
+    return min(minA, min(p.amount, now));
+}
+
+int compare(const void* a, const void* b) {
+    potion* ta = (potion*) a;
+    potion* tt = (potion*) b;
+    if (ta->amount == 0) return 1;
+    if (tt->amount == 0) return -1;
+    LL dif = tt->cap - ta->cap;
+    if (dif > 0) return 1;
+    if (dif < 0) return -1;
+    return 0;
+}
+
+int main() {
+    LL n, x;
+    LL sumAmount = 0;
+    scanf("%llu %llu", &n, &x);
+    struct potion list[n];
+    for (auto& it : list) {
+        scanf("%llu %llu", &it.amount, &it.cap);
+        sumAmount += it.amount;
+    }
+    qsort(list, n, sizeof(potion), compare);
+    LL mid = sumAmount / 2;
+    LL sum;
+    LL right = sumAmount + 1, left = 0;
+    bool can = false;
+    do {
+        LL now = mid;
+        sum = 0;
+        for (LL i = 0; i != n; ++i) {
+            LL take = potionMax(list[i], mid, now, sumAmount - list[i].amount);
+            now -= take;
+            sum += list[i].cap * take;
+        }
+        if (sum == x) {
+            can = true;
+            break;
+        }
+        if (sum > x) {
+            can = true;
+            if (right == mid) {
+                mid = left;
+                break;
+            }
+            right = mid;
+            mid = (left + mid) / 2;
+        } else {
+            if (left == mid) {
+                mid = right;
+                break;
+            }
+            left = mid;
+            mid = (right - mid) / 2 + mid;
+        }
+    } while (true);
+    if (can) printf("%llu", mid);
+    else printf("-1");
+    return 0;
+}
+```
+<!-- endtab -->
+
+{% endtabs %}
+
+---
+
+{% tip success %}<div class="text" style=" text-align:center;">创作不易，这次的题真的很难Orz，扫描下方打赏二维码支持一下吧ヾ(≧▽≦*)o</div>{% endtip %}

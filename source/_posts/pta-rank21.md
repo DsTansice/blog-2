@@ -231,6 +231,10 @@ int main() {
 
 ### 题解
 
+{% tabs cndqsjlg %}
+
+<!-- tab 循环解法 -->
+
 &emsp;&emsp;这道题需要注意时间成本问题，这里我们采用了从大往小计算的方式，即每次循环将`y`除以`x`，直至不能再整除。这么做需要注意一个特殊情况，即`x`为一但`y`不为一的情况，如果不特殊处理的话该程序就会陷入无限循环。
 
 &emsp;&emsp;直接采用正序运算的方法的话肯定会TLE，但是使用快速幂来进行正序运算的话我没有试过，有兴趣的可以尝试一下，然后把结果发到评论区。
@@ -249,6 +253,32 @@ int main() {
     return 0;
 }
 ```
+
+<!-- endtab -->
+
+<!-- tab 数学解法 -->
+
+&emsp;&emsp;该方法由群友——Dissolve提供。
+
+&emsp;&emsp;通过对数运算我们可以知道，<code>log<sub>x</sub>y</code>为整数时说明`x`是`y`的整数次幂。通过换底公式易得，当<code>log<sub>e</sub>(y) / log<sub>e</sub>(x)</code>为整数时说明`x`是`y`得整数次幂。
+
+```c
+int main() {
+    double x, y;
+    scanf("%lf %lf", &x, &y);
+    double result = log(y) / log(x);
+    int integer = (int) result;
+    if (fabs(result - integer) < 1e-6)
+        printf("YES");
+    else
+        printf("NO");
+    return 0;
+}
+```
+
+<!-- endtab -->
+
+{% endtabs %}
 
 ## 双城之战
 
