@@ -1,8 +1,7 @@
 ---
 title: 蓝桥选拔赛(三)题解
-top_img: false
 toc_number: false
-cover: 'https://image.emptydreams.xyz/bg/b26.jpg!/fxfn2/550x500'
+cover: https://image.emptydreams.xyz/bg/b26.jpg
 date: 2021-12-09 20:34:13
 categories:
     - C/C++
@@ -16,8 +15,6 @@ description: 蓝桥选拔赛（三）暨2020级新生赛详细题解
 ## 注意
 
 &emsp;&emsp;该博客是为了帮助同学学习，并非为了协助同学刷题，请读者保持自觉，**请勿做CV工具人**。另外为了节省篇幅，代码中不再写明`#include`，如果遇到我没有声明的函数，那么就是某一个头文件中的函数，读者搜索“`c` + 函数名字”就能查到相关信息。
-
-&emsp;&emsp;为了减轻工作量，本篇题解中不再完全模仿PTA的题目格式，没有特殊说明均表示输入输出结尾无空行。
 
 ## 小A与泉水([OJ2779](http://acm.zzuli.edu.cn/problem.php?id=2779))
 
@@ -74,7 +71,7 @@ description: 蓝桥选拔赛（三）暨2020级新生赛详细题解
 
 {% endfolding %}
 
-&emsp;&emsp;这道题需要判断是否是2的整数次幂，我们可以把`int`范围内的所有值都列出来（打表打表，都可以打表{% inlineimage https://cdn.jsdelivr.net/gh/EmptyDreams/resources/icon/doge0.png %}），这样我们判断是否是二进制的时候直接查表就可以了，不需要再计算。
+&emsp;&emsp;这道题需要判断是否是2的整数次幂，我们可以把`int`范围内的所有值都列出来（打表打表，都可以打表{% inlineimage https://image.emptydreams.xyz/icon/bili/doge.png %}样我们判断是否是二进制的时候直接查表就可以了，不需要再计算。
 
 &emsp;&emsp;这里我们写一个函数（`int check(int n, int start)`）来判断一个数是否为2的整数次幂。其中`n`是要进行判断的数，`start`是从表中哪个位置开始搜索，返回值是返回返回下一次从哪个地方开始搜索，返回`-1`表示当前值已经是2的整数次幂了，返回`-2`表明计算错误。`start`的存在意义是减小搜索范围，通过观察我们不难发现，每次运算过后值只会变大不会变小，所以当前搜索过的地方下一次在这里也不会搜索到结果。
 
@@ -336,7 +333,7 @@ int main() {
 
 ### 题解
 
-&emsp;&emsp;这道题是一道博弈题（~~听说还是小学奥数题{% inlineimage https://cdn.jsdelivr.net/gh/EmptyDreams/resources/icon/bleed.png %}~~）。
+&emsp;&emsp;这道题是一道博弈题（~~听说还是小学奥数题{% inlineimage https://image.emptydreams.xyz/icon/bili/bixie.png %}~~）。
 
 &emsp;&emsp;我们先假设只有一堆金子或者一堆银子的情况。
 

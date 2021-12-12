@@ -19,6 +19,8 @@ description: PTA-网安、人工智能21级班级团体训练欢乐赛（三）�
 
 &emsp;&emsp;为了减轻工作量，本篇题解中不再完全模仿PTA的题目格式，没有特殊说明均表示输入输出结尾无空行。
 
+---
+
 ## 我爱编程
 
 &emsp;&emsp;请编程输出文字：I love Computer,I love Programm,I love C!。
