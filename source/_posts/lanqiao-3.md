@@ -1,7 +1,8 @@
 ---
 title: 蓝桥选拔赛(三)题解
 toc_number: false
-cover: https://image.emptydreams.xyz/bg/b26.jpg
+top_img: false
+cover: https://image.emptydreams.xyz/bg/b26.jpg!/fxfn2/550x500
 date: 2021-12-09 20:34:13
 categories:
     - C/C++
