@@ -8,13 +8,11 @@
 
 menu:
   主页: / || icon-zhuye
-  足迹: /archives/ || icon-guidang
-  标签: /tags/ || icon-biaoqian
-  分类: /categories/ || icon-fenlei
+  足迹 || icon-zuji:
+    归 档: /archives/ || icon-guidang
+    分 类: /categories/ || icon-fenlei
+    标 签: /tags/ || icon-biaoqian
   留言板: /comments/ || icon-liuyan
-  # List||fas fa-list:
-  #   - Music || /music/ || fas fa-music
-  #   - Movie || /movies/ || fas fa-video
   友人帐: /link/ || icon-youlian
   # About: /about/ || fas fa-heart
 
@@ -58,17 +56,9 @@ algolia_search:
   hits:
     per_page: 6
 
-  labels:
-    input_placeholder: 输入搜索内容
-    hits_empty: "很抱歉，没有找到相关内容o(TヘTo): ${query}" # if there are no result
-    hits_stats: '${hits} 在 ${time} ms 内找到了结果'
-
 # Local search
 local_search:
   enable: true
-  labels:
-    input_placeholder: 输入搜索内容
-    hits_empty: "很抱歉，没有找到相关内容o(TヘTo): ${query}" # if there are no result
 
 # tag-plugins-plus
 # see https://akilar.top/posts/615e2dec/
@@ -221,9 +211,9 @@ reward:
      - img: https://image.emptydreams.xyz/reward/vcode.jpg
        link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/vcode.jpg
        text: 微信
-     - img: https://image.emptydreams.xyz/reward/afd.png
-       link: https://afdian.net/@emptydreams
-       text: 爱发电
+     #- img: https://image.emptydreams.xyz/reward/afd.png
+     #  link: https://afdian.net/@emptydreams
+     #  text: 爱发电
      - img: https://image.emptydreams.xyz/reward/zfbcode.jpg
        link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/zfbcode.jpg
        text: 支付宝
@@ -266,7 +256,7 @@ addThis:
 # https://github.com/overtrue/share.js
 sharejs:
   enable: true
-  sites: facebook,twitter,wechat,weibo,qq
+  sites: wechat,weibo,qq
 
 # AddToAny
 # https://www.addtoany.com/
@@ -680,11 +670,11 @@ aside:
     enable: true
     content: <p>我通过我自己写的代码把所有文章的标题等级向后迁移了一层，如果你发现有的文章出现了显示错误，还请通过评论告诉我QAQ。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
-    enable: true
+    enable: false
     limit: 5 # if set 0 will show all
     sort: date # date or updated
   card_categories:
-    enable: true
+    enable: false
     limit: 8 # if set 0 will show all
     expand: none # none/true/false
   card_tags:
@@ -717,7 +707,7 @@ runtimeshow:
 
 # Aside widget - Newest Comments
 newest_comments:
-  enable: true
+  enable: false
   limit: 6
   avatar: true
   leancloud:
@@ -885,7 +875,7 @@ inject:
   head:
     - <link rel="stylesheet" href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.css">
   bottom:
-    - <script src="//at.alicdn.com/t/font_2833129_hwithdyzo4b.js"></script>
+    - <script src="//at.alicdn.com/t/font_2833129_nslrebjp4is.js"></script>
     - <script defer src="https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/live2ds/live2d-widget/autoload.min.js"></script>
     - <link href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 # - <script src="xxxx"></script>

@@ -6,7 +6,6 @@ cover: https://image.emptydreams.xyz/bg/b28.jpg!/fxfn2/550x500
 date: 2021-12-18 15:30:49
 categories:
   - 随心记
-  - 通用
 tags:
   - 规范
 description: 代码规范是开发中一个非常重要的内容，今天我们再来说一下相关的内容。

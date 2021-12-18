@@ -199,10 +199,11 @@ envelope_comment:
   enable: true #开关
   cover: https://ae01.alicdn.com/kf/U5bb04af32be544c4b41206d9a42fcacfd.jpg #信笺封面图
   message: #信笺内容，支持多行
-    - 有什么想问的？
-    - 有什么想说的？
+    - 有什么想知道的？
+    - 有什么想学习的？
     - 有什么想吐槽的？
-    - 哪怕是有什么想吃的，都可以告诉我哦~
+    - 有什么想反馈的？
+    - 哪怕是有什么想吃的，都可以在这里告诉我哦ヾ(≧▽≦*)o
   bottom: ---空梦の博客--- #信笺结束语，只能单行
   height: #调整信笺划出高度，默认1050px
   path: #【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html
