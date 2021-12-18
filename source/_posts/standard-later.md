@@ -22,7 +22,7 @@ description: 代码规范是开发中一个非常重要的内容，今天我们�
 
 &emsp;&emsp;曾经我跟老师提到过这方面的问题，但是老师认为竞赛代码追求简洁，越紧凑越好。这是母庸置疑的，但是这不代表代码规范对于竞赛代码一文不值，其中一部分我们仍然需要严格遵守。
 
-&emsp;&emsp;按照我曾经的经验，代码编写过程中，尤其是变量名的命名，一定要遵循规范。曾经我因为使用了`w`和`h`分别表示宽高，导致有一行代码两个变量名混淆，从而致使我排查了一个多小时的漏洞，最终还是学长发现了这个问题{% inlineimage https://image.emptydreams.xyz/icon/dku.png %}。
+&emsp;&emsp;按照我曾经的经验，代码编写过程中，尤其是变量名的命名，一定要遵循规范。曾经我因为使用了`w`和`h`分别表示宽高，导致有一行代码两个变量名混淆，从而致使我排查了一个多小时的漏洞，最终还是学长发现了这个问题{% inlineimage https://image.emptydreams.xyz/icon/bili/dku.png %}。
 
 &emsp;&emsp;这说明一个问题：就算代码只有几十行，不良的编写习惯仍然有可能给我们埋下一颗不定时的炸弹。
 
@@ -45,4 +45,4 @@ int main() {
 
 &emsp;&emsp;再没有摸清楚宏的运作原理的情况下使用宏是一件非常危险的事情，如果真的必须使用宏那么一定要小心之上再小心，同时也要避免让宏的使用毁掉代码的可读性。
 
-&emsp;&emsp;程序员对规范的追求是无止境哒{% inlineimage https://image.emptydreams.xyz/icon/le.png %}，祝各位在追求规范的道路上五风十雨{% inlineimage https://image.emptydreams.xyz/icon/huaji.png %}。
+&emsp;&emsp;程序员对规范的追求是无止境哒{% inlineimage https://image.emptydreams.xyz/icon/bili/le.png %}，祝各位在追求规范的道路上五风十雨{% inlineimage https://image.emptydreams.xyz/icon/bili/huaji.png %}。
