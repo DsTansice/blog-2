@@ -713,7 +713,7 @@ int main() {
 &emsp;&emsp;所以我们选择第二种选择，即使用一个数组（或者`vector`）存储方案，数组中实际存储的是指定节点被移除的连接的数目。这样子的话在处理完数据后遍历数组，判断其值是否大于等于图中的连接数量，就可以判断是否所有节点的连接数量都为`0`。
 
 ```c++
-##include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 

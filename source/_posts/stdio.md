@@ -32,7 +32,7 @@ description: 简要讲解控制台输入/输出的相关内容
 ### 示例
 
 ```C
-##include <stdio.h>
+#include <stdio.h>
 
 int main() {
     int n;
@@ -57,7 +57,7 @@ int main() {
 ### 示例
 
 ```C
-##include <stdio.h>
+#include <stdio.h>
 
 int main() {
     double PI = 3.1415;
@@ -137,7 +137,7 @@ int main() {
 &emsp;&emsp;`printf`和`scanf`的修饰符中都可以使用`*`，但是他们的语义并不相同，我们写一段代码试一下：
 
 ```c
-##include <stdio.h>
+#include <stdio.h>
 
 int main() {
     int temp, width;
@@ -176,8 +176,8 @@ printf打印：		| 00000000000000000012
 &emsp;&emsp;`putchar`在标准中没有定义有无缓冲，所以在不同编译器（甚至是同一个编译器的不同版本）中都可能会有不同的结果。注意下面这段代码：
 
 ```C
-##include <stdio.h>
-##include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     putchar('a');

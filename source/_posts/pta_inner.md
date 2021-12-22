@@ -91,7 +91,7 @@ int main() {
 &emsp;&emsp;由此，我们可得如下代码：
 
 ```c
-##include <stdlib.h>
+#include <stdlib.h>
 
 void task(char op, int a, long long* result) {
     switch (op) {
@@ -495,7 +495,7 @@ int main() {
 
 ```c++
 //万能头
-##include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using std::string;  //字符串
 using std::vector;  //变长数组
@@ -630,7 +630,7 @@ int main() {
 &emsp;&emsp;网上的“环形石子合并”大多选择将数据复制一遍来模拟环形，这里我选择了另一种方法，巧妙的利用了数组中的空余空间，节省了内存。题太难，不解释，直接上代码：
 
 ```c++
-##include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 int n;
 

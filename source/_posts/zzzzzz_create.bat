@@ -1,1 +1,0 @@
-@java -jar zzzzzz_creater.jar
