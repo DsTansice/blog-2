@@ -67,7 +67,7 @@ tag_plugins:
   priority: 5 #过滤器优先权
   issues: false #issues标签依赖注入开关
   CDN:
-    anima: https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css #动画标签anima的依赖
+    anima: https://image.emptydreams.xyz/code/font-awesome-animation.min.css #动画标签anima的依赖
     jquery: https://unpkg.zhimg.com/jquery@latest/dist/jquery.min.js #issues标签依赖
     issues: https://unpkg.zhimg.com/hexo-theme-volantis@latest/source/js/issues.min.js #issues标签依赖
     iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
