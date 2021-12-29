@@ -478,15 +478,18 @@ site_verification:
  #百度
  - name: baidu-site-verification
    content: code-c6wpamBYNV
- #搜狗
- - name: sogou_site_verification
-   content: OLjI7xoRfY
+ #神马
+ - name: shenma-site-verification
+   content: 565cddd8fba62f53ec8a95f3ebb3d9e0_1640754024
  #必应
  - name: msvalidate.01
    content: 4D0452C80638B0C50B1895BDDD28341D
  #头条
  - name: bytedance-verification-code
    content: gJaFb+Tv3E1+DC46qTXQ
+#360
+ - name: 360-site-verification
+   content: de51b4c1fdc2394b82afd77a152b7512
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
@@ -875,7 +878,7 @@ inject:
   head:
     - <link rel="stylesheet" href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.css">
   bottom:
-    - <script src="//at.alicdn.com/t/font_2833129_nslrebjp4is.js"></script>
+    - <script async src="//at.alicdn.com/t/font_2833129_hk7lcvtvcgc.js"></script>
     - <script defer src="/live2d-widget/autoload.js"></script>
     - <link href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 # - <script src="xxxx"></script>
