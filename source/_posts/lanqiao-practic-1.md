@@ -386,7 +386,7 @@ int main() {
 
 {% tabs zcdczc %}
 
-<!-- C语言 -->
+<!-- tab C语言 -->
 ```c
 int max(int a, int b) {
     return a > b ? a : b;
@@ -427,7 +427,7 @@ int main() {
 ```
 <!-- endtab -->
 
-<!-- C++ -->
+<!-- tab C++ -->
 
 &emsp;&emsp;很明显`C++`的代码短一点，所以，各位，努力学`C++`吧{% inlineimage https://image.emptydreams.xyz/icon/bili/xiao.png %}
 
