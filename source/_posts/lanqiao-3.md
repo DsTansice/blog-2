@@ -209,11 +209,11 @@ int main() {
 
 ### 题解
 
-{% tabs xadmf %}
+{% tabs xadmf, 2 %}
 
 <!-- tab 一维前缀和 -->
 
-&emsp;&emsp;这个方法比二位前缀和的方法更容易理解，但是时间复杂度更高。
+&emsp;&emsp;这个方法本质上依然是二维前缀和，但是只存储了一维的前缀和，每次遍历时重新计算二维前缀和。
 
 &emsp;&emsp;为了节省运算资源，我们中间做了一个优化，就是裁剪掉没有人的区域，减少遍历范围，效果如图所示：
 
@@ -283,7 +283,55 @@ int main() {
 
 <!-- tab 二维前缀和 -->
 
-{%p center blue, 等待补充…… %}
+&emsp;&emsp;使用二维前缀和的方式计算结果，代码有优化的余地（即计算出遍历边界可以减少遍历数量）。
+
+{% p blue center, 规定：左下角为坐标轴原点，右方向为X轴正轴，上方向为Y轴正轴。 %}
+
+```c++
+//存储二维前缀和
+int sum[1001][1001];
+//存储输入数据，true表示指定位置有人
+bool input[1001][1001];
+
+//获取指定范围内的人数
+//参数：
+//  leftX - 左下角X轴坐标
+//  leftY - 左下角Y轴坐标
+//  width - 搜索矩形宽度
+//  height - 搜索矩形高度
+//返回值：  人数
+int get(int leftX, int leftY, int width, int height) {
+	int rightY = leftY + height - 1;
+	int rightX = leftX + width - 1;
+	return sum[rightY][rightX] - sum[leftY - 1][rightX]
+			- sum[rightY][leftX - 1] + sum[leftY - 1][leftX - 1];
+}
+
+int main() {
+	int n, width, height, tempX, tempY;
+	cin >> n >> width >> height;
+	for (int i = 0; i != n; ++i) {
+		scanf("%d %d", &tempX, &tempY);
+		input[tempY][tempX] = true;
+	}
+	for (int y = 1; y <= 1000; ++y) {
+		for (int x = 1; x <= 1000; ++x) {
+			sum[y][x] = sum[y][x - 1] + sum[y - 1][x] - sum[y - 1][x - 1];
+			if (input[y][x]) ++sum[y][x];
+		}
+	}
+	int result = 0;
+	int endX = 1000 - width + 2;
+	int endY = 1000 - height + 2;
+	for (int y = 1; y != endY; ++y) {
+		for (int x = 1; x != endX; ++x) {
+			result = max(result, get(x, y, width, height));
+		}
+	}
+	cout << result;
+	return 0;
+}
+```
 
 <!-- endtab -->
 
