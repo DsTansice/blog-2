@@ -128,6 +128,7 @@ int main() {
         a *= den;   den *= b;   num *= b;   num += a;
     }
     if (num == 0) return (printf("0"), 0);
+    if (num % den == 0) return (printf("%lld", num / num), 0);
     long long k = gcd(num, den);
     num /= k;   den /= k;
     if (num > den) printf("%lld %lld/%lld", num / den, num % den, den);
@@ -148,10 +149,8 @@ int main() {
         scanf("%lld/%lld", &a, &b);
         a *= den;   den *= b;   num *= b;   num += a;
     }
-    if (num == 0) {
-        cout << 0;
-        return 0;
-    }
+    if (num == 0) return (printf("0"), 0);
+    if (num % den == 0) return (printf("%lld", num / num), 0);
     long long k = __gcd(num, den);
     num /= k;   den /= k;
     if (num > den) printf("%lld %lld/%lld", num / den, num % den, den);
