@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 空梦の博客
-subtitle: EmptyDreams
+title: 山岳库博
+subtitle: 空梦的博客
 description: 有编程的烦恼？来这里说不定可以找到答案~
-keywords: 空梦,MC,MineCraft,我的世界,EmptyDreams,开发,笔记,Forge,MDK,1.12.2,程序开发,编程,Java,C/C++
+keywords: 空梦,MC,MineCraft,我的世界,EmptyDreams,开发,笔记,Forge,MDK,1.12.2,程序开发,编程,Java,C/C++,cpp,python,ACM,blog,博客
 author: 空梦
 language: zh-CN
 timezone: Asia/Shanghai
