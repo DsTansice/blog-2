@@ -207,6 +207,7 @@ post_copyright:
 # Sponsor/reward
 reward:
   enable: true
+  coinAudio: https://unpkg.zhimg.com/akilar-candyassets/audio/aowu.m4a
   QR_code:
      - img: https://image.emptydreams.xyz/reward/vcode.jpg
        link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/vcode.jpg
@@ -281,7 +282,7 @@ comments:
   count: true # Display comment count in top_img
 
 twikoo:
-  envId: https://twikoo-49d8wlt30-emptydreams.vercel.app
+  envId: https://twikoo-52uo1mvzp-emptydreams.vercel.app
   region:
   visitor: false
   option:
@@ -671,7 +672,7 @@ aside:
       link: https://github.com/EmptyDreams
   card_announcement:
     enable: true
-    content: <p>本站正在完成jsdelivr向其它CDN的迁移，如果发现有资源出现了404还望通过评论或邮箱告知本人。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
+    content: <p>本站正在准备换用新的域名（目前无法访问的：https://kmar.top），同时逐步修改网站标题等内容，故会有比较大的变动，如果出现问题还请及时联系我。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: false
     limit: 5 # if set 0 will show all
@@ -856,6 +857,7 @@ lazyload:
 pwa:
   enable: true
   manifest: /manifest.json
+  theme_color: '#242424'
   apple_touch_icon: /logo/apple-touch-icon.png
   favicon_32_32: /logo/favicon-32x32.png
   favicon_16_16: /logo/favicon-16x16.png
@@ -906,7 +908,7 @@ CDN:
   disqusjs: https://unpkg.zhimg.com/disqusjs@1/dist/disqus.min.js
   disqusjs_css: https://unpkg.zhimg.com/disqusjs@1/dist/disqusjs.min.css
   utterances: https://utteranc.es/client.min.js
-  twikoo: https://unpkg.zhimg.com/twikoo@1.4.9/dist/twikoo.all.min.js
+  twikoo: https://unpkg.zhimg.com/twikoo@1.4.15/dist/twikoo.all.min.js
 
   # share
   addtoany: https://static.addtoany.com/menu/page.js

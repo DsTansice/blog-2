@@ -2,29 +2,9 @@
   header#page-header::before{
     background-color: rgba(0,0,0,0.5)!important;
   }
-@media screen and (max-width: 900px) and (min-width: 701px){
-  header#page-header{
-    background-image: url(https://image.emptydreams.xyz/mobileBg.jpg!/fw/900)!important;
-  }
-}
 @media screen and (max-width: 700px) and (min-width: 401px){
   header#page-header{
-    background-image: url(https://image.emptydreams.xyz/mobileBg.jpg!/fw/700)!important;
-  }
-}
-@media screen and (max-width: 400px){
-  header#page-header{
-    background-image: url(https://image.emptydreams.xyz/mobileBg.jpg!/fw/400)!important;
-  }
-}
-@media screen and (max-width: 1200px) and (min-width: 901px){
-  header#page-header{
-    background-image: url(https://image.emptydreams.xyz/bg.jpg!/fw/1200)!important;
-  }
-}
-@media screen and (max-width: 1500px) and (min-width: 1201px){
-  header#page-header{
-    background-image: url(https://image.emptydreams.xyz/bg.jpg!/fw/1500)!important;
+    background-image: url(https://image.emptydreams.xyz/mobileBg.jpg)!important;
   }
 }
 

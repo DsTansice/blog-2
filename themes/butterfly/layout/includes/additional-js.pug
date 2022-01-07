@@ -32,7 +32,7 @@ div
   .js-pjax
     if needLoadCountJs
       !=partial('includes/third-party/card-post-count/index', {}, {cache: true})
-    
+
     if loadSubJs
       include ./third-party/subtitle.pug
 
@@ -54,7 +54,7 @@ div
   !=partial('includes/third-party/effect', {}, {cache: true})
 
   !=partial('includes/third-party/chat/index', {}, {cache: true})
-  
+
   if theme.aplayerInject && theme.aplayerInject.enable
     if theme.pjax.enable || theme.aplayerInject.per_page
       include ./third-party/aplayer.pug
@@ -63,9 +63,6 @@ div
 
   if theme.pjax.enable
     !=partial('includes/third-party/pjax', {}, {cache: true})
-    
+
   if theme.busuanzi.site_uv || theme.busuanzi.site_pv || theme.busuanzi.page_pv
     script(async data-pjax src=url_for(theme.CDN.busuanzi))
-
-  if theme.pwa.enable
-    !=partial('includes/third-party/pwanotice', {}, {cache: true})
