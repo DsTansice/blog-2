@@ -66,3 +66,6 @@ div
 
   if theme.busuanzi.site_uv || theme.busuanzi.site_pv || theme.busuanzi.page_pv
     script(async data-pjax src=url_for(theme.CDN.busuanzi))
+
+  if !theme.aside.mobile && theme.fixed_card_widget.enable
+    include ./custom/fixed_card_widget.pug

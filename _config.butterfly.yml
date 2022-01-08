@@ -278,8 +278,8 @@ comments:
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
-  lazyload: false
-  count: true # Display comment count in top_img
+  lazyload: true
+  count: false # Display comment count in top_img
 
 twikoo:
   envId: https://twikoo-52uo1mvzp-emptydreams.vercel.app
@@ -661,7 +661,7 @@ preloader: false
 
 aside:
   enable: true
-  mobile: true # display on mobile
+  mobile: false # display on mobile
   position: right # left or right
   card_author:
     enable: true
@@ -884,6 +884,49 @@ inject:
     - <script defer src="/live2d-widget/autoload.js"></script>
     - <link href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 # - <script src="xxxx"></script>
+    - <script data-pjax defer src="/js/custom/fixed_card_widget.js"></script>
+
+#侧栏悬浮卡片控制按钮
+#https://akilar.top/posts/451ac5f8/
+fixed_card_widget:
+  enable: true
+  page:  #页面显示按钮
+    - type: class
+      name: card-webinfo
+      index: 0
+      icon: fas fa-info-circle
+      title: 网站资讯
+    - type: class
+      name: card-tags
+      index: 0
+      icon: fas fa-tags
+      title: 标签
+    - type: class
+      name: card-announcement
+      index: 0
+      icon: fas fa-bullhorn
+      title: 公告
+    - type: class #侧栏卡片选择器类型
+      name: card-info #侧栏卡片选择器名称
+      index: 0 #侧栏卡片选择器序列
+      icon: fas fa-address-card #图标
+      title: 用户信息 #悬停显示提示
+  post: #文章页显示按钮
+    - type: class
+      name: card-announcement
+      index: 0
+      icon: fas fa-bullhorn
+      title: 公告
+    - type: class
+      name: card-recommend-post
+      index: 0
+      icon: fas fa-arrows-alt
+      title: 相关推荐
+    - type: class
+      name: card-info
+      index: 0
+      icon: fas fa-address-card
+      title: 用户信息
 
 # CDN
 # Don't modify the following settings unless you know how they work

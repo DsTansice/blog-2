@@ -2,7 +2,7 @@
   header#page-header::before{
     background-color: rgba(0,0,0,0.5)!important;
   }
-@media screen and (max-width: 700px) and (min-width: 401px){
+@media screen and (max-width: 700px) {
   header#page-header{
     background-image: url(https://image.emptydreams.xyz/mobileBg.jpg)!important;
   }
@@ -26,8 +26,8 @@
 }
 /* 右侧小按钮圆角 */
 #rightside>div>button,#to_comment {
-margin-right: 4px;
-border-radius: 5px;
+  margin-right: 4px;
+  border-radius: 5px;
 }
 /* github按钮圆角 */
 #card-info-btn{
