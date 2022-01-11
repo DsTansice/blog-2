@@ -1,6 +1,5 @@
 ---
-title: 网安、人工智能21级班级团体训练欢乐赛(二)题解
-date: 2021-11-20 15:18:44
+title: PTA-21班级团体训练欢乐赛（二）题解
 top_img: false
 toc_number: false
 categories:
@@ -9,8 +8,10 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: https://image.emptydreams.xyz/bg/b19.jpg!/fxfn2/550x500
+cover: 'https://image.emptydreams.xyz/bg/b19.jpg!/fxfn2/550x500'
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
+abbrlink: 8e7c7611
+date: 2021-11-20 15:18:44
 ---
 
 ## 注意

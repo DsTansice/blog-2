@@ -1,10 +1,9 @@
 ---
-title: 2021级新生程序设计班级天梯赛题解
+title: PTA-21新生程序设计班级天梯赛题解
 top_img: false
 toc_number: false
 katex: true
 cover: 'https://image.emptydreams.xyz/bg/b25.jpg!/fxfn2/550x500'
-date: 2021-12-05 00:54:08
 categories:
   - C/C++
 tags:
@@ -12,6 +11,8 @@ tags:
   - 题解
   - PTA
 description: 2021级新生程序设计班级天梯赛详细题解
+abbrlink: a1192983
+date: 2021-12-05 00:54:08
 ---
 
 ## 注意

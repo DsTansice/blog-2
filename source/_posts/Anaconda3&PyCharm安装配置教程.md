@@ -1,14 +1,15 @@
 ---
 title: Anaconda3&PyCharm安装配置教程
-date: 2021-09-05 13:58:13
 top_img: false
 categories:
   - Python
 tags:
   - 教程
   - 环境
-cover: https://image.emptydreams.xyz/bg/b5.jpg!/fxfn2/550x500
+cover: 'https://image.emptydreams.xyz/bg/b5.jpg!/fxfn2/550x500'
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
+abbrlink: 63e7b43c
+date: 2021-09-05 13:58:13
 ---
 
 ## 下载

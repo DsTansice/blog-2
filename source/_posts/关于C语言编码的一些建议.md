@@ -1,14 +1,15 @@
 ---
 title: 关于C语言编码的一些建议
-date: 2021-10-12 20:14:05
 top_img: false
 categories:
   - C/C++
 tags:
   - 规范
   - 教程
-cover: https://image.emptydreams.xyz/bg/b12.jpg!/fxfn2/550x500
+cover: 'https://image.emptydreams.xyz/bg/b12.jpg!/fxfn2/550x500'
 description: 简单总结一下我对一些代码的建议。
+abbrlink: 51979312
+date: 2021-10-12 20:14:05
 ---
 
 ## 前言

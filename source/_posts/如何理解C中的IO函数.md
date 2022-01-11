@@ -1,14 +1,15 @@
 ---
 title: 如何理解c/c++中的输入/输出函数？
-date: 2021-09-27 21:16:36
 top_img: false
 categories:
   - C/C++
 tags:
   - 函数
   - 教程
-cover: https://image.emptydreams.xyz/bg/b9.jpg!/fxfn2/550x500
+cover: 'https://image.emptydreams.xyz/bg/b9.jpg!/fxfn2/550x500'
 description: 简要讲解控制台输入/输出的相关内容
+abbrlink: 51c9b0a0
+date: 2021-09-27 21:16:36
 ---
 
 ## scanf的使用

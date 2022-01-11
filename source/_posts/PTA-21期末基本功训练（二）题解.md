@@ -1,9 +1,8 @@
 ---
-title: 网安、人工智能21级期末基本功训练(二)题解
+title: PTA-21期末基本功训练（二）题解
 top_img: false
 toc_number: false
-cover: https://image.emptydreams.xyz/bg/b27.jpg!/fxfn2/550x500
-date: 2021-12-12 13:35:57
+cover: 'https://image.emptydreams.xyz/bg/b27.jpg!/fxfn2/550x500'
 categories:
   - C/C++
 tags:
@@ -11,6 +10,8 @@ tags:
   - 教程
   - PTA
 description: 网安、人工智能21级期末基本功训练（二）详细题解
+abbrlink: d7176297
+date: 2021-12-12 13:35:57
 ---
 
 ## 注意

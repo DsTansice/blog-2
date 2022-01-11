@@ -1,6 +1,5 @@
 ---
-title: PTA人工智能(2)内部训练赛题解
-date: 2021-11-29 19:17:53
+title: PTA-人工智能内部训练赛题解
 top_img: false
 toc_number: false
 categories:
@@ -9,7 +8,9 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: https://image.emptydreams.xyz/bg/b21.jpg!/fxfn2/550x500
+cover: 'https://image.emptydreams.xyz/bg/b21.jpg!/fxfn2/550x500'
+abbrlink: a6147ba1
+date: 2021-11-29 19:17:53
 description:
 ---
 

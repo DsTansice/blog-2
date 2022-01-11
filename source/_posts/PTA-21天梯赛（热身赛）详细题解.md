@@ -1,9 +1,8 @@
 ---
-title: 2021年天梯赛（热身赛）详细题解
+title: PTA-21天梯赛（热身赛）详细题解
 top_img: false
 toc_number: false
 cover: 'https://image.emptydreams.xyz/bg/b23.jpg!/fxfn2/550x500'
-date: 2021-12-02 22:07:01
 categories:
   - C/C++
 tags:
@@ -11,6 +10,8 @@ tags:
   - PTA
   - 教程
 description: PTA-2021年郑轻新生团体程序设计天梯赛（热身赛）详细题解
+abbrlink: a2b62b89
+date: 2021-12-02 22:07:01
 ---
 
 ## 注意
