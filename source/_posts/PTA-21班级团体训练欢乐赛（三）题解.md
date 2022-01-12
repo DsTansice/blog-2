@@ -8,7 +8,7 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: 'https://image.emptydreams.xyz/bg/b22.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b22.jpg!/fxfn2/550x500'
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（三）详细题解
 abbrlink: e86a50f3
 date: 2021-12-02 00:03:14

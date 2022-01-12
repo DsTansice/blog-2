@@ -3,7 +3,7 @@ title: PTA-21新生程序设计班级天梯赛题解
 top_img: false
 toc_number: false
 katex: true
-cover: 'https://image.emptydreams.xyz/bg/b25.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b25.jpg!/fxfn2/550x500'
 categories:
   - C/C++
 tags:

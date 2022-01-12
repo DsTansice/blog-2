@@ -6,7 +6,7 @@ categories:
 tags:
   - 规范
   - 教程
-cover: 'https://image.emptydreams.xyz/bg/b6.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b6.jpg!/fxfn2/550x500'
 description: 这里简单描述了C语言的代码规范，部分规则其他语言也可参考。
 abbrlink: 61e7750c
 date: 2021-09-05 16:49:06
@@ -64,7 +64,7 @@ unsigned int cnm(int n, int m) {
 
 &emsp;&emsp;比如上面几行代码完成的是一个功能，下面几行代码完成的是另一个功能，那么它们中间就要加空行。这样看起来更清晰。因为C语言的例子我没有找到，这里拿Java写的一个例子来充个数。
 
-![](https://image.emptydreams.xyz/standard/dmk.jpg)
+![](https://image.kmar.top/standard/dmk.jpg)
 
 #### 集中的变量声明后添加空行
 

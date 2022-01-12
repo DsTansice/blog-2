@@ -8,7 +8,7 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: 'https://image.emptydreams.xyz/bg/b21.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b21.jpg!/fxfn2/550x500'
 abbrlink: a6147ba1
 date: 2021-11-29 19:17:53
 description:
@@ -74,12 +74,12 @@ int main() {
 ### 输入样例
 
 {% note simple %}1+2*3
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note simple %}7
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -181,7 +181,7 @@ int main() {
 999999999
 55
 10
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 样例解释
 
@@ -259,12 +259,12 @@ int main() {
 
 {% note simple %}I love Python!  It's a fun game!
 aeiou
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例：
 
 {% note simple %}I lv Pythn!  It's  fn gm!
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -482,13 +482,13 @@ int main() {
 
 {% note simple %}4 3 4 -5 2  6 1  -2 0
 3 5 20  -7 4  3 1
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note simple %}15 24 -25 22 30 21 -10 20 -21 8 35 6 -33 5 14 4 -15 3 18 2 -6 1
 5 20 -4 4 -5 2 9 1 -2 0
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -616,13 +616,13 @@ int main() {
 
 {% note simple %}4
 4 5 9 4
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 输出样例
 
 {% note simple %}43
 54
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 

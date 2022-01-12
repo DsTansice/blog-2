@@ -5,7 +5,7 @@ tags:
   - Java
 categories:
   - MC
-cover: 'https://image.emptydreams.xyz/bg/b2.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b2.jpg!/fxfn2/550x500'
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 abbrlink: 51cab89d
 date: 2020-07-23 17:54:24
@@ -25,7 +25,7 @@ date: 2020-07-23 17:54:24
 
 #### 启动/调试模组的方式（P19）
 
-&emsp;&emsp;书中给出的方式是`gradlew.bat runClient`和`gradlew.bat runServer`，实际上如果使用`gradlew.bat genIntelliRuns`配置的运行方式应该是下图中的样子(其中的虚拟机选项、程序参数、使用模块的类路径与JRE默认不是这样子，服务端与这个类似)：![客户端运行配置](https://image.emptydreams.xyz/ReviewOfDevelopmentGuide/run.png)
+&emsp;&emsp;书中给出的方式是`gradlew.bat runClient`和`gradlew.bat runServer`，实际上如果使用`gradlew.bat genIntelliRuns`配置的运行方式应该是下图中的样子(其中的虚拟机选项、程序参数、使用模块的类路径与JRE默认不是这样子，服务端与这个类似)：![客户端运行配置](https://image.kmar.top/ReviewOfDevelopmentGuide/run.png)
 
 #### 注册名称（P57...）
 

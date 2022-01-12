@@ -2,7 +2,7 @@
 title: PTA-21期末基本功训练（二）题解
 top_img: false
 toc_number: false
-cover: 'https://image.emptydreams.xyz/bg/b27.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b27.jpg!/fxfn2/550x500'
 categories:
   - C/C++
 tags:
@@ -147,7 +147,7 @@ int main() {
 
 &emsp;&emsp;这个也是通过模拟得出答案，不同的是每次模拟会一次性模拟最大量的数据。相对于全天模拟会有一定的性能提升。
 
-&emsp;&emsp;老早写的代码了，当时我还在用`Java`刷OJ，大家自己体会代码的含义吧{% inlineimage https://image.emptydreams.xyz/icon/bili/zan.png %}，递归版本可能更好懂一点。
+&emsp;&emsp;老早写的代码了，当时我还在用`Java`刷OJ，大家自己体会代码的含义吧{% inlineimage https://image.kmar.top/icon/bili/zan.png %}，递归版本可能更好懂一点。
 
 ```c
 int main() {
@@ -239,9 +239,9 @@ int main() {
 
 &emsp;&emsp;这道题需要用到位运算，主要是移位和与运算，不了解的可以先看看[《二进制运算从入门到入坟》](https://kmar.top/binary/)。
 
-![部分运算过程图解](https://image.emptydreams.xyz/pta-basic-2/bit.jpg)
+![部分运算过程图解](https://image.kmar.top/pta-basic-2/bit.jpg)
 
-&emsp;&emsp;图中只写出了`a`和`b`的运算，剩余的就交给同学们自己想象了{% inlineimage https://image.emptydreams.xyz/icon/bili/doge.png %}
+&emsp;&emsp;图中只写出了`a`和`b`的运算，剩余的就交给同学们自己想象了{% inlineimage https://image.kmar.top/icon/bili/doge.png %}
 
 ```c
 int main() {
@@ -332,7 +332,7 @@ int main() {
 
 ### 题解
 
-![关系图](https://image.emptydreams.xyz/pta-basic-2/ven.png)
+![关系图](https://image.kmar.top/pta-basic-2/ven.png)
 
 &emsp;&emsp;由上图可以很清楚的观察几个数据之间的关系，注意：**p、q、r这三个数据都包含中央的k区间**。
 

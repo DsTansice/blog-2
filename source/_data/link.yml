@@ -7,9 +7,9 @@
       siteshot: https://api.cyfan.top/thumb?url=https://afdian.net/@emptydreams/&width=400&zip=true
     - name: Bilibili
       link: https://space.bilibili.com/66951474
-      avatar: https://image.emptydreams.xyz/links/bilibili.png!/max/200
+      avatar: https://image.kmar.top/links/bilibili.png!/max/200
       descr: 探索我的视频~
-      siteshot: https://image.emptydreams.xyz/links/bilibiliSite.jpg!/max/400
+      siteshot: https://image.kmar.top/links/bilibiliSite.jpg!/max/400
 - class_name: 至尊阁
   link_list:
     - name: There,hello大大
@@ -26,7 +26,7 @@
       link: https://www.ijinse.cn/
       avatar: https://www.ijinse.cn/logo.png
       descr: 锦瑟无端五十弦，一弦一柱思华年
-      siteshot: https://image.emptydreams.xyz/links/jinseSite.jpg!/max/400
+      siteshot: https://image.kmar.top/links/jinseSite.jpg!/max/400
     - name: Xin's Blog
       link: https://blog.xinmouren.cn
       avatar: https://info.xinmouren.cn/custom.gif
@@ -36,21 +36,21 @@
   link_list:
     - name: 探姬的小天地
       link: https://www.yuque.com/probius/
-      avatar: https://image.emptydreams.xyz/links/tj.png!/max/200
+      avatar: https://image.kmar.top/links/tj.png!/max/200
       descr: 妄想全栈的fw探姬酱（
-      siteshot: https://image.emptydreams.xyz/links/tjSite.png!/max/400
+      siteshot: https://image.kmar.top/links/tjSite.png!/max/400
     - name: kaiboshi
       link: https://kaiboshi.gitee.io/
       avatar: https://cdn.jsdelivr.net/gh/kaiboshi/kaiboshi.github.io/medias/logo66.png
       descr: 做一个有梦想的咸鱼
-      siteshot: https://image.emptydreams.xyz/links/kaiboshiSite.jpg!/max/400
+      siteshot: https://image.kmar.top/links/kaiboshiSite.jpg!/max/400
     - name: Ramsayi
       link: https://ramsayi.cn/
       avatar: https://i.loli.net/2021/08/29/y9prTaRZugj8QBb.jpg
       descr: 月亮不睡你不睡，医院等你去缴费
-      siteshot: https://image.emptydreams.xyz/links/ramsayiSite.jpg!/max/400
+      siteshot: https://image.kmar.top/links/ramsayiSite.jpg!/max/400
     - name: Ethan.Tzy
       link: https://ethant.top/
       avatar: https://cdn.jsdelivr.net/gh/tzy13755126023/BLOG_SOURCE/theme_f/avater.jpg
       descr: 学习与交流的乐园，希望能和你成为好朋友
-      siteshot: https://image.emptydreams.xyz/links/tangSite.jpg!/max/400
+      siteshot: https://image.kmar.top/links/tangSite.jpg!/max/400

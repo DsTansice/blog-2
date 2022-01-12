@@ -2,7 +2,7 @@
 title: PTA-21天梯赛（热身赛）详细题解
 top_img: false
 toc_number: false
-cover: 'https://image.emptydreams.xyz/bg/b23.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b23.jpg!/fxfn2/550x500'
 categories:
   - C/C++
 tags:
@@ -618,7 +618,7 @@ int main() {
 
 &emsp;&emsp;我们放一个图表来演示计算过程：
 
-![计算过程](https://image.emptydreams.xyz/pta_dry/dot.jpg)
+![计算过程](https://image.kmar.top/pta_dry/dot.jpg)
 
 ```c
 //计算一次值，并把计算后的数据存放在n1的位置

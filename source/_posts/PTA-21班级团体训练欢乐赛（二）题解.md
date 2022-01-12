@@ -8,7 +8,7 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: 'https://image.emptydreams.xyz/bg/b19.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b19.jpg!/fxfn2/550x500'
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
 abbrlink: 8e7c7611
 date: 2021-11-20 15:18:44
@@ -42,7 +42,7 @@ date: 2021-11-20 15:18:44
 
 {% note simple %}poemp134567
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例1
 
@@ -50,7 +50,7 @@ date: 2021-11-20 15:18:44
 
 {% note simple %}not found
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输入样例2
 
@@ -58,7 +58,7 @@ date: 2021-11-20 15:18:44
 
 {% note simple %}This 156is a test example
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例2
 
@@ -66,7 +66,7 @@ date: 2021-11-20 15:18:44
 
 {% note simple %}Thisaexmpl
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -122,7 +122,7 @@ int main() {
 
 {% note simple %}4 30
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
@@ -134,7 +134,7 @@ int main() {
 
 amount=8 sum=124
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -181,13 +181,13 @@ int main() {
 
 {% note simple %}5
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
 {% note simple %}\*\*\*\*\*
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -220,13 +220,13 @@ int main() {
 
 2 3 1 1 4
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
 {% note simple %}2
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 解释
 
@@ -303,13 +303,13 @@ int main() {
 
 {% note simple %}12.15
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
 {% note simple %}1.80
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -348,7 +348,7 @@ int main() {
 
 {% note simple %}37
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例1
 
@@ -356,7 +356,7 @@ int main() {
 
 {% note simple %}3
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输入样例2
 
@@ -364,7 +364,7 @@ int main() {
 
 {% note simple %}0
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例2
 
@@ -372,7 +372,7 @@ int main() {
 
 {% note simple %}0
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -416,7 +416,7 @@ int main() {
 
 {% note simple %}0.00000001
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
@@ -424,7 +424,7 @@ int main() {
 
 {% note simple %}3.141497
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -482,7 +482,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 37070419881216001X
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例1
 
@@ -492,7 +492,7 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 37070419881216001X
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输入样例2
 
@@ -502,13 +502,13 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 110108196711301862
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例2
 
 {% note simple %}All passed
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -561,13 +561,13 @@ int main() {
 
 {% note simple %}123
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
 {% note simple %}11233
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 
@@ -608,7 +608,7 @@ int main() {
 
 {% note simple %}90
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 #### 输出样例
 
@@ -616,7 +616,7 @@ int main() {
 
 {% note success no-icon %}sum = 3885
 
-{% inlineimage https://image.emptydreams.xyz/icon/warning.png %} 结尾无空行{% endnote %}
+{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
 
 ### 题解
 

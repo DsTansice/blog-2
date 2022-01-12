@@ -7,6 +7,6 @@ categories:
 
 tags:
 
-cover: https://image.emptydreams.xyz/bg/b.jpg!/fxfn2/550x500
+cover: https://image.kmar.top/bg/b.jpg!/fxfn2/550x500
 description:
 ---
