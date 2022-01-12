@@ -15,12 +15,11 @@ workbox.precaching.precacheAndRoute(self.__WB_MANIFEST,{
 });
 
 workbox.precaching.cleanupOutdatedCaches();
-// 可选内容 start 都选可能造成缓存过多 酌情保留。
-// 图片资源
+// 字体文件
 workbox.routing.registerRoute(
-    /\.(?:png|jpg|jpeg|gif|bmp|webp|svg|ico)$/,
+    /\.(?:eot|ttf|woff|woff2)$/,
     new workbox.strategies.CacheFirst({
-        cacheName: "images",
+        cacheName: "fonts",
         plugins: [
             new workbox.expiration.ExpirationPlugin({
                 maxEntries: 1000,
@@ -33,11 +32,17 @@ workbox.routing.registerRoute(
     })
 );
 
-// jsdelivr的CDN资源
+// 谷歌字体
 workbox.routing.registerRoute(
-    /^https:\/\/cdn\.jsdelivr\.net/,
+    /^https:\/\/fonts\.googleapis\.com/,
+    new workbox.strategies.StaleWhileRevalidate({
+        cacheName: "google-fonts-stylesheets"
+    })
+);
+workbox.routing.registerRoute(
+    /^https:\/\/fonts\.gstatic\.com/,
     new workbox.strategies.CacheFirst({
-        cacheName: "static-libs",
+        cacheName: 'google-fonts-webfonts',
         plugins: [
             new workbox.expiration.ExpirationPlugin({
                 maxEntries: 1000,
