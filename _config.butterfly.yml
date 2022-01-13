@@ -477,20 +477,20 @@ google_adsense:
 # --------------------------------------
 site_verification:
  #百度
- - name: baidu-site-verification
-   content: code-c6wpamBYNV
+ #- name: baidu-site-verification
+ #  content: code-c6wpamBYNV
  #神马
  - name: shenma-site-verification
-   content: 565cddd8fba62f53ec8a95f3ebb3d9e0_1640754024
+   content: cc3a06847fc37f4b0d742f7a3d37ba45_1642050968
  #必应
  - name: msvalidate.01
    content: 4D0452C80638B0C50B1895BDDD28341D
  #头条
  - name: bytedance-verification-code
-   content: gJaFb+Tv3E1+DC46qTXQ
+   content: odCQB0UK99sjxR78nbo
 #360
  - name: 360-site-verification
-   content: de51b4c1fdc2394b82afd77a152b7512
+   content: eff2843f221d37cc40de2b387191d83f
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
