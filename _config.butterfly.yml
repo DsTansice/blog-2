@@ -376,12 +376,16 @@ wowjs:
   animateitem:
     - class: recent-post-item #必填项，需要添加动画的元素的class
       style: animate__zoomIn #必填项，需要添加的动画
-      duration: 1200ms #选填项，动画持续时间，单位可以是ms也可以是s。例如3s，700ms。
+      duration: 1200ms #选填项，动画持续时间，单位可以是ms也可以是s。例如3s，700ms
       delay: 150ms #选填项，动画开始的延迟时间，单位可以是ms也可以是s。例如3s，700ms。
       offset: 50 #选填项，开始动画的距离（相对浏览器底部）
       iteration: 1 #选填项，动画重复的次数
     - class: card-widget
       style: animate__zoomIn
+      duration: 1200ms
+      delay: 150ms
+      offset: 50
+      iteration: 1
 
 # Chat Services
 # --------------------------------------
@@ -710,7 +714,7 @@ busuanzi:
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
   enable: false
-  publish_date:
+  publish_date: 2020/04/04
 
 # Aside widget - Newest Comments
 newest_comments:
@@ -763,7 +767,7 @@ darkmode:
   # autoChangeMode: 1  Following System Settings, if the system doesn't support dark mode, it will switch dark mode between 6 pm to 6 am
   # autoChangeMode: 2  Switch dark mode between 6 pm to 6 am
   # autoChangeMode: false
-  autoChangeMode: false
+  autoChangeMode: 2
 
 # Lightbox (圖片大圖查看模式)
 # --------------------------------------
