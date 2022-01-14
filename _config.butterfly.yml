@@ -491,6 +491,9 @@ site_verification:
  #360
  - name: 360-site-verification
    content: eff2843f221d37cc40de2b387191d83f
+ #搜狗
+ - name: sogou_site_verification
+   content: IAogIZRPwy
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------

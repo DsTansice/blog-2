@@ -17,4 +17,4 @@
     .footer_custom_text!=`${theme.footer.custom_text}`
   #running-time
     script.
-      setInterval(()=>{let create_time=Math.round(new Date(Date.UTC(2020,04,04,0,0,0)).getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600;}currentTimeHtml='本站已苟活 '+time[0]+' 年 '+time[1]+' 天 ';document.getElementById("running-time").innerHTML=currentTimeHtml;},1000);
+      let create_time=Math.round(new Date(Date.UTC(2020,04,04,0,0,0)).getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600;}if(second>=24*3600){time[1]=parseInt(second/(24*3600));}currentTimeHtml='本站已苟活 '+time[0]+' 年 '+time[1]+' 天 ';document.getElementById("running-time").innerHTML=currentTimeHtml;
