@@ -485,7 +485,7 @@ site_verification:
  #  content: code-c6wpamBYNV
  #神马
  - name: shenma-site-verification
-   content: cc3a06847fc37f4b0d742f7a3d37ba45_1642053852
+   content: cc3a06847fc37f4b0d742f7a3d37ba45_1642239799
  #必应
  - name: msvalidate.01
    content: 4D0452C80638B0C50B1895BDDD28341D
@@ -706,9 +706,9 @@ aside:
 # busuanzi count for PV / UV in site
 # 訪問人數
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
@@ -834,10 +834,10 @@ aplayerInject:
 # position 彈窗位置
 # 可選 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
-  position: bottom-left
+  enable: true
+  position: top-center
   bg_light: '#49b1f5' # The background color of Toast Notification in light mode
-  bg_dark: '#121212' # The background color of Toast Notification in dark mode
+  bg_dark: '#343434' # The background color of Toast Notification in dark mode
 
 # Baidu Push (百度推送)
 baidu_push: false
@@ -885,7 +885,6 @@ fragment_cache: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <link rel="stylesheet" href="//at.alicdn.com/t/font_2979878_l0eq9u2nxi.css">
   bottom:
     - <script async src="//at.alicdn.com/t/font_2833129_hk7lcvtvcgc.js"></script>
     - <script defer src="/live2d-widget/autoload.js"></script>
@@ -898,11 +897,6 @@ inject:
 fixed_card_widget:
   enable: true
   page:  #页面显示按钮
-    - type: class
-      name: card-webinfo
-      index: 0
-      icon: fas fa-info-circle
-      title: 网站资讯
     - type: class
       name: card-tags
       index: 0

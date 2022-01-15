@@ -1,23 +1,21 @@
 #article-container.post-content h2:before {
-  font-family: "iconfont" !important;
-  content: '\e625' !important;
-  font-size: 2rem !important;
-  margin-left: -1.8rem !important;
-  margin-top: -0.55rem !important;
+  content: '\f105' !important;
+  font-size: 2.3rem !important;
+  margin-left: -1.5rem !important;
+  margin-top: -0.7rem !important;
 }
 #article-container.post-content h3:before {
-  font-family: "iconfont" !important;
-  content: '\e624' !important;
-  margin-left: -1.35rem !important;
-  margin-top: -0.35rem !important;
-  font-size: 1.45rem !important;
+  content: '\f101' !important;
+  margin-left: -1.75rem !important;
+  margin-top: -0.4rem !important;
+  font-size: 1.7rem !important;
 }
 #article-container.post-content h4:before,
 #article-container.post-content h5:before,
 #article-container.post-content h6:before {
-  font-family: "iconfont" !important;
-  content: '\e781' !important;
-  margin-top: 0rem !important;
+  content: '\f121' !important;
+  margin-left: -1.1rem !important;
+  margin-top: 0.05rem !important;
 }
 
 #article-container.post-content h2{

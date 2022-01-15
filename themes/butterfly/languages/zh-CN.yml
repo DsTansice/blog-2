@@ -3,9 +3,9 @@ footer:
   theme: 主题
 
 copy:
-  success: 复制成功
+  success: 哟吼！你的剪切板已经被我填满了的说(*/ω＼*)
   error: 复制错误
-  noSupport: 浏览器不支持
+  noSupport: 请问你使用的是什么浏览器呀~
 
 page:
   articles: 文章总览
