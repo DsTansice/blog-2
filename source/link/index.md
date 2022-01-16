@@ -13,33 +13,33 @@ comments: true
 
 # 友链申请
 
-<br/>
+## 我的友链
 
-{% tip success %}<p style=" text-align:center;">如果想要添加友链的话在本页评论区中提供以下信息即可：</p>
+```
+name: 山岳库博
+link: https://kmar.top/
+avatar: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/qqavatar.jpg
+descr: 开发学习启发性二刺螈
+```
 
-<ul>
-    <li>网站名称&emsp;<b>(name)</b></li>
-    <li>网站链接&emsp;<b>(link)</b></li>
-    <li>本人头像链接&emsp;<b>(avatar)</b></li>
-    <li>网站描述&emsp;<b>(descr)</b></li>
-    <li>网站截图&emsp;<b>(siteshot)</b>（可选，留空的话我自己截）</li>
-</ul>{% endtip %}
+## 友链要求
 
-<br/>
+1. 网站在国内不需要梯子就可以正常打开
+2. 网站没有废弃
+3. 网站内没有影响浏览体验的广告
+4. 网站内有可以证明自身水平的文章（方便我分类）
+5. （非硬性要求）在网站内添加我的友链
 
+## 申请格式
 
+{% p blue center, 如果想要添加友链的话在本页评论区中提供以下信息即可 %}
 
+1. 网站名称&emsp;(**name**)
+2. 网站链接&emsp;(**link**)
+3. 头像链接&emsp;(**avatar**)
+4. 网站描述&emsp;(**descr**)
+5. 网站截图&emsp; （**siteshot**）（可选，留空的话需要保证网站没有屏蔽爬虫）
 
+---
 
-
-
-
-
-
-
-
-
-
-
-
-
+{% p blue center, 如果你发现我的友链中有链接违反了上述原则欢迎在评论区提醒我~ %}

@@ -54,5 +54,5 @@ workbox.routing.registerRoute(
         ]
     })
 );
-// 可选内容 end 都选可能造成缓存过多 酌情保留。
+
 workbox.googleAnalytics.initialize();

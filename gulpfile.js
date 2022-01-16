@@ -13,9 +13,10 @@ gulp.task('generate-service-worker', () => {
         swDest: './public/sw.js',
         globDirectory: './public',
         globPatterns: [
-            "**/*.{html,css,js,json,woff2,xml}"
-            // "**/*.{html,xml}"    
-            //精简版使用下面这行
+          // 缓存所有以下类型的文件，极端不推荐
+          // "**/*.{html,css,js,json,woff2,xml}"
+          // 推荐只缓存404，主页和主要样式和脚本。
+          "404.html","index.html","js/main.js","css/index.css"
         ],
         modifyURLPrefix: {
             "": "./"
