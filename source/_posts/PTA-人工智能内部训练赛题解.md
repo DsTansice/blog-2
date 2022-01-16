@@ -8,7 +8,7 @@ tags:
   - 教程
   - 题解
   - PTA
-cover: 'https://image.kmar.top/bg/b21.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b21.jpg!/fw/550'
 abbrlink: a6147ba1
 date: 2021-11-29 19:17:53
 description:

@@ -70,16 +70,19 @@
     background: rgba(0,0,0,0.1) !important;
 }
 /* 有序列表序号 */
-[data-theme="dark"]
-  li::before{
-    border: 0.2em solid #49b1f5;
-    margin-top: 0.85em !important;
-    width: 1.2em !important;
-    height: 1.2em !important;
-    background: transparent !important;
-    border-radius: 1em !important;
-    line-height: 1.3em !important;
-    font-size: 0.75em !important;
+ol li::before{
+  border: 0.2em solid #49b1f5;
+  margin-top: 0.85em !important;
+  width: 1.2em !important;
+  height: 1.2em !important;
+  background: transparent !important;
+  border-radius: 1em !important;
+  line-height: 1.3em !important;
+  font-size: 0.75em !important;
+}
+[data-theme="light"]
+  li::before {
+    color: rgb(50,50,50) !important;
   }
 /* 引入背景 */
 [data-theme="dark"]

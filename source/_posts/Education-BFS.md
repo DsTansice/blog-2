@@ -2,7 +2,7 @@
 title: Education BFS
 top_img: false
 toc_number: false
-cover: 'https://image.kmar.top/bg/b33.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b33.jpg!/fw/550'
 categories:
   - C/C++
 tags:
@@ -30,8 +30,8 @@ description: 这道题不是特别难，但是网上我没有找到讲的清晰�
 
 &emsp;&emsp;每天 OHgg 都可做以下两件事中的任何一个：
 
-+ 如果 OHgg 此时的职业等级为 xx ，那么他就可以赚取 a[x]a[x] 元。
-+ 如果 OHgg 此时的职业等级为 x(x < n)x(x<n) ，并且他手头至少有 b[x]b[x] 元，那么他就可以花费 b[x]b[x] 元，通过学习网上课程然后职业等级升值到 x+1x+1。
++ 如果 OHgg 此时的职业等级为`x`，那么他就可以赚取 a[x] 元。
++ 如果 OHgg 此时的职业等级为`x`(`x < n`) ，并且他手头至少有 b[x] 元，那么他就可以花费 b[x] 元，通过学习网上课程然后职业等级升值到`x + 1`。
 
 &emsp;&emsp;例如，如果n = 4, c= 15, a = [1 ,3 ,10 ,11],b=[1 ,2 ,7]n=4,c=15,a=[1,3,10,11],b=[1,2,7] , OHgg 可以这样做：
 
@@ -42,7 +42,7 @@ description: 这道题不是特别难，但是网上我没有找到讲的清晰�
 5. 第五天， OHgg 在 3 号位置，他选择赚取 10 元，此时他有 11 元。
 6. 第六天， OHgg 在 3 号位置，他选择赚取 10 元，此时他有 21 元。
 
-&emsp;&emsp;她一共花费了 66 天，然后可以买一台自己想要的电脑。
+&emsp;&emsp;她一共花费了 6 天，然后可以买一台自己想要的电脑。
 
 &emsp;&emsp;所以你的任务是帮助 OHgg 知道最少需要几天才能买到电脑。
 
@@ -50,7 +50,7 @@ description: 这道题不是特别难，但是网上我没有找到讲的清晰�
 
 &emsp;&emsp;第一行有一个整数`t`，然后有`t`个样例。
 
-&emsp;&emsp;每个样例第一行有两个整数`n`、`c`(2 ≤ 10<sup>5</sup>, 1 ≤  10<sup>9</sup>)n,c(2 ≤ `n` ≤ 2×10<sup>5</sup>, 1 ≤ c ≤ 10<sup>9</sup>)，`n`和`c`分别为职位的个数，以及电脑费用。
+&emsp;&emsp;每个样例第一行有两个整数`n`、`c`(2 ≤ 10<sup>5</sup>, 1 ≤  10<sup>9</sup>)，`n`和`c`分别为职位的个数，以及电脑费用。
 
 &emsp;&emsp;第二行是`n`个整数，a[1] ≤ a[2] ≤ ... ≤ a[n] ( 1 ≤ a[i] ≤ 10<sup>9</sup>)
 

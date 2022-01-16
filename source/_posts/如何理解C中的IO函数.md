@@ -6,7 +6,7 @@ categories:
 tags:
   - 函数
   - 教程
-cover: 'https://image.kmar.top/bg/b9.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b9.jpg!/fw/550'
 description: 简要讲解控制台输入/输出的相关内容
 abbrlink: 51c9b0a0
 date: 2021-09-27 21:16:36

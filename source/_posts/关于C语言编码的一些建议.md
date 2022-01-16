@@ -6,7 +6,7 @@ categories:
 tags:
   - 规范
   - 教程
-cover: 'https://image.kmar.top/bg/b12.jpg!/fxfn2/550x500'
+cover: 'https://image.kmar.top/bg/b12.jpg!/fw/550'
 description: 简单总结一下我对一些代码的建议。
 abbrlink: 51979312
 date: 2021-10-12 20:14:05
