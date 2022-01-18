@@ -6,7 +6,6 @@ cover: 'https://image.kmar.top/bg/b33.jpg!/fw/550'
 categories:
   - C/C++
 tags:
-  - 教程
   - 题解
   - BFS
 abbrlink: 14c61bca

@@ -5,7 +5,6 @@ categories:
   - C/C++
 tags:
   - 规范
-  - 教程
 cover: 'https://image.kmar.top/bg/b6.jpg!/fw/550'
 description: 这里简单描述了C语言的代码规范，部分规则其他语言也可参考。
 abbrlink: 61e7750c

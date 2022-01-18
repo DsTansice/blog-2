@@ -446,7 +446,7 @@ footer:
 
 # Baidu Analytics
 # https://tongji.baidu.com/web/welcome/login
-baidu_analytics:
+baidu_analytics: 2e3ab45cfebc8b4617e0099f3c5d8517
 
 # Google Analytics
 # https://analytics.google.com/analytics/web/
@@ -481,8 +481,8 @@ google_adsense:
 # --------------------------------------
 site_verification:
  #百度
- #- name: baidu-site-verification
- #  content: code-c6wpamBYNV
+ - name: baidu-site-verification
+   content: code-V4LXB1c5zO
  #神马
  - name: shenma-site-verification
    content: cc3a06847fc37f4b0d742f7a3d37ba45_1642239799

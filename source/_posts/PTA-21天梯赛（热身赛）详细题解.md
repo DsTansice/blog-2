@@ -8,7 +8,6 @@ categories:
 tags:
   - 题解
   - PTA
-  - 教程
 description: PTA-2021年郑轻新生团体程序设计天梯赛（热身赛）详细题解
 abbrlink: a2b62b89
 date: 2021-12-02 22:07:01

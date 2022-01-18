@@ -5,7 +5,6 @@ categories:
   - C/C++
 tags:
   - 规范
-  - 教程
 cover: 'https://image.kmar.top/bg/b12.jpg!/fw/550'
 description: 简单总结一下我对一些代码的建议。
 abbrlink: 51979312

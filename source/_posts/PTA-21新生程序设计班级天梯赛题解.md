@@ -7,7 +7,6 @@ cover: 'https://image.kmar.top/bg/b25.jpg!/fw/550'
 categories:
   - C/C++
 tags:
-  - 教程
   - 题解
   - PTA
 description: 2021级新生程序设计班级天梯赛详细题解

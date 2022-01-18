@@ -5,7 +5,7 @@ categories:
   - C/C++
 tags:
   - 函数
-  - 教程
+  - IO
 cover: 'https://image.kmar.top/bg/b9.jpg!/fw/550'
 description: 简要讲解控制台输入/输出的相关内容
 abbrlink: 51c9b0a0

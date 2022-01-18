@@ -7,7 +7,6 @@ categories:
   - C/C++
 tags:
   - 题解
-  - 教程
   - PTA
 description: 网安、人工智能21级期末基本功训练（二）详细题解
 abbrlink: d7176297

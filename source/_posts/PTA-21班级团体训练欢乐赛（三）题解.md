@@ -5,7 +5,6 @@ toc_number: false
 categories:
   - C/C++
 tags:
-  - 教程
   - 题解
   - PTA
 cover: 'https://image.kmar.top/bg/b22.jpg!/fw/550'

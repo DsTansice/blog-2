@@ -2,7 +2,7 @@
 title: 《我的世界：Minecraft模组开发指南》读后感
 top_img: false
 tags:
-  - Java
+  - 随心记
 categories:
   - MC
 cover: 'https://image.kmar.top/bg/b2.jpg!/fw/550'
