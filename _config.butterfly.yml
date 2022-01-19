@@ -70,7 +70,7 @@ tag_plugins:
     anima: https://image.kmar.top/code/font-awesome-animation.min.css #动画标签anima的依赖
     jquery: https://unpkg.zhimg.com/jquery@latest/dist/jquery.min.js #issues标签依赖
     issues: https://unpkg.zhimg.com/hexo-theme-volantis@latest/source/js/issues.min.js #issues标签依赖
-    iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
+    #iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
     carousel: https://unpkg.zhimg.com/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.js
 
 # Math (數學)
@@ -256,7 +256,7 @@ addThis:
 # Share.js
 # https://github.com/overtrue/share.js
 sharejs:
-  enable: true
+  enable: false
   sites: wechat,weibo,qq
 
 # AddToAny
@@ -679,7 +679,7 @@ aside:
       link: https://github.com/EmptyDreams
   card_announcement:
     enable: true
-    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
+    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>本站使用百度统计统计访问量等信息，希望小伙伴可以将本站加入到拦截白名单中。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
     limit: 3 # if set 0 will show all
@@ -713,7 +713,7 @@ busuanzi:
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
 runtimeshow:
-  enable: false
+  enable: true
   publish_date: 2020/04/04
 
 # Aside widget - Newest Comments
@@ -908,6 +908,11 @@ fixed_card_widget:
       icon: fa fa-history
       title: 最新文章
     - type: class
+      name: card-webinfo
+      index: 0
+      icon: fas fa-line-chart
+      title: 网站信息
+    - type: class
       name: card-announcement
       index: 0
       icon: fas fa-bullhorn
@@ -926,7 +931,7 @@ fixed_card_widget:
     - type: class
       name: card-recommend-post
       index: 0
-      icon: fas fa-arrows-alt
+      icon: fas fa-expand
       title: 相关推荐
     - type: class
       name: card-info

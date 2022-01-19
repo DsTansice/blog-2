@@ -670,7 +670,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const $runtimeCount = document.getElementById('runtimeshow')
     if ($runtimeCount) {
       const publishDate = $runtimeCount.getAttribute('data-publishDate')
-      $runtimeCount.innerText = btf.diffDate(publishDate) + ' ' + GLOBAL_CONFIG.runtime
+      const time = btf.diffDate(publishDate)
+      const year =Math.floor(time / 365)
+      const day = time % 365
+      $runtimeCount.innerText = year + ' 年 ' + day + ' ' + GLOBAL_CONFIG.runtime
     }
   }
 

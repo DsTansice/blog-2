@@ -242,7 +242,7 @@ footer_beautify:
       message: 本站已经在工信部备案，豫ICP备2021031313号
     - link: https://hexo.io/ #徽标指向网站链接
       shields: /footer/hexo.svg
-      message: 博客框架为Hexo_v5.4.0 #徽标提示语
+      message: 博客框架为Hexo_v6.0.0 #徽标提示语
     - link: https://butterfly.js.org/
       shields: /footer/butterfly.svg
       message: 主题版本Butterfly_v3.8.3
