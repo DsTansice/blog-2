@@ -236,7 +236,7 @@ int main() {
 
 ### 题解
 
-&emsp;&emsp;这道题需要用到位运算，主要是移位和与运算，不了解的可以先看看[《二进制运算从入门到入坟》](https://kmar.top/binary/)。
+&emsp;&emsp;这道题需要用到位运算，主要是移位和与运算，不了解的可以先看看[《二进制运算从入门到入坟》](https://kmar.top/posts/2e876344/)。
 
 ![部分运算过程图解](https://image.kmar.top/pta-basic-2/bit.jpg)
 
