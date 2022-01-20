@@ -896,7 +896,7 @@ int main () {
 
 <!-- tab zhy -->
 
-本题解由[there hello](https://www.therehello.top/xia_mo_shan_gu/)提供。
+本题解由[there hello](https://blog.therehello.top/xia_mo_shan_gu/)提供。
 
 求$36\sum_{i=1}^{n}\sum_{j=1}^{n}\sum_{a=1}^{i}\sum_{b=1}^{j}(a*b)$
 
