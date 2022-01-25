@@ -60,4 +60,4 @@ gulp.task('minify-html', () => {
         .pipe(gulp.dest('./public'))
 });
 
-gulp.task("default", gulp.series('generate-service-worker', 'compress', 'minify-css', 'minify-html'));
+gulp.task("default", gulp.series('generate-service-worker'));
