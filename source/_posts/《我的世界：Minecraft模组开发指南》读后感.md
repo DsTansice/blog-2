@@ -25,7 +25,7 @@ date: 2020-07-23 17:54:24
 
 #### 启动/调试模组的方式（P19）
 
-&emsp;&emsp;书中给出的方式是`gradlew.bat runClient`和`gradlew.bat runServer`，实际上如果使用`gradlew.bat genIntelliRuns`配置的运行方式应该是下图中的样子(其中的虚拟机选项、程序参数、使用模块的类路径与JRE默认不是这样子，服务端与这个类似)：![客户端运行配置](https://image.kmar.top/ReviewOfDevelopmentGuide/run.png)
+&emsp;&emsp;书中给出的方式是`gradlew.bat runClient`和`gradlew.bat runServer`，实际上如果使用`gradlew.bat genIntelliRuns`配置的运行方式应该是下图中的样子(其中的虚拟机选项、程序参数、使用模块的类路径与JRE默认不是这样子，服务端与这个类似)：![客户端运行配置](https://image.kmar.top/posts/mcmodkfzn-0.png)
 
 #### 注册名称（P57...）
 

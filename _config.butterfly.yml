@@ -910,8 +910,8 @@ fixed_card_widget:
     - type: class
       name: card-webinfo
       index: 0
-      icon: fas fa-line-chart
-      title: 网站信息
+      icon: fas fa-info-circle
+      title: 网站资讯
     - type: class
       name: card-announcement
       index: 0

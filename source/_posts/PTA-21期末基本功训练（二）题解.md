@@ -238,7 +238,7 @@ int main() {
 
 &emsp;&emsp;这道题需要用到位运算，主要是移位和与运算，不了解的可以先看看[《二进制运算从入门到入坟》](https://kmar.top/posts/2e876344/)。
 
-![部分运算过程图解](https://image.kmar.top/pta-basic-2/bit.jpg)
+![部分运算过程图解](https://image.kmar.top/posts/pta21qmjbgxletj-0.jpg)
 
 &emsp;&emsp;图中只写出了`a`和`b`的运算，剩余的就交给同学们自己想象了{% inlineimage https://image.kmar.top/icon/bili/doge.png %}
 
@@ -331,7 +331,7 @@ int main() {
 
 ### 题解
 
-![关系图](https://image.kmar.top/pta-basic-2/ven.png)
+![关系图](https://image.kmar.top/posts/pta21qmjbgxletj-1.png)
 
 &emsp;&emsp;由上图可以很清楚的观察几个数据之间的关系，注意：**p、q、r这三个数据都包含中央的k区间**。
 

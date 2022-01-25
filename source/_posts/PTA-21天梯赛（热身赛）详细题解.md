@@ -617,7 +617,7 @@ int main() {
 
 &emsp;&emsp;我们放一个图表来演示计算过程：
 
-![计算过程](https://image.kmar.top/pta_dry/dot.jpg)
+![计算过程](https://image.kmar.top/posts/pta21ttsrssxxtj-0.jpg)
 
 ```c
 //计算一次值，并把计算后的数据存放在n1的位置

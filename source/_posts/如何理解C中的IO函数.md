@@ -73,7 +73,7 @@ int main() {
 
 &emsp;&emsp;变长参数的本质就是一段连续的内存，我们用一个图解释一下：
 
-![变长参数](https://image.kmar.top/stdio/bianchang.jpg)
+![变长参数](https://image.kmar.top/posts/rhljczdiohs-0.jpg)
 
 &emsp;&emsp;我们先来了解调用函数时是如何传参的，图中第一个对应的是函数`void example(int arg0, double arg1, short arg2)`的模型，在调用该函数时需要传入三个值，在传递时编译器会将要传入的值复制并排列到一起，然后传递给被调用的函数。函数使用时取用相应位置的内存即可。图中第二个对应的是函数`void example(char arg0[])`，传递方式和上面相同。
 
@@ -83,7 +83,7 @@ int main() {
 
 &emsp;&emsp;缓冲区是程序建立的一个内存空间，用于临时存储数据。其工作原理如图所示：（无缓冲输出就是把输入反过来）
 
-![示意图](https://image.kmar.top/stdio/io.jpg!/scale/80)
+![示意图](https://image.kmar.top/posts/rhljczdiohs-1.jpg!/scale/80)
 
 ### 缓冲区的意义
 
@@ -119,19 +119,19 @@ int main() {
 
 #### 转换说明
 
-![转换说明](https://image.kmar.top/stdio/zhuanhuan.jpg!/scale/67)
+![转换说明](https://image.kmar.top/posts/rhljczdiohs-2.jpg!/scale/67)
 
 #### printf修饰符
 
-![修饰符](https://image.kmar.top/stdio/xiushi.jpg!/scale/67)
+![修饰符](https://image.kmar.top/posts/rhljczdiohs-3.jpg!/scale/67)
 
 #### printf标记
 
-![标记](https://image.kmar.top/stdio/biaoji.jpg!/scale/67)
+![标记](https://image.kmar.top/posts/rhljczdiohs-4.jpg!/scale/67)
 
 #### scanf修饰符
 
-![修饰符](https://image.kmar.top/stdio/sxh.jpg!/scale/67)
+![修饰符](https://image.kmar.top/posts/rhljczdiohs-5.jpg!/scale/67)
 
 #### printf与scanf中的`*`修饰符
 

@@ -73,11 +73,11 @@ date: 2021-09-05 13:58:13
 
 &emsp;&emsp;修改完之后就是下图中的效果：
 
-![](https://image.kmar.top/py/path.png!/scale/67)
+![](https://image.kmar.top/posts/a3apcazpzjc-0.png!/scale/67)
 
 &emsp;&emsp;保存并退出打开的这些界面，然后`Win + R`打开运行，输入`cmd`回车打开命令提示符，输入`python`回车，若出现类似于下图中的效果则说明你py的环境配置成功：
 
-![](https://image.kmar.top/py/check.png!/scale/67)
+![](https://image.kmar.top/posts/a3apcazpzjc-1.png!/scale/67)
 
 ## 添加Anaconda中国镜像
 
@@ -114,7 +114,7 @@ custom_channels:
 
 &emsp;&emsp;打开PyCharm可以看到下面的界面：
 
-![](https://image.kmar.top/py/25389123-349af93c05042b76.webp!/scale/80)
+![](https://image.kmar.top/posts/a3apcazpzjc-3.jpg!/scale/80)
 
 &emsp;&emsp;点击左侧的`Plugins`按钮，接着点击`Marketplace`，在搜索栏内填入`chinese`可以看到下面的样子：
 
@@ -137,7 +137,7 @@ custom_channels:
 
 &emsp;&emsp;点击界面左下角的设置按钮，然后点击`编辑自定义VM选项`，进入图示界面：
 
-![](https://image.kmar.top/py/edit.png!/scale/67)
+![](https://image.kmar.top/posts/a3apcazpzjc-4.png!/scale/67)
 
 &emsp;&emsp;在列表最后面添加如下语句，这里就不解释具体原因了：
 
