@@ -45,18 +45,19 @@ hexo.extend.helper.register('related_posts', function (currentPost, allPosts) {
   relatedPosts = relatedPosts.sort(compare('weight'))
 
   if (relatedPosts.length > 0) {
-    result += '<div class="card-widget card-recommend-post">'
-    result += `<div class="item-headline"><i class="fas fa-dharmachakra"></i><span>${headlineLang}</span></div>`
-    result += '<div class="aside-list">'
+      result += '<div class="card-widget card-recommend-post">'
+      result += `<div class="item-headline"><i class="fas fa-dharmachakra"></i><span>${headlineLang}</span></div>`
+      result += '<div class="aside-list">'
+
     for (let i = 0; i < Math.min(relatedPosts.length, limitNum); i++) {
       const cover =
         relatedPosts[i].cover === false
           ? relatedPosts[i].randomcover
           : relatedPosts[i].cover
           result += `<div class="aside-list-item">`
-        result += `<a class="thumbnail" href="${this.url_for(relatedPosts[i].path)}" title="${relatedPosts[i].title}"><img src="${this.url_for(cover)}" alt="${relatedPosts[i].title}"></a>`
-        result += `<div class="content">`
-        result += `<a class="title" href="${this.url_for(relatedPosts[i].path)}" title="${relatedPosts[i].title}">${relatedPosts[i].title}</a>`
+          result += `<a class="thumbnail" href="${this.url_for(relatedPosts[i].path)}" title="${relatedPosts[i].title}"><img src="${this.url_for(cover)}" alt="${relatedPosts[i].title}"></a>`
+          result += `<div class="content">`
+          result += `<a class="title" href="${this.url_for(relatedPosts[i].path)}" title="${relatedPosts[i].title}">${relatedPosts[i].title}</a>`
       if (dateType === 'created') {
         result += `<time datetime="${this.date(relatedPosts[i].created, hexoConfig.date_format)}" title="发表于 ${this.date(relatedPosts[i].created, hexoConfig.date_format)}">${this.date(relatedPosts[i].created, hexoConfig.date_format)}</time>`
       } else {

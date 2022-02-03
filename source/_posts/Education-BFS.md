@@ -1,7 +1,6 @@
 ---
 title: Education BFS
 top_img: false
-toc_number: false
 cover: 'https://image.kmar.top/bg/b33.jpg!/fw/550'
 categories:
   - C/C++

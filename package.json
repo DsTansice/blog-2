@@ -18,6 +18,7 @@
     "hexo-abbrlink": "^2.2.1",
     "hexo-algoliasearch": "^1.0.0",
     "hexo-asset-image": "^1.0.0",
+    "hexo-bilibili-bangumi": "^1.7.4",
     "hexo-butterfly-envelope": "^1.0.7",
     "hexo-butterfly-footer-beautify": "^1.0.5",
     "hexo-butterfly-tag-plugins-plus": "^1.0.10",

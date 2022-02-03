@@ -1,7 +1,6 @@
 ---
 title: PTA-21新生程序设计班级天梯赛题解
 top_img: false
-toc_number: false
 katex: true
 cover: 'https://image.kmar.top/bg/b25.jpg!/fw/550'
 categories:

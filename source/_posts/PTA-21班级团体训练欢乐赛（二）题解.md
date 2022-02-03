@@ -1,7 +1,6 @@
 ---
 title: PTA-21班级团体训练欢乐赛（二）题解
 top_img: false
-toc_number: false
 categories:
   - C/C++
 tags:

@@ -1,7 +1,6 @@
 ---
 title: PTA-21天梯赛（热身赛）详细题解
 top_img: false
-toc_number: false
 cover: 'https://image.kmar.top/bg/b23.jpg!/fw/550'
 categories:
   - C/C++

@@ -7,28 +7,6 @@
     background-image: url(https://image.kmar.top/mobileBg.jpg)!important;
   }
 }
-
-/* 翻页圆角 */
-#pagination a.extend,
-#pagination .page-number,
-#pagination span {
-  color: var(--font-color);
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  height: 1.6rem;
-  text-align: center;
-  line-height: 1.6rem;
-  display: inline-block;
-  min-width: 1.6rem;
-}
-#pagination .page-number.current {
-  background: rgba(80,80,80,0.7)!important;
-}
-/* 右侧小按钮圆角 */
-#rightside>div>button,#to_comment {
-  margin-right: 4px;
-  border-radius: 5px;
-}
 /* github按钮圆角 */
 #card-info-btn{
   border-radius: 25px;

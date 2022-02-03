@@ -37,7 +37,7 @@
                   if theme.lazyload.enable
                     img(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                   else
-                    img(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt='' )
+                    img(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                 .info
                   if theme.lazyload.enable
                     img(data-lazy-src=url_for(item.avatar) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt='' )
@@ -62,7 +62,7 @@
                   if theme.lazyload.enable
                     img.cover.fadeIn(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                   else
-                    img.cover.fadeIn(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt='' )    
+                    img.cover.fadeIn(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                 .info
                   if theme.lazyload.enable
                     img.flink-avatar(data-lazy-src=url_for(item.avatar) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt='' )

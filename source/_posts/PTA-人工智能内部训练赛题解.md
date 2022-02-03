@@ -1,7 +1,6 @@
 ---
 title: PTA-人工智能内部训练赛题解
 top_img: false
-toc_number: false
 categories:
   - C/C++
 tags:

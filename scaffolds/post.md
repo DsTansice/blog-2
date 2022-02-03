@@ -2,7 +2,6 @@
 title: {{ title }}
 date: {{ date }}
 top_img: false
-toc_number: false
 categories:
 
 tags:

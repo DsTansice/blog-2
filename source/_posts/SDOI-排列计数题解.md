@@ -1,7 +1,6 @@
 ---
 title: SDOI-排列计数题解
 top_img: false
-toc_number: false
 cover: 'https://image.kmar.top/bg/b34.jpg!/fw/550'
 categories:
   - C/C++
