@@ -73,3 +73,6 @@ div
 
   if !theme.aside.mobile && theme.fixed_card_widget.enable
     include ./custom/fixed_card_widget.pug
+
+  if theme.pwa.enable
+    !=partial('includes/third-party/pwanotice', {}, { cache: true })

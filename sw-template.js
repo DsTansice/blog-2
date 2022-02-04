@@ -15,9 +15,10 @@ workbox.precaching.precacheAndRoute(self.__WB_MANIFEST,{
 });
 
 workbox.precaching.cleanupOutdatedCaches();
+
 // 字体文件
 workbox.routing.registerRoute(
-    /\.(?:eot|ttf|woff|woff2)$/,
+    /\.(?:eot|ttf|woff|woff2|svg)$/,
     new workbox.strategies.CacheFirst({
         cacheName: "fonts",
         plugins: [
@@ -32,17 +33,10 @@ workbox.routing.registerRoute(
     })
 );
 
-// 谷歌字体
 workbox.routing.registerRoute(
-    /^https:\/\/fonts\.googleapis\.com/,
-    new workbox.strategies.StaleWhileRevalidate({
-        cacheName: "google-fonts-stylesheets"
-    })
-);
-workbox.routing.registerRoute(
-    /^https:\/\/fonts\.gstatic\.com/,
+    /^https:\/\/cdn1\.tianli0\.top/,
     new workbox.strategies.CacheFirst({
-        cacheName: 'google-fonts-webfonts',
+        cacheName: "static-libs",
         plugins: [
             new workbox.expiration.ExpirationPlugin({
                 maxEntries: 1000,

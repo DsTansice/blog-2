@@ -3,14 +3,14 @@
 # --------------------------------------
 
 menu:
-  主页: / || icon-zhuye
-  足迹 || icon-zuji:
-    归 档: /archives/ || icon-guidang
-    分 类: /categories/ || icon-fenlei
-    标 签: /tags/ || icon-biaoqian
-  追番: /bangumis/ || icon-liuyan
-  留言板: /comments/ || icon-liuyan
-  友人帐: /link/ || icon-youlian
+  主页: / || iconfont icon-zhuye
+  足迹 || iconfont icon-zuji:
+    归 档: /archives/ || iconfont icon-guidang
+    分 类: /categories/ || iconfont icon-fenlei
+    标 签: /tags/ || iconfont icon-biaoqian
+  追番: /bangumis/ || iconfont icon-bilibili
+  留言板: /comments/ || iconfont icon-liuyan
+  友人帐: /link/ || iconfont icon-youlian
 
 flink_style: volantis #flexcard
 
@@ -844,7 +844,6 @@ inject:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     - <script defer data-pjax src="/js/custom/kernel.js"></script>
-    - <script async src="//at.alicdn.com/t/font_2833129_hk7lcvtvcgc.js"></script>
     - <script defer src="/live2d-widget/autoload.js"></script>
     - <script data-pjax defer src="/js/custom/fixed_card_widget.js"></script>
 

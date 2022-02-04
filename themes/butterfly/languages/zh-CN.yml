@@ -3,7 +3,7 @@ footer:
   theme: 主题
 
 copy:
-  success: 复制成功
+  success: 呦吼，你的剪切板已经被我塞满啦（￣︶￣）
   error: 复制错误
   noSupport: 浏览器不支持
 
@@ -45,7 +45,7 @@ search:
 
   local_search:
     label: 本地搜索
-    input_placeholder: 搜索文章
+    input_placeholder: 在这里输入你想要搜索的内容
     hits_empty: '找不到您查询的内容：${query}'
 
 pagination:
@@ -92,7 +92,7 @@ date_suffix:
   day: 天前
   month: 个月前
 
-donate: 打赏
+donate: 投币ヾ(≧▽≦*)o支持　
 share: 分享
 
 rightside:
