@@ -37,6 +37,11 @@
       avatar: https://oniya.cn/usr/uploads/ok/8920e6741fc2808cce5b81bc27abdbda291655d3.png
       descr: 干啥啥不行，干饭第一名
       siteshot: https://oniya.cn/usr/uploads/ok/screenshot.png
+    - name: Tianli
+      link: https://tianli-blog.club/
+      avatar: https://img1.tianli0.top/logo.png
+      descr: 惟其不可能，所以才相信。
+      siteshot: https://api.cyfan.top/thumb?url=https://tianli-blog.club/&width=400&zip=true
 - class_name: 笔趣楼
   link_list:
     - name: 探姬的小天地

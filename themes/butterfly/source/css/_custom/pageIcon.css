@@ -33,9 +33,11 @@
 #article-container.post-content h6 {
   font-size: 0.8rem !important;
 }
-@media screen and (min-width: 100px) {
+#content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
+  color: #49b1f5;
+}
+@media screen and (min-width: 900px) {
   #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
-    color: #49b1f5 ;
     margin-left: 0.4rem;
   }
 }
