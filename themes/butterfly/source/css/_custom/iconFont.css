@@ -1,5 +1,5 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 2833129 */
+  font-family: "iconfont";
   src: url('/font/iconfont.woff2') format('woff2'),
        url('/font/iconfont.woff') format('woff'),
        url('/font/iconfont.ttf') format('truetype');
@@ -13,12 +13,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-bilibili:before {
-  content: "\e600";
+.icon-chongdian:before {
+  content: "\e76c";
+}
+
+.icon-tuijian:before {
+  content: "\e620";
 }
 
 .icon-zuji:before {
-  content: "\e60f";
+  content: "\e663";
+}
+
+.icon-bilibili:before {
+  content: "\e8b1";
+}
+
+.icon-youlian:before {
+  content: "\e66f";
 }
 
 .icon-liuyan:before {
@@ -37,10 +49,6 @@
   content: "\e64d";
 }
 
-.icon-youlian:before {
-  content: "\e6ca";
-}
-
 .icon-biaoqian:before {
   content: "\e885";
 }
@@ -52,3 +60,4 @@
 .icon-youxiang:before {
   content: "\e612";
 }
+

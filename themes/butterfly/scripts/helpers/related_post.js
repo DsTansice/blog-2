@@ -46,7 +46,7 @@ hexo.extend.helper.register('related_posts', function (currentPost, allPosts) {
 
   if (relatedPosts.length > 0) {
       result += '<div class="card-widget card-recommend-post">'
-      result += `<div class="item-headline"><i class="fas fa-dharmachakra"></i><span>${headlineLang}</span></div>`
+      result += `<div class="item-headline"><i class="iconfont icon-tuijian"></i><span>${headlineLang}</span></div>`
       result += '<div class="aside-list">'
 
     for (let i = 0; i < Math.min(relatedPosts.length, limitNum); i++) {
