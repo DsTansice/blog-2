@@ -63,7 +63,7 @@ gulp.task('minify-html', () => {
 //替换CDN
 gulp.task('cdn', async() => {
   gulp.src('public/**/*.*')
-    .pipe(replace('cdn.jsdelivr.net', '您需要使用的cdn地址'))
+    .pipe(replace('cdn.jsdelivr.net', 'cdn1.tianli0.top'))
     .pipe(gulp.dest('public/')),  { overwrite: true };
 });
 
