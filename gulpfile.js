@@ -4,6 +4,7 @@ const workbox = require("workbox-build");
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-html-minifier-terser');
 var htmlclean = require('gulp-htmlclean');
+const replace = require('gulp-replace');
 // gulp-tester
 var terser = require('gulp-terser');
 
@@ -59,5 +60,11 @@ gulp.task('minify-html', () => {
         }))
         .pipe(gulp.dest('./public'))
 });
+//替换CDN
+gulp.task('cdn', async() => {
+  gulp.src('public/**/*.*')
+    .pipe(replace('cdn.jsdelivr.net', '您需要使用的cdn地址'))
+    .pipe(gulp.dest('public/')),  { overwrite: true };
+});
 
-gulp.task("default", gulp.series('generate-service-worker', 'compress', 'minify-css', 'minify-html'));
+gulp.task("default", gulp.series('generate-service-worker', 'cdn', 'compress', 'minify-css', 'minify-html'));

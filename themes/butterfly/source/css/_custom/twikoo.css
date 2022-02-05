@@ -12,13 +12,13 @@
   width: calc(100% + 70px);
 }
 /* 头像宽度调整 rem单位与全局字体大小挂钩，需配合自己情况调整大小以保证头像显示完整*/
-.tk-replies .tk-avatar {
-  width: 2.5rem !important;
-  height: 2.5rem !important;
+.tk-avatar {
+  width: 3rem !important;
+  height: 3rem !important;
 }
-.tk-replies .tk-avatar img {
-  width: 2.5rem !important;
-  height: 2.5rem !important;
+.tk-avatar img {
+  width: 3rem !important;
+  height: 3rem !important;
 }
 /* 回复框左移，避免窄屏时出框 */
 .tk-comments-container .tk-submit {
@@ -29,6 +29,7 @@
 .tk-content {
   background: #00a6ff; /*默认模式访客气泡配色*/
   padding: 10px;
+  left: 8px;
   color: #fff; /*默认模式访客气泡字体配色*/
   border-radius: 10px;
   font-size: 16px !important;
@@ -67,6 +68,7 @@
   color: #fff; /*默认模式博主气泡字体配色*/
   width: fit-content;
   max-width: 100%;
+  left: 9px;
 }
 .tk-master .tk-content a {
   color: #eeecaa;
@@ -86,10 +88,15 @@
 .tk-row[data-v-d82ce9a0] {
   max-width: 100%;
   width: fit-content;
+  margin-left: 10px;
 }
 .tk-avatar {
   border-radius: 50%;
-  margin-top: 10px;
+  margin-top: 15px;
+}
+.tk-master .tk-avatar {
+  position: relative;
+  left: 6px;
 }
 
 /* 夜间模式配色，具体比照上方默认模式class */
@@ -125,6 +132,7 @@
   }
   .tk-master .tk-content {
     width: 75%;
+    left: 80px;
   }
   .tk-master .tk-content::before {
     left: 100%;
@@ -133,12 +141,12 @@
   }
   .tk-master .tk-avatar {
     position: relative;
-    left: calc(75% + 70px);
+    left: calc(75% + 120px);
   }
   .tk-master .tk-row[data-v-d82ce9a0] {
     position: relative;
     top: 0px;
-    left: calc(75% - 230px);
+    left: calc(55%);
   }
   [data-theme="dark"] .tk-master .tk-content::before {
     border-left: 15px solid #1c1c1e;

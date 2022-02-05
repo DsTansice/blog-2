@@ -36,8 +36,9 @@ copy:
 # formal:
 #   icon: link || the description
 social:
-  Github: https://github.com/EmptyDreams || icon-github
-  Email: mailto:minedreams@qq.com || icon-youxiang
+  iconfont icon-github: https://github.com/EmptyDreams/ || Github
+  iconfont icon-youxiang: mailto:minedreams@qq.com || Email
+
 
 # search (搜索)
 # --------------------------------------
@@ -641,12 +642,12 @@ aside:
     description:
     button:
       enable: true
-      icon: fab fa-github
+      icon: iconfont icon-github
       text: GitHub
       link: https://github.com/EmptyDreams/
   card_announcement:
     enable: true
-    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>本站使用百度统计统计访问量等信息，希望小伙伴可以将本站加入到拦截白名单中。<p>建议需要通知的小伙伴把<b>edblog@probius.xyz</b>加入到邮箱的白名单中防止被拦截。
+    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>本站使用百度统计统计访问量等信息，希望小伙伴可以将本站加入到拦截白名单中。<p>建议需要通知的小伙伴把<b>kmar@foxmail.com</b>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
     limit: 4 # if set 0 will show all
@@ -908,7 +909,7 @@ CDN:
   coin_css: /reward/coin.css
 
   # pjax
-  pjax: https://cdn1.tianli0.top/npm/pjax/pjax.min.js
+  pjax:
 
   # comments
   gitalk:
@@ -949,18 +950,18 @@ CDN:
   canvas_nest:
 
   lazyload:
-  instantpage: https://cdn1.tianli0.top/gh/instantpage/instant.page@5.1.0/instantpage.min.js
-  typed: https://cdn1.tianli0.top/npm/typed.js/lib/typed.min.js
+  instantpage:
+  typed:
   pangu:
 
   # photo
-  fancybox_css_v4: https://cdn1.tianli0.top/npm/@fancyapps/ui/dist/fancybox.css
-  fancybox_v4: https://cdn1.tianli0.top/npm/@fancyapps/ui/dist/fancybox.umd.js
+  fancybox_css_v4:
+  fancybox_v4:
   medium_zoom:
 
   # snackbar
-  snackbar_css: https://cdn1.tianli0.top/npm/node-snackbar/dist/snackbar.min.css
-  snackbar: https://cdn1.tianli0.top/npm/node-snackbar/dist/snackbar.min.js
+  snackbar_css:
+  snackbar:
 
   # effect
   activate_power_mode:
@@ -969,7 +970,7 @@ CDN:
   ClickShowText:
 
   # fontawesome
-  fontawesome: https://cdn1.tianli0.top/npm/@fortawesome/fontawesome-free/css/all.min.css
+  fontawesome:
 
   # Conversion between Traditional and Simplified Chinese
   translate:
