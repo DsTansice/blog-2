@@ -67,4 +67,6 @@ gulp.task('cdn', async() => {
     .pipe(gulp.dest('public/')),  { overwrite: true };
 });
 
-gulp.task("default", gulp.series('generate-service-worker', 'cdn', 'compress', 'minify-css', 'minify-html'));
+gulp.task("pac", gulp.parallel('generate-service-worker', 'cdn'));
+
+gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html'));
