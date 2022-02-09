@@ -31,11 +31,11 @@
             .flink-desc!=i.class_desc
           .site-card-group
             each item in i.link_list
-              a.site-card(target='_blank' rel='noopener' href=url_for(item.link))
+              a.site-card(target='_blank' href=url_for(item.link))
                 .img
-                  - var siteshot = item.siteshot ? url_for(item.siteshot) : 'https://image.thum.io/get/width/400/crop/800/allowJPG/wait/20/noanimate/' + item.link
+                  - var siteshot = item.siteshot ? url_for(item.siteshot) : 'https://api.cyfan.top/thumb?url=' + item.link + '&width=400&zip=true'
                   if theme.lazyload.enable
-                    img(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
+                    img(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='')
                   else
                     img(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                 .info
@@ -58,7 +58,7 @@
             each item in i.link_list
               a.flink-list-card(href=url_for(item.link) target='_blank' data-title=item.descr)
                 .wrapper.cover
-                  - var siteshot = item.siteshot ? url_for(item.siteshot) : 'https://image.thum.io/get/width/400/crop/800/allowJPG/wait/20/noanimate/' + item.link
+                  - var siteshot = item.siteshot ? url_for(item.siteshot) : 'https://api.cyfan.top/thumb?url=' + item.link + '&width=400&zip=true'
                   if theme.lazyload.enable
                     img.cover.fadeIn(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                   else

@@ -4,73 +4,59 @@
       link: https://afdian.net/@emptydreams
       avatar: https://pic1.afdiancdn.com/user/b8d1ee924d7411ea8b7b52540025c377/avatar/883197cee34dfb1648e36efd44df6787_w180_h180_s42.jpg?imageView2/1/w/240/h/240
       descr: 来探索我正在开发的项目吧~
-      siteshot: https://api.cyfan.top/thumb?url=https://afdian.net/@emptydreams/&width=400&zip=true
     - name: Bilibili
       link: https://space.bilibili.com/66951474
       avatar: https://image.kmar.top/links/bilibili.png!/max/200
       descr: 探索我的视频~
-      siteshot: https://image.kmar.top/links/bilibiliSite.jpg!/max/400
 - class_name: 至尊阁
   link_list:
     - name: Akilar店长
       link: https://akilar.top/
       avatar: https://akilar.top/img/siteicon/favicon.png
       descr: 欢迎光临糖果屋
-      siteshot: https://cdn.jsdelivr.net/gh/Akilarlxh/ScreenShot@gh-pages/akilar.top.jpg
     - name: There,hello大大
       link: https://blog.therehello.top/
       avatar: https://z3.ax1x.com/2021/11/04/IeChpF.jpg
       descr: 大一菜鸡，多多关注
-      siteshot: https://z3.ax1x.com/2021/11/04/IeFKYV.jpg
     - name: 锦瑟的糖果屋
       link: https://www.ijinse.cn/
       avatar: https://www.ijinse.cn/logo.png
       descr: 锦瑟无端五十弦，一弦一柱思华年
-      siteshot: https://image.kmar.top/links/jinseSite.jpg!/max/400
     - name: Xin's Blog
       link: https://blog.xinmouren.cn/
       avatar: https://info.xinmouren.cn/custom.gif
       descr: 嵌入式的日子真不好过！
-      siteshot: https://api.cyfan.top/thumb?url=https://blog.xinmouren.cn/&width=400&zip=true
     - name: 梦荟楼的后花园
       link: https://oniya.cn/
       avatar: https://oniya.cn/usr/uploads/ok/8920e6741fc2808cce5b81bc27abdbda291655d3.png
       descr: 干啥啥不行，干饭第一名
-      siteshot: https://oniya.cn/usr/uploads/ok/screenshot.png
     - name: Tianli
       link: https://tianli-blog.club/
       avatar: https://img1.tianli0.top/logo.png
       descr: 惟其不可能，所以才相信。
-      siteshot: https://api.cyfan.top/thumb?url=https://tianli-blog.club/&width=400&zip=true
 - class_name: 笔趣楼
   link_list:
     - name: 探姬的小天地
       link: https://www.yuque.com/probius/
       avatar: https://image.kmar.top/links/tj.png!/max/200
       descr: 妄想全栈的fw探姬酱（
-      siteshot: https://image.kmar.top/links/tjSite.png!/max/400
     - name: kaiboshi
       link: https://kaiboshi.gitee.io/
       avatar: https://cdn.jsdelivr.net/gh/kaiboshi/kaiboshi.github.io/medias/logo66.png
       descr: 做一个有梦想的咸鱼
-      siteshot: https://image.kmar.top/links/kaiboshiSite.jpg!/max/400
     - name: Ramsayi
       link: https://ramsayi.cn/
       avatar: https://i.loli.net/2021/08/29/y9prTaRZugj8QBb.jpg
       descr: 月亮不睡你不睡，医院等你去缴费
-      siteshot: https://image.kmar.top/links/ramsayiSite.jpg!/max/400
     - name: Ethan.Tzy
       link: https://tzy1997.com/
       avatar: https://bu.dusays.com/2022/01/14/cd5ffd485f867.jpg
       descr: 学习与交流的乐园，希望能和你成为好朋友
-      siteshot: https://bu.dusays.com/2021/12/07/38a0bd6cef409.jpg
     - name: CieanYau
       link: https://www.milank.cn/
       avatar: https://img.milank.cn/image/1_1641457746569.jpg
       descr: Milank或许只是开始…
-      siteshot: https://api.cyfan.top/thumb?url=https://www.milank.cn/&width=400&zip=true
     - name: 葱苓的小窝
       link: https://www.itciraos.cn/
       avatar: https://www.itciraos.cn/mysource/avatar.webp
       descr: DARE & DO
-      siteshot: https://api.cyfan.top/thumb?url=https://www.itciraos.cn/&width=400&zip=true
