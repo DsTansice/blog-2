@@ -290,7 +290,8 @@ footer_beautify:
   swiper_js: https://cdn1.tianli0.top/npm/hexo-butterfly-swiper/lib/swiper.min.js
   swiperbdage_init_js: https://cdn1.tianli0.top/npm/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js
 
-bangumi: # 追番设置
+# 追番设置
+bangumi:
   enable: true
   source: bili
   path:
