@@ -970,7 +970,7 @@ CDN:
   ClickShowText:
 
   # fontawesome
-  fontawesome:
+  fontawesome: https://cdn1.tianli0.top/npm/@fortawesome/fontawesome-free/css/all.min.css
 
   # Conversion between Traditional and Simplified Chinese
   translate:

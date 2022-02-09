@@ -298,6 +298,7 @@ bangumi: # 追番设置
   title: '追番列表'
   quote: '生命不息，追番不止！'
   show: 1
+  lazyload: false
   loading:
   metaColor:
   color:
