@@ -67,10 +67,10 @@ aside:
     headline: 网站资讯
     article_name: 文章数目
     runtime:
-      name: 已运行时间
+      name: 已运行
       unit: 天
     last_push_date:
-      name: 最后更新时间
+      name: 最近更新
     site_wordcount: 本站总字数
     site_uv_name: 本站访客数
     site_pv_name: 本站总访问量

@@ -35,9 +35,9 @@
                 .img
                   - var siteshot = item.siteshot ? url_for(item.siteshot) : 'https://api.cyfan.top/thumb?url=' + item.link + '&width=400&zip=true'
                   if theme.lazyload.enable
-                    img(data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='')
+                    img(class='no-lightbox' data-lazy-src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='')
                   else
-                    img(src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
+                    img(class='no-lightbox' src=siteshot onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.post_page) + `'` alt='' )
                 .info
                   if theme.lazyload.enable
                     img(data-lazy-src=url_for(item.avatar) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt='' )

@@ -1,3 +1,4 @@
+/* 加载字体 */
 @font-face {
   font-family: "iconfont";
   src: url('/font/iconfont.woff2') format('woff2'),
@@ -60,4 +61,3 @@
 .icon-youxiang:before {
   content: "\e612";
 }
-

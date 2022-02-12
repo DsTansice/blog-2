@@ -83,7 +83,7 @@
   border-top: 2px solid transparent;
   border-bottom: 20px solid transparent;
   border-right: 15px solid #ff8080; /*默认模式博主气泡小三角配色*/
-  border-left: 0px solid transparent;
+  border-left: 0 solid transparent;
 }
 .tk-row[data-v-d82ce9a0] {
   max-width: 100%;
