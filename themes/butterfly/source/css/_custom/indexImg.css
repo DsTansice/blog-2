@@ -1,5 +1,4 @@
-[data-theme="dark"]
-  header#page-header::before{
+[data-theme="dark"] header#page-header::before{
     background-color: rgba(0,0,0,0.5)!important;
   }
 @media screen and (max-width: 700px) {
@@ -7,6 +6,7 @@
     background-image: url(https://image.kmar.top/mobileBg.jpg)!important;
   }
 }
+
 /* github按钮圆角 */
 #card-info-btn{
   border-radius: 25px;
@@ -14,4 +14,9 @@
 }
 #card-info-btn:before{
   border-radius: 25px
+}
+
+/* inlineimage */
+img.inline.entered.loaded {
+  margin: unset !important;
 }

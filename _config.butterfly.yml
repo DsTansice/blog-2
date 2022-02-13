@@ -338,7 +338,7 @@ facebook_comments:
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
-  envId: https://twikoo-rlbejj4ig-emptydreams.vercel.app
+  envId: https://twikoo-c8s3zkoyh-emptydreams.vercel.app
   region:
   visitor: false
   option:

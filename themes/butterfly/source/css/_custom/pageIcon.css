@@ -1,3 +1,4 @@
+/* 标题前图标 */
 #article-container.post-content h2:before {
   content: '\f105' !important;
   font-size: 2.3rem !important;
@@ -18,6 +19,7 @@
   margin-top: 0.05rem !important;
 }
 
+/* 标题大小 */
 #article-container.post-content h2{
   font-size: 1.6rem !important;
 }
@@ -33,11 +35,22 @@
 #article-container.post-content h6 {
   font-size: 0.8rem !important;
 }
-#content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
+
+/* 鼠标悬浮变色 */
+#content-inner.layout h2:hover,
+#content-inner.layout h3:hover,
+#content-inner.layout h4:hover,
+#content-inner.layout h5:hover,
+#content-inner.layout h6:hover {
   color: #49b1f5;
 }
+/* 增加鼠标悬浮时移动距离 */
 @media screen and (min-width: 900px) {
-  #content-inner.layout h2:hover, #content-inner.layout h3:hover, #content-inner.layout h4:hover, #content-inner.layout h5:hover, #content-inner.layout h6:hover {
+  #content-inner.layout h2:hover,
+  #content-inner.layout h3:hover,
+  #content-inner.layout h4:hover,
+  #content-inner.layout h5:hover,
+  #content-inner.layout h6:hover {
     margin-left: 0.4rem;
   }
 }
