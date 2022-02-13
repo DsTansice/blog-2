@@ -27,3 +27,26 @@ block content
     if page.comments !== false && theme.comments && theme.comments.use
       - var commentsJsLoad = true
       !=partial('includes/third-party/comments/index', {}, {cache: true})
+
+    .js-pjax
+      script(src='https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js')
+      script.
+        const clipboard = new ClipboardJS('.copybtn', {
+          text: function () {
+            return document.title + '：' + location.protocol + '//' + location.host + location.pathname
+          },
+        });
+        clipboard.on('success', function () {
+          if (GLOBAL_CONFIG.Snackbar) {
+            btf.snackbarShow("快分享给你的小伙伴吧o(*￣︶￣*)o")
+          } else {
+            console.log("复制成功")
+          }
+        });
+        clipboard.on('error', function () {
+          if (GLOBAL_CONFIG.Snackbar) {
+            btf.snackbarShow(GLOBAL_CONFIG.copy.error)
+          } else {
+            console.error("复制失败")
+          }
+        });

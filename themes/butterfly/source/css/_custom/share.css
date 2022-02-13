@@ -1,0 +1,23 @@
+.copybtn {
+    position: relative;
+    display: inline-block;
+    color: #66ccff;
+    border-radius: 5px;
+    width: 2.6rem;
+    height: 1.8rem;
+    text-align: center;
+    transition: background 0.1s ease-out 0s;
+    background: #1f1f1f;
+}
+[data-theme="light"] .copybtn {
+    background: #49b1f5;
+    color: white;
+}
+[data-theme="light"] .copybtn:hover {
+    background: #0084ff;
+    box-shadow: 0 4px 8px 2px hsla(0, 0%, 22%, 0.2)
+}
+[data-theme="dark"] .copybtn:hover {
+    background: #212121;
+    box-shadow: 0 4px 8px 2px hsl(0deg 0% 100% / 20%)
+}

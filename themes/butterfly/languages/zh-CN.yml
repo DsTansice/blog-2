@@ -4,8 +4,8 @@ footer:
 
 copy:
   success: 呦吼，你的剪切板已经被我塞满啦（￣︶￣）
-  error: 复制错误
-  noSupport: 浏览器不支持
+  error: WTF？！竟然复制失败了 w(ﾟДﾟ)w
+  noSupport: 答应我，更新一下浏览器好嘛(*/ω＼*)
 
 page:
   articles: 文章总览
@@ -92,7 +92,7 @@ date_suffix:
   day: 天前
   month: 个月前
 
-donate: 投币ヾ(≧▽≦*)o支持　
+donate: 投币ヾ(≧▽≦*)o支持
 share: 分享
 
 rightside:

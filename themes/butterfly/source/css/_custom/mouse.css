@@ -9,7 +9,7 @@ a:hover, a#site-name:hover, img, button:hover, div#scroll-down:hover, i:hover{
     cursor: url('https://image.kmar.top/mouse/link.cur'),auto !important;
 }
 /* 选中输入框时的鼠标指针 */
-.tk-input[data-v-619b4c52]:hover, input:hover{
+#article-container pre code:hover, #article-container p:hover, .tk-input[data-v-619b4c52]:hover, input:hover{
     cursor: url('https://image.kmar.top/mouse/texto.cur'),auto;
 }
 /* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */

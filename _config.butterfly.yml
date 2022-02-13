@@ -196,9 +196,6 @@ reward:
      - img: https://image.kmar.top/reward/zfbcode.jpg
        link: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/reward/zfbcode.jpg
        text: 支付宝
-     #- img: https://image.kmar.top/reward/afd.png
-     #  link: https://afdian.net/@emptydreams
-     #  text: 爱发电
 
 # Post edit
 # Easily browse and edit blog source code online.

@@ -26,12 +26,38 @@
 [data-theme="dark"] #article-container a.link-card:hover {
     box-shadow: 0 4px 8px 5px hsl(0deg 0% 100% / 20%) !important;
 }
+
 [data-theme="dark"] #article-container a.link-card {
     background: #101010 radial-gradient(#2a2a2a, #080808) !important;
     color: white !important;
 }
 [data-theme="dark"] #article-container a.link-card p.url {
     color: #d3d3d3 !important;
+}
+
+/* 分栏 */
+[data-theme="light"] #article-container .tabs {
+    border-right: 2px solid #bbb !important;
+    border-bottom: 2px solid #bbb !important;
+    border-left: 2px solid #bbb !important;
+}
+#article-container .tabs {
+    border-radius: 15px;
+}
+#article-container .tabs > .nav-tabs {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+#article-container .tabs > .nav-tabs > .tab button {
+    border-radius: 15px;
+}
+#article-container .tabs > .nav-tabs > .tab:not(.active) button:hover {
+    border-top: unset;
+}
+
+/* 代码框 */
+#article-container figure.highlight {
+    border-radius: 6px;
 }
 
 /* 滚动条 */
@@ -51,4 +77,9 @@
 }
 ::-webkit-scrollbar-corner {
     background-color: transparent
+}
+
+/* 顶部通知栏 */
+.snackbar-pos.top-center {
+    border-radius: 8px;
 }

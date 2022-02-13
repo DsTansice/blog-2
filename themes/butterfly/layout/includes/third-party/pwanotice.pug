@@ -5,39 +5,39 @@
       span(style='color: #fff;text-decoration: underline;cursor: pointer;') 📃点击追新🚀
 script.
   if ('serviceWorker' in navigator) {
-  if (navigator.serviceWorker.controller) {
-  navigator.serviceWorker.addEventListener('controllerchange', function() {
-  showNotification()
-  })
-  }
-  window.addEventListener('load', function() {
-  navigator.serviceWorker.register('/sw.js')
-  })
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        showNotification()
+      })
+    }
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js')
+    })
   }
   function showNotification() {
-  if (GLOBAL_CONFIG.Snackbar) {
-  var snackbarBg =
-  document.documentElement.getAttribute('data-theme') === 'light' ?
-  GLOBAL_CONFIG.Snackbar.bgLight :
-  GLOBAL_CONFIG.Snackbar.bgDark
-  var snackbarPos = GLOBAL_CONFIG.Snackbar.position
-  Snackbar.show({
-  text: '✨ 山岳库博更新啦！🌙',
-  backgroundColor: snackbarBg,
-  duration: 500000,
-  pos: snackbarPos,
-  actionText: '📃点击追新🚀',
-  actionTextColor: '#fff',
-  onActionClick: function(e) {
-  location.reload(true)
-  },
-  })
-  } else {
-  var showBg =
-  document.documentElement.getAttribute('data-theme') === 'light' ?
-  '#49b1f5' :
-  '#1f1f1f'
-  var cssText = `top: 0; background: ${showBg};`
-  document.getElementById('app-refresh').style.cssText = cssText
-  }
+    if (GLOBAL_CONFIG.Snackbar) {
+      var snackbarBg =
+              document.documentElement.getAttribute('data-theme') === 'light' ?
+                      GLOBAL_CONFIG.Snackbar.bgLight :
+                      GLOBAL_CONFIG.Snackbar.bgDark
+      var snackbarPos = GLOBAL_CONFIG.Snackbar.position
+      Snackbar.show({
+        text: '✨ 山岳库博更新啦！🌙',
+        backgroundColor: snackbarBg,
+        duration: 500000,
+        pos: snackbarPos,
+        actionText: '📃点击追新🚀',
+        actionTextColor: '#fff',
+        onActionClick: function (e) {
+          location.reload(true)
+        },
+      })
+    } else {
+      var showBg =
+              document.documentElement.getAttribute('data-theme') === 'light' ?
+                      '#49b1f5' :
+                      '#1f1f1f'
+      var cssText = `top: 0; background: ${showBg};`
+      document.getElementById('app-refresh').style.cssText = cssText
+    }
   }

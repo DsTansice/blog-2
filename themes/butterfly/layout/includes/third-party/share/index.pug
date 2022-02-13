@@ -1,4 +1,6 @@
 .post_share
+  .copybtn(title='复制链接')
+    i.fas.fa-link
   if theme.addThis.enable
     !=partial('includes/third-party/share/add-this', {}, {cache: true})
   else if theme.sharejs.enable

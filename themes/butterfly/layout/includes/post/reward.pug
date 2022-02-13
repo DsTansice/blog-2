@@ -16,6 +16,6 @@ link(rel='stylesheet' href=url_for(theme.CDN.coin_css) media="defer" onload="thi
               img.post-qr-code-img(src=url_for((item.itemlist||item).img) alt=(item.itemlist||item).text)
             .post-qr-code-desc=(item.itemlist||item).text
 if theme.reward.coinAudio
-  - var coinAudio = theme.reward.coinAudio ? url_for(theme.reward.coinAudio) : 'https://npm.elemecdn.com/akilar-candyassets@1.0.16/audio/coin.mp3'
+  - var coinAudio = theme.reward.coinAudio ? url_for(theme.reward.coinAudio) : 'https://cdn.jsdelivr.net/npm/akilar-candyassets@1.0.16/audio/coin.mp3'
   audio#coinAudio(src=coinAudio)
 script(defer src=url_for(theme.CDN.coin_js))
