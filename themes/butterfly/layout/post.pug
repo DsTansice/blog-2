@@ -31,7 +31,7 @@ block content
     .js-pjax
       script(src='https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js')
       script.
-        const clipboard = new ClipboardJS('.copybtn', {
+        var clipboard = new ClipboardJS('.copybtn', {
           text: function () {
             return document.title + '：' + location.protocol + '//' + location.host + location.pathname
           },
