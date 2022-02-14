@@ -1,1 +1,0 @@
-plugins: [`gatsby-plugin-netlify`]
