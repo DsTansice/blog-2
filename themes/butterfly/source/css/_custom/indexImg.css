@@ -10,10 +10,10 @@
 /* github按钮圆角 */
 #card-info-btn{
   border-radius: 25px;
-  overflow: hidden
+  overflow: hidden;
 }
 #card-info-btn:before{
-  border-radius: 25px
+  border-radius: 25px;
 }
 
 /* inlineimage */

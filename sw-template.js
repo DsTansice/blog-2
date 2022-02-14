@@ -3,7 +3,7 @@ const workboxVersion = '6.3.0';
 importScripts(`https://storage.googleapis.com/workbox-cdn/releases/${workboxVersion}/workbox-sw.js`);
 
 workbox.core.setCacheNameDetails({
-    prefix: "空梦"
+    prefix: "kmar"
 });
 
 workbox.core.skipWaiting();
@@ -34,7 +34,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-    /^https:\/\/cdn1\.tianli0\.top/,
+    /^https:\/\/cdn\.jsdelivr\.net/,
     new workbox.strategies.CacheFirst({
         cacheName: "static-libs",
         plugins: [

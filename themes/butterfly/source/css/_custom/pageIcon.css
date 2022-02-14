@@ -15,7 +15,7 @@
 #article-container.post-content h5:before,
 #article-container.post-content h6:before {
   content: '\f121' !important;
-  margin-left: -1.1rem !important;
+  margin-left: -1.3rem !important;
   margin-top: 0.05rem !important;
 }
 

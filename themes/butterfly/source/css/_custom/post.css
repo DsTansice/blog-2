@@ -19,67 +19,46 @@
     border-radius: 10px;
 }
 
-/* 链接卡片 */
-#article-container a.link-card div.left img {
-    border-radius: 8px;
-}
-[data-theme="dark"] #article-container a.link-card:hover {
-    box-shadow: 0 4px 8px 5px hsl(0deg 0% 100% / 20%) !important;
-}
-
-[data-theme="dark"] #article-container a.link-card {
-    background: #101010 radial-gradient(#2a2a2a, #080808) !important;
-    color: white !important;
-}
-[data-theme="dark"] #article-container a.link-card p.url {
-    color: #d3d3d3 !important;
-}
-
-/* 分栏 */
-[data-theme="light"] #article-container .tabs {
-    border-right: 2px solid #bbb !important;
-    border-bottom: 2px solid #bbb !important;
-    border-left: 2px solid #bbb !important;
-}
-#article-container .tabs {
-    border-radius: 15px;
-}
-#article-container .tabs > .nav-tabs {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-#article-container .tabs > .nav-tabs > .tab button {
-    border-radius: 15px;
-}
-#article-container .tabs > .nav-tabs > .tab:not(.active) button:hover {
-    border-top: unset;
-}
-
 /* 代码框 */
 #article-container figure.highlight {
     border-radius: 6px;
 }
 
 /* 滚动条 */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px
+*::-webkit-scrollbar-thumb {
+    border-radius: 8px;
 }
-::-webkit-scrollbar-track {
-    border-radius: 2em;
-}
-::-webkit-scrollbar-thumb {
-    background-color: rgb(255 255 255 / .3);
-    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%,
-            transparent 25%, transparent 50%,
-            rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-    border-radius: 2em
-}
-::-webkit-scrollbar-corner {
-    background-color: transparent
+html {
+    /*noinspection CssInvalidPropertyValue*/
+    overflow-y: overlay;
 }
 
 /* 顶部通知栏 */
 .snackbar-pos.top-center {
     border-radius: 8px;
+    text-align: center;
+    min-width: 0 !important;
+}
+.snackbar-pos.top-center p {
+    font-weight: bold !important;
+}
+
+/* 超链接 */
+#post ol a:hover, #post ul a:hover, #post p a:hover, #post .post-copyright a:hover {
+    text-decoration: unset !important;
+    background: #0084FF;
+    border-radius: 6px;
+    color: white;
+    padding: 3px;
+}
+[data-theme="dark"] #post ol a:hover,
+[data-theme="dark"] #post ul a:hover,
+[data-theme="dark"] #post p a:hover,
+[data-theme="dark"] #post .post-copyright a:hover{
+    background: #326e99;
+}
+
+/* 行内代码 */
+#article-container code {
+    border-radius: 5px;
 }

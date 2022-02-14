@@ -178,10 +178,10 @@ beautify()
     margin: 40px 0 10px
     padding: 10px 16px
     border: 1px solid var(--light-grey)
-    transition: box-shadow .3s ease-in-out
     overflow: hidden
     border-radius: 12px!important
     background-color: rgb(239 241 243)
+    transition: all 0.2s
 
     &:before
       background var(--heo-post-blockquote-bg)
@@ -192,9 +192,6 @@ beautify()
       font-size 200px
       font-family 'Font Awesome 5 Brands'
       opacity .2
-
-    &:hover
-      box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5)
 
     .post-copyright
       &-meta
@@ -251,7 +248,6 @@ beautify()
       text-shadow #bfbeb8 0 0 2px
       border 1px solid rgb(19 18 18 / 35%)
       box-shadow 0 0 5px rgb(20, 120, 210)
-      animation flashlight 1s linear infinite alternate
   .post-copyright-info
     color #e0e0e4
 
