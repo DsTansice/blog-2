@@ -839,12 +839,12 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <script async src="/js/custom/share.js"></script>
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     - <script async>if(!!window.ActiveXObject||"ActiveXObject"in window)alert("都2202年了，能不能不要用IE了！！！\n本博客没有为IE做任何适配，请使用edge等浏览器进行访问。");</script>
     - <script data-pjax async src="/js/custom/fixed_card_widget.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
+    - <script async src="/js/custom/share.js"></script>
 
 #侧栏悬浮卡片控制按钮
 #https://akilar.top/posts/451ac5f8/
