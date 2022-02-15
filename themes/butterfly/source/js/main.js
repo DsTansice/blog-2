@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
    * Lightbox
    */
   const runLightbox = () => {
-    btf.loadLightbox(document.querySelectorAll('#article-container img:not(.no-lightbox)'))
+    btf.loadLightbox(document.querySelectorAll('#article-container img:not(.no-lightbox):not(.inline)'))
   }
 
   /**

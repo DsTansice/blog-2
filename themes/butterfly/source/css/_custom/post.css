@@ -44,17 +44,23 @@ html {
 }
 
 /* 超链接 */
-#post ol a:hover, #post ul a:hover, #post p a:hover, #post .post-copyright a:hover {
+#post ol a, #post ul a, #post p a, .bangumi-title a {
+    border-bottom: 2px solid #3599d9;
+}
+#post ol a:hover, #post ul a:hover,
+#post p a:hover, #post .post-copyright a:hover,
+.bangumi-title a:hover {
     text-decoration: unset !important;
     background: #0084FF;
     border-radius: 6px;
-    color: white;
+    color: white !important;
     padding: 3px;
 }
 [data-theme="dark"] #post ol a:hover,
 [data-theme="dark"] #post ul a:hover,
 [data-theme="dark"] #post p a:hover,
-[data-theme="dark"] #post .post-copyright a:hover{
+[data-theme="dark"] #post .post-copyright a:hover,
+[data-theme="dark"] .bangumi-title a:hover {
     background: #326e99;
 }
 

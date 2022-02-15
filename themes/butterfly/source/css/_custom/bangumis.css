@@ -1,0 +1,59 @@
+.bangumi-tabs, .bangumi-pagination {
+    text-align: center;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 3px;
+}
+
+a.bangumi-tab {
+    border-radius: 5px;
+}
+
+a.bangumi-tab:hover {
+    text-decoration: none !important;
+    background: var(--tab-button-hover-bg);
+}
+
+.bangumi-show .bangumi-button:hover {
+    border-radius: 5px;
+    text-decoration: none !important;
+    background: var(--tab-button-hover-bg) !important;
+}
+
+[data-theme="dark"] .bangumi-active {
+    background: #4c4c4c !important;
+}
+[data-theme="light"] .bangumi-active {
+    background: #66ccff !important;
+    color: white !important;
+}
+
+[data-theme="light"] .bangumi-info-items {
+    color: black !important;
+}
+
+.bangumi-item {
+    border-bottom: unset !important;
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+[data-theme="light"] .bangumi-item:hover {
+    background: #66ccff34 !important;
+    box-shadow: 2px 3px 8px #546e7a;
+}
+
+.bangumi-picture img {
+    border-radius: 12px;
+    transition: all 0.5s !important;
+}
+.bangumi-picture img:hover {
+    box-shadow: 1px 2px 3px #546e7a;
+}
+
+.bangumi-picture {
+    left: 10px !important;
+}
+.bangumi-info {
+    padding-left: 135px !important;
+}
