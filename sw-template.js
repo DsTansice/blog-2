@@ -34,7 +34,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-    /(^https:\/\/cdn1\.tianli0\.top).*\.(svg|eot|ttf|woff|woff2|jpg|jpeg|png|gif|webp)$/,
+    /(^https:\/\/cdn1\.tianli0\.top).*\.(svg|eot|ttf|woff|woff2|)$/,
     new workbox.strategies.CacheFirst({
         cacheName: "static-libs",
         plugins: [
