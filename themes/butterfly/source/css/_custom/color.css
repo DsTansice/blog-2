@@ -1,8 +1,8 @@
 :root {
     --km-global-bg: rgba(250, 250, 250, 0.85);
-    --km-link-bg: #0084FF;
+    --km-link-bg: #0084ff;
     --km-link-underline: #3599d9;
-    --km-button-dark-hover: var(--km-link-bg);
+    --km-button-dark-hover: #0084ff;
     --km-button-dark-bg: #66ccff;
     --km-button-light-active: #66ccff;
     --km-button-font: white;
