@@ -1,65 +1,44 @@
 /* 首页文章卡片 */
-[data-theme="light"] #recent-posts > .recent-post-item {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] #recent-posts > .recent-post-item {
-    background: rgba(20, 20, 20, 0.75);
+#recent-posts > .recent-post-item {
+    background: var(--km-global-bg) !important;
 }
 
 /* 首页侧栏卡片 */
 [data-theme="light"] .card-widget {
-    background: rgba(250, 250, 250, 0.85) !important;
+    background: var(--km-global-bg) !important;
 }
 [data-theme="dark"] .card-widget {
     background: rgba(20, 20, 20, 0.9) !important;
 }
-[data-theme="dark"] #aside-content #card-toc .toc-content .toc-link.active {
-    background: #313534;
-}
 
 /* 文章页面正文背景 */
-[data-theme="light"] div#post {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] div#post {
-    background: rgba(20, 20, 20, 0.8);
+div#post {
+    background: var(--km-global-bg);
 }
 
 /* 分页页面 */
-[data-theme="light"] div#page {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] div#page {
-    background: rgba(20, 20, 20, 0.8);
+div#page {
+    background: var(--km-global-bg);
 }
 
 /* 归档页面 */
-[data-theme="light"] div#archive {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] div#archive {
-    background: rgba(20, 20, 20, 0.8);
+div#archive {
+    background: var(--km-global-bg);
 }
 
 /* 标签页面 */
-[data-theme="light"] div#tag {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] div#tag {
-    background: rgba(20, 20, 20, 0.8);
+div#tag {
+    background: var(--km-global-bg);
 }
 
 /* 分类页面 */
-[data-theme="light"] div#category {
-    background: rgba(250, 250, 250, 0.85);
-}
-[data-theme="dark"] div#category {
-    background: rgba(20, 20, 20, 0.8);
+div#category {
+    background: var(--km-global-bg);
 }
 
 /* 页脚背景 */
 #footer:before {
-    background: rgba(0, 0, 0, 0.1) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 引入背景 */
@@ -69,13 +48,10 @@
 
 /* 右侧标签 */
 [data-theme="dark"] #aside-content .card-tag-cloud a {
-    color: #959a86 !important;
+    color: var(--km-font) !important;
 }
 #aside-content .card-tag-cloud a:hover {
-    background-color: #0084FF;
+    background-color: var(--km-link-bg);
     color: white !important;
     border-radius: 8px;
-}
-[data-theme="dark"] #aside-content .card-tag-cloud a:hover {
-    background-color: #326e99;
 }
