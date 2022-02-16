@@ -34,12 +34,12 @@ const db = {
 }
 
 self.addEventListener('install', async function (installEvent) {
-    await self.skipWaiting();
-    installEvent.waitUntil(
+    await self.skipWaiting()
+    await installEvent.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
             return cache.addAll(CACHE_NAME);
         })
-    );
+    )
 });
 
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g

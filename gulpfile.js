@@ -46,7 +46,9 @@ gulp.task('minify-html', () => {
 gulp.task('cdn', async() => {
   gulp.src('public/**/*.*')
     .pipe(replace('cdn.jsdelivr.net', 'cdn1.tianli0.top'))
-    .pipe(gulp.dest('public/')),  { overwrite: true };
+    .pipe(gulp.dest('public/')), { overwrite: true };
 });
 
-gulp.task("default", gulp.parallel('cdn', 'compress', 'minify-css', 'minify-html'));
+gulp.task("cdn", gulp.series('cdn'));
+
+gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html'));
