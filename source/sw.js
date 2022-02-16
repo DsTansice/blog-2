@@ -34,7 +34,7 @@ const db = {
 }
 
 self.addEventListener('install', async function (installEvent) {
-    self.skipWaiting();
+    await self.skipWaiting();
     installEvent.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
             return cache.addAll(CACHE_NAME);
