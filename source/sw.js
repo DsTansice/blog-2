@@ -41,7 +41,7 @@ self.addEventListener('install', function () {
 //永久缓存
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
 //博文缓存
-const updateCache = /(.*\/posts\/.*(\/$))|(.*(kmar\.top\/)$)/g
+const updateCache = /(^https:\/\/kmar\.top\/posts\/)|(.*(kmar\.top\/)$)/g
 //博客资源缓存
 const blogResourceCache = /(^(https:\/\/kmar\.top)).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
