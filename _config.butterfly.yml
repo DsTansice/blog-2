@@ -75,7 +75,7 @@ katex:
 # --------------------------------------
 
 # Favicon（網站圖標）
-favicon: https://image.kmar.top/logo.jpg
+favicon: /logo/favicon.ico
 
 # Avatar (頭像)
 avatar:
