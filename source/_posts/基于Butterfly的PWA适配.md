@@ -279,14 +279,14 @@ self.addEventListener('fetch', async event => {
 
 &emsp;&emsp;其中，`register`的参数就是`sw.js`的地址，对于我而言，合法的地址有：
 
-1. /sw.js
-2. https://kmar.top/sw.js
+1. `/sw.js`
+2. `https://kmar.top/sw.js`
 
 &emsp;&emsp;其余任何形式的加载都是非法的，包括但不限于：
 
-1. http://kmar.top/sw.js #非法，因为sw仅允许通过https注册（本地127.0.0.1允许http）
-2. https://wulawula.com/sw.js #非法，跨域
-3. https://11.53.15.145/sw.js #即使11.53.15.145是我的博客的IP地址依然非法，被视为跨域
+1. `http://kmar.top/sw.js` #非法，因为sw仅允许通过https注册（本地`127.0.0.1`允许http）
+2. `https://wulawula.com/sw.js` #非法，跨域
+3. `https://11.53.15.145/sw.js` #即使`11.53.15.145`是我的博客的IP地址依然非法，被视为跨域
 
 &emsp;&emsp;现在我们找个地方把注册代码放进去就可以了，我是放在了`[butterfly]/layout/includes/additional-js.pug`的末尾：
 
