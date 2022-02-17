@@ -38,6 +38,10 @@
       link: https://blog.cyfan.top/
       avatar: https://cdn.jsdelivr.net/npm/chenyfan-oss@3
       descr: 一个在互联网角落挣扎的小小博客，很小很小
+    - name: Gahotx
+      link: https://gahotx.cn/
+      avatar: https://pub.gahotx.cn/photo/cat.jpg
+      descr: Don’t repeat yourself
 - class_name: 笔趣楼
   link_list:
     - name: 探姬的小天地
