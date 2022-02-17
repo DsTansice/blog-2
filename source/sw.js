@@ -91,6 +91,7 @@ self.addEventListener('fetch', async event => {
                 }
                 return response
             }).catch(function () {
+                if (request.url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
                 console.error('不可达的链接：' + request.url)
             })
         })
