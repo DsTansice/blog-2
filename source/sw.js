@@ -1,9 +1,9 @@
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
-const preCacheList = ['404.html']
 const VERSION_CACHE_NAME = 'kmarCacheTime'
 //缓存时间
 const MAX_BLOG_CACHE_TIME = 60 * 60 * 8
+const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3
 const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime() / 1000;
@@ -33,29 +33,40 @@ const db = {
     }
 }
 
-self.addEventListener('install', async function (installEvent) {
-    await self.skipWaiting()
-    await installEvent.waitUntil(
-        caches.open(CACHE_NAME).then(function (cache) {
-            return cache.addAll(preCacheList);
-        })
-    )
+self.addEventListener('install', function () {
+    // noinspection JSIgnoredPromiseFromCall
+    self.skipWaiting()
 });
 
+//永久缓存
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
-const updateCache = /(^(http:\/\/|https:\/\/kmar\.top).*\.(css|js|woff2|woff|ttf|json)$)|(.*\/posts\/.*(\/$))|(.*(kmar\.top\/)$)/g
-//const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/cdn1\.tianli0\.top).*\.(css|js|json)$)|(^(https:\/\/unpkg\.zhimg\.com))/g
-const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\.zhimg\.com))|(404\.html$)/g
+//博文缓存
+const updateCache = /(.*\/posts\/.*(\/$))|(.*(kmar\.top\/)$)/g
+//博客资源缓存
+const blogResourceCache = /(^((http:)|(https:\/\/kmar\.top))).*\.(css|js|woff2|woff|ttf|json)$/g
+//CDN缓存
+const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\.zhimg\.com))/g
+//缓存黑名单
+const cacheBlacklist = /^chrome-extension:\/\//g
 
+/**
+ * 根据url判断缓存最多存储多长时间
+ * @return
+ *     -1  - 永久缓存<br/>
+ *     0   - 不缓存<br/>
+ *     n   - 缓存n毫秒<br/>
+ */
 const getMaxCacheTime = function (url) {
     if (url.match(updateCache)) return MAX_BLOG_CACHE_TIME
     if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
     if (url.match(foreverCache)) return -1
+    if (url.match(blogResourceCache)) return MAX_RESOURCE_CACHE_TIME
     return 0
 }
 
 self.addEventListener('fetch', async event => {
     const request = event.request
+    if (request.url.match(cacheBlacklist)) return fetch(request)
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
@@ -75,7 +86,10 @@ self.addEventListener('fetch', async event => {
                     const clone = response.clone()
                     caches.open(CACHE_NAME).then(function (cache) {
                         if (remove) cache.delete(request)
-                        cache.put(request, clone)
+                        cache.put(request, clone).catch(function (err) {
+                            console.error(err)
+                            console.error(request)
+                        })
                     })
                 }
                 return response
