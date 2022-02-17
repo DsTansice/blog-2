@@ -46,8 +46,6 @@ const updateCache = /(^https:\/\/kmar\.top\/posts\/)|(.*(kmar\.top\/)$)/g
 const blogResourceCache = /(^(https:\/\/kmar\.top)).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
 const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\.zhimg\.com))/g
-//缓存黑名单
-const cacheBlacklist = /^chrome-extension:\/\//g
 
 /**
  * 根据url判断缓存最多存储多长时间
@@ -66,7 +64,6 @@ const getMaxCacheTime = function (url) {
 
 self.addEventListener('fetch', async event => {
     const request = event.request
-    if (request.url.match(cacheBlacklist)) return fetch(request)
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
