@@ -91,12 +91,15 @@ self.addEventListener('fetch', async event => {
 })
 
 self.addEventListener('message', function (event) {
+    if (event.data !== 'refresh') return
     caches.open(CACHE_NAME).then(function (cache) {
-        cache.delete(new Request(event.data)).then(function () {
-            console.log("sdf")
-            event.source.postMessage('success')
-        }).catch(function (error) {
-            console.error(error)
+        cache.keys().then(function (keys) {
+            for (let key of keys) {
+                if (key.url.match(updateCache)) {
+                    cache.delete(key)
+                }
+            }
         })
     })
+    event.source.postMessage('success')
 })

@@ -85,6 +85,6 @@ div
         })
       })
       navigator.serviceWorker.addEventListener('message', function (event) {
-        location.reload()
+        if (event.data === 'success') location.reload()
       })
     }
