@@ -8,6 +8,18 @@ const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime() / 1000;
 
+//npm CDN列表
+const npmCdnList = [
+    'https://cdn1.tianli0.top/npm',
+    'https://unpkg.zhimg.com',
+    'https://npm.elemecdn.com',
+    'https://fastly.jsdelivr.net/npm',
+    'https://cdn.jsdelivr.net/npm'
+]
+
+let npmCdnListLength = 0
+let npmCdnRank = new Array(npmCdnList.length)
+
 const db = {
     read: (key) => {
         return new Promise((resolve) => {
@@ -91,12 +103,34 @@ self.addEventListener('fetch', async event => {
 })
 
 self.addEventListener('message', function (event) {
-    if (event.data !== 'refresh') return
-    caches.open(CACHE_NAME).then(function (cache) {
-        cache.keys().then(function (keys) {
-            for (let key of keys) {
-                if (key.url.match(updateCache)) cache.delete(key)
-            }
+    if (event.data === 'refresh') {
+        caches.open(CACHE_NAME).then(function (cache) {
+            cache.keys().then(function (keys) {
+                for (let key of keys) {
+                    if (key.url.match(updateCache)) {
+                        // noinspection JSIgnoredPromiseFromCall
+                        cache.delete(key)
+                    }
+                }
+            })
+        }).then(function () {
+            event.source.postMessage('success')
         })
-    }).then(function () {event.source.postMessage('success')})
+    } else {
+        Promise.all([npmCdnList.map(function (value) {
+            return new Promise(function (resolve) {
+                setTimeout(() => {
+                    const start = new Date().getTime()
+                    fetch(value + '/hexo-adsense@1.0.26/lib/index.js?' + Math.random()).then(function (response) {
+                        if (response.ok || response.status === 301 || response.status === 302) {
+                            console.log(value + ':' + (new Date().getTime() - start))
+                            npmCdnRank[npmCdnListLength++] = value
+                        }
+                    }).catch(() => {
+                    })
+                }, 2000)
+                resolve(true)
+            })
+         })]).then(r => {})
+    }
 })
