@@ -50,10 +50,10 @@ const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\
  *     n   - 缓存n毫秒<br/>
  */
 const getMaxCacheTime = function (url) {
-    if (url.match(updateCache)) return MAX_BLOG_CACHE_TIME
-    if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
     if (url.match(foreverCache)) return -1
+    if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
     if (url.match(blogResourceCache)) return MAX_RESOURCE_CACHE_TIME
+    if (url.match(updateCache)) return MAX_BLOG_CACHE_TIME
     return 0
 }
 
@@ -95,11 +95,8 @@ self.addEventListener('message', function (event) {
     caches.open(CACHE_NAME).then(function (cache) {
         cache.keys().then(function (keys) {
             for (let key of keys) {
-                if (key.url.match(updateCache)) {
-                    cache.delete(key)
-                }
+                if (key.url.match(updateCache)) cache.delete(key)
             }
         })
-    })
-    event.source.postMessage('success')
+    }).then(function () {event.source.postMessage('success')})
 })
