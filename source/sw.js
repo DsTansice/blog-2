@@ -14,7 +14,7 @@ const npmCdnList = [
     'https://unpkg.zhimg.com',
     'https://npm.elemecdn.com',
     'https://fastly.jsdelivr.net/npm',
-    'https://cdn-jsd.pigax.cn/npm'
+    'https://code.bdstatic.com/npm'
 ]
 
 let npmCdnListLength = 0
