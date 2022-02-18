@@ -237,10 +237,9 @@ tag_plugins:
   priority: 5 #过滤器优先权
   issues: false #issues标签依赖注入开关
   CDN:
-    anima: https://image.kmar.top/code/font-awesome-animation.min.css #动画标签anima的依赖
+    anima: https://cdn.jsdelivr.net/npm/font-awesome-animation@1.1.1/css/font-awesome-animation.min.css #动画标签anima的依赖
     jquery: https://cdn1.tianli0.top/npm/jquery@latest/dist/jquery.min.js #issues标签依赖
     issues: https://cdn1.tianli0.top/npm/hexo-theme-volantis@latest/source/js/issues.min.js #issues标签依赖
-    #iconfont: //at.alicdn.com/t/font_2032782_8d5kxvn09md.js #参看https://akilar.top/posts/d2ebecef/
     carousel: https://cdn1.tianli0.top/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.js
 
 # envelope_comment
@@ -291,7 +290,7 @@ footer_beautify:
       message: 博客框架为Hexo-v6.0.0 #徽标提示语
     - link: https://butterfly.js.org/
       shields: /footer/butterfly.svg
-      message: 主题版本Butterfly-v4.0.1
+      message: 主题版本Butterfly-v4.1.0
     - link: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
       shields: /footer/upyun.svg
       message: 本网站又又拍云提供CDN加速及云存储服务
@@ -301,9 +300,9 @@ footer_beautify:
     - link: https://icp.gov.moe/?keyword=20219494
       shields: /footer/cute.svg
       message: 本站已添加萌ICP豪华套餐，萌ICP备20219494号
-  swiper_css: https://cdn1.tianli0.top/npm/hexo-butterfly-swiper/lib/swiper.min.css
-  swiper_js: https://cdn1.tianli0.top/npm/hexo-butterfly-swiper/lib/swiper.min.js
-  swiperbdage_init_js: https://cdn1.tianli0.top/npm/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js
+  swiper_css: https://cdn1.tianli0.top/npm/hexo-butterfly-swiper@1.0.11/lib/swiper.min.css
+  swiper_js: https://cdn1.tianli0.top/npm/hexo-butterfly-swiper@1.0.11/lib/swiper.min.js
+  swiperbdage_init_js: https://cdn1.tianli0.top/npm/hexo-butterfly-footer-beautify@1.0.6/lib/swiperbdage_init.min.js
 
 # 追番设置
 bangumi:

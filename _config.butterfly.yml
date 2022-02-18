@@ -968,7 +968,7 @@ CDN:
   ClickShowText:
 
   # fontawesome
-  fontawesome: https://cdn1.tianli0.top/npm/@fortawesome/fontawesome-free/css/all.min.css
+  fontawesomeV6:
 
   # Conversion between Traditional and Simplified Chinese
   translate:
