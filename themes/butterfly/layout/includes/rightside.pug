@@ -56,5 +56,8 @@ mixin rightsideItem(array)
     if showArray
       +rightsideItem(showArray)
 
+    button#refresh-cache(type="button" title='刷新当页缓存' onclick="refreshCache()")
+      i.fas.fa-refresh.fa-spin
+
     button#go-up(type="button" title=_p("rightside.back_to_top"))
       i.fas.fa-arrow-up

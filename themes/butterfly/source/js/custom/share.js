@@ -876,9 +876,12 @@
 });
 
 /* 自定义内容 */
+function getNowURL() {
+    return location.protocol + '//' + location.host + location.pathname
+}
 var clipboard = new ClipboardJS('.copybtn', {
     text: function () {
-        return document.title + '：' + location.protocol + '//' + location.host + location.pathname
+        return document.title + '：' + getNowURL()
     },
 });
 clipboard.on('success', function () {
@@ -895,3 +898,10 @@ clipboard.on('error', function () {
         console.error("复制失败")
     }
 });
+function refreshCache() {
+    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage(getNowURL());
+    } else {
+        if (confirm('ServiceWorker未激活，受否刷新以激活SW')) location.reload()
+    }
+}

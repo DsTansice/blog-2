@@ -33,11 +33,6 @@ const db = {
     }
 }
 
-self.addEventListener('install', function () {
-    // noinspection JSIgnoredPromiseFromCall
-    self.skipWaiting()
-});
-
 //永久缓存
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
 //博文缓存
@@ -83,10 +78,7 @@ self.addEventListener('fetch', async event => {
                     const clone = response.clone()
                     caches.open(CACHE_NAME).then(function (cache) {
                         if (remove) cache.delete(request)
-                        cache.put(request, clone).catch(function (err) {
-                            console.error(err)
-                            console.error(request)
-                        })
+                        cache.put(request, clone)
                     })
                 }
                 return response
@@ -96,4 +88,15 @@ self.addEventListener('fetch', async event => {
             })
         })
     )
+})
+
+self.addEventListener('message', function (event) {
+    caches.open(CACHE_NAME).then(function (cache) {
+        cache.delete(new Request(event.data)).then(function () {
+            console.log("sdf")
+            event.source.postMessage('success')
+        }).catch(function (error) {
+            console.error(error)
+        })
+    })
 })
