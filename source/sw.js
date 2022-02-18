@@ -14,7 +14,7 @@ const npmCdnList = [
     'https://unpkg.zhimg.com',
     'https://npm.elemecdn.com',
     'https://fastly.jsdelivr.net/npm',
-    'https://cdn.jsdelivr.net/npm'
+    'https://cdn-jsd.pigax.cn/npm'
 ]
 
 let npmCdnListLength = 0
@@ -121,7 +121,7 @@ self.addEventListener('message', function (event) {
             return new Promise(function (resolve) {
                 setTimeout(() => {
                     const start = new Date().getTime()
-                    fetch(value + '/hexo-adsense@1.0.26/lib/index.js?' + Math.random()).then(function (response) {
+                    fetch(value + '/font-awesome-animation@1.1.1/css/font-awesome-animation.css?' + Math.random()).then(function (response) {
                         if (response.ok || response.status === 301 || response.status === 302) {
                             console.log(value + ':' + (new Date().getTime() - start))
                             npmCdnRank[npmCdnListLength++] = value
