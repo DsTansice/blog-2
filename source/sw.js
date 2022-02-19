@@ -8,17 +8,20 @@ const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime() / 1000;
 
-//npm CDN列表
-const npmCdnList = [
-    'https://cdn1.tianli0.top/npm',
-    'https://unpkg.zhimg.com',
+//预缓存
+const cache403 = 'https://errorpage.b0.upaiyun.com/km-blog-image-403'
+
+//CDN列表
+const cdnList = [
     'https://npm.elemecdn.com',
+    'https://cdn1.tianli0.top/npm',
+    'https://code.bdstatic.com/npm',
     'https://fastly.jsdelivr.net/npm',
-    'https://code.bdstatic.com/npm'
+    'https://cdn.jsdelivr.net/npm',
+    'https://unpkg.zhimg.com'
 ]
 
-let npmCdnListLength = 0
-let npmCdnRank = new Array(npmCdnList.length)
+let distCdn = 'https://npm.elemecdn.com'
 
 const db = {
     read: (key) => {
@@ -45,6 +48,11 @@ const db = {
     }
 }
 
+self.addEventListener('install', (event) => {
+    self.skipWaiting()
+    event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.add(cache403)))
+})
+
 //永久缓存
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
 //博文缓存
@@ -61,7 +69,7 @@ const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\
  *     0   - 不缓存<br/>
  *     n   - 缓存n毫秒<br/>
  */
-const getMaxCacheTime = function (url) {
+function getMaxCacheTime(url) {
     if (url.match(foreverCache)) return -1
     if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
     if (url.match(blogResourceCache)) return MAX_RESOURCE_CACHE_TIME
@@ -69,14 +77,32 @@ const getMaxCacheTime = function (url) {
     return 0
 }
 
+function getDistCDN(url) {
+    for (let value of cdnList) {
+        if (value !== distCdn && url.match(value)) return url.replace(value, distCdn)
+    }
+    return url
+}
+
+function fetchError(url) {
+    return caches.match(url).then(response => {
+        if (response) return response
+        return fetch(url).then(response => {
+            caches.open(CACHE_NAME).then(cache => cache.put(url, response))
+            return response
+        })
+    })
+}
+
 self.addEventListener('fetch', async event => {
     const request = event.request
-    event.respondWith(caches.match(request).then(async function (response) {
+    const url = getDistCDN(request.url)
+    event.respondWith(caches.match(url).then(async function (response) {
             let remove = false
-            const maxTime = getMaxCacheTime(request.url)
+            const maxTime = getMaxCacheTime(url)
             if (response) {
                 if (maxTime === -1) return response
-                const time = await db.read(request.url)
+                const time = await db.read(url)
                 if (time) {
                     const difTime = NOW_TIME - time
                     if (difTime < maxTime) return response
@@ -84,19 +110,23 @@ self.addEventListener('fetch', async event => {
                 }
                 remove = true
             }
-            return fetch(request).then(function (response) {
+            return fetch(url).then(response => {
                 if (maxTime !== 0) {
-                    if (maxTime !== -1) db.write(request.url, NOW_TIME)
+                    if (maxTime !== -1) db.write(url, NOW_TIME)
                     const clone = response.clone()
                     caches.open(CACHE_NAME).then(function (cache) {
-                        if (remove) cache.delete(request)
-                        cache.put(request, clone)
+                        if (remove) cache.delete(url)
+                        cache.put(url, clone)
                     })
                 }
                 return response
-            }).catch(function () {
-                if (request.url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
-                else console.error('不可达的链接：' + request.url)
+            }).catch((err) => {
+                if (url.match('image.kmar.top')) {
+                    return fetchError(cache403)
+                } else {
+                    if (url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
+                    else console.error('不可达的链接：' + url + ' 原因：' + err)
+                }
             })
         })
     )
@@ -116,21 +146,5 @@ self.addEventListener('message', function (event) {
         }).then(function () {
             event.source.postMessage('success')
         })
-    } else {
-        Promise.all([npmCdnList.map(function (value) {
-            return new Promise(function (resolve) {
-                setTimeout(() => {
-                    const start = new Date().getTime()
-                    fetch(value + '/font-awesome-animation@1.1.1/css/font-awesome-animation.css?' + Math.random()).then(function (response) {
-                        if (response.ok || response.status === 301 || response.status === 302) {
-                            console.log(value + ':' + (new Date().getTime() - start))
-                            npmCdnRank[npmCdnListLength++] = value
-                        }
-                    }).catch(() => {
-                    })
-                }, 2000)
-                resolve(true)
-            })
-         })]).then(r => {})
     }
 })
