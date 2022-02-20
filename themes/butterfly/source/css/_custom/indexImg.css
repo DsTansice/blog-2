@@ -21,6 +21,6 @@ img.inline.entered.loaded {
   margin: unset !important;
 }
 
-.layout > .recent-posts .pagination > .extend.next i {
+.layout > .recent-posts .pagination > .extend i {
   line-height: 36px;
 }
