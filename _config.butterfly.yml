@@ -948,7 +948,7 @@ CDN:
   canvas_nest:
 
   lazyload:
-  instantpage: https://cdn.jsdelivr.net/gh/EmptyDreams/resources/code/instantpage.min.js
+  instantpage: https://npm.elemecdn.com/instant.page/instantpage.js
   typed:
   pangu:
 
