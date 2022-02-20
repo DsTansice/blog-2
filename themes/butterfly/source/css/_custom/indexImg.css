@@ -16,11 +16,17 @@
   border-radius: 25px;
 }
 
-/* inlineimage */
+/* inlineimage坐标修正 */
 img.inline.entered.loaded {
   margin: unset !important;
 }
 
+/* 主页翻页按钮坐标修正 */
 .layout > .recent-posts .pagination > .extend i {
   line-height: 36px;
+}
+
+/* 归档页页码美化 */
+#pagination .page-number.current {
+  border-radius: 5px;
 }
