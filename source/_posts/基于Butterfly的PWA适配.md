@@ -288,12 +288,9 @@ self.addEventListener('fetch', async event => {
 2. `https://wulawula.com/sw.js` #非法，跨域
 3. `https://11.53.15.145/sw.js` #即使`11.53.15.145`是我的博客的IP地址依然非法，被视为跨域
 
-&emsp;&emsp;现在我们找个地方把注册代码放进去就可以了，我是放在了`[butterfly]/layout/includes/additional-js.pug`的末尾：
+&emsp;&emsp;现在我们找个地方把注册代码放进去就可以了，我是放在了`[butterfly]/layout/includes/layout.pug`的开头：
 
 ```diff
-   if !theme.aside.mobile && theme.fixed_card_widget.enable
-     include ./custom/fixed_card_widget.pug
-
 +  script.
 +    if ('serviceWorker' in navigator) {
 +      window.addEventListener('load', function () {
