@@ -73,17 +73,3 @@ div
 
   if !theme.aside.mobile && theme.fixed_card_widget.enable
     include ./custom/fixed_card_widget.pug
-
-  script.
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js').then(function () {
-          if (!navigator.serviceWorker.controller) {
-            if (confirm('ServiceWorker安装完毕，刷新以激活')) location.reload()
-          }
-        })
-      })
-      navigator.serviceWorker.addEventListener('message', function (event) {
-        if (event.data === 'success') location.reload()
-      })
-    }

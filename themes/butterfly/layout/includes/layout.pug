@@ -1,3 +1,17 @@
+script.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').then(function () {
+        if (!navigator.serviceWorker.controller) {
+          location.reload()
+        }
+      })
+    })
+    navigator.serviceWorker.addEventListener('message', function (event) {
+      if (event.data === 'success') location.reload()
+    })
+  }
+
 - var htmlClassHideAside = theme.aside.enable && theme.aside.hide ? 'hide-aside' : ''
 - var hideAside = !theme.aside.enable || page.aside === false ? 'hide-aside' : ''
 - var pageType = is_post() ? 'post' : 'page'

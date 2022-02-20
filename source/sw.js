@@ -8,22 +8,6 @@ const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime() / 1000;
 
-//CDN列表
-const npmCdnList = [
-    'https://cdn1.tianli0.top/npm',
-    'https://code.bdstatic.com/npm',
-    'https://fastly.jsdelivr.net/npm',
-    'https://cdn.jsdelivr.net/npm',
-    'https://unpkg.zhimg.com'
-]
-const ghCdnList = [
-    'https://cdn.jsdelivr.net/gh',
-    'https://fastly.jsdelivr.net/gh'
-]
-
-const distNpmCdn = 'https://npm.elemecdn.com'
-const distGhCdn = 'https://cdn1.tianli0.top/gh'
-
 const db = {
     read: (key) => {
         return new Promise((resolve) => {
@@ -49,9 +33,7 @@ const db = {
     }
 }
 
-self.addEventListener('install', (event) => {
-    self.skipWaiting()
-})
+self.addEventListener('install', () => self.skipWaiting())
 
 //永久缓存
 const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
@@ -77,35 +59,22 @@ function getMaxCacheTime(url) {
     return 0
 }
 
-function getDistCDN(url) {
-    for (let value of npmCdnList) {
-        if (url.match(value)) return url.replace(value, distNpmCdn)
-    }
-    for (let value of ghCdnList) {
-        if (url.match(value)) return url.replace(value, distGhCdn)
-    }
-    return url
-}
-
-function fetchError(url) {
-    return caches.match(url).then(response => {
-        if (response) return response
-        return fetch(url).then(response => {
-            caches.open(CACHE_NAME).then(cache => cache.put(url, response))
-            return response
-        })
-    })
-}
-
 self.addEventListener('fetch', async event => {
-    const request = event.request
-    const url = getDistCDN(request.url)
-    event.respondWith(caches.match(url).then(async function (response) {
+    let request
+    if (event.request.url.match('https://cdn.jsdelivr.net')) {
+        request = new Request(event.request.url.replace('https://cdn.jsdelivr.net', 'https://cdn1.tianli0.top'), {
+            headers: event.request.headers,
+            mode: event.request.mode,
+            method: event.request.method,
+            referrer: event.request.referrer
+        })
+    } else request = event.request
+    event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
-            const maxTime = getMaxCacheTime(url)
+            const maxTime = getMaxCacheTime(request.url)
             if (response) {
                 if (maxTime === -1) return response
-                const time = await db.read(url)
+                const time = await db.read(request.url)
                 if (time) {
                     const difTime = NOW_TIME - time
                     if (difTime < maxTime) return response
@@ -113,25 +82,19 @@ self.addEventListener('fetch', async event => {
                 }
                 remove = true
             }
-            return fetch(url, {
-                headers: request.headers,
-                method: request.method,
-                body: request.body,
-                mode: request.mode === 'navigate' ? 'same-origin' : request.mode,
-                referrer: request.referrer
-            }).then(response => {
+            return fetch(request).then(response => {
                 if (maxTime !== 0) {
-                    if (maxTime !== -1) db.write(url, NOW_TIME)
+                    if (maxTime !== -1) db.write(request.url, NOW_TIME)
                     const clone = response.clone()
                     caches.open(CACHE_NAME).then(function (cache) {
-                        if (remove) cache.delete(url)
-                        cache.put(url, clone)
+                        if (remove) cache.delete(request)
+                        cache.put(request, clone)
                     })
                 }
                 return response
             }).catch((err) => {
-                if (url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
-                else console.error('不可达的链接：' + url + ' 原因：' + err)
+                if (request.url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
+                else console.error('不可达的链接：' + request.url + ' 原因：' + err)
             })
         })
     )
@@ -147,9 +110,8 @@ self.addEventListener('message', function (event) {
                         cache.delete(key)
                     }
                 }
+                event.source.postMessage('success')
             })
-        }).then(function () {
-            event.source.postMessage('success')
         })
     }
 })
