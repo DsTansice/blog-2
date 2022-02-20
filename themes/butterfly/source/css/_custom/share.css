@@ -14,3 +14,7 @@
     background: var(--km-button-dark-hover);
     box-shadow: 0 4px 8px 2px var(--km-button-shadow);
 }
+
+#post .tag_share .post_share .copybtn i:before {
+    line-height: 30px;
+}
