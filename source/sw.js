@@ -8,20 +8,21 @@ const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime() / 1000;
 
-//预缓存
-const cache403 = 'https://errorpage.b0.upaiyun.com/km-blog-image-403'
-
 //CDN列表
-const cdnList = [
-    'https://npm.elemecdn.com',
+const npmCdnList = [
     'https://cdn1.tianli0.top/npm',
     'https://code.bdstatic.com/npm',
     'https://fastly.jsdelivr.net/npm',
     'https://cdn.jsdelivr.net/npm',
     'https://unpkg.zhimg.com'
 ]
+const ghCdnList = [
+    'https://cdn.jsdelivr.net/gh',
+    'https://fastly.jsdelivr.net/gh'
+]
 
-let distCdn = 'https://npm.elemecdn.com'
+const distNpmCdn = 'https://npm.elemecdn.com'
+const distGhCdn = 'https://cdn1.tianli0.top/gh'
 
 const db = {
     read: (key) => {
@@ -50,7 +51,6 @@ const db = {
 
 self.addEventListener('install', (event) => {
     self.skipWaiting()
-    event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.add(cache403)))
 })
 
 //永久缓存
@@ -78,8 +78,11 @@ function getMaxCacheTime(url) {
 }
 
 function getDistCDN(url) {
-    for (let value of cdnList) {
-        if (value !== distCdn && url.match(value)) return url.replace(value, distCdn)
+    for (let value of npmCdnList) {
+        if (url.match(value)) return url.replace(value, distNpmCdn)
+    }
+    for (let value of ghCdnList) {
+        if (url.match(value)) return url.replace(value, distGhCdn)
     }
     return url
 }
@@ -110,7 +113,13 @@ self.addEventListener('fetch', async event => {
                 }
                 remove = true
             }
-            return fetch(url).then(response => {
+            return fetch(url, {
+                headers: request.headers,
+                method: request.method,
+                body: request.body,
+                mode: request.mode === 'navigate' ? 'same-origin' : request.mode,
+                referrer: request.referrer
+            }).then(response => {
                 if (maxTime !== 0) {
                     if (maxTime !== -1) db.write(url, NOW_TIME)
                     const clone = response.clone()
@@ -121,12 +130,8 @@ self.addEventListener('fetch', async event => {
                 }
                 return response
             }).catch((err) => {
-                if (url.match('image.kmar.top')) {
-                    return fetchError(cache403)
-                } else {
-                    if (url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
-                    else console.error('不可达的链接：' + url + ' 原因：' + err)
-                }
+                if (url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
+                else console.error('不可达的链接：' + url + ' 原因：' + err)
             })
         })
     )

@@ -78,9 +78,7 @@ div
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('/sw.js').then(function () {
-          if (navigator.serviceWorker.controller) {
-            navigator.serviceWorker.controller.postMessage('network')
-          } else {
+          if (!navigator.serviceWorker.controller) {
             if (confirm('ServiceWorker安装完毕，刷新以激活')) location.reload()
           }
         })
