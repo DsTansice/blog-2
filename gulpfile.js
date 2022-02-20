@@ -42,5 +42,11 @@ gulp.task('minify-html', () => {
         }))
         .pipe(gulp.dest('./public'))
 });
+//替换CDN
+gulp.task('cdn', async() => {
+    gulp.src('public/**/*.*')
+        .pipe(replace('cdn.jsdelivr.net', 'cdn1.tianli0.top'))
+        .pipe(gulp.dest('public/')), { overwrite: true };
+});
 
 gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html'));
