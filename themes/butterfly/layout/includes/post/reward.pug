@@ -12,7 +12,7 @@ link(rel='stylesheet' href=url_for(theme.CDN.coin_css) media="defer" onload="thi
         each item in theme.reward.QR_code
           - var clickTo = (item.itemlist||item).link ? (item.itemlist||item).link : (item.itemlist||item).img
           li.reward-item
-            a(href=clickTo target='_blank')
+            a(href=clickTo target='_blank' class='no-custom')
               img.post-qr-code-img(src=url_for((item.itemlist||item).img) alt=(item.itemlist||item).text)
             .post-qr-code-desc=(item.itemlist||item).text
 if theme.reward.coinAudio
