@@ -905,3 +905,11 @@ function refreshCache() {
         if (confirm('ServiceWorker未激活，受否刷新以激活SW')) location.reload()
     }
 }
+
+function closeSideBar() {
+    var $body = document.body
+    $body.style.overflow = ''
+    $body.style.paddingRight = ''
+    btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
+    document.getElementById('sidebar-menus').classList.remove('open')
+}

@@ -2,14 +2,14 @@ if theme.menu
   .menus_items
     each value, label in theme.menu
       if typeof value !== 'object'
-        .menus_item
+        .menus_item(onclick='closeSideBar()')
           - const valueArray = value.split('||')
           a.site-page(href=url_for(trim(valueArray[0])))
             if valueArray[1]
               i.fa-fw(class=trim(valueArray[1]))
             span=' '+label
       else
-        .menus_item
+        .menus_item(onclick='closeSideBar()')
           - const labelArray = label.split('||')
           - const hideClass = labelArray[2] && trim(labelArray[2]) === 'hide' ? 'hide' : ''
           a.site-page.group(class=`${hideClass}` href='javascript:void(0);')
