@@ -65,7 +65,7 @@ const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fa
 //博文缓存
 const updateCache = /(^(https:\/\/(kmar\.top|emptydreams\.netlify\.app)).*(\/)$)/g
 //博客资源缓存
-const blogResourceCache = /(^(https:\/\/(kmar\.top|emptydreams\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
+const blogResourceCache = /(^(https:\/\/(image\.kmar\.top|kmar\.top|emptydreams\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
 const cdnCache = /^(https:\/\/unpkg\.zhimg\.com)/g
 
@@ -141,6 +141,7 @@ self.addEventListener('message', function (event) {
                         cache.delete(key)
                         dbTime.delete(key)
                     } else if (!dbAccess.check(key.url)) {
+                        // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
                         dbTime.delete(key)
                     }
