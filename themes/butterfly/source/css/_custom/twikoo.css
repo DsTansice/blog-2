@@ -24,6 +24,7 @@
 .tk-comments-container .tk-submit {
   position: relative;
   left: -70px;
+  width: 110%;
 }
 /* 评论块气泡化修改 */
 .tk-content {
