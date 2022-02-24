@@ -5,26 +5,27 @@ const VERSION_CACHE_NAME = 'kmarCacheTime'
 const MAX_BLOG_CACHE_TIME = 60 * 60 * 8
 const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3
 const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
+//缓存离线超时时间
+const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
 //当前时间
-const NOW_TIME = new Date().getTime() / 1000;
+const NOW_TIME = new Date().getTime();
 
-const db = {
+const dbHelper = {
     read: (key) => {
         return new Promise((resolve) => {
-            caches.match(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
-                .then(function (res) {
-                    if (!res) resolve(null)
-                    res.text().then(text => resolve(text))
-                }).catch(() => {
-                    resolve(null)
-                })
+            caches.match(key).then(function (res) {
+                if (!res) resolve(null)
+                res.text().then(text => resolve(text))
+            }).catch(() => {
+                resolve(null)
+            })
         })
     },
     write: (key, value) => {
         return new Promise((resolve, reject) => {
             caches.open(VERSION_CACHE_NAME).then(function (cache) {
                 // noinspection JSIgnoredPromiseFromCall
-                cache.put(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), new Response(value));
+                cache.put(key, new Response(value));
                 resolve()
             }).catch(() => {
                 reject()
@@ -32,10 +33,28 @@ const db = {
         })
     },
     delete: (key) => {
-        const value = new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)
-        caches.match(value).then(response => {
-            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(value))
+        caches.match(key).then(response => {
+            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(key))
         })
+    }
+}
+
+const dbTime = {
+    read: (key) => dbHelper.read(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)),
+    write: (key, value) => dbHelper.write(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), value),
+    delete: (key) => dbHelper.delete(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
+}
+
+const dbAccess = {
+    update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), NOW_TIME),
+    check: async (key) => {
+        const realKey = new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`)
+        const value = await dbHelper.read(realKey)
+        if (value) {
+            dbHelper.delete(realKey)
+            return NOW_TIME - value < MAX_ACCESS_CACHE_TIME
+        }
+        else return false
     }
 }
 
@@ -78,9 +97,10 @@ self.addEventListener('fetch', async event => {
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
+            if (maxTime !== 0) dbAccess.update(request.url)
             if (response) {
                 if (maxTime === -1) return response
-                const time = await db.read(request.url)
+                const time = await dbTime.read(request.url)
                 if (time) {
                     const difTime = NOW_TIME - time
                     if (difTime < maxTime) return response
@@ -90,7 +110,7 @@ self.addEventListener('fetch', async event => {
             }
             return fetch(request).then(response => {
                 if (maxTime !== 0) {
-                    if (maxTime !== -1) db.write(request.url, NOW_TIME)
+                    if (maxTime !== -1) dbTime.write(request.url, NOW_TIME)
                     const clone = response.clone()
                     caches.open(CACHE_NAME).then(function (cache) {
                         if (remove) cache.delete(request)
@@ -119,7 +139,10 @@ self.addEventListener('message', function (event) {
                         key.url.match(blogResourceCache) || key.url.match(cdnCache))) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
-                        db.delete(key)
+                        dbTime.delete(key)
+                    } else if (!dbAccess.check(key.url)) {
+                        cache.delete(key)
+                        dbTime.delete(key)
                     }
                 }
                 event.source.postMessage('success')
