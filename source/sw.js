@@ -30,6 +30,12 @@ const db = {
                 reject()
             })
         })
+    },
+    delete: (key) => {
+        const value = new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)
+        caches.match(value).then(response => {
+            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(value))
+        })
     }
 }
 
@@ -42,7 +48,7 @@ const updateCache = /(^(https:\/\/(kmar\.top|emptydreams\.netlify\.app)).*(\/)$)
 //博客资源缓存
 const blogResourceCache = /(^(https:\/\/(kmar\.top|emptydreams\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
-const cdnCache = /(^(https:\/\/(cdn|fastly)\.jsdelivr\.net))|(^(https:\/\/unpkg\.zhimg\.com))/g
+const cdnCache = /^(https:\/\/unpkg\.zhimg\.com)/g
 
 /**
  * 根据url判断缓存最多存储多长时间
@@ -92,9 +98,10 @@ self.addEventListener('fetch', async event => {
                     })
                 }
                 return response
-            }).catch((err) => {
+            }).catch(() => {
                 if (request.url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
-                else console.error('不可达的链接：' + request.url + ' 原因：' + err)
+                else console.error('不可达的链接：' + request.url)
+                return response
             })
         })
     )
@@ -108,6 +115,11 @@ self.addEventListener('message', function (event) {
                     if (key.url.match(updateCache)) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
+                    } else if (!(key.url.match(foreverCache) ||
+                        key.url.match(blogResourceCache) || key.url.match(cdnCache))) {
+                        // noinspection JSIgnoredPromiseFromCall
+                        cache.delete(key)
+                        db.delete(key)
                     }
                 }
                 event.source.postMessage('success')
