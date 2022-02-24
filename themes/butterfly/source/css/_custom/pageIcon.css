@@ -54,3 +54,10 @@
     margin-left: 0.4rem;
   }
 }
+
+/* 修正窄屏下搜索按钮的位置 */
+@media screen and (max-width: 770px) {
+  #nav #search-button {
+    line-height: 1 !important;
+  }
+}
