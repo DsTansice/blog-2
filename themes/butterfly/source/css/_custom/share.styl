@@ -1,0 +1,22 @@
+.copybtn
+  position relative
+  display inline-block
+  color var(--km-button-font)
+  border-radius 5px
+  width 2.6rem
+  height 1.8rem
+  text-align center
+  transition background 0.1s ease-out 0s
+  background var(--km-button-dark-bg)
+
+  &:hover
+    background var(--km-button-dark-hover)
+    box-shadow 0 4px 8px 2px var(--km-button-shadow)
+
+#post
+  .tag_share
+    .post_share
+      .copybtn
+        i
+          &:before
+            line-height 30px

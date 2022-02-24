@@ -1,0 +1,50 @@
+.bangumi-tabs, .bangumi-pagination
+  text-align center
+  background-color var(--card-bg)
+  border-radius 10px
+  box-shadow 0 0 3px
+
+a
+  &.bangumi-tab
+    border-radius 5px
+
+    &:hover
+      text-decoration none !important
+      background var(--tab-button-hover-bg)
+
+.bangumi-active
+  background var(--km-button-light-active) !important
+  color var(--km-font) !important
+
+.bangumi-item
+  border-bottom unset !important
+  border-radius 12px
+  transition all 0.3s
+
+  &:hover
+    background var(--km-card-bg) !important
+    box-shadow 2px 3px 8px var(--km-general-shadow)
+
+.bangumi-picture
+  left 10px !important
+
+  img
+    border-radius 12px
+    transition all 0.5s !important
+
+    &:hover
+      box-shadow 1px 2px 4px var(--km-general-shadow)
+
+.bangumi-info
+  padding-left 135px !important
+
+[data-theme="light"]
+  .bangumi-info-items
+    color black !important
+
+.bangumi-show
+  .bangumi-button
+    &:hover
+      border-radius 5px
+      text-decoration none !important
+      background var(--tab-button-hover-bg) !important

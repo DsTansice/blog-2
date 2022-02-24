@@ -1,0 +1,81 @@
+/* 链接卡片 */
+#article-container
+  a
+    &.link-card
+      div
+        &.left
+          img
+            border-radius 8px
+
+  .tabs
+    border-right 2px solid var(--km-tab-border) !important
+    border-bottom 2px solid var(--km-tab-border) !important
+    border-left 2px solid var(--km-tab-border) !important
+    border-radius 15px
+
+    & > .nav-tabs
+      border-top-left-radius 15px
+      border-top-right-radius 15px
+      background var(--km-tab-border) !important
+
+      & > .tab
+        button
+          border-top-left-radius 15px
+          border-top-right-radius 15px
+
+        &:not(.active)
+          button
+            &:hover
+              background var(--km-tab-hover) !important
+
+        &.active
+          button
+            background var(--km-tab-active) !important
+            border-top 2px solid var(--km-tab-overline) !important
+
+[data-theme="dark"]
+  #article-container
+    a
+      &.link-card
+        background #101010 radial-gradient(#2a2a2a, #080808) !important
+        color white !important
+
+        &:hover
+          box-shadow 0 4px 8px 5px var(--km-button-shadow) !important
+          filter unset
+
+        p
+          &.url
+            color #d3d3d3 !important
+
+  details
+    &.folding-tag
+      & > summary
+        background #3c3c3c
+        color #dadada
+
+      summary
+        &:hover
+          color white
+
+    &.folding-tag[open]
+      & > summary
+        color #dbdbdb
+
+/* 分栏 */
+/* 折叠框 */
+details
+  &.folding-tag
+    border 0 solid #4c4c4c !important
+    background transparent !important
+
+    summary
+      border-radius 12px !important
+      transition .3s
+
+  &.folding-tag[open]
+    & > div
+      &.content
+        background transparent !important
+        border-bottom 3px solid #00a6ff
+        border-radius 30px
