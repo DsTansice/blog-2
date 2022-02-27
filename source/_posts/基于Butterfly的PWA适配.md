@@ -155,9 +155,9 @@ date: 2022-02-17 15:07:55
 const CACHE_NAME = 'kmarCache'
 const VERSION_CACHE_NAME = 'kmarCacheTime'
 //缓存时间
-const MAX_BLOG_CACHE_TIME = 60 * 60 * 8 * 1000
-const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3 * 1000
-const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7 * 1000
+const MAX_BLOG_CACHE_TIME = 60 * 60 * 8
+const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3
+const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //当前时间
 const NOW_TIME = new Date().getTime();
 
