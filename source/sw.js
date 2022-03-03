@@ -61,13 +61,13 @@ const dbAccess = {
 self.addEventListener('install', () => self.skipWaiting())
 
 //永久缓存
-const foreverCache = /(^(https:\/\/(cdn1\.tianli0\.top)|(unpkg\.zhimg\.com)|((fastly|cdn)\.jsdelivr\.net)).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
+const foreverCache = /(^(https:\/\/npm\.elemecdn\.com).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
 //博文缓存
-const updateCache = /(^(https:\/\/(kmar\.top|emptydreams\.netlify\.app)).*(\/)$)/g
+const updateCache = /(^(https:\/\/(kmar\.top|kmar-source\.netlify\.app)).*(\/)$)/g
 //博客资源缓存
-const blogResourceCache = /(^(https:\/\/(image\.kmar\.top|kmar\.top|emptydreams\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
+const blogResourceCache = /(^(https:\/\/(image\.kmar\.top|kmar\.top|kmar-source\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
-const cdnCache = /^(https:\/\/unpkg\.zhimg\.com)/g
+const cdnCache = /^none:/g
 
 /**
  * 根据url判断缓存最多存储多长时间
@@ -84,16 +84,35 @@ function getMaxCacheTime(url) {
     return 0
 }
 
+const cdnList = {
+    gh: {
+        source: ['https://cdn.jsdelivr.net/gh'],
+        dist: 'https://cdn1.tianli0.top/gh'
+    },
+    npm: {
+        source: [
+            'https://cdn.jsdelivr.net/npm',
+            'https://unpkg.zhimg.com'
+        ],
+        dist: 'https://npm.elemecdn.com'
+    }
+}
+
+function replaceRequest(request) {
+    for (let cdn of cdnList.npm.source) {
+        if (request.url.match(cdn)) {
+            console.log(request.url.replace(cdn, cdnList.npm.dist))
+            return new Request(request.url.replace(cdn, cdnList.npm.dist));
+        }
+    }
+    for (let cdn of cdnList.gh.source) {
+        if (request.url.match(cdn)) return new Request(request.url.replace(cdn, cdnList.gh.dist));
+    }
+    return request;
+}
+
 self.addEventListener('fetch', async event => {
-    let request
-    if (event.request.url.match('https://cdn.jsdelivr.net')) {
-        request = new Request(event.request.url.replace('https://cdn.jsdelivr.net', 'https://cdn1.tianli0.top'), {
-            headers: event.request.headers,
-            mode: event.request.mode,
-            method: event.request.method,
-            referrer: event.request.referrer
-        })
-    } else request = event.request
+    const request =replaceRequest(event.request)
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
