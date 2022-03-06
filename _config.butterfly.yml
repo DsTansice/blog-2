@@ -335,7 +335,7 @@ facebook_comments:
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
-  envId: https://twikoo-c8s3zkoyh-emptydreams.vercel.app
+  envId: https://twikoo-fg0bia8o6-emptydreams.vercel.app
   region:
   visitor: false
   option:
@@ -917,7 +917,7 @@ CDN:
   disqusjs:
   disqusjs_css:
   utterances:
-  twikoo:
+  twikoo: https://lib.baomitu.com/twikoo/1.5.0/twikoo.all.min.js
   waline:
   giscus:
 
