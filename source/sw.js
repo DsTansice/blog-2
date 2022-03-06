@@ -116,7 +116,10 @@ self.addEventListener('fetch', async event => {
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
-            if (maxTime !== 0) dbAccess.update(request.url)
+            if (maxTime !== 0) {
+                // noinspection ES6MissingAwait
+                dbAccess.update(request.url)
+            }
             if (response) {
                 if (maxTime === -1) return response
                 const time = await dbTime.read(request.url)
@@ -151,15 +154,9 @@ self.addEventListener('message', function (event) {
         caches.open(CACHE_NAME).then(function (cache) {
             cache.keys().then(function (keys) {
                 for (let key of keys) {
-                    if (key.url.match(updateCache)) {
-                        // noinspection JSIgnoredPromiseFromCall
-                        cache.delete(key)
-                    } else if (!(key.url.match(foreverCache) ||
-                        key.url.match(blogResourceCache) || key.url.match(cdnCache))) {
-                        // noinspection JSIgnoredPromiseFromCall
-                        cache.delete(key)
-                        dbTime.delete(key)
-                    } else if (!dbAccess.check(key.url)) {
+                    if (key.url.match(updateCache) || !(key.url.match(foreverCache) ||
+                        key.url.match(blogResourceCache) || key.url.match(cdnCache)) ||
+                        !dbAccess.check(key.url)) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
                         dbTime.delete(key)
