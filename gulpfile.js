@@ -45,6 +45,7 @@ gulp.task('minify-html', () => {
 //替换CDN
 gulp.task('cdn', async() => {
     gulp.src('public/**/*.*')
+        .pipe(replace('unpkg.zhimg.com', 'npm.elemecdn.com'))
         .pipe(replace('cdn.jsdelivr.net/npm', 'npm.elemecdn.com'))
         .pipe(replace('cdn.jsdelivr.net/gh', 'cdn1.tianli0.top/gh'))
         .pipe(gulp.dest('public/')), { overwrite: true };
