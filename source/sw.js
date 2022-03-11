@@ -101,7 +101,6 @@ const cdnList = {
 function replaceRequest(request) {
     for (let cdn of cdnList.npm.source) {
         if (request.url.match(cdn)) {
-            console.log(request.url.replace(cdn, cdnList.npm.dist))
             return new Request(request.url.replace(cdn, cdnList.npm.dist));
         }
     }

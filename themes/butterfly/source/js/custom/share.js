@@ -879,7 +879,7 @@
 function getNowURL() {
     return location.protocol + '//' + location.host + location.pathname
 }
-var clipboard = new ClipboardJS('.copybtn', {
+var clipboard = new ClipboardJS('button#share-link', {
     text: function () {
         return document.title + '：' + getNowURL()
     },
