@@ -53,8 +53,7 @@ const dbAccess = {
         if (value) {
             dbHelper.delete(realKey)
             return NOW_TIME - value < MAX_ACCESS_CACHE_TIME
-        }
-        else return false
+        } else return false
     }
 }
 
@@ -111,7 +110,7 @@ function replaceRequest(request) {
 }
 
 self.addEventListener('fetch', async event => {
-    const request =replaceRequest(event.request)
+    const request = replaceRequest(event.request)
     event.respondWith(caches.match(request).then(async function (response) {
             let remove = false
             const maxTime = getMaxCacheTime(request.url)
@@ -154,7 +153,7 @@ self.addEventListener('message', function (event) {
             cache.keys().then(function (keys) {
                 for (let key of keys) {
                     if (key.url.match(updateCache) || !(key.url.match(foreverCache) ||
-                        key.url.match(blogResourceCache) || key.url.match(cdnCache)) ||
+                            key.url.match(blogResourceCache) || key.url.match(cdnCache)) ||
                         !dbAccess.check(key.url)) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
