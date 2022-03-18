@@ -26,25 +26,25 @@ date: 2021-09-05 13:58:13
 
 &emsp;&emsp;打开安装包，可以看到下图所示的界面
 
-<img src="https://pic1.zhimg.com/v2-1a95c6756d90ce6dd74a9f08f6dd50a8_r.jpg" style="zoom:67%;" />
+<img src="https://pic1.zhimg.com/v2-1a95c6756d90ce6dd74a9f08f6dd50a8_r.jpg" style="zoom:67%;" alt="安装包-0"/>
 
 &emsp;&emsp;然后可以看到下面的界面，这里两个选项区别不大，如果你想让电脑上所有用户都能使用Anaconda3就选2，否则默认即可。
 
-<img src="https://pic2.zhimg.com/v2-29778a46617e491adb554ac5fa5823b1_r.jpg" style="zoom:67%;" />
+<img src="https://pic2.zhimg.com/v2-29778a46617e491adb554ac5fa5823b1_r.jpg" style="zoom:67%;" alt="安装-1"/>
 
 &emsp;&emsp;接下来是安装路径的选择，这里以`E:\Anaconda\`为例。
 
 &emsp;&emsp;**注意：安装目录必须是空的，即Anaconda文件夹内不能有任何文件！如果Anaconda文件夹不存在安装程序会自动创建，不需要手动新建文件夹！**
 
-<img src="https://pic2.zhimg.com/v2-64590b21362f65132f54d1a597f0c809_r.jpg" style="zoom:67%;" />
+<img src="https://pic2.zhimg.com/v2-64590b21362f65132f54d1a597f0c809_r.jpg" style="zoom:67%;" alt="安装-2"/>
 
 &emsp;&emsp;点击next即可进入下面的界面，新版本的安装界面第二个选项写的是3.8，这个不用管，保持默认即可。
 
-<img src="https://pic1.zhimg.com/v2-118a4d294002f24f36b86cb6250b2594_r.jpg" style="zoom:67%;" />
+<img src="https://pic1.zhimg.com/v2-118a4d294002f24f36b86cb6250b2594_r.jpg" style="zoom:67%;" alt="安装-3"/>
 
 &emsp;&emsp;点击`Install`后一路`Next`就能进入最终的这个界面，两个选项都取消，点击`Finish`就完成安装了。
 
-<img src="https://pic2.zhimg.com/v2-6ed983e8cedf48dc0c0870d3de2c620d_r.jpg" style="zoom:67%;" />
+<img src="https://pic2.zhimg.com/v2-6ed983e8cedf48dc0c0870d3de2c620d_r.jpg" style="zoom:67%;" alt="安装-4"/>
 
 ### Pycharm
 
@@ -52,11 +52,11 @@ date: 2021-09-05 13:58:13
 
 &emsp;&emsp;**注意：这里目标文件夹同样要是空的！**
 
-<img src="https://pic4.zhimg.com/80/v2-8fa2ab72964bc9a979b31d562012e45b_720w.jpg" style="zoom:67%;" />
+<img src="https://pic4.zhimg.com/80/v2-8fa2ab72964bc9a979b31d562012e45b_720w.jpg" style="zoom:67%;" alt="Pycharm安装-0"/>
 
 &emsp;&emsp;接下来这个界面是让很多人迷惑的界面，你们的界面跟这个应该有一点不太一样，没有32位的选项，也没有最下面安装JRE的选项，不影响安装。
 
-<img src="https://pic2.zhimg.com/80/v2-4adeead66fe9a9ac358d2ef6e1984b2d_720w.jpg" style="zoom: 67%;" />
+<img src="https://pic2.zhimg.com/80/v2-4adeead66fe9a9ac358d2ef6e1984b2d_720w.jpg" style="zoom: 67%;" alt="Pycharm安装-1"/>
 
 &emsp;&emsp;进入最后一个界面的时候可以先把`Run PyCharm`取消掉，点击`Finish`就完成安装了
 
@@ -118,7 +118,7 @@ custom_channels:
 
 &emsp;&emsp;点击左侧的`Plugins`按钮，接着点击`Marketplace`，在搜索栏内填入`chinese`可以看到下面的样子：
 
-<img src="https://img-blog.csdnimg.cn/20210304214811945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ0MTExODA1,size_16,color_FFFFFF,t_70#pic_center" style="zoom:59%;" />
+<img src="https://img-blog.csdnimg.cn/20210304214811945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ0MTExODA1,size_16,color_FFFFFF,t_70#pic_center" style="zoom:59%;" alt="汉化"/>
 
 &emsp;&emsp;然后按照图中所示，点击`Install`，等待安装完毕后重启PyCharm，你就会发现界面变成中文了。
 
