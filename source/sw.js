@@ -62,11 +62,11 @@ self.addEventListener('install', () => self.skipWaiting())
 //永久缓存
 const foreverCache = /(^(https:\/\/npm\.elemecdn\.com).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
 //博文缓存
-const updateCache = /(^(https:\/\/(kmar\.top|kmar-source\.netlify\.app)).*(\/)$)/g
+const updateCache = /(^(https:\/\/kmar\.top).*(\/)$)/g
 //博客资源缓存
-const blogResourceCache = /(^(https:\/\/(image\.kmar\.top|kmar\.top|kmar-source\.netlify\.app))).*\.(css|js|woff2|woff|ttf|json)$/g
+const blogResourceCache = /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json)$/g
 //CDN缓存
-const cdnCache = /^none:/g
+const cdnCache = /^https:\/\/image\.kmar\.top\/indexBg\//g
 
 /**
  * 根据url判断缓存最多存储多长时间
