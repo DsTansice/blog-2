@@ -1,6 +1,9 @@
 [data-theme="dark"]
   header#page-header::before
-    background-color: rgba(0, 0, 0, 0.5) !important
+    background-color: rgba(0, 0, 0, 0.4) !important
+
+  header#page-header
+    background-image: url(https://image.kmar.top/indexBg/dark.jpg) !important
 
   /* 深色模式下的标签栏 */
   #aside-content .card-tag-cloud a
@@ -10,9 +13,9 @@
       color var(--km-button-font) !important
       background var(--km-link-bg) !important
 
-@media screen and (max-width: 700px)
-  header#page-header
-    background-image: url(https://image.kmar.top/indexBg/mobileBg.jpg) !important
+[data-theme="light"]
+  #page-header:not(.not-top-img):before
+    background-color rgba(0, 0, 0, 0.15)
 
 /* github按钮圆角 */
 #card-info-btn
