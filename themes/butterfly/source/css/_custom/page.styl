@@ -2,6 +2,14 @@
   header#page-header::before
     background-color: rgba(0, 0, 0, 0.5) !important
 
+  /* 深色模式下的标签栏 */
+  #aside-content .card-tag-cloud a
+    color rgb(132, 133, 135) !important
+
+    &:hover
+      color var(--km-button-font) !important
+      background var(--km-link-bg) !important
+
 @media screen and (max-width: 700px)
   header#page-header
     background-image: url(https://image.kmar.top/indexBg/mobileBg.jpg) !important
@@ -14,7 +22,6 @@
 #card-info-btn:before
   border-radius: 25px
 
-
 /* inlineimage坐标修正 */
 img.inline.entered.loaded
   margin: unset !important
@@ -26,3 +33,8 @@ img.inline.entered.loaded
 /* 归档页页码美化 */
 #pagination .page-number.current
   border-radius: 5px
+
+/* 底部卡片边距 */
+#footer-wrap a
+  display inline-block
+  margin 3px
