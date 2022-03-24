@@ -337,7 +337,7 @@ self.addEventListener('message', function (event) {
             cache.keys().then(function (keys) {
                 for (let key of keys) {
                     const value = findCache(key.url)
-                    if (value.clear || !dbAccess.check(key.url)) {
+                    if (value == null || value.clean || !dbAccess.check(key.url)) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
                         dbTime.delete(key)
