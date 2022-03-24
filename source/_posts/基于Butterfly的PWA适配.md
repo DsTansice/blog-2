@@ -12,8 +12,19 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
+update: 2022-3-24 16:43:00
 ---
   
+## 更新内容
+
+{% checkbox green checked, 删除长时间未访问的缓存 %}
+
+{% checkbox green checked, 运行时替换CDN链接 %}
+
+{% checkbox green checked, 过期缓存采用超时策略 %}
+
+{% checkbox green checked, 增强拓展性 %}
+
 ## 参考内容
 
 {%p blue center, 本文参考了以下教程/文档，这些都是很不错的资源，读者可以自行参阅 %}
@@ -38,8 +49,6 @@ date: 2022-02-17 15:07:55
 &emsp;&emsp;接下来就是根据图标生成我们要的图标包了，我们可以使用这个网站：
 
 {% link Favicon Generator. For real., https://realfavicongenerator.net/, https://realfavicongenerator.net/the_favicon/favicon.ico %}
-
-{% folding, 具体步骤 %}
 
 &emsp;&emsp;进入网站后点击那大大的`Select your Favicon image`按钮，然后选择你处理好的图标文件。
 
@@ -123,8 +132,6 @@ date: 2022-02-17 15:07:55
 }
 ```
 
-{% endfolding %}
-
 ### 修改配置文件
 
 &emsp;&emsp;修改主题配置文件，注意里面的文件路径要改成自己的：
@@ -154,118 +161,196 @@ date: 2022-02-17 15:07:55
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
 const VERSION_CACHE_NAME = 'kmarCacheTime'
-//缓存时间
-const MAX_BLOG_CACHE_TIME = 60 * 60 * 8
-const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3
-const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
-//当前时间
-const NOW_TIME = new Date().getTime();
+//缓存离线超时时间
+const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
 
-const db = {
+function time() {
+    return new Date().getTime()
+}
+
+const dbHelper = {
     read: (key) => {
         return new Promise((resolve) => {
-            caches.match(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
-                .then(function (res) {
-                    if (!res) resolve(null)
-                    res.text().then(text => resolve(text))
-                }).catch(() => {
-                    resolve(null)
-                })
+            caches.match(key).then(function (res) {
+                if (!res) resolve(null)
+                res.text().then(text => resolve(text))
+            }).catch(() => {
+                resolve(null)
+            })
         })
     },
     write: (key, value) => {
         return new Promise((resolve, reject) => {
             caches.open(VERSION_CACHE_NAME).then(function (cache) {
                 // noinspection JSIgnoredPromiseFromCall
-                cache.put(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), new Response(value));
+                cache.put(key, new Response(value));
                 resolve()
             }).catch(() => {
                 reject()
             })
         })
+    },
+    delete: (key) => {
+        caches.match(key).then(response => {
+            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(key))
+        })
     }
 }
 
-self.addEventListener('install', function () {
-    // noinspection JSIgnoredPromiseFromCall
-    self.skipWaiting()
-});
+//存储缓存入库时间
+const dbTime = {
+    read: (key) => dbHelper.read(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)),
+    write: (key, value) => dbHelper.write(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), value),
+    delete: (key) => dbHelper.delete(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
+}
 
-//永久缓存
-const foreverCache = /[这里填正则表达式]/g
-//博文缓存
-const updateCache = /[]/g
-//博客资源缓存
-const blogResourceCache = /[]/g
-//CDN缓存
-const cdnCache = /[]/g
+//存储缓存最后一次访问的时间
+const dbAccess = {
+    update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), time()),
+    check: async (key) => {
+        const realKey = new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`)
+        const value = await dbHelper.read(realKey)
+        if (value) {
+            dbHelper.delete(realKey)
+            return time() - value < MAX_ACCESS_CACHE_TIME
+        } else return false
+    }
+}
+
+self.addEventListener('install', () => self.skipWaiting())
 
 /**
- * 根据url判断缓存最多存储多长时间
- * @return
- *     -1  - 永久缓存<br/>
- *     0   - 不缓存<br/>
- *     n   - 缓存n毫秒<br/>
+ * 缓存列表
+ * @param url 匹配规则
+ * @param time 缓存有效时间
+ * @param clean 清理缓存时是否无视最终访问时间世界删除
  */
-const getMaxCacheTime = function (url) {
-    if (url.match(updateCache)) return MAX_BLOG_CACHE_TIME
-    if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
-    if (url.match(foreverCache)) return -1
-    if (url.match(blogResourceCache)) return MAX_RESOURCE_CACHE_TIME
-    return 0
+const cacheList = {
+    static: {
+        url: /正则表达式匹配/g,
+        time: Number.MAX_VALUE,
+        clean: true
+    },
+    update: {
+        url: /正则表达式匹配/g,
+        time: 60 * 60 * 8,
+        clean: true
+    },
+    resources: {
+        url: /正则表达式匹配/g,
+        time: 60 * 60 * 24 * 3,
+        clean: true
+    },
+    stand: {
+        url: /正则表达式匹配/g,
+        time: 60 * 60 * 24 * 7,
+        clean: true
+    }
+}
+
+/**
+ * 链接替换列表
+ * @param source 源链接
+ * @param dist 目标链接
+ */
+const replaceList = {
+    gh: {
+        source: ['https://cdn.jsdelivr.net/gh'],
+        dist: 'https://cdn1.tianli0.top/gh'
+    },
+    npm: {
+        source: [
+            'https://cdn.jsdelivr.net/npm',
+            'https://unpkg.zhimg.com'
+        ],
+        dist: 'https://npm.elemecdn.com'
+    }
+}
+
+//判断指定url击中了哪一种缓存，都没有击中则返回null
+function findCache(url) {
+    for (let key in cacheList) {
+        const value = cacheList[key]
+        if (url.match(value.url)) return value
+    }
+    return null
+}
+
+//检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
+function replaceRequest(request) {
+    for (let key in replaceList) {
+        const value = replaceList[key]
+        for (let source of value.source) {
+            if (request.url.match(source))
+                return new Request(request.url.replace(source, value.dist))
+        }
+    }
+    return null
+}
+
+async function fetchEvent(request, response, cacheDist) {
+    const NOW_TIME = time()
+    // noinspection ES6MissingAwait
+    dbAccess.update(request.url)
+    const maxTime = cacheDist.time
+    let remove = false
+    if (response) {
+        const time = await dbTime.read(request.url)
+        if (time) {
+            const difTime = NOW_TIME - time
+            if (difTime < maxTime) return response
+        }
+        remove = true
+    }
+    const fetchFunction = () => fetch(request).then(response => {
+        dbTime.write(request.url, NOW_TIME)
+        const clone = response.clone()
+        caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+        return response
+    }).catch((err) => {
+        console.error('不可达的链接：' + request.url + '\n错误信息：' + err)
+        return response
+    })
+    if (!remove) return fetchFunction()
+    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 200)))
+    return Promise.race([timeOut(), fetchFunction()])
 }
 
 self.addEventListener('fetch', async event => {
-    const request = event.request
-    event.respondWith(caches.match(request).then(async function (response) {
-            let remove = false
-            const maxTime = getMaxCacheTime(request.url)
-            if (response) {
-                if (maxTime === -1) return response
-                const time = await db.read(request.url)
-                if (time) {
-                    const difTime = NOW_TIME - time
-                    if (difTime < maxTime) return response
-                    //console.log('一个缓存超时：url=' + request.url + ', time=' + difTime)
+    const replace = replaceRequest(event.request)
+    const request = replace === null ? event.request : replace
+    const cacheDist = findCache(request.url)
+    if (cacheDist === null && replace === null) return
+    event.respondWith(caches.match(request).then(
+        async (response) => fetchEvent(request, response, request))
+    )
+})
+
+//想要使用该功能的话需要在js中调用
+//  navigator.serviceWorker.addEventListener('message', function())
+//  navigator.serviceWorker.controller.postMessage("refresh")
+//前者是用于在删除缓存后触发reload()，后者是触发删除缓存的操作
+self.addEventListener('message', function (event) {
+    //刷新缓存
+    if (event.data === 'refresh') {
+        caches.open(CACHE_NAME).then(function (cache) {
+            cache.keys().then(function (keys) {
+                for (let key of keys) {
+                    const value = findCache(key.url)
+                    if (value.clear || !dbAccess.check(key.url)) {
+                        // noinspection JSIgnoredPromiseFromCall
+                        cache.delete(key)
+                        dbTime.delete(key)
+                    }
                 }
-                remove = true
-            }
-            return fetch(request).then(function (response) {
-                if (maxTime !== 0) {
-                    if (maxTime !== -1) db.write(request.url, NOW_TIME)
-                    const clone = response.clone()
-                    caches.open(CACHE_NAME).then(function (cache) {
-                        if (remove) cache.delete(request)
-                        cache.put(request, clone).catch(function (err) {
-                            console.error(err)
-                            console.error(request)
-                        })
-                    })
-                }
-                return response
-            }).catch(function () {
-                console.error('不可达的链接：' + request.url)
+                event.source.postMessage('success')
             })
         })
-    )
+    }
 })
 ```
 
 &emsp;&emsp;这里我把开了两个缓存空间，一个是`kmarCache`，一个是`kmarCacheTime`。前者是用来存储缓存内容的，后者是用来存储非永久缓存的缓存时间戳的。
-
-&emsp;&emsp;对于缓存我们分为以下几类：
-
-1. 永久缓存（foreverCache - 永久）：适用于只要上线就一定不会变动的内容，只要用户不手动删除或浏览器主动删除就永远不会删除
-2. 短期缓存（updateCache - 默认8h）：适用于经常会变更的内容，在缓存时间超过`MAX_BLOG_CACHE_TIME`后再访问时会更新缓存
-3. 中期缓存（blogResourceCache - 默认3d）：适用于变动次数不多同时变动后不着急让用户看到新内容的缓存，在缓存时间超过`MAX_RESOURCE_CACHE_TIME`后再访问时会更新缓存
-4. 长期缓存（cdnCache - 默认7d）：适用于很少变动的内容，在缓存时间超过`MAX_CDN_CACHE_TIME`后再访问时会更新缓存
-
-### 预期内容
-
-&emsp;&emsp;还有一些`sw`的功能还没有考虑好要不要实现：
-
-1. 运行时将`jsdelivr`访问转换为其它CDN
-2. 主动删除冗余缓存
 
 ### 注册SW
 
