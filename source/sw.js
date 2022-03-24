@@ -1,10 +1,6 @@
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
 const VERSION_CACHE_NAME = 'kmarCacheTime'
-//缓存时间
-const MAX_BLOG_CACHE_TIME = 60 * 60 * 8
-const MAX_RESOURCE_CACHE_TIME = 60 * 60 * 24 * 3
-const MAX_CDN_CACHE_TIME = 60 * 60 * 24 * 7
 //缓存离线超时时间
 const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
 //当前时间
@@ -39,12 +35,14 @@ const dbHelper = {
     }
 }
 
+//存储缓存入库时间
 const dbTime = {
     read: (key) => dbHelper.read(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)),
     write: (key, value) => dbHelper.write(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), value),
     delete: (key) => dbHelper.delete(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
 }
 
+//存储缓存最后一次访问的时间
 const dbAccess = {
     update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), NOW_TIME),
     check: async (key) => {
@@ -59,31 +57,41 @@ const dbAccess = {
 
 self.addEventListener('install', () => self.skipWaiting())
 
-//永久缓存
-const foreverCache = /(^(https:\/\/npm\.elemecdn\.com).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g
-//博文缓存
-const updateCache = /(^(https:\/\/kmar\.top).*(\/)$)/g
-//博客资源缓存
-const blogResourceCache = /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json)$/g
-//CDN缓存
-const cdnCache = /^https:\/\/image\.kmar\.top\/indexBg\//g
-
 /**
- * 根据url判断缓存最多存储多长时间
- * @return
- *     -1  - 永久缓存<br/>
- *     0   - 不缓存<br/>
- *     n   - 缓存n毫秒<br/>
+ * 缓存列表
+ * @param url 匹配规则
+ * @param time 缓存有效时间
+ * @param clean 清理缓存时是否无视最终访问时间世界删除
  */
-function getMaxCacheTime(url) {
-    if (url.match(foreverCache)) return -1
-    if (url.match(cdnCache)) return MAX_CDN_CACHE_TIME
-    if (url.match(blogResourceCache)) return MAX_RESOURCE_CACHE_TIME
-    if (url.match(updateCache)) return MAX_BLOG_CACHE_TIME
-    return 0
+const cacheList = {
+    static: {
+        url: /(^(https:\/\/npm\.elemecdn\.com).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g,
+        time: Number.MAX_VALUE,
+        clean: true
+    },
+    update: {
+        url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
+        time: 60 * 60 * 8,
+        clean: true
+    },
+    resources: {
+        url: /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json)$/g,
+        time: 60 * 60 * 24 * 3,
+        clean: true
+    },
+    stand: {
+        url: /^https:\/\/image\.kmar\.top\/indexBg\//g,
+        time: 60 * 60 * 24 * 7,
+        clean: true
+    }
 }
 
-const cdnList = {
+/**
+ * 链接替换列表
+ * @param source 源链接
+ * @param dist 目标链接
+ */
+const replaceList = {
     gh: {
         source: ['https://cdn.jsdelivr.net/gh'],
         dist: 'https://cdn1.tianli0.top/gh'
@@ -97,64 +105,72 @@ const cdnList = {
     }
 }
 
+//判断指定url击中了哪一种缓存，都没有击中则返回null
+function findCache(url) {
+    for (let key in cacheList) {
+        const value = cacheList[key]
+        if (url.match(value.url)) return value
+    }
+    return null
+}
+
+//检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
 function replaceRequest(request) {
-    for (let cdn of cdnList.npm.source) {
-        if (request.url.match(cdn)) {
-            return new Request(request.url.replace(cdn, cdnList.npm.dist));
+    for (let key in replaceList) {
+        const value = replaceList[key]
+        for (let source of value.source) {
+            if (request.url.match(source))
+                return new Request(request.url.replace(source, value.dist))
         }
     }
-    for (let cdn of cdnList.gh.source) {
-        if (request.url.match(cdn)) return new Request(request.url.replace(cdn, cdnList.gh.dist));
+    return null
+}
+
+async function fetchEvent(request, response, cacheDist) {
+    // noinspection ES6MissingAwait
+    dbAccess.update(request.url)
+    const maxTime = cacheDist.time
+    let remove = false
+    if (response) {
+        const time = await dbTime.read(request.url)
+        if (time) {
+            const difTime = NOW_TIME - time
+            if (difTime < maxTime) return response
+        }
+        remove = true
     }
-    return request;
+    return fetch(request).then(response => {
+        dbTime.write(request.url, NOW_TIME)
+        const clone = response.clone()
+        caches.open(CACHE_NAME).then(function (cache) {
+            if (remove) cache.delete(request)
+            cache.put(request, clone)
+        })
+        return response
+    }).catch(() => {
+        console.error('不可达的链接：' + request.url)
+        return response
+    })
 }
 
 self.addEventListener('fetch', async event => {
-    const request = replaceRequest(event.request)
-    event.respondWith(caches.match(request).then(async function (response) {
-            let remove = false
-            const maxTime = getMaxCacheTime(request.url)
-            if (maxTime !== 0) {
-                // noinspection ES6MissingAwait
-                dbAccess.update(request.url)
-            }
-            if (response) {
-                if (maxTime === -1) return response
-                const time = await dbTime.read(request.url)
-                if (time) {
-                    const difTime = NOW_TIME - time
-                    if (difTime < maxTime) return response
-                    //console.log('一个缓存超时：url=' + request.url + ', time=' + difTime)
-                }
-                remove = true
-            }
-            return fetch(request).then(response => {
-                if (maxTime !== 0) {
-                    if (maxTime !== -1) dbTime.write(request.url, NOW_TIME)
-                    const clone = response.clone()
-                    caches.open(CACHE_NAME).then(function (cache) {
-                        if (remove) cache.delete(request)
-                        cache.put(request, clone)
-                    })
-                }
-                return response
-            }).catch(() => {
-                if (request.url.match(/.*hm.baidu.com/g)) console.log("百度统计被屏蔽")
-                else console.error('不可达的链接：' + request.url)
-                return response
-            })
-        })
+    const replace = replaceRequest(event.request)
+    const request = replace === null ? event.request : replace
+    const cacheDist = findCache(request.url)
+    if (cacheDist === null && replace === null) return
+    event.respondWith(caches.match(request).then(
+        async (response) => fetchEvent(request, response, request))
     )
 })
 
 self.addEventListener('message', function (event) {
+    //刷新缓存
     if (event.data === 'refresh') {
         caches.open(CACHE_NAME).then(function (cache) {
             cache.keys().then(function (keys) {
                 for (let key of keys) {
-                    if (key.url.match(updateCache) || !(key.url.match(foreverCache) ||
-                            key.url.match(blogResourceCache) || key.url.match(cdnCache)) ||
-                        !dbAccess.check(key.url)) {
+                    const value = findCache(key.url)
+                    if (value.clear || !dbAccess.check(key.url)) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
                         dbTime.delete(key)
