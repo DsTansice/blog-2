@@ -3,8 +3,10 @@ const CACHE_NAME = 'kmarCache'
 const VERSION_CACHE_NAME = 'kmarCacheTime'
 //缓存离线超时时间
 const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
-//当前时间
-const NOW_TIME = new Date().getTime();
+
+function time() {
+    return new Date().getTime()
+}
 
 const dbHelper = {
     read: (key) => {
@@ -44,13 +46,13 @@ const dbTime = {
 
 //存储缓存最后一次访问的时间
 const dbAccess = {
-    update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), NOW_TIME),
+    update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), time()),
     check: async (key) => {
         const realKey = new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`)
         const value = await dbHelper.read(realKey)
         if (value) {
             dbHelper.delete(realKey)
-            return NOW_TIME - value < MAX_ACCESS_CACHE_TIME
+            return time() - value < MAX_ACCESS_CACHE_TIME
         } else return false
     }
 }
@@ -127,6 +129,7 @@ function replaceRequest(request) {
 }
 
 async function fetchEvent(request, response, cacheDist) {
+    const NOW_TIME = time()
     // noinspection ES6MissingAwait
     dbAccess.update(request.url)
     const maxTime = cacheDist.time
