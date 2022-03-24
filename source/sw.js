@@ -152,7 +152,10 @@ async function fetchEvent(request, response, cacheDist) {
         return response
     })
     if (!remove) return fetchFunction()
-    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 200)))
+    const timeOut = () => new Promise((resolve => setTimeout(() => {
+        console.log('资源加载超时，使用本地缓存加载。后台加载完毕后，下一次刷新即可看到新的内容。')
+        resolve(response)
+    }, 200)))
     return Promise.race([timeOut(), fetchFunction()])
 }
 
