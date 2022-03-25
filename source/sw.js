@@ -153,9 +153,15 @@ async function fetchEvent(request, response, cacheDist) {
     })
     if (!remove) return fetchFunction()
     const timeOut = () => new Promise((resolve => setTimeout(() => {
-        console.log('资源加载超时，使用本地缓存加载。后台加载完毕后，下一次刷新即可看到新的内容。')
+        if (request.destination === 'document') {
+            self.clients.matchAll().then(clients => {
+                clients.forEach(client => {
+                    client.postMessage('location')
+                })
+            })
+        }
         resolve(response)
-    }, 300)))
+    }, 0)))
     return Promise.race([timeOut(), fetchFunction()])
 }
 

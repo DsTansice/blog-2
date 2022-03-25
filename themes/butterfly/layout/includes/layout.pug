@@ -7,9 +7,6 @@ script.
         }
       })
     })
-    navigator.serviceWorker.addEventListener('message', event => {
-      if (event.data === 'success') location.reload()
-    })
   }
 
 - var htmlClassHideAside = theme.aside.enable && theme.aside.hide ? 'hide-aside' : ''

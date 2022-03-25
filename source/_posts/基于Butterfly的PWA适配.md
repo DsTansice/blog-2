@@ -312,7 +312,7 @@ async function fetchEvent(request, response, cacheDist) {
         return response
     })
     if (!remove) return fetchFunction()
-    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 200)))
+    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 300)))
     return Promise.race([timeOut(), fetchFunction()])
 }
 

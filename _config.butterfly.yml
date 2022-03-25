@@ -845,6 +845,7 @@ inject:
     - <script data-pjax async src="/js/custom/fixed_card_widget.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
     - <script async src="/js/custom/share.js"></script>
+    - <script async src="/js/custom/event.js"></script>
 
 #侧栏悬浮卡片控制按钮
 #https://akilar.top/posts/451ac5f8/
