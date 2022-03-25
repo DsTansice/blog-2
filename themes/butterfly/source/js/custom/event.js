@@ -22,7 +22,7 @@ navigator.serviceWorker.addEventListener('message', event => {
             break
         case 'location':
             if (GLOBAL_CONFIG.Snackbar) {
-                btf.snackbarShow('检测到您的弱网络环境……<br/><br/>在后台加载完毕后，刷新页面即可查看新的内容', false, 3000)
+                btf.snackbarShow('检测到您的弱网络环境……<br/><br/>在后台加载完毕后，刷新页面即可查看新的内容')
             }
             break
     }
