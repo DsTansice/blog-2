@@ -155,7 +155,7 @@ async function fetchEvent(request, response, cacheDist) {
     const timeOut = () => new Promise((resolve => setTimeout(() => {
         console.log('资源加载超时，使用本地缓存加载。后台加载完毕后，下一次刷新即可看到新的内容。')
         resolve(response)
-    }, 200)))
+    }, 300)))
     return Promise.race([timeOut(), fetchFunction()])
 }
 
@@ -163,7 +163,7 @@ self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
     const cacheDist = findCache(request.url)
-    if (cacheDist === null && replace === null) return
+    if (cacheDist == null && replace == null) return
     event.respondWith(caches.match(request).then(
         async (response) => fetchEvent(request, response, request))
     )
