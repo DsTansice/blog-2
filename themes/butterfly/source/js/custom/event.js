@@ -1,8 +1,10 @@
 function refreshCache() {
     if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
         if (confirm('是否确定刷新博文缓存')) navigator.serviceWorker.controller.postMessage("refresh")
+    } else if (GLOBAL_CONFIG.Snackbar) {
+        btf.snackbarShow('ServiceWorker未激活')
     } else {
-        if (confirm('ServiceWorker未激活，受否刷新以激活SW')) location.reload()
+        alert('ServiceWorker未激活')
     }
 }
 
