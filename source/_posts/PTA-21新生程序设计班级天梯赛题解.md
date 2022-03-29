@@ -935,7 +935,7 @@ $$36*(S_1+S_2+\cdots S_n)^2=(n+2)\cdot (n+2)\cdot (n+1)\cdot (n+1)\cdot n\cdot n
 对了，别忘了处处取模。
 
 ```c++
-##define mo 1000000007
+#define mo 1000000007
 
 int main(){
 	int t;
