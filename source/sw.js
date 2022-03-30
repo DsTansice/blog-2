@@ -161,7 +161,7 @@ async function fetchEvent(request, response, cacheDist) {
             })
         }
         resolve(response)
-    }, 0)))
+    }, 300)))
     return Promise.race([timeOut(), fetchFunction()])
 }
 
