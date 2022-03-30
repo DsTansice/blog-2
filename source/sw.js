@@ -153,7 +153,7 @@ async function fetchEvent(request, response, cacheDist) {
     })
     if (!remove) return fetchFunction()
     const timeOut = () => new Promise((resolve => setTimeout(() => {
-        if (request.destination === 'document') {
+        if (request.url.match(/.*(\/)^/g)) {
             self.clients.matchAll().then(clients => {
                 clients.forEach(client => {
                     client.postMessage('location')
