@@ -142,33 +142,18 @@ async function fetchEvent(request, response, cacheDist) {
         }
         remove = true
     }
-    let loading = true
     const fetchFunction = () => fetch(request).then(response => {
         dbTime.write(request.url, NOW_TIME)
         const clone = response.clone()
         caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
         return response
-    }).catch((err) => {
-        console.error('不可达的链接：' + request.url + '\n错误信息：' + err)
-        return response
     })
     if (!remove) return fetchFunction()
-    const timeOut = () => new Promise((resolve => setTimeout(() => {
-        if (loading) {
-            if (request.url.match(/\/$/g)) {
-                self.clients.matchAll().then(clients => {
-                    clients.forEach(client => {
-                        client.postMessage('location')
-                    })
-                })
-            }
-        }
-        resolve(response)
-    }, 300)))
+    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 300)))
     return Promise.race([
         timeOut(),
-        fetchFunction().then(() => loading = false)]
-    ).catch(err => console.error(err))
+        fetchFunction()]
+    ).catch(err => console.error('不可达的链接：' + request.url + '\n错误信息：' + err))
 }
 
 self.addEventListener('fetch', async event => {
