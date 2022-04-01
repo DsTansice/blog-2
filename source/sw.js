@@ -142,6 +142,7 @@ async function fetchEvent(request, response, cacheDist) {
         }
         remove = true
     }
+    let loading = true
     const fetchFunction = () => fetch(request).then(response => {
         dbTime.write(request.url, NOW_TIME)
         const clone = response.clone()
@@ -153,16 +154,21 @@ async function fetchEvent(request, response, cacheDist) {
     })
     if (!remove) return fetchFunction()
     const timeOut = () => new Promise((resolve => setTimeout(() => {
-        if (request.url.match(/\/$/g)) {
-            self.clients.matchAll().then(clients => {
-                clients.forEach(client => {
-                    client.postMessage('location')
+        if (loading) {
+            if (request.url.match(/\/$/g)) {
+                self.clients.matchAll().then(clients => {
+                    clients.forEach(client => {
+                        client.postMessage('location')
+                    })
                 })
-            })
+            }
         }
         resolve(response)
     }, 300)))
-    return Promise.race([timeOut(), fetchFunction()])
+    return Promise.race([
+        timeOut(),
+        fetchFunction().then(() => loading = false)]
+    ).catch(err => console.error(err))
 }
 
 self.addEventListener('fetch', async event => {
