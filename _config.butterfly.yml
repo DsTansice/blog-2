@@ -649,7 +649,7 @@ aside:
       link: https://afdian.net/@emptydreams/
   card_announcement:
     enable: true
-    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>本站使用百度统计统计访问量等信息，希望小伙伴可以将本站加入到拦截白名单中。<p>建议需要通知的小伙伴把<a href="mailto:kmar@foxmail.com">mailto:kmar@foxmail.com</a>加入到邮箱的白名单中防止被拦截。
+    content: <p>有些人好像不知道怎么打赏，每篇博文下面都有一个投币的按钮，鼠标放上去就有付款的二维码。<p>建议需要通知的小伙伴把<a href="mailto:kmar@foxmail.com">mailto:kmar@foxmail.com</a>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
     limit: 4 # if set 0 will show all
