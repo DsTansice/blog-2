@@ -1,5 +1,5 @@
 ---
-title: 算法竞赛竞赛-STL常用容器的底层原理
+title: 算法竞赛-STL常用容器的底层原理
 top_img: false
 cover: 'https://image.kmar.top/bg/b6.jpg!/fw/550'
 categories:
