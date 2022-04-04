@@ -2,9 +2,6 @@
 .OwO .OwO-body .OwO-items-image .OwO-item {
   max-width: calc(25% - 10px) !important;
 }
-.tk-owo-emotion, .twikoo .OwO-item img {
-  width: 1.5rem !important;
-}
 
 /* 自定义twikoo评论输入框高度 */
 .tk-input[data-v-619b4c52] .el-textarea__inner {
