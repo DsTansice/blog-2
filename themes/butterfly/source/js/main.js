@@ -579,7 +579,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const $runtimeCount = document.getElementById('runtimeshow')
     if ($runtimeCount) {
       const publishDate = $runtimeCount.getAttribute('data-publishDate')
-      $runtimeCount.innerText = getRemainderTime(new Date(publishDate))
+      const date = new Date(publishDate)
+      date.setHours(0)
+      $runtimeCount.innerText = getRemainderTime(date)
     }
   }
 
