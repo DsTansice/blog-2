@@ -95,15 +95,15 @@ const cacheList = {
  */
 const replaceList = {
     gh: {
-        source: ['https://cdn.jsdelivr.net/gh'],
-        dist: 'https://cdn1.tianli0.top/gh'
+        source: ['//cdn.jsdelivr.net/gh'],
+        dist: '//cdn1.tianli0.top/gh'
     },
     npm: {
         source: [
-            'https://cdn.jsdelivr.net/npm',
-            'https://unpkg.zhimg.com'
+            '//cdn.jsdelivr.net/npm',
+            '//unpkg.zhimg.com'
         ],
-        dist: 'https://npm.elemecdn.com'
+        dist: '//npm.elemecdn.com'
     }
 }
 
