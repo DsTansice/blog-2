@@ -2,9 +2,9 @@
 title: 《我的世界：Minecraft模组开发指南》读后感
 top_img: false
 tags:
-  - 随心记
-categories:
   - MC
+categories:
+  - 随心记
 cover: 'https://image.kmar.top/bg/b2.jpg!/fw/550'
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 abbrlink: 51cab89d
