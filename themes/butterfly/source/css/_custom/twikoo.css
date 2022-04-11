@@ -3,6 +3,11 @@
   max-width: calc(25% - 10px) !important;
 }
 
+/** 调整表情位置 */
+.tk-content img.tk-owo-emotion {
+  vertical-align: bottom;
+}
+
 /* 自定义twikoo评论输入框高度 */
 .tk-input[data-v-619b4c52] .el-textarea__inner {
   height: 130px !important;
