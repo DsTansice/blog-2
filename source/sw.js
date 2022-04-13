@@ -104,6 +104,10 @@ const replaceList = {
             '//unpkg.zhimg.com'
         ],
         dist: '//npm.elemecdn.com'
+    },
+    bangumi: {
+        source: ['/bangumis/null'],
+        dist: '/null.jpg'
     }
 }
 
