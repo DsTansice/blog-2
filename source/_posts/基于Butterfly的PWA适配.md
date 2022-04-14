@@ -12,7 +12,7 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
-updated: 2022-3-24 16:43:00
+updated: 2022-4-14 12:21:00
 ---
   
 ## 更新内容
@@ -24,6 +24,8 @@ updated: 2022-3-24 16:43:00
 {% checkbox green checked, 过期缓存采用超时策略 %}
 
 {% checkbox green checked, 增强拓展性 %}
+
+{% checkbox green checked, 支持204拦截网络请求 %}
 
 ## 参考内容
 
@@ -226,24 +228,9 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理缓存时是否无视最终访问时间世界删除
  */
 const cacheList = {
-    static: {
-        url: /正则表达式匹配/g,
+    sample: {
+        url: /[填写正则表达式]/g,
         time: Number.MAX_VALUE,
-        clean: true
-    },
-    update: {
-        url: /正则表达式匹配/g,
-        time: 60 * 60 * 8,
-        clean: true
-    },
-    resources: {
-        url: /正则表达式匹配/g,
-        time: 60 * 60 * 24 * 3,
-        clean: true
-    },
-    stand: {
-        url: /正则表达式匹配/g,
-        time: 60 * 60 * 24 * 7,
         clean: true
     }
 }
@@ -254,16 +241,9 @@ const cacheList = {
  * @param dist 目标链接
  */
 const replaceList = {
-    gh: {
-        source: ['//cdn.jsdelivr.net/gh'],
-        dist: '//cdn1.tianli0.top/gh'
-    },
-    npm: {
-        source: [
-            '//cdn.jsdelivr.net/npm',
-            '//unpkg.zhimg.com'
-        ],
-        dist: '//npm.elemecdn.com'
+    sample: {
+        source: ['//www.kmar.top'],
+        dist: '//kmar.top'
     }
 }
 
@@ -288,6 +268,11 @@ function replaceRequest(request) {
     return null
 }
 
+//判断是否拦截指定的request
+function blockRequest(request) {
+    return false
+}
+
 async function fetchEvent(request, response, cacheDist) {
     const NOW_TIME = time()
     // noinspection ES6MissingAwait
@@ -307,23 +292,28 @@ async function fetchEvent(request, response, cacheDist) {
         const clone = response.clone()
         caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
         return response
-    }).catch((err) => {
-        console.error('不可达的链接：' + request.url + '\n错误信息：' + err)
-        return response
     })
     if (!remove) return fetchFunction()
     const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 300)))
-    return Promise.race([timeOut(), fetchFunction()])
+    return Promise.race([
+        timeOut(),
+        fetchFunction()]
+    ).catch(err => console.error('不可达的链接：' + request.url + '\n错误信息：' + err))
 }
 
 self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
     const cacheDist = findCache(request.url)
-    if (cacheDist === null && replace === null) return
-    event.respondWith(caches.match(request).then(
-        async (response) => fetchEvent(request, response, request))
-    )
+    if (blockRequest(request)) {
+        event.respondWith(new Response(null, {status: 204}))
+    } else if (cacheDist !== null) {
+        event.respondWith(caches.match(request)
+            .then(async (response) => fetchEvent(request, response, request))
+        )
+    } else if (replace !== null) {
+        event.respondWith(fetch(request))
+    }
 })
 
 //想要使用该功能的话需要在js中调用
