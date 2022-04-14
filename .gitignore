@@ -6,3 +6,4 @@ db.json
 public/
 node_modules/
 .idea/
+/source/_data/bangumis.json

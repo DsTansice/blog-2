@@ -104,10 +104,6 @@ const replaceList = {
             '//unpkg.zhimg.com'
         ],
         dist: '//npm.elemecdn.com'
-    },
-    bangumi: {
-        source: ['/bangumis/null'],
-        dist: '/null.jpg'
     }
 }
 
@@ -130,6 +126,11 @@ function replaceRequest(request) {
         }
     }
     return null
+}
+
+//判断是否拦截指定的request
+function blockRequest(request) {
+    return request.url.match('/bangumis/null')
 }
 
 async function fetchEvent(request, response, cacheDist) {
@@ -164,10 +165,15 @@ self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
     const cacheDist = findCache(request.url)
-    if (cacheDist == null && replace == null) return
-    event.respondWith(caches.match(request).then(
-        async (response) => fetchEvent(request, response, request))
-    )
+    if (blockRequest(request)) {
+        event.respondWith(new Response(null, {status: 204}))
+    } else if (cacheDist !== null) {
+        event.respondWith(caches.match(request)
+            .then(async (response) => fetchEvent(request, response, request))
+        )
+    } else if (replace !== null) {
+        event.respondWith(fetch(request))
+    }
 })
 
 self.addEventListener('message', function (event) {
