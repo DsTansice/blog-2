@@ -43,12 +43,24 @@ div#category
   &:before
     background: rgba(0, 0, 0, 0.2) !important
 
-/* 引入背景 */
 /* 右侧标签 */
 #aside-content
   .card-tag-cloud
     a
+      border-radius: 8px
+
       &:hover
         background-color: var(--km-link-bg)
         color: white !important
-        border-radius: 8px
+
+      [data-theme="dark"]
+        &:hover
+          background var(--km-link-bg) !important
+
+[data-theme="dark"]
+  #aside-content
+    a
+      color rgb(132, 133, 135) !important
+
+      &:hover
+        background var(--km-link-bg) !important

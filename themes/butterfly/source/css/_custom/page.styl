@@ -5,14 +5,6 @@
   header#page-header
     background-image: url(https://image.kmar.top/indexBg/dark.jpg) !important
 
-  /* 深色模式下的标签栏 */
-  #aside-content .card-tag-cloud a
-    color rgb(132, 133, 135) !important
-
-    &:hover
-      color var(--km-button-font) !important
-      background var(--km-link-bg) !important
-
 [data-theme="light"]
   #page-header:not(.not-top-img):before
     background-color rgba(0, 0, 0, 0.15)
@@ -41,3 +33,14 @@ img.inline.entered.loaded
 #footer-wrap a
   display inline-block
   margin 3px
+
+[data-theme="dark"]
+  .tag-cloud-list a
+    color rgb(132, 133, 135) !important
+
+    &:hover
+      color white !important
+      background var(--km-link-bg) !important
+
+.tag-cloud-list a
+  border-radius 10px
