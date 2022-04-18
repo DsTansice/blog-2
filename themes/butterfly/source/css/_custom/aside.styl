@@ -1,0 +1,43 @@
+/* 首页侧栏卡片 */
+[data-theme="light"] .card-widget
+  background: var(--km-global-bg) !important
+
+[data-theme="dark"] .card-widget
+  background: rgba(20, 20, 20, 0.9) !important
+
+  blockquote
+    background-color: rgba(30, 30, 30, 0.65) !important
+
+[data-theme="dark"]
+  /* 深色模式右侧标签 */
+  #aside-content
+    .card-tag-cloud a
+      color rgb(132, 133, 135) !important
+
+      &:hover
+        background var(--km-link-bg) !important
+
+#aside-content
+  /* 右侧标签 */
+  .card-tag-cloud
+    a
+      border-radius: 8px
+
+      &:hover
+        background-color: var(--km-link-bg)
+        color: white !important
+
+  /* 文章页目录 */
+  #card-toc
+    .toc-content
+      .toc-link
+        border-radius 10px
+
+        &:hover
+          background var(--km-toc-hover)
+          color var(--km-font) !important
+
+        &.active
+          color var(--km-toc-active-font) !important
+          border-radius 10px
+          background var(--km-toc-active) !important

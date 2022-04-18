@@ -3,21 +3,6 @@
   & > .recent-post-item
     background: var(--km-global-bg) !important;
 
-/* 首页侧栏卡片 */
-[data-theme="light"] .card-widget
-  background: var(--km-global-bg) !important
-
-[data-theme="dark"] .card-widget
-  background: rgba(20, 20, 20, 0.9) !important
-
-  blockquote
-    background-color: rgba(30, 30, 30, 0.65) !important
-
-  #aside-content
-    .card-tag-cloud
-      a
-        color: var(--km-font) !important
-
 /* 文章页面正文背景 */
 div#post
   background: var(--km-global-bg)
@@ -42,25 +27,3 @@ div#category
 #footer
   &:before
     background: rgba(0, 0, 0, 0.2) !important
-
-/* 右侧标签 */
-#aside-content
-  .card-tag-cloud
-    a
-      border-radius: 8px
-
-      &:hover
-        background-color: var(--km-link-bg)
-        color: white !important
-
-      [data-theme="dark"]
-        &:hover
-          background var(--km-link-bg) !important
-
-[data-theme="dark"]
-  #aside-content
-    .card-tag-cloud a
-      color rgb(132, 133, 135) !important
-
-      &:hover
-        background var(--km-link-bg) !important
