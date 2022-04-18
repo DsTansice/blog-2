@@ -8,28 +8,6 @@
   code
     border-radius 5px
 
-/* 滚动条 */
-*::-webkit-scrollbar-thumb
-  border-radius 8px
-
-html
-  overflow-y overlay
-
-/* 顶部通知栏 */
-.snackbar-pos
-  &.top-center
-    border-radius 8px
-    text-align center
-    min-width 0 !important
-
-    p
-      font-weight bold !important
-
-@media (max-width: 640px)
-  .snackbar-pos.top-center
-    p
-      width: -webkit-fill-available
-
 /* 超链接 */
 #post ol a:not(.no-custom), #post ul a:not(.no-custom),
 #post p a, .bangumi-title a, .announcement_content a
@@ -43,3 +21,23 @@ html
   border-radius 6px
   color white !important
   padding 3px
+
+/* 底部版权声明 */
+[data-theme="dark"]
+  #post
+    .post-copyright
+      background-color rgb(7 8 10)
+
+  .post-copyright-info
+    color #e0e0e4
+
+#post
+  .post-copyright__title
+    font-size 22px
+
+  .post-copyright__notice
+    font-size 15px
+
+  .post-copyright-cc-info
+    a
+      margin-left 3px

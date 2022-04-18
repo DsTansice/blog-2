@@ -45,3 +45,25 @@ img.inline.entered.loaded
 
 .tag-cloud-list a
   border-radius 10px
+
+/* 滚动条 */
+*::-webkit-scrollbar-thumb
+  border-radius 8px
+
+html
+  overflow-y overlay
+
+/* 顶部通知栏 */
+.snackbar-pos
+  &.top-center
+    border-radius 8px
+    text-align center
+    min-width 0 !important
+
+    p
+      font-weight bold !important
+
+@media (max-width: 640px)
+  .snackbar-pos.top-center
+    p
+      width: -webkit-fill-available
