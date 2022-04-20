@@ -44,7 +44,12 @@ if theme.woyaola_perf
       h.type = "text/javascript";
       h.crossorigin = true;
       h.onload = function () {
-        new c[b]["Monitor"]().init({id: "!{theme.woyaola_perf}", sendPerf: false, sendJank: false});
+        new c[b]["Monitor"]().init({
+          id: "!{theme.woyaola_perf}",
+          sendPerf: false,
+          sendJank: false,
+          ignoreApiStatus: ['301', '302', '304', '499']
+        });
       };
       f.parentNode.insertBefore(h, f);
       h.src = e;
