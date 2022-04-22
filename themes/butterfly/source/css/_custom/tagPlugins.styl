@@ -1,5 +1,5 @@
-/* 链接卡片 */
 #article-container
+  /* 链接卡片 */
   a
     &.link-card
       div
@@ -7,6 +7,7 @@
           img
             border-radius 8px
 
+  /* 分栏 */
   .tabs
     border-right 2px solid var(--km-tab-border) !important
     border-bottom 2px solid var(--km-tab-border) !important
@@ -36,6 +37,7 @@
 [data-theme="dark"]
   #article-container
     a
+      /* 链接卡片 */
       &.link-card
         background #101010 radial-gradient(#2a2a2a, #080808) !important
         color white !important
@@ -48,6 +50,7 @@
           &.url
             color #d3d3d3 !important
 
+  /* 折叠框 */
   details
     &.folding-tag
       & > summary
@@ -62,10 +65,10 @@
       & > summary
         color #dbdbdb
 
+/* 卡片遮罩 */
 [data-theme="dark"] .tip
   filter brightness(0.9) !important
 
-/* 分栏 */
 /* 折叠框 */
 details
   &.folding-tag
