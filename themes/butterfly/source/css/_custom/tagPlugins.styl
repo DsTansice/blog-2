@@ -80,8 +80,15 @@ details
       transition .3s
 
   &.folding-tag[open]
+    summary
+      border-bottom-right-radius unset !important
+      border-bottom-left-radius unset !important
+
+  &.folding-tag[open]
     & > div
       &.content
         background transparent !important
-        border-bottom 3px solid #00a6ff
-        border-radius 30px
+        border 1px solid #00a6ff
+        border-top unset
+        border-bottom-left-radius 25px
+        border-bottom-right-radius 25px
