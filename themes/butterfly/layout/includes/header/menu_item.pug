@@ -9,7 +9,7 @@ if theme.menu
               i.fa-fw(class=trim(valueArray[1]))
             span=' '+label
       else
-        .menus_item(onclick='closeSideBar()')
+        .menus_item
           - const labelArray = label.split('||')
           - const hideClass = labelArray[2] && trim(labelArray[2]) === 'hide' ? 'hide' : ''
           a.site-page.group(class=`${hideClass}` href='javascript:void(0);')
