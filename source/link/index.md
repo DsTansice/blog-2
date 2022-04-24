@@ -18,7 +18,7 @@ comments: true
 ```
 name: 山岳库博
 link: https://kmar.top/
-avatar: https://fastly.jsdelivr.net/gh/EmptyDreams/resources/qqavatar.jpg
+avatar: https://kmar.top/avatar.jpg
 descr: 开发学习启发性二刺螈
 ```
 
