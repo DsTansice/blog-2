@@ -27,27 +27,22 @@
     h6
       font-size 0.8rem !important
 
-#article-container.post-content h4:before,
-#article-container.post-content h5:before,
-#article-container.post-content h6:before
-  content '\f121' !important
-  margin-left -1.3rem !important
-  margin-top 0.05rem !important
+    h4, h5, h6
+      &:before
+        content '\f121' !important
+        margin-left -1.3rem !important
+        margin-top 0.05rem !important
 
-#content-inner.layout h2:hover,
-#content-inner.layout h3:hover,
-#content-inner.layout h4:hover,
-#content-inner.layout h5:hover,
-#content-inner.layout h6:hover
-  color #49b1f5
+    h2, h3, h4, h5, h6
+      &:hover
+        color #49b1f5
 
 @media screen and (min-width: 900px)
-  #content-inner.layout h2:hover,
-  #content-inner.layout h3:hover,
-  #content-inner.layout h4:hover,
-  #content-inner.layout h5:hover,
-  #content-inner.layout h6:hover
-    margin-left 0.4rem
+  #article-container
+    &.post-content
+      h2, h3, h4, h5, h6
+        &:hover
+          margin-left 0.4rem
 
 @media screen and (max-width: 770px)
   #nav
