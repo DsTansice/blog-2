@@ -879,14 +879,15 @@
 function getNowURL() {
     return location.protocol + '//' + location.host + location.pathname
 }
-var clipboard = new ClipboardJS('button#share-link', {
+
+const clipboard = new ClipboardJS('button#share-link', {
     text: function () {
         return document.title + '：' + getNowURL()
     },
 });
 clipboard.on('success', function () {
     if (GLOBAL_CONFIG.Snackbar) {
-        btf.snackbarShow("快分享给你的小伙伴吧o(*￣︶￣*)o")
+        btf.snackbarShow(GLOBAL_CONFIG.copy.success)
     } else {
         console.log("复制成功")
     }
