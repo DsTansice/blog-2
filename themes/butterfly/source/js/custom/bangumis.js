@@ -17,7 +17,7 @@ function getElementTop(element) {
 window.addEventListener('load', () => {
     const page = document.getElementById('page')
     if (!page) return
-    const index = getElementTop()
+    const index = getElementTop(page)
     const list = document.getElementsByClassName('bangumi-button')
     for (let element of list) {
         element.addEventListener('click', () => btf.scrollToDest(index))
