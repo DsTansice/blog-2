@@ -15,7 +15,9 @@ function getElementTop(element) {
 
 //追番页面点击按钮时回到顶部
 window.addEventListener('load', () => {
-    const index = getElementTop(document.getElementById('page'))
+    const page = document.getElementById('page')
+    if (!page) return
+    const index = getElementTop()
     const list = document.getElementsByClassName('bangumi-button')
     for (let element of list) {
         element.addEventListener('click', () => btf.scrollToDest(index))
