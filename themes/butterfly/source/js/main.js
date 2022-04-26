@@ -222,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function () {
    * Lightbox
    */
   const runLightbox = () => {
-    if (location.href.match('/bangumis/')) return
     btf.loadLightbox(document.querySelectorAll('#article-container img:not(.no-lightbox):not(.inline)'))
   }
 
