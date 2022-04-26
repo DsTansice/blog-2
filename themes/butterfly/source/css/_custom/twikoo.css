@@ -3,7 +3,7 @@
     max-width: calc(25% - 10px) !important;
 }
 
-/** 调整表情位置 */
+/* 调整表情位置 */
 .tk-content img.tk-owo-emotion {
     vertical-align: bottom;
 }
@@ -24,7 +24,7 @@
     width: calc(100% + 70px);
 }
 
-/* 头像宽度调整 rem单位与全局字体大小挂钩，需配合自己情况调整大小以保证头像显示完整*/
+/* 头像宽度调整 rem单位与全局字体大小挂钩，需配合自己情况调整大小以保证头像显示完整 */
 .tk-avatar {
     width: 3rem !important;
     height: 3rem !important;
@@ -44,10 +44,10 @@
 
 /* 评论块气泡化修改 */
 .tk-content {
-    background: #00a6ff; /*默认模式访客气泡配色*/
+    background: #00a6ff; /* 默认模式访客气泡配色 */
     padding: 10px;
     left: 8px;
-    color: white; /*默认模式访客气泡字体配色*/
+    color: white; /* 默认模式访客气泡字体配色 */
     border-radius: 10px;
     font-size: 16px !important;
     width: fit-content;
@@ -69,7 +69,7 @@
 }
 
 .tk-content a {
-    color: #eeecaa; /*默认模式超链接配色*/
+    color: #eeecaa; /* 默认模式超链接配色 */
 }
 
 .tk-content::before {
@@ -81,13 +81,13 @@
     left: -13px;
     border-top: 2px solid transparent;
     border-bottom: 20px solid transparent;
-    border-right: 15px solid #00a6ff; /*默认模式访客气泡小三角配色*/
+    border-right: 15px solid #00a6ff; /* 默认模式访客气泡小三角配色 */
     border-left: 0 solid transparent;
 }
 
 .tk-master .tk-content {
-    background: #ff8080; /*默认模式博主气泡配色*/
-    color: white; /*默认模式博主气泡字体配色*/
+    background: #ff8080; /* 默认模式博主气泡配色 */
+    color: white; /* 默认模式博主气泡字体配色 */
     width: fit-content;
     max-width: 100%;
     left: 9px;
@@ -106,7 +106,7 @@
     left: -13px;
     border-top: 2px solid transparent;
     border-bottom: 20px solid transparent;
-    border-right: 15px solid #ff8080; /*默认模式博主气泡小三角配色*/
+    border-right: 15px solid #ff8080; /* 默认模式博主气泡小三角配色 */
     border-left: 0 solid transparent;
 }
 
