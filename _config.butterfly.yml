@@ -849,7 +849,6 @@ inject:
   head:
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
-    - <script async>if(!!window.ActiveXObject||"ActiveXObject"in window)alert("都2202年了，能不能不要用IE了！！！\n本博客没有为IE做任何适配，请使用edge等浏览器进行访问。");</script>
     - <script data-pjax async src="/js/custom/fixed_card_widget.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
     - <script async src="/js/custom/share.js"></script>
