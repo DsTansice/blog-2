@@ -9,6 +9,7 @@ tags:
   - PWA
   - ServiceWorker
   - 教程
+  - Butterfly
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
