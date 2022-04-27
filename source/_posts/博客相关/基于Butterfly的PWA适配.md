@@ -13,7 +13,7 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
-updated: 2022-4-14 12:21:00
+updated: 2022-04-27 22:00:40
 ---
   
 ## 更新内容
@@ -316,29 +316,6 @@ self.addEventListener('fetch', async event => {
         event.respondWith(fetch(request))
     }
 })
-
-//想要使用该功能的话需要在js中调用
-//  navigator.serviceWorker.addEventListener('message', function())
-//  navigator.serviceWorker.controller.postMessage("refresh")
-//前者是用于在删除缓存后触发reload()，后者是触发删除缓存的操作
-self.addEventListener('message', function (event) {
-    //刷新缓存
-    if (event.data === 'refresh') {
-        caches.open(CACHE_NAME).then(function (cache) {
-            cache.keys().then(function (keys) {
-                for (let key of keys) {
-                    const value = findCache(key.url)
-                    if (value == null || value.clean || !dbAccess.check(key.url)) {
-                        // noinspection JSIgnoredPromiseFromCall
-                        cache.delete(key)
-                        dbTime.delete(key)
-                    }
-                }
-                event.source.postMessage('success')
-            })
-        })
-    }
-})
 ```
 
 &emsp;&emsp;这里我把开了两个缓存空间，一个是`kmarCache`，一个是`kmarCacheTime`。前者是用来存储缓存内容的，后者是用来存储非永久缓存的缓存时间戳的。
@@ -382,6 +359,12 @@ self.addEventListener('message', function (event) {
 ## 调试SW
 
 &emsp;&emsp;浏览器打开网页，按`F12`，找到`应用程序`项目，在里面就可以调试`ServiceWorker`。
+
+## 补充
+
+&emsp;&emsp;现在，`ServiceWorker`的缓存完全由代码控制，用户想要刷新缓存只能使用开发者工具删除缓存，这无疑是非常不友好的。
+
+&emsp;&emsp;这在另一篇教程中通过添加刷新缓存的按钮得到了解决：[《给博客添加刷新缓存按钮》](https://kmar.top/posts/af52c173/)
 
 ---
 
