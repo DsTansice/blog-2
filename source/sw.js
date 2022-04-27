@@ -130,7 +130,8 @@ function replaceRequest(request) {
 
 //判断是否拦截指定的request
 function blockRequest(request) {
-    return request.url.match('/bangumis/null')
+    return false
+    //return request.url.match('/bangumis/null')
 }
 
 async function fetchEvent(request, response, cacheDist) {
@@ -167,9 +168,7 @@ self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
     const cacheDist = findCache(request.url)
-    if (blockRequest(request)) {
-        event.respondWith(new Response(null, {status: 204}))
-    } else if (cacheDist !== null) {
+    if (cacheDist !== null) {
         event.respondWith(caches.match(request)
             .then(async (response) => fetchEvent(request, response, request))
         )
