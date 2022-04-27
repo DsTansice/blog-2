@@ -314,7 +314,7 @@ bangumi:
   title: '追番列表'
   quote: '生命不息，追番不止！'
   show: 1
-  lazyload: false
+  lazyload: true
   loading:
   metaColor:
   color:
