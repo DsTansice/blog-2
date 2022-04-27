@@ -17,7 +17,7 @@ if theme.menu
               i.fa-fw(class=trim(labelArray[1]))
             span=' '+ trim(labelArray[0])
             i.fas.fa-chevron-down
-          ul.menus_item_child
+          ul.menus_item_child(onclick='closeSideBar()')
             each val,lab in value
               - const valArray = val.split('||')
               li
