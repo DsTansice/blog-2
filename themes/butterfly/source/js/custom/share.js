@@ -875,7 +875,9 @@
         .default;
 });
 
-/* 自定义内容 */
+// ---------- 自定义内容 ---------- //
+
+/* 获取本页链接地址（不包含参数） */
 function getNowURL() {
     return location.protocol + '//' + location.host + location.pathname
 }
