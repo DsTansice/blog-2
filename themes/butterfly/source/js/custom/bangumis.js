@@ -14,7 +14,7 @@ function getElementTop(element) {
 }
 
 //追番页面点击按钮时回到顶部
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
     const page = document.getElementById('page')
     if (!page) return
     const index = getElementTop(page)
