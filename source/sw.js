@@ -67,7 +67,7 @@ self.addEventListener('install', () => self.skipWaiting())
  */
 const cacheList = {
     static: {
-        url: /(^(https:\/\/npm\.elemecdn\.com).*@[0-9].*)|((jinrishici\.js|\.cur)$)/g,
+        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
         time: Number.MAX_VALUE,
         clean: true
     },
