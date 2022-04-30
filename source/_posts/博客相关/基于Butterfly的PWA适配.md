@@ -226,7 +226,7 @@ self.addEventListener('install', () => self.skipWaiting())
  * 缓存列表
  * @param url 匹配规则
  * @param time 缓存有效时间
- * @param clean 清理缓存时是否无视最终访问时间世界删除
+ * @param clean 清理缓存时是否无视最终访问时间直接删除
  */
 const cacheList = {
     sample: {
