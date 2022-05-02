@@ -652,7 +652,7 @@ aside:
       link: https://afdian.net/@emptydreams/
   card_announcement:
     enable: true
-    content: <p>本站将于 <code>2022-04-04</code> 日起统计收入，累计收入达到 100RMB 咱们就抽一波奖哦~<p>建议需要通知的小伙伴把<a href="mailto:kmar@foxmail.com">mailto:kmar@foxmail.com</a>加入到邮箱的白名单中防止被拦截。
+    content: <p>本站将于 <code>2022-04-04</code> 日起统计收入，累计收入达到 100RMB 咱们就抽一波奖哦~<p>建议需要通知的小伙伴把<a href="mailto:blog.kmar@gmail.com">blog.kmar@gmail.com</a>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
     limit: 4 # if set 0 will show all
