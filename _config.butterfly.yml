@@ -265,90 +265,12 @@ comments:
   count: true # Display comment count in post's top_img
   card_post_count: false # Display comment count in Home Page
 
-# disqus
-# https://disqus.com/
-disqus:
-  shortname:
-  apikey: # For newest comments widget
-
-# Alternative Disqus - Render comments with Disqus API
-# DisqusJS 評論系統，可以實現在網路審查地區載入 Disqus 評論列表，兼容原版
-# https://github.com/SukkaW/DisqusJS
-disqusjs:
-  shortname:
-  apikey:
-  option:
-
-# livere (來必力)
-# https://www.livere.com/
-livere:
-  uid:
-
-# gitalk
-# https://github.com/gitalk/gitalk
-gitalk:
-  client_id:
-  client_secret:
-  repo:
-  owner:
-  admin:
-  option:
-
-# valine
-# https://valine.js.org
-valine:
-  appId: # leancloud application app id
-  appKey: # leancloud application app key
-  avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
-  bg: # valine background
-  visitor: false
-  option:
-
-# waline - A simple comment system with backend support fork from Valine
-# https://waline.js.org/
-waline:
-  serverURL: # Waline server address url
-  bg: # waline background
-  visitor: false
-  option:
-
-# utterances
-# https://utteranc.es/
-utterances:
-  repo:
-  # Issue Mapping: pathname/url/title/og:title
-  issue_term: pathname
-  # Theme: github-light/github-dark/github-dark-orange/icy-dark/dark-blue/photon-dark
-  light_theme: github-light
-  dark_theme: photon-dark
-
-# Facebook Comments Plugin
-# https://developers.facebook.com/docs/plugins/comments/
-facebook_comments:
-  app_id:
-  user_id: # optional
-  pageSize: 10 # The number of comments to show
-  order_by: social # social/time/reverse_time
-  lang: en_US # Language en_US/zh_CN/zh_TW and so on
-
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
   envId: https://twikoo-7dk9ndl08-emptydreams.vercel.app
   region:
   visitor: false
-  option:
-
-# Giscus
-# https://giscus.app/
-giscus:
-  repo:
-  repo_id:
-  category_id:
-  theme:
-    light: light
-    dark: dark
   option:
 
 # Chat Services
