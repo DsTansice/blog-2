@@ -6,3 +6,4 @@ db.json
 public/
 node_modules/
 source/_data/bangumis.json
+search.xml
