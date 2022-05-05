@@ -18,7 +18,7 @@ gulp.task('compress', () =>
 //压缩css
 gulp.task('minify-css', () => {
     return gulp.src(['./public/**/*.css'])
-        .pipe(cleanCSS({compatibility: 'ie11'}))
+        .pipe(cleanCSS({level: 2}))
         .pipe(gulp.dest('./public'))
 })
 //压缩html
@@ -44,7 +44,7 @@ gulp.task('minify-html', () => {
 })
 
 //压缩json
-gulp.task('min-json', function () {
+gulp.task('min-json', async () => {
     gulp.src('./src/**/*.json')
         .pipe(jsonMin())
         .pipe(gulp.dest('./dist'));
