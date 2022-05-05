@@ -12,7 +12,7 @@ const jsonMin = require('gulp-jsonmin');
 // 压缩js
 gulp.task('compress', () =>
     gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
-        .pipe(terser())
+        .pipe(terser({toplevel: true}))
         .pipe(gulp.dest('./public'))
 )
 //压缩css
@@ -77,8 +77,7 @@ gulp.task('ttf2woff2', async () => {
 //压缩字体
 gulp.task('mini-font', (cb) => {
     const buffers = [];
-    gulp
-        .src(['./public/**/*.html']) //HTML文件所在目录请根据自身情况修改
+    gulp.src(['./public/**/*.html'])
         .on('data', (file) => buffers.push(file.contents))
         .on('end', () => {
             const text = Buffer.concat(buffers).toString('utf-8')
