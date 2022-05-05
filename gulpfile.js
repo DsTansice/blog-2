@@ -81,4 +81,4 @@ gulp.task('mini-font', (cb) => {
 //压缩
 gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html', 'mini-font'))
 //转换
-gulp.task("convert", gulp.parallel('ttf2woff2', 'cdn'))
+gulp.task("convert", gulp.parallel('cdn'))
