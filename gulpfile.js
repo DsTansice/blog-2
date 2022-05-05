@@ -7,6 +7,7 @@ const replace = require('gulp-replace')
 const terser = require('gulp-terser')
 const ttf2woff2 = require('gulp-ttf2woff2')
 const fontMin = require('gulp-fontmin')
+const jsonMin = require('gulp-jsonmin');
 
 // 压缩js
 gulp.task('compress', () =>
@@ -41,6 +42,13 @@ gulp.task('minify-html', () => {
         }))
         .pipe(gulp.dest('./public'))
 })
+
+//压缩json
+gulp.task('min-json', function () {
+    gulp.src('./src/**/*.json')
+        .pipe(jsonMin())
+        .pipe(gulp.dest('./dist'));
+});
 
 //压缩字体
 function minifyFont(text, cb) {
@@ -79,6 +87,6 @@ gulp.task('mini-font', (cb) => {
 })
 
 //压缩
-gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html', 'mini-font'))
+gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html', 'mini-font', 'min-json'))
 //转换
 gulp.task("convert", gulp.parallel('cdn'))
