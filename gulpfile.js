@@ -44,7 +44,7 @@ gulp.task('minify-html', () => {
 
 //压缩字体
 function minifyFont(text, cb) {
-    gulp.src('./public/font/*.ttf') //原字体所在目录
+    gulp.src('./public/font/s*.ttf') //原字体所在目录
         .pipe(fontMin({text: text}))
         .pipe(gulp.dest('./public/font/')) //压缩后的输出目录
         .on('end', cb)
