@@ -10,7 +10,7 @@ const jsonMin = require('gulp-jsonmin')
 // 压缩js
 gulp.task('compress', () =>
     gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
-        .pipe(terser({toplevel: true}))
+        .pipe(terser({}))
         .pipe(gulp.dest('./public'))
 )
 //压缩css
