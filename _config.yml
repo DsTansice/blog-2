@@ -244,7 +244,6 @@ tag_plugins:
     tag_plugins_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
 
 # envelope_comment
-# see https://akilar.top/posts/58900a8/
 envelope_comment:
   enable: true #开关
   cover: https://ae01.alicdn.com/kf/U5bb04af32be544c4b41206d9a42fcacfd.jpg #信笺封面图
@@ -262,8 +261,6 @@ envelope_comment:
     comments: true
 
 # footer_beautify
-# 页脚计时器：[Native JS Timer](https://akilar.top/posts/b941af/)
-# 页脚徽标：[Add Github Badge](https://akilar.top/posts/e87ad7f8/)
 footer_beautify:
   enable:
     timer: false # 计时器开关
