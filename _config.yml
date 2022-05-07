@@ -247,6 +247,11 @@ tag_plugins:
 envelope_comment:
   enable: true #开关
   cover: https://ae01.alicdn.com/kf/U5bb04af32be544c4b41206d9a42fcacfd.jpg #信笺封面图
+  custom_pic:
+    cover: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/violet.jpg
+    line: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/line.png
+    beforeimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/before.png
+    afterimg: https://npm.elemecdn.com/hexo-butterfly-envelope/lib/after.png
   message: #信笺内容，支持多行
     - 有什么想知道的？
     - 有什么想学习的？
