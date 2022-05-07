@@ -66,6 +66,11 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理缓存时是否无视最终访问时间直接删除
  */
 const cacheList = {
+    font: {
+        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
+        time: Number.MAX_VALUE,
+        clean: false
+    },
     static: {
         url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
         time: Number.MAX_VALUE,
@@ -77,7 +82,7 @@ const cacheList = {
         clean: true
     },
     resources: {
-        url: /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json|svg|eot)$/g,
+        url: /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
         time: 60 * 60 * 24 * 3,
         clean: true
     },
