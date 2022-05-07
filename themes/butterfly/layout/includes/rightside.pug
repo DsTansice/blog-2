@@ -63,3 +63,12 @@ mixin rightsideItem(array)
 
     button#go-up(type="button" title=_p("rightside.back_to_top"))
       i.fas.fa-arrow-up
+
+script.
+  function refreshCache() {
+    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+      if (confirm('是否确定刷新博文缓存')) navigator.serviceWorker.controller.postMessage("refresh")
+    } else {
+      btf.snackbarShow('ServiceWorker未激活')
+    }
+  }

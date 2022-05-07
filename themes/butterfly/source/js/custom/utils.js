@@ -1,3 +1,12 @@
+// -------------------- sw通信 -------------------- //
+navigator.serviceWorker.addEventListener('message', event => {
+    switch (event.data) {
+        case 'success':
+            location.reload()
+            break
+    }
+})
+
 // -------------------- fixed-card-widget -------------------- //
 // 固定卡片点击动作
 function FixedCardWidget(type, name, index) {

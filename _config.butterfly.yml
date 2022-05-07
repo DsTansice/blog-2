@@ -774,7 +774,6 @@ inject:
     - <script async src="/js/custom/utils.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
     - <script async src="/js/custom/share.js"></script>
-    - <script async src="/js/custom/event.js"></script>
     - <script data-pjax async src="/js/custom/no-pjax.js"></script>
 
 #侧栏悬浮卡片控制按钮

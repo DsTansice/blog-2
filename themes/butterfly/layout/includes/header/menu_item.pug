@@ -25,3 +25,12 @@ if theme.menu
                   if valArray[1]
                     i.fa-fw(class=trim(valArray[1]))
                   span=' '+ lab
+
+script.
+  function closeSideBar() {
+    const $body = document.body;
+    $body.style.overflow = ''
+    $body.style.paddingRight = ''
+    btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
+    document.getElementById('sidebar-menus').classList.remove('open')
+  }
