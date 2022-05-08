@@ -38,33 +38,29 @@ date: 2021-11-20 15:18:44
 
 在这里给出一组输入。例如：
 
-{% note simple %}poemp134567
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> poemp134567
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例1
 
 在这里给出相应的输出。例如：
 
-{% note simple %}not found
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> not found
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输入样例2
 
 在这里给出一组输入。例如：
 
-{% note simple %}This 156is a test example
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> This 156is a test example
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例2
 
 在这里给出相应的输出。例如：
 
-{% note simple %}Thisaexmpl
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> Thisaexmpl
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -81,9 +77,10 @@ bool contain(const char record[], int c) {
 }
 
 int main() {
-    char record[11] = {'\0'};
+    char record[11];
     int size = 0;
     int c;
+    recotd[10] = '\0';
     while (c = getchar(), c != '\n' && c != EOF) {
         //如果c是字母并且record中不存在c，则将c放入数组中
         if (isalpha(c) && !contain(record, c)) {
@@ -118,21 +115,17 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note simple %}4 30
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 4 30
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note simple %}5 7 11 13 17
-
-19 23 29
-
-amount=8 sum=124
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 5 7 11 13 17
+> 19 23 29
+> amount=8 sum=124
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -177,15 +170,13 @@ int main() {
 
 #### 输入样例
 
-{% note simple %}5
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 5
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
-{% note simple %}\*\*\*\*\*
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> \*\*\*\*\*
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -214,17 +205,14 @@ int main() {
 
 #### 输入样例
 
-{% note simple %}5
-
-2 3 1 1 4
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 5
+> 2 3 1 1 4
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
-{% note simple %}2
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 2
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 解释
 
@@ -232,9 +220,9 @@ int main() {
 
 #### 范围
 
-对于 20% 的数据：n≤100
+对于 20% 的数据：n ≤ 100
 
-对于 100% 的数据：n≤1000000
+对于 100% 的数据：n ≤ 1000000
 
 所有整数元素在`int`范围内
 
@@ -299,15 +287,13 @@ int main() {
 
 #### 输入样例
 
-{% note simple %}12.15
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 12.15
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
-{% note simple %}1.80
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 1.80
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -344,33 +330,29 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note simple %}37
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 37
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例1
 
 在这里给出相应的输出。例如：
 
-{% note simple %}3
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 3
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输入样例2
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note simple %}0
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 0
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例2
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note simple %}0
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 0
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -412,17 +394,15 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note simple %}0.00000001
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 0.00000001
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
 &emsp;&emsp;在这里给出相应的输出。例如：
 
-{% note simple %}3.141497
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 3.141497
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -470,43 +450,31 @@ M：1 0 X 9 8 7 6 5 4 3 2
 
 #### 输入样例1
 
-{% note simple %}4
-
-320124198808240056
-
-12010X198901011234
-
-110108196711301866
-
-37070419881216001X
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 4
+> 320124198808240056
+> 12010X198901011234
+> 110108196711301866
+> 37070419881216001X
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例1
 
-{% note simple %}12010X198901011234
-
-110108196711301866
-
-37070419881216001X
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 12010X198901011234
+> 110108196711301866
+> 37070419881216001X
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输入样例2
 
-{% note simple %}2
-
-320124198808240056
-
-110108196711301862
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 2
+> 320124198808240056
+> 110108196711301862
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例2
 
-{% note simple %}All passed
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> All passed
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -557,15 +525,13 @@ int main() {
 
 #### 输入样例
 
-{% note simple %}123
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 123
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
-{% note simple %}11233
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 11233
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -604,17 +570,15 @@ int main() {
 
 &emsp;&emsp;在这里给出一组输入。例如：
 
-{% note simple %}90
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 90
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 #### 输出样例
 
 在这里给出相应的输出。例如：
 
-{% note success no-icon %}sum = 3885
-
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> sum = 3885
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
