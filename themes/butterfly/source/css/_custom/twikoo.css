@@ -156,6 +156,11 @@
     border-left: 0 solid transparent;
 }
 
+.tk-content:hover+.tk-extras {
+    position: relative;
+    left: calc(2%);
+}
+
 /* 自适应内容 */
 @media screen and (min-width: 1024px) {
     /* 设置宽度上限，避免挤压博主头像 */
@@ -183,7 +188,11 @@
     .tk-master .tk-row[data-v-d82ce9a0] {
         position: relative;
         top: 0;
-        left: calc(55%);
+        left: calc(56%);
+    }
+
+    .tk-master .tk-content:hover+.tk-extras {
+        left: calc(43%);
     }
 
     [data-theme="dark"] .tk-master .tk-content::before {
