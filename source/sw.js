@@ -109,6 +109,10 @@ const replaceList = {
             '//unpkg.zhimg.com'
         ],
         dist: '//npm.elemecdn.com'
+    },
+    emoji: {
+        source: ['/gh/EmptyDreams/resources/icon/'],
+        dist: '/gh/EmptyDreams/twikoo-emoji/'
     }
 }
 
@@ -123,14 +127,18 @@ function findCache(url) {
 
 //检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
 function replaceRequest(request) {
+    let url = request.url;
+    let flag = false
     for (let key in replaceList) {
         const value = replaceList[key]
         for (let source of value.source) {
-            if (request.url.match(source))
-                return new Request(request.url.replace(source, value.dist))
+            if (url.match(source)) {
+                url = url.replace(source, value.dist)
+                flag = true
+            }
         }
     }
-    return null
+    return flag ? new Request(url) : null
 }
 
 //判断是否拦截指定的request
