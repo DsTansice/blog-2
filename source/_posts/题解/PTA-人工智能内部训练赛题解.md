@@ -28,19 +28,19 @@ description:
 
 ### 输入格式
 
-{% note simple %}底层油桶和层数{% endnote %}
+&emsp;&emsp;底层油桶和层数
 
 ### 输出格式
 
-{% note simple %}油桶的数量{% endnote %}
+&emsp;&emsp;油桶的数量
 
 ### 输入样例
 
-{% note simple %}7 4{% endnote %}
+> 7 4
 
 ### 输出样例
 
-{% note simple %}22{% endnote %}
+> 22
 
 ### 题解
 
@@ -63,21 +63,21 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}在一行内包含一个算式。算式中有2个运算符，3个操作数。运算符保证是“+、-、*、/”之一，所有的操作数都是非负整数。除法运算结果与C语言整数除法规则一致，所有测试数据中保证除数不为0。{% endnote %}
+&emsp;&emsp;在一行内包含一个算式。算式中有2个运算符，3个操作数。运算符保证是“+、-、*、/”之一，所有的操作数都是非负整数。除法运算结果与C语言整数除法规则一致，所有测试数据中保证除数不为0。
 
 ### 输出格式
 
-{% note simple %}输出算式结果。{% endnote %}
+&emsp;&emsp;输出算式结果。
 
 ### 输入样例
 
-{% note simple %}1+2*3
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 1+2*3
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 输出样例
 
-{% note simple %}7
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 7
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -140,9 +140,7 @@ int main() {
 
 &emsp;&emsp;先来一题思维题，给你四个整数，`a`、`b`、`x`、`y`。一开始，`a≥x`和`b≥y`。您可以执行以下操作不超过`n`次。
 
-<ul>
-    <li> 选择其中之一<code>a</code>或<code>b</code>把它减少一。但是，<code>a</code>不能比<code>x</code>小，<code>b</code>不能比<code>y</code>小。
-</ul>
++ 选择其中之一<code>a</code>或<code>b</code>把它减少一。但是，<code>a</code>不能比<code>x</code>小，<code>b</code>不能比<code>y</code>小。
 
 &emsp;&emsp;你的任务是通过不超过`n`次操作后，最小化`a∗b`。
 
@@ -150,36 +148,35 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}输入的第一行包含一个整数。`t` (1≥t≥2∗10^4^)测试用例的数量。然后接下来是`t`个测试用例。{% endnote %}
+&emsp;&emsp;输入的第一行包含一个整数。`t` (1≥t≥2∗10^4^)测试用例的数量。然后接下来是`t`个测试用例。
 
-{% note simple %}测试用例的唯一行包含五个整数。`a`、`b`、`x`、
-`y`和`n`(1≤a,b,x,y,n≤10^9^)。对输入的附加限制：a≥x和b≥y一直都是。{% endnote %}
+&emsp;&emsp;测试用例的唯一行包含五个整数。`a`、`b`、`x`、`y`和`n`(1≤a,b,x,y,n≤10^9^)。对输入的附加限制：a≥x和b≥y一直都是。
 
 ### 输出格式
 
-{% note simple %}对每个测试用例，打印一个整数：通过不超过`n`次操作后，最小化`a∗b`{% endnote %}
+&emsp;&emsp;对每个测试用例，打印一个整数：通过不超过`n`次操作后，最小化`a∗b`。
 
 ### 输入样例
 
-{% note simple %}7
-10 10 8 5 3
-12 8 8 7 2
-12343 43 4543 39 123212
-1000000000 1000000000 1 1 1
-1000000000 1000000000 1 1 1000000000
-10 11 2 1 5
-10 11 9 1 10{% endnote %}
+> 7
+> 10 10 8 5 3
+> 12 8 8 7 2
+> 12343 43 4543 39 123212
+> 1000000000 1000000000 1 1 1
+> 1000000000 1000000000 1 1 1000000000
+> 10 11 2 1 5
+> 10 11 9 1 10
 
 ### 输出样例
 
-{% note simple %}70
-77
-177177
-999999999000000000
-999999999
-55
-10
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 70
+> 77
+> 177177
+> 999999999000000000
+> 999999999
+> 55
+> 10
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 样例解释
 
@@ -195,23 +192,17 @@ int main() {
 
 &emsp;&emsp;我们来列出一些情况分类讨论：
 
-<ol>
-<li> a = 100, b = 100, x = 1, y = 1, n = 5<br/>
-&emsp;我们只需要将`a`、`b`中任意一个数减`5`就可以得到答案。
+1. a = 100, b = 100, x = 1, y = 1, n = 5
+   &emsp;我们只需要将`a`、`b`中任意一个数减`5`就可以得到答案。
+2. a = 50, b = 100, x = 45, y = 45, n = 10
+   &emsp;我们应当将`a`减到`45`，将`b`减到`95`；在第三个情况中，我们不应该对任何一个数进行减法。
+3. a = 50, b = 50, x = 50, y = 50, n = 10
+   &emsp;我们需要思考一下，到底应该先减哪一个数？应当先减`a`还是`b`？我们可以试一下，如果先减`b`，最终的结果是`40*40=1600`，如果先减`a`，最终的结果是`35*45=1400`，显而易见，我们应该先减`a`。
+4. a = 50, b = 45, x = 35, y = 40, n = 15
+   &emsp;显然同样任何一个数都不应该进行减法。
+5. a = 50, b = 50, x = 1, y = 1, n = 0
 
-<li> a = 50, b = 100, x = 45, y = 45, n = 10<br/>
-&emsp;我们应当将`a`减到`45`，将`b`减到`95`；在第三个情况中，我们不应该对任何一个数进行减法。
-
-<li> a = 50, b = 50, x = 50, y = 50, n = 10<br/>
-&emsp;我们需要思考一下，到底应该先减哪一个数？应当先减`a`还是`b`？我们可以试一下，如果先减`b`，最终的结果是`40*40=1600`，如果先减`a`，最终的结果是`35*45=1400`，显而易见，我们应该先减`a`。
-
-<li> a = 50, b = 45, x = 35, y = 40, n = 15<br/>
-&emsp;显然同样任何一个数都不应该进行减法。
-
-<li> a = 50, b = 50, x = 1, y = 1, n = 0<br/>
-</ol>
-
-&emsp;&emsp;根据以上信息我们总结一下，进行运算时，我们应当尽量的减出一个最小的数字（注意不是把当前最小的数字减到其能达到的最小）。同时通过例题我们也可以看到，中间出现了非常大的数字，所以只用`int`绝对会导致数据溢出，这里我们就用`long long`来保证数据正常（如果连`long long`都存不下只能用大数字了，但是我们这个水平的竞赛题中如果不单独考大数字是绝对不会涉及到大数字的）。
+&emsp;&emsp;根据以上信息我们总结一下，进行运算时，我们应当尽量地减出一个最小的数字（注意不是把当前最小的数字减到其能达到的最小）。同时通过例题我们也可以看到，中间出现了非常大的数字，所以只用`int`绝对会导致数据溢出，这里我们就用`long long`来保证数据正常（如果连`long long`都存不下只能用大数字了，但是我们这个水平的竞赛题中如果不单独考大数字是绝对不会涉及到大数字的）。
 
 &emsp;&emsp;所以我们可以得到如下代码：
 
@@ -247,22 +238,22 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}输入在2行中先后给出字符串`A`和`B`。每个字符串都是由可见的ASCII码组成，最后以换行符结束。{% endnote %}
+&emsp;&emsp;输入在2行中先后给出字符串`A`和`B`。每个字符串都是由可见的ASCII码组成，最后以换行符结束。
 
 ### 输出格式
 
-{% note simple %}在一行中打印出`A-B`的结果字符串。{% endnote %}
+&emsp;&emsp;在一行中打印出`A-B`的结果字符串。
 
 ### 输入样例：
 
-{% note simple %}I love Python!  It's a fun game!
-aeiou
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> I love Python!  It's a fun game!
+> aeiou
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 输出样例：
 
-{% note simple %}I lv Pythn!  It's  fn gm!
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> I lv Pythn!  It's  fn gm!
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
@@ -300,28 +291,26 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}测试数据有多组，处理到文件尾。每组测试输入一个字符串（长度小于100，且由大写英文字母构成）。{% endnote %}
+&emsp;&emsp;测试数据有多组，处理到文件尾。每组测试输入一个字符串（长度小于100，且由大写英文字母构成）。
 
 ### 输出格式
 
-{% note simple %}对于每组测试数据，在一行上输出一个整数，表示没使用魔镜前，最初字符串可能的最小长度。{% endnote %}
+&emsp;&emsp;对于每组测试数据，在一行上输出一个整数，表示没使用魔镜前，最初字符串可能的最小长度。
 
 ### 输入样例
 
-{% note simple %}XYYXXYYX{% endnote %}
+> XYYXXYYX
 
 ### 输出样例
 
-{% note simple %}2{% endnote %}
+> 2
 
 ### 题解
 
 &emsp;&emsp;这道题说的很复杂，实际上就是判断是否为对称字符串。我们来考虑一下对称字符串需要满足什么条件。
 
-<ul>
-<li> 长度为偶数
-<li> 轴对称
-</ul>
++ 长度为偶数
++ 轴对称
 
 &emsp;&emsp;到这里，思路应该就很清晰了，我们给出代码：
 
@@ -354,29 +343,29 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}输入在一行中给出`n`（`10≤n≤10000`）和`k`（`1≤k≤10`）的值。{% endnote %}
+&emsp;&emsp;输入在一行中给出`n`（`10≤n≤10000`）和`k`（`1≤k≤10`）的值。
 
 ### 输出格式
 
-{% note simple %}在一行中按下列格式输出:
-素数1+素数2+…+素数k=总和值
-其中素数按递减顺序输出。若n以内不够k个素数，则按实际个数输出。{% endnote %}
+&emsp;&emsp;在一行中按下列格式输出：`素数1` + `素数2` + … + `素数k` = `总和值`
+
+&emsp;&emsp;其中素数按递减顺序输出，若n以内不够k个素数，则按实际个数输出。
 
 ### 输入样例1
 
-{% note simple %}1000 10{% endnote %}
+> 1000 10
 
 ### 输出样例1
 
-{% note simple %}997+991+983+977+971+967+953+947+941+937=9664{% endnote %}
+> 997+991+983+977+971+967+953+947+941+937=9664
 
 ### 输入样例2
 
-{% note simple %}12 6{% endnote %}
+> 12 6
 
 ### 输出样例2
 
-{% note simple %}11+7+5+3+2=28{% endnote %}
+> 11+7+5+3+2=28
 
 ### 题解
 
@@ -412,32 +401,32 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}输入第一行给出一个正整数`T`，为待测矩阵的个数。接下来给出`T`个矩阵的信息：每个矩阵信息的第一行给出一个不超过10的正整数`n`。随后`n`行，每行给出`n`个整数，其间以空格分隔。{% endnote %}
+&emsp;&emsp;输入第一行给出一个正整数`T`，为待测矩阵的个数。接下来给出`T`个矩阵的信息：每个矩阵信息的第一行给出一个不超过10的正整数`n`。随后`n`行，每行给出`n`个整数，其间以空格分隔。
 
 ### 输出格式
 
-{% note simple %}每个矩阵的判断结果占一行。如果输入的矩阵是上三角矩阵，输出“YES”，否则输出“NO”。{% endnote %}
+&emsp;&emsp;每个矩阵的判断结果占一行。如果输入的矩阵是上三角矩阵，输出“YES”，否则输出“NO”。
 
 ### 输入样例
 
-{% note simple %}3
-3
-1 2 3
-0 4 5
-0 0 6
-2
-1 0
--8 2
-3
-1 2 3
-1 4 5
-0 -1 6{% endnote %}
+> 3
+> 3
+> 1 2 3
+> 0 4 5
+> 0 0 6
+> 2
+> 1 0
+> -8 2
+> 3
+> 1 2 3
+> 1 4 5
+> 0 -1 6
 
 ### 输出样例
 
-{% note simple %}YES
-NO
-NO{% endnote %}
+> YES
+> NO
+> NO
 
 ### 题解
 
@@ -470,27 +459,27 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过`1000`的整数）。数字间以空格分隔。{% endnote %}
+&emsp;&emsp;输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过`1000`的整数）。数字间以空格分隔。
 
 ### 输出格式
 
-{% note simple %}输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出`0 0`。{% endnote %}
+&emsp;&emsp;输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。零多项式应输出`0 0`。
 
 ### 输入样例
 
-{% note simple %}4 3 4 -5 2  6 1  -2 0
-3 5 20  -7 4  3 1
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 4 3 4 -5 2  6 1  -2 0
+> 3 5 20  -7 4  3 1
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 输出样例
 
-{% note simple %}15 24 -25 22 30 21 -10 20 -21 8 35 6 -33 5 14 4 -15 3 18 2 -6 1
-5 20 -4 4 -5 2 9 1 -2 0
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 15 24 -25 22 30 21 -10 20 -21 8 35 6 -33 5 14 4 -15 3 18 2 -6 1
+> 5 20 -4 4 -5 2 9 1 -2 0
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
-&emsp;&emsp;这道题用到了很多的数组，所以我们使用`c++`来写，想要`c`的解法可以参考[这篇博客](https://www.cnblogs.com/sser-invincible/p/5300126.html)。
+&emsp;&emsp;这道题用到了很多的数组，所以我们使用`c++`来写，想要`c`的解法可以参考 [这篇博客](https://www.cnblogs.com/sser-invincible/p/5300126.html)。
 
 ```c++
 //万能头
@@ -603,24 +592,23 @@ int main() {
 
 ### 输入格式
 
-{% note simple %}数据的第 1 行是正整数`N`，表示有`N`堆石子。
-第 2 行有`N`个整数，第`i`个整数 a~i~表示第`i`堆石子的个数。{% endnote %}
+&emsp;&emsp;数据的第 1 行是正整数`N`，表示有`N`堆石子。第 2 行有`N`个整数，第`i`个整数 a~i~表示第`i`堆石子的个数。
 
 ### 输出格式
 
-{% note simple %}输出共 2 行，第 1 行为最小得分，第 2 行为最大得分。{% endnote %}
+&emsp;&emsp;输出共 2 行，第 1 行为最小得分，第 2 行为最大得分。
 
 ### 输入样例
 
-{% note simple %}4
-4 5 9 4
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 4
+> 4 5 9 4
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 输出样例
 
-{% note simple %}43
-54
-{% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行{% endnote %}
+> 43
+> 54
+> {% inlineimage https://image.kmar.top/icon/warning.png %} 结尾无空行
 
 ### 题解
 
