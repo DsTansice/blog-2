@@ -90,9 +90,9 @@ LL factorial[1000001];
 
 void init() {
     factorial[0] = 1;
-	for (int i = 1; i != 1000001; ++i) {
-		factorial[i] = (factorial[i - 1] * i) % mod;
-	}
+    for (int i = 1; i != 1000001; ++i) {
+        factorial[i] = (factorial[i - 1] * i) % mod;
+    }
 }
 ```
 
@@ -119,9 +119,9 @@ LL space[1000001];
 
 void init() {
     space[0] = 1;
-	for (int i = 1; i != 1000001; ++i) {
-		space[i] = (i * space[i - 1] + ((i - 1) * space[i - 2])) % mod;
-	}
+    for (int i = 1; i != 1000001; ++i) {
+        space[i] = (i * space[i - 1] + ((i - 1) * space[i - 2])) % mod;
+    }
 }
 ```
 
@@ -142,41 +142,41 @@ LL factorial[1000001];
 LL space[1000001];
 
 LL ksm(LL a, LL b) {
-	LL result = 1;
-	while (b) {
-		if (b & 1) result = (result * a) % mod;
-		a = (a * a) % mod;
-		b >>= 1;
-	}
-	return result;
+    LL result = 1;
+    while (b) {
+        if (b & 1) result = (result * a) % mod;
+        a = (a * a) % mod;
+        b >>= 1;
+    }
+    return result;
 }
 
 void init() {
     factorial[0] = 1;
-	space[0] = 1;
-	for (int i = 1; i != 1000001; ++i) {
-		factorial[i] = (factorial[i - 1] * i) % mod;
-		space[i] = (i * space[i - 1] + ((i - 1) * space[i - 2])) % mod;
-	}
+    space[0] = 1;
+    for (int i = 1; i != 1000001; ++i) {
+        factorial[i] = (factorial[i - 1] * i) % mod;
+        space[i] = (i * space[i - 1] + ((i - 1) * space[i - 2])) % mod;
+    }
 }
 
 int main() {
-	init();
-	int t, n, m;
-	cin >> t;
-	while (t--) {
-		scanf("%d %d", &n, &m);
-		if (n == m) {
-			printf("1\n");
-		} else if (m == 0) {
-			printf("%llu\n", (n - 1) * space[n - 2] % mod);
-		} else {
-			LL cnm = factorial[n] * ksm(factorial[m], mod - 2) % mod
-			         * ksm(factorial[n - m], mod - 2) % mod;
-			LL result = cnm * (n - m - 1) % mod * space[n - m - 2] % mod;
-			printf("%llu\n", result);
-		}
-	}
-	return 0;
+    init();
+    int t, n, m;
+    cin >> t;
+    while (t--) {
+        scanf("%d %d", &n, &m);
+        if (n == m) {
+            printf("1\n");
+        } else if (m == 0) {
+            printf("%llu\n", (n - 1) * space[n - 2] % mod);
+        } else {
+            LL cnm = factorial[n] * ksm(factorial[m], mod - 2) % mod
+                    * ksm(factorial[n - m], mod - 2) % mod;
+            LL result = cnm * (n - m - 1) % mod * space[n - m - 2] % mod;
+            printf("%llu\n", result);
+        }
+    }
+    return 0;
 }
 ```
