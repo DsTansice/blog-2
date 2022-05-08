@@ -90,10 +90,10 @@ description: 这道题不是特别难，但是网上我没有找到讲的清晰�
 <!-- tab BFS -->
 ```c++
 struct info {
-	int step;
-	int money;
-	int level;
-	info(int a, int b, int c) : step(a), money(b), level(c) {}
+    int step;
+    int money;
+    int level;
+    info(int a, int b, int c) : step(a), money(b), level(c) {}
 };
 
 int profit[200000];
@@ -101,45 +101,45 @@ int upgrade[200000];
 int n;
 
 int task(int dist) {
-	queue<info> record;
-	record.emplace(0, 0, 0);
-	int ans = INT_MAX;
-	do {
-		info now = record.front();
-		record.pop();
-		if (now.step >= ans) continue;
-		if (now.money >= dist) {
-			ans = min(ans, now.step);
-			continue;
-		}
-		if (now.money >= upgrade[now.level]) {
-			record.emplace(now.step + 1, now.money - upgrade[now.level], now.level + 1);
-			int dif = dist - now.money;
-			int step = dif / profit[now.level];
-			if (dif % profit[now.level] != 0) ++step;
-			ans = min(ans, now.step + step);
-		} else {
-			int target = min(dist, upgrade[now.level]);
-			int dif = target - now.money;
-			int step = dif / profit[now.level];
-			if (dif % profit[now.level] != 0) ++step;
-			record.emplace(step + now.step, now.money + step * profit[now.level], now.level);
-		}
-	} while (!record.empty());
-	return ans;
+    queue<info> record;
+    record.emplace(0, 0, 0);
+    int ans = INT_MAX;
+    do {
+        info now = record.front();
+        record.pop();
+        if (now.step >= ans) continue;
+        if (now.money >= dist) {
+            ans = min(ans, now.step);
+            continue;
+        }
+        if (now.money >= upgrade[now.level]) {
+            record.emplace(now.step + 1, now.money - upgrade[now.level], now.level + 1);
+            int dif = dist - now.money;
+            int step = dif / profit[now.level];
+            if (dif % profit[now.level] != 0) ++step;
+            ans = min(ans, now.step + step);
+        } else {
+            int target = min(dist, upgrade[now.level]);
+            int dif = target - now.money;
+            int step = dif / profit[now.level];
+            if (dif % profit[now.level] != 0) ++step;
+            record.emplace(step + now.step, now.money + step * profit[now.level], now.level);
+        }
+    } while (!record.empty());
+    return ans;
 }
 
 int main() {
-	int t, dist;
-	cin >> t;
-	while (t--) {
-		scanf("%d %d", &n, &dist);
-		for (int i = 0; i != n; ++i) scanf("%d", &profit[i]);
-		for (int i = 0; i != n - 1; ++i) scanf("%d", &upgrade[i]);
-		upgrade[n - 1] = INT_MAX;
-		printf("%d\n", task(dist));
-	}
-	return 0;
+    int t, dist;
+    cin >> t;
+    while (t--) {
+        scanf("%d %d", &n, &dist);
+        for (int i = 0; i != n; ++i) scanf("%d", &profit[i]);
+        for (int i = 0; i != n - 1; ++i) scanf("%d", &upgrade[i]);
+        upgrade[n - 1] = INT_MAX;
+        printf("%d\n", task(dist));
+    }
+    return 0;
 }
 ```
 <!-- endtab -->
@@ -147,10 +147,10 @@ int main() {
 <!-- tab DFS -->
 ```c++
 struct info {
-	int step;
-	int money;
-	int level;
-	info(int a, int b, int c) : step(a), money(b), level(c) {}
+    int step;
+    int money;
+    int level;
+    info(int a, int b, int c) : step(a), money(b), level(c) {}
 };
 
 int profit[200000];
@@ -158,45 +158,45 @@ int upgrade[200000];
 int n;
 
 int task(int dist) {
-	stack<info> record;
-	record.emplace(0, 0, 0);
-	int ans = INT_MAX;
-	do {
-		info now = record.top();
-		record.pop();
-		if (now.step >= ans) continue;
-		if (now.money >= dist) {
-			ans = min(ans, now.step);
-			continue;
-		}
-		if (now.money >= upgrade[now.level]) {
-			record.emplace(now.step + 1, now.money - upgrade[now.level], now.level + 1);
-			int dif = dist - now.money;
-			int step = dif / profit[now.level];
-			if (dif % profit[now.level] != 0) ++step;
-			ans = min(ans, now.step + step);
-		} else {
-			int target = min(dist, upgrade[now.level]);
-			int dif = target - now.money;
-			int step = dif / profit[now.level];
-			if (dif % profit[now.level] != 0) ++step;
-			record.emplace(step + now.step, now.money + step * profit[now.level], now.level);
-		}
-	} while (!record.empty());
-	return ans;
+    stack<info> record;
+    record.emplace(0, 0, 0);
+    int ans = INT_MAX;
+    do {
+        info now = record.top();
+        record.pop();
+        if (now.step >= ans) continue;
+        if (now.money >= dist) {
+            ans = min(ans, now.step);
+            continue;
+        }
+        if (now.money >= upgrade[now.level]) {
+            record.emplace(now.step + 1, now.money - upgrade[now.level], now.level + 1);
+            int dif = dist - now.money;
+            int step = dif / profit[now.level];
+            if (dif % profit[now.level] != 0) ++step;
+            ans = min(ans, now.step + step);
+        } else {
+            int target = min(dist, upgrade[now.level]);
+            int dif = target - now.money;
+            int step = dif / profit[now.level];
+            if (dif % profit[now.level] != 0) ++step;
+            record.emplace(step + now.step, now.money + step * profit[now.level], now.level);
+        }
+    } while (!record.empty());
+    return ans;
 }
 
 int main() {
-	int t, dist;
-	cin >> t;
-	while (t--) {
-		scanf("%d %d", &n, &dist);
-		for (int i = 0; i != n; ++i) scanf("%d", &profit[i]);
-		for (int i = 0; i != n - 1; ++i) scanf("%d", &upgrade[i]);
-		upgrade[n - 1] = INT_MAX;
-		printf("%d\n", task(dist));
-	}
-	return 0;
+    int t, dist;
+    cin >> t;
+    while (t--) {
+        scanf("%d %d", &n, &dist);
+        for (int i = 0; i != n; ++i) scanf("%d", &profit[i]);
+        for (int i = 0; i != n - 1; ++i) scanf("%d", &upgrade[i]);
+        upgrade[n - 1] = INT_MAX;
+        printf("%d\n", task(dist));
+    }
+    return 0;
 }
 ```
 <!-- endtab -->
