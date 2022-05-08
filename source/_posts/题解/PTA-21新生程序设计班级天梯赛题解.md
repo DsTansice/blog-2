@@ -1127,14 +1127,16 @@ int main() {
 
 &emsp;&emsp;“书中自有黄金屋 书中自有颜如玉”，噢！小Z现在太爱读书了，以至于做梦都在想读书的画面。现在他想回想一下梦里的场景，也就是一本书的画面，这本书是立体的，所以是一个长方体。 他需要画出这个长方体的立体图像以便向大家分享他梦中的场景，如图所示是一个长为 7 宽为 4 高为 5 的长方体。
 
-> &emsp;&emsp;&emsp;@@@@@@@
-> &emsp;&emsp;@&emsp;&emsp;&emsp;&emsp;&emsp;@@
-> &emsp;@&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;@
-> @@@@@@@&emsp;&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@@
-> @@@@@@@
+```
+   @@@@@@@
+  @     @@
+ @     @ @
+@@@@@@@  @
+@     @  @
+@     @ @
+@     @@
+@@@@@@@
+```
 
 &emsp;&emsp;现在请你帮小Z用任意字符画出长为`a`，宽为`b`，高为`c`的长方体。
 
@@ -1157,14 +1159,16 @@ int main() {
 
 ### 输出样例
 
-> &emsp;&emsp;&emsp;@@@@@@@
-> &emsp;&emsp;@&emsp;&emsp;&emsp;&emsp;&emsp;@@
-> &emsp;@&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;@
-> @@@@@@@&emsp;&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@&emsp;@
-> @&emsp;&emsp;&emsp;&emsp;&emsp;@@
-> @@@@@@@
+```
+   @@@@@@@
+  @     @@
+ @     @ @
+@@@@@@@  @
+@     @  @
+@     @ @
+@     @@
+@@@@@@@
+```
 
 ### 题解
 
