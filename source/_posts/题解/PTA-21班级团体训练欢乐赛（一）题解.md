@@ -256,17 +256,15 @@ int main () {
 
 &emsp;&emsp;这道题是非常经典的题目，所有这种打印图形的题目的思路都一样，就是找规律。这道题要求的图形的规律非常明显，我们规定：
 
-```
-n表示总行数
-line表示当前行的下标（从1开始）
-spaceLength|line表示指定行上的空格数量
-```
+<div class="text" style="text-align: center; line-height: 0.9rem;">
+<p>n表示总行数
+<p>line表示当前行的下标（从1开始）
+<p>spaceLength|line表示指定行上的空格数量
+</div>
 
 &emsp;&emsp;其中，`n`为常数，`line`为自变量，易得：
 
-```
-spaceLength|line = n - line;
-```
+{% p center, <b>spaceLength|line = n - line</b> %}
 
 &emsp;&emsp;随后直接打印就行了：
 
