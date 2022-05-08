@@ -57,23 +57,15 @@ date: 2020-07-23 17:54:24
 
 #### 书写错误
 
-> 1.这是我们第一次编写拥有返回值的方法，也就是返回值声明为void。
->
-> ​																			------ P71 · 第一行
->
-> 2.IntelliJ IDEA 提出了两个方案——实现对应方法，并把这个类同样变成抽象类。
->
-> ​																			------ P83 · 第四行
->
-> 3.返回值是EnumActionResult.PASS的情况都将被视为成功执行，并忽略副手上的物品。
->
-> ​																			------ P226 · 第七行
-
-1). 应该为：这是我们第一次编写拥有返回值的方法，也就是返回值声明为`非void`。| 书中写成了"void"。
-
-2). 应该为：IntelliJ IDEA 提出了两个方案——实现对应方法，`或`把这个类同样变成抽象类。| 书中将“或”写为了“并”。
-
-3). 应该为：返回值是`EnumActionResult.SUCCESS`的情况都将被视为成功执行，并忽略副手上的物品。 | 书中将“SUCCESS”写成了“PASS”。
+1. “这是我们第一次编写拥有返回值的方法，也就是返回值声明为void。”
+   <p>应该为：这是我们第一次编写拥有返回值的方法，也就是返回值声明为`非void`。| 书中写成了"void"。</p>
+    <p class = "text" style="text-align: right;">------ P71 · 第一行</p>
+2. “IntelliJ IDEA 提出了两个方案——实现对应方法，并把这个类同样变成抽象类。”
+   <p>应该为：IntelliJ IDEA 提出了两个方案——实现对应方法，`或`把这个类同样变成抽象类。| 书中将“或”写为了“并”。</p>
+    <p class = "text" style="text-align: right;">------ P83 · 第四行</p>
+3. “返回值是EnumActionResult.PASS的情况都将被视为成功执行，并忽略副手上的物品。”
+    <p>应该为：返回值是`EnumActionResult.SUCCESS`的情况都将被视为成功执行，并忽略副手上的物品。 | 书中将“SUCCESS”写成了“PASS”。</p>
+    <p class="text" style="text-align: right;">------ P226 · 第七行</p>
 
 #### ItemStack类（P85---倒数第三行）
 
@@ -142,7 +134,7 @@ Item.getItemFromBlock(Blocks.DIRT) == event.getItemStack().getItem()
 ```java
 EnumFacing facing = EnumFacing.getHorizontal(meta);
 if (facing.getAxis() == EnumFacing.Axis.Y) {
-	facing = EnumFacing.NORTH;
+    facing = EnumFacing.NORTH;
 }
 return getDefaultState().widthProperty(FACING, facing);
 ```
