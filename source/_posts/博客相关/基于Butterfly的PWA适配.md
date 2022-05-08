@@ -13,7 +13,7 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
-updated: 2022-04-27 22:00:40
+updated: 2022-05-08 23:34:40
 ---
   
 ## 更新内容
@@ -257,16 +257,26 @@ function findCache(url) {
     return null
 }
 
-//检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
+/**
+ * 检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
+ * 该函数会顺序匹配{@link replaceList}中的所有项目，即使已经有可用的替换项
+ * 故该函数允许重复替换，例如：
+ * 如果第一个匹配项把链接由"http://abc.com/"改为了"https://abc.com/"
+ * 此时第二个匹配项可以以此为基础继续进行修改，替换为"https://abc.net/"
+ */
 function replaceRequest(request) {
+    let url = request.url;
+    let flag = false
     for (let key in replaceList) {
         const value = replaceList[key]
         for (let source of value.source) {
-            if (request.url.match(source))
-                return new Request(request.url.replace(source, value.dist))
+            if (url.match(source)) {
+                url = url.replace(source, value.dist)
+                flag = true
+            }
         }
     }
-    return null
+    return flag ? new Request(url) : null
 }
 
 //判断是否拦截指定的request
@@ -295,7 +305,7 @@ async function fetchEvent(request, response, cacheDist) {
         return response
     })
     if (!remove) return fetchFunction()
-    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 300)))
+    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 400)))
     return Promise.race([
         timeOut(),
         fetchFunction()]
