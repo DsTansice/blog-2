@@ -21,8 +21,6 @@ date: 2021-09-05 16:49:06
 
 ## 正文
 
----
-
 ### 排版
 
 &emsp;&emsp;排版是规范中最为重要的部分，正确的排版可以让代码更加清晰。
@@ -119,10 +117,10 @@ printf("乌拉乌拉阿斯蒂芬卢卡斯的的规划区内我发噶卫生间"
 &emsp;&emsp;正常情况下，一行仅包含一条变量声明，这样子也方便为变量添加注释。
 
 ```c
-double pi = 3.1415;	 //π
-int r;				//原半径
-int c;				//周长
-int s;				//面积
+double pi = 3.1415; //π
+int r;              //半径
+int c;              //周长
+int s;              //面积
 ```
 
 
@@ -262,7 +260,7 @@ int min(int a, int b);
 
 #### 尽量使用 const 定义代替宏
 
-&emsp;&emsp;一下内容复制自：https://blog.csdn.net/m0_38106923/article/details/105042594
+&emsp;&emsp;以下内容复制自：https://blog.csdn.net/m0_38106923/article/details/105042594
 
 &emsp;&emsp;“尽量用编译器而不用预处理”，因为#define经常被认为好象不是语言本身的一部分。看下面的语句：
 
@@ -346,9 +344,7 @@ int main(int argc, char *argv[], char *envp[])
 
 &emsp;&emsp;按参考程度排序，程度越深越靠前。
 
-<ul>
-    <li>https://blog.csdn.net/m0_38106923/article/details/105042594</li>
-    <li>http://c.biancheng.net/view/158.html</li>
-    <li>https://zhuanlan.zhihu.com/p/54121195</li>
-    <li>http://www.360doc.com/content/18/0830/08/11881101_782310615.shtml</li>
-</ul>
+1. [华为C语言编程规范（精华总结）- CSDN](https://blog.csdn.net/m0_38106923/article/details/105042594)
+2. [C语言代码规范（编程规范）- C语言中文网](http://c.biancheng.net/view/158.html)
+3. [C语言：编码规范 - 知乎](https://zhuanlan.zhihu.com/p/54121195)
+4. [C语言的代码规范有哪些？- 个人图书馆](http://www.360doc.com/content/18/0830/08/11881101_782310615.shtml)
