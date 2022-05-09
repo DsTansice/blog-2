@@ -16,7 +16,7 @@ gulp.task('compress', () =>
 //压缩css
 gulp.task('minify-css', () => {
     return gulp.src(['./public/**/*.css'])
-        .pipe(cleanCSS({level: 2}))
+        .pipe(cleanCSS({level: 1}))
         .pipe(gulp.dest('./public'))
 })
 //压缩html
@@ -26,7 +26,11 @@ gulp.task('minify-html', () => {
         .pipe(htmlMin({
             removeComments: true, //清除html注释
             collapseWhitespace: true, //压缩html
+            collapseInlineTagWhitespace: true,
             collapseBooleanAttributes: true,
+            noNewlinesBeforeTagClose: false,
+            removeAttributeQuotes: true,
+            removeRedundantAttributes: true,
             //省略布尔属性的值，例如：<input checked="true"/> ==> <input />
             removeEmptyAttributes: true,
             //删除所有空格作属性值，例如：<input id="" /> ==> <input />
