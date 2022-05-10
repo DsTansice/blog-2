@@ -161,10 +161,11 @@ updated: 2022-05-10 21:27:40
 &emsp;&emsp;接下来就是重中之重了：编写`sw.js`，这里直接把我的放出来了：
 
 ```javascript
-//缓存库名称
+/** 缓存库（数据）名称 */
 const CACHE_NAME = 'kmarCache'
+/** 缓存库（时间戳）名称 */
 const VERSION_CACHE_NAME = 'kmarCacheTime'
-//缓存离线超时时间
+/** 缓存离线超时时间 */
 const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
 
 function time() {
@@ -200,14 +201,14 @@ const dbHelper = {
     }
 }
 
-//存储缓存入库时间
+/** 存储缓存入库时间 */
 const dbTime = {
     read: (key) => dbHelper.read(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)),
     write: (key, value) => dbHelper.write(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), value),
     delete: (key) => dbHelper.delete(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
 }
 
-//存储缓存最后一次访问的时间
+/** 存储缓存最后一次访问的时间 */
 const dbAccess = {
     update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), time()),
     check: async (key) => {
@@ -248,7 +249,7 @@ const replaceList = {
     }
 }
 
-//判断指定url击中了哪一种缓存，都没有击中则返回null
+/** 判断指定url击中了哪一种缓存，都没有击中则返回null */
 function findCache(url) {
     for (let key in cacheList) {
         const value = cacheList[key]
@@ -258,11 +259,11 @@ function findCache(url) {
 }
 
 /**
- * 检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
- * 该函数会顺序匹配{@link replaceList}中的所有项目，即使已经有可用的替换项
- * 故该函数允许重复替换，例如：
- * 如果第一个匹配项把链接由"http://abc.com/"改为了"https://abc.com/"
- * 此时第二个匹配项可以以此为基础继续进行修改，替换为"https://abc.net/"
+ * 检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null<br/>
+ * 该函数会顺序匹配{@link replaceList}中的所有项目，即使已经有可用的替换项<br/>
+ * 故该函数允许重复替换，例如：<br/>
+ * 如果第一个匹配项把链接由"http://abc.com/"改为了"https://abc.com/"<br/>
+ * 此时第二个匹配项可以以此为基础继续进行修改，替换为"https://abc.net/"<br/>
  */
 function replaceRequest(request) {
     let url = request.url;
@@ -279,7 +280,7 @@ function replaceRequest(request) {
     return flag ? new Request(url) : null
 }
 
-//判断是否拦截指定的request
+/** 判断是否拦截指定的request */
 function blockRequest(request) {
     return false
 }
@@ -328,7 +329,7 @@ self.addEventListener('fetch', async event => {
 })
 ```
 
-&emsp;&emsp;这里我把开了两个缓存空间，一个是`kmarCache`，一个是`kmarCacheTime`。前者是用来存储缓存内容的，后者是用来存储非永久缓存的缓存时间戳的。
+&emsp;&emsp;这里我把开了两个缓存空间，一个是`kmarCache`，一个是`kmarCacheTime`。前者是用来存储缓存内容的，后者是用来存储时间戳的。
 
 ### 注册SW
 
