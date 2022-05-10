@@ -82,7 +82,7 @@ const cacheList = {
         clean: true
     },
     resources: {
-        url: /(^(https:\/\/image\.kmar\.top|kmar\.top)).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
+        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
         time: 60 * 60 * 24 * 3,
         clean: true
     },
