@@ -87,7 +87,7 @@ const cacheList = {
         clean: true
     },
     stand: {
-        url: /^https:\/\/image\.kmar\.top\/indexBg\//g,
+        url: /^https:\/\/image\.kmar\.top\/indexBg/g,
         time: 60 * 60 * 24 * 7,
         clean: true
     }
@@ -111,8 +111,8 @@ const replaceList = {
         dist: '//npm.elemecdn.com'
     },
     emoji: {
-        source: ['/gh/EmptyDreams/resources/icon/'],
-        dist: '/gh/EmptyDreams/twikoo-emoji/'
+        source: ['/gh/EmptyDreams/resources/icon'],
+        dist: '/gh/EmptyDreams/twikoo-emoji'
     }
 }
 
@@ -183,7 +183,7 @@ self.addEventListener('fetch', async event => {
     const cacheDist = findCache(request.url)
     if (cacheDist !== null) {
         event.respondWith(caches.match(request)
-            .then(async (response) => fetchEvent(request, response, request))
+            .then(async (response) => fetchEvent(request, response, cacheDist))
         )
     } else if (replace !== null) {
         event.respondWith(fetch(request))
