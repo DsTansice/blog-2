@@ -141,12 +141,6 @@ function replaceRequest(request) {
     return flag ? new Request(url) : null
 }
 
-//判断是否拦截指定的request
-function blockRequest(request) {
-    return false
-    //return request.url.match('/bangumis/null')
-}
-
 async function fetchEvent(request, response, cacheDist) {
     const NOW_TIME = time()
     // noinspection ES6MissingAwait
