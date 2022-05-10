@@ -13,7 +13,7 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
-updated: 2022-05-08 23:34:40
+updated: 2022-05-10 21:27:40
 ---
   
 ## 更新内容
@@ -320,7 +320,7 @@ self.addEventListener('fetch', async event => {
         event.respondWith(new Response(null, {status: 204}))
     } else if (cacheDist !== null) {
         event.respondWith(caches.match(request)
-            .then(async (response) => fetchEvent(request, response, request))
+            .then(async (response) => fetchEvent(request, response, cacheList))
         )
     } else if (replace !== null) {
         event.respondWith(fetch(request))
