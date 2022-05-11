@@ -157,7 +157,7 @@ async function fetchEvent(request, response, cacheDist) {
     }
     const fetchFunction = () => fetch(request).then(response => {
         dbTime.write(request.url, NOW_TIME)
-        if (response.ok) {
+        if (response.ok || response.status === 0) {
             const clone = response.clone()
             caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
         }
