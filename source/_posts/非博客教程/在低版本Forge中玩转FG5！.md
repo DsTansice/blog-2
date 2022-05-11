@@ -142,7 +142,7 @@ jar {
     manifest.attributes([
             "Specification-Title"        : "examplemod",
             "Specification-Vendor"       : "examplemodsareus",
-            "Specification-Version"      : version, // We are version 1 of ourselves
+            "Specification-Version"      : "1", // We are version 1 of ourselves
             "Implementation-Title"       : project.name,
             "Implementation-Version"     : project.jar.archiveVersion,
             "Implementation-Vendor"      : "examplemodsareus",
