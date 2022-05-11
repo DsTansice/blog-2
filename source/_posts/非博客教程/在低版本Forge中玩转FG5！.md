@@ -181,7 +181,7 @@ compileTestKotlin {
 
 &emsp;&emsp;打开命令提示符进入项目根目录，执行下面的命令：
 
-{% p center, <code>mklink /J "out/production/classes/assets" "out/production/resources/assets"</code> %}
+{% p center, <code>mklink /J &quot;out/production/classes/assets&quot; &quot;out/production/resources/assets&quot;</code> %}
 
 &emsp;&emsp;这上面的路径各位根据自己的情况进行调整。
 
