@@ -57,10 +57,6 @@
       link: https://www.itciraos.cn/
       avatar: https://www.itciraos.cn/customized/avatar.webp
       descr: DARE & DO
-    - name: Xin's Blog
-      link: https://blog.xinmouren.cn/
-      avatar: https://info.xinmouren.cn/custom.gif
-      descr: 嵌入式的日子真不好过！
     - name: 梦荟楼的后花园
       link: https://oniya.cn/
       avatar: https://oniya.cn/usr/uploads/ok/8920e6741fc2808cce5b81bc27abdbda291655d3.png
@@ -75,8 +71,14 @@
       avatar: https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg
       descr: 用这生命中的每一秒，给自己一个不后悔的未来
       siteshot: https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/noionion.top.png
+- class_name: 待君归
+  link_list:
     - name: Mark Blog
       link: https://www.markyin.cn
       avatar: https://blog10000.oss-cn-shanghai.aliyuncs.com/img/202204191758263.png
       descr: IT技术博客
       siteshot: https://blog10000.oss-cn-shanghai.aliyuncs.com/img/202204191758430.jpg
+    - name: Xin's Blog
+      link: https://blog.xinmouren.cn/
+      avatar: https://info.xinmouren.cn/custom.gif
+      descr: 嵌入式的日子真不好过！
