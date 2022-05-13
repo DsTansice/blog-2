@@ -192,7 +192,7 @@
     }
 
     .tk-master .tk-content:hover+.tk-extras {
-        left: calc(43%);
+        left: calc(79%);
     }
 
     [data-theme="dark"] .tk-master .tk-content::before {
