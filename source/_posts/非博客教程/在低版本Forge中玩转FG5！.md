@@ -11,6 +11,7 @@ tags:
 description: 之前为了在模组开发中使用Kotlin，想办法在Forge-1.12.2中使用了FG5，当时着实是废了不少功夫，所以写个教程记录一下。
 abbrlink: 6d850038
 date: 2022-05-11 14:44:29
+updated: 2022-05-15 13:29:19
 ---
 
 ## 思路
@@ -191,6 +192,6 @@ compileTestKotlin {
 
 ## 鸣谢
 
-+ MCreator讨论群（239746610）内的大佬
-+ 执着
-+ [xfl03](https://github.com/xfl03)
++ MCreator讨论群（239746610）内的大佬们
++ [执着](https://github.com/luiqn2007)
++ ZK
