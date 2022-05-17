@@ -13,7 +13,7 @@ tags:
 description: 最近几天又琢磨了琢磨博客的缓存，因为Workbox缓存实在是太大了，但是又不想完全舍弃缓存，所以就在群友的帮助下手写了sw.js。
 abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
-updated: 2022-05-10 21:27:40
+updated: 2022-05-17 09:33:40
 ---
   
 ## 更新内容
@@ -301,8 +301,13 @@ async function fetchEvent(request, response, cacheDist) {
     }
     const fetchFunction = () => fetch(request).then(response => {
         dbTime.write(request.url, NOW_TIME)
-        const clone = response.clone()
-        caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+        //如果加载正常再缓存
+        //至于为什么多了个检测与0相等是因为我实操的时候遇到了status为0的情况
+        //为什么会有0我没搞清楚，知道的小伙伴可以分享一下
+        if (response.ok || response.status === 0) {
+            const clone = response.clone()
+            caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+        }
         return response
     })
     if (!remove) return fetchFunction()
@@ -352,16 +357,51 @@ self.addEventListener('fetch', async event => {
 2. `https://wulawula.com/sw.js` #非法，跨域
 3. `https://11.53.15.145/sw.js` #即使`11.53.15.145`是我的博客的IP地址依然非法，被视为跨域
 
+&emsp;&emsp;同时需要注意的是，注册`sw`后`sw`并不会立即生效，只有在刷新页面后才会有效果。解决方案十分简单粗暴，即在安装成功后直接用代码刷新页面，这里我们就用到了`js`的`then`。
+
 &emsp;&emsp;现在我们找个地方把注册代码放进去就可以了，我是放在了`[butterfly]/layout/includes/layout.pug`的开头：
+
+{% tabs sw-registry %}
+
+<!-- tab 本人方案 -->
 
 ```diff
 +  script.
 +    if ('serviceWorker' in navigator) {
 +      window.addEventListener('load', function () {
 +        navigator.serviceWorker.register('/sw.js')
++      }).them(() => {
++        //这里我是用的这种粗暴的方式检测SW是否安装成功
++        //不过大佬说这么检测不太靠谱
++        //保守的小伙伴可以用另一个方案
++        if (!navigator.serviceWorker.controller) {
++          location.reload()
++        }
 +      })
 +    }
 ```
+
+<!-- endtab -->
+
+<!-- tab 大佬方案 -->
+
+```diff
++  script.
++    if ('serviceWorker' in navigator) {
++      window.addEventListener('load', function () {
++        navigator.serviceWorker.register('/sw.js')
++      }).them(() => {
++        if (window.localStorage.getItem('install') != 'true') {
++          window.localStorage.setItem('install', 'true');
++          location.reload()
++        }
++      })
++    }
+```
+
+<!-- endtab -->
+
+{% endtabs %}
 
 ## 检测PWA
 
