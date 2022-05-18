@@ -6,7 +6,7 @@ categories:
   - Kotlin
 tags:
   - 日志
-  - 类
+  - 面向对象
 description: 众所周知，JVM中是没有属性重写这一个功能的，那么KT是如何在JVM中实现属性重载的呢？
 abbrlink: e9cc8407
 date: 2022-05-18 11:47:52
