@@ -2,3 +2,5 @@
 RemoveFixedCardWidget()
 //修复bangumis
 repairBangumis()
+//fancybox
+addFancyboxOpenMonitor()
