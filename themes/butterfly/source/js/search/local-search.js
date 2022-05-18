@@ -1,9 +1,9 @@
 window.addEventListener('load', () => {
   let loadFlag = false
   const openSearch = () => {
-    const bodyStyle = document.body.style
-    bodyStyle.width = '100%'
-    bodyStyle.overflow = 'hidden'
+    //const bodyStyle = document.body.style
+    //bodyStyle.width = '100%'
+    //bodyStyle.overflow = 'hidden'
     for (let element of document.getElementsByTagName("html")) {
       element.style.overflow = 'hidden'
     }
@@ -24,9 +24,9 @@ window.addEventListener('load', () => {
   }
 
   const closeSearch = () => {
-    const bodyStyle = document.body.style
-    bodyStyle.width = ''
-    bodyStyle.overflow = ''
+    //const bodyStyle = document.body.style
+    //bodyStyle.width = ''
+    //bodyStyle.overflow = ''
     for (let element of document.getElementsByTagName("html")) {
       element.style.overflow = ''
     }
