@@ -4,9 +4,7 @@ window.addEventListener('load', () => {
     //const bodyStyle = document.body.style
     //bodyStyle.width = '100%'
     //bodyStyle.overflow = 'hidden'
-    for (let element of document.getElementsByTagName("html")) {
-      element.style.overflow = 'hidden'
-    }
+    removeHtmlScrollBar()
     btf.animateIn(document.getElementById('search-mask'), 'to_show 0.5s')
     btf.animateIn(document.querySelector('#local-search .search-dialog'), 'titleScale 0.5s')
     setTimeout(() => { document.querySelector('#local-search-input input').focus() }, 100)
@@ -27,9 +25,7 @@ window.addEventListener('load', () => {
     //const bodyStyle = document.body.style
     //bodyStyle.width = ''
     //bodyStyle.overflow = ''
-    for (let element of document.getElementsByTagName("html")) {
-      element.style.overflow = ''
-    }
+    recoverHtmlScrollBar()
     btf.animateOut(document.querySelector('#local-search .search-dialog'), 'search_close .5s')
     btf.animateOut(document.getElementById('search-mask'), 'to_hide 0.5s')
   }

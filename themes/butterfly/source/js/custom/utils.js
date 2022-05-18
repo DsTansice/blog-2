@@ -1,17 +1,24 @@
+// -------------------- 滚动条操作 -------------------- //
+/** 移除页面滚动条 */
+function removeHtmlScrollBar() {
+    for (let element of document.getElementsByTagName("html")) {
+        element.style.overflow = 'hidden'
+    }
+}
+/** 还原页面滚动条 */
+function recoverHtmlScrollBar() {
+    for (let element of document.getElementsByTagName("html")) {
+        element.style.overflow = ''
+    }
+}
+
 // -------------------- fancybox监听 -------------------- //
 function addFancyboxOpenMonitor() {
     addEventListener('load', () => {
         document.addEventListener('DOMSubtreeModified', () => {
             const fancybox = document.getElementsByClassName('fancybox__container is-animated')
-            if (fancybox.length === 0) {
-                for (let element of document.getElementsByTagName("html")) {
-                    element.style.overflow = ''
-                }
-            } else {
-                for (let element of document.getElementsByTagName("html")) {
-                    element.style.overflow = 'hidden'
-                }
-            }
+            if (fancybox.length === 0) recoverHtmlScrollBar()
+            else removeHtmlScrollBar()
         })
     })
 }
