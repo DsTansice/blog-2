@@ -53,10 +53,6 @@
       link: https://tzy1997.com/
       avatar: https://bu.dusays.com/2022/01/14/cd5ffd485f867.jpg
       descr: 学习与交流的乐园，希望能和你成为好朋友
-    - name: 葱苓的小窝
-      link: https://www.itciraos.cn/
-      avatar: https://www.itciraos.cn/customized/avatar.webp
-      descr: DARE & DO
     - name: 梦荟楼的后花园
       link: https://oniya.cn/
       avatar: https://oniya.cn/usr/uploads/ok/8920e6741fc2808cce5b81bc27abdbda291655d3.png
@@ -71,6 +67,10 @@
       avatar: https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/head.jpg
       descr: 用这生命中的每一秒，给自己一个不后悔的未来
       siteshot: https://pub-noionion.oss-cn-hangzhou.aliyuncs.com/noionion.top.png
+    - name: 轻笑Chuckle
+      link: https://www.chuckle.top
+      avatar: https://www.chuckle.top/img/head.webp
+      descr: 宁静致远,倾尘轻笑
 - class_name: 待君归
   link_list:
     - name: Mark Blog
@@ -82,3 +82,7 @@
       link: https://blog.xinmouren.cn/
       avatar: https://info.xinmouren.cn/custom.gif
       descr: 嵌入式的日子真不好过！
+    - name: 葱苓的小窝
+      link: https://www.itciraos.cn/
+      avatar: https://www.itciraos.cn/customized/avatar.webp
+      descr: DARE & DO
