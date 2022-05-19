@@ -1,7 +1,7 @@
 ---
 title: 使用JS禁用网页滚动条
 top_img: false
-cover: 'https://image.kmar.top/bg/b19.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b19.jpg!/fw/700'
 categories:
   - 随心记
 tags:
