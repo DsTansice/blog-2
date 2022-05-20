@@ -1,60 +1,14 @@
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
 const VERSION_CACHE_NAME = 'kmarCacheTime'
-//缓存离线超时时间
-const MAX_ACCESS_CACHE_TIME = 60 * 60 * 24 * 10
 
 function time() {
     return new Date().getTime()
 }
 
-const dbHelper = {
-    read: (key) => {
-        return new Promise((resolve) => {
-            caches.match(key).then(function (res) {
-                if (!res) resolve(null)
-                res.text().then(text => resolve(text))
-            }).catch(() => {
-                resolve(null)
-            })
-        })
-    },
-    write: (key, value) => {
-        return new Promise((resolve, reject) => {
-            caches.open(VERSION_CACHE_NAME).then(function (cache) {
-                // noinspection JSIgnoredPromiseFromCall
-                cache.put(key, new Response(value));
-                resolve()
-            }).catch(() => {
-                reject()
-            })
-        })
-    },
-    delete: (key) => {
-        caches.match(key).then(response => {
-            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(key))
-        })
-    }
-}
-
-//存储缓存入库时间
-const dbTime = {
-    read: (key) => dbHelper.read(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`)),
-    write: (key, value) => dbHelper.write(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`), value),
-    delete: (key) => dbHelper.delete(new Request(`https://LOCALCACHE/${encodeURIComponent(key)}`))
-}
-
-//存储缓存最后一次访问的时间
-const dbAccess = {
-    update: (key) => dbHelper.write(new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`), time()),
-    check: async (key) => {
-        const realKey = new Request(`https://ACCESS-CACHE/${encodeURIComponent(key)}`)
-        const value = await dbHelper.read(realKey)
-        if (value) {
-            dbHelper.delete(realKey)
-            return time() - value < MAX_ACCESS_CACHE_TIME
-        } else return false
-    }
+const dbID = {
+    write: (id) => dbHelper.write(new Request('http://id.record'), id),
+    read: () => dbHelper.read(new Request('https://id.record'))
 }
 
 self.addEventListener('install', () => self.skipWaiting())
@@ -62,33 +16,27 @@ self.addEventListener('install', () => self.skipWaiting())
 /**
  * 缓存列表
  * @param url 匹配规则
- * @param time 缓存有效时间
- * @param clean 清理缓存时是否无视最终访问时间直接删除
+ * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
     font: {
         url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
-        time: Number.MAX_VALUE,
         clean: false
     },
     static: {
         url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
-        time: Number.MAX_VALUE,
         clean: true
     },
     update: {
         url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
-        time: 60 * 60 * 8,
         clean: true
     },
     resources: {
         url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
-        time: 60 * 60 * 24 * 3,
         clean: true
     },
     stand: {
         url: /^https:\/\/image\.kmar\.top\/indexBg/g,
-        time: 60 * 60 * 24 * 7,
         clean: true
     }
 }
@@ -141,34 +89,15 @@ function replaceRequest(request) {
     return flag ? new Request(url) : null
 }
 
-async function fetchEvent(request, response, cacheDist) {
-    const NOW_TIME = time()
-    // noinspection ES6MissingAwait
-    dbAccess.update(request.url)
-    const maxTime = cacheDist.time
-    let remove = false
-    if (response) {
-        const time = await dbTime.read(request.url)
-        if (time) {
-            const difTime = NOW_TIME - time
-            if (difTime < maxTime) return response
-        }
-        remove = true
-    }
-    const fetchFunction = () => fetch(request).then(response => {
-        dbTime.write(request.url, NOW_TIME)
+async function fetchEvent(request, response) {
+    if (response) return response
+    return fetch(request).then(response => {
         if (response.ok || response.status === 0) {
             const clone = response.clone()
             caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
         }
         return response
     })
-    if (!remove) return fetchFunction()
-    const timeOut = () => new Promise((resolve => setTimeout(() => resolve(response), 400)))
-    return Promise.race([
-        timeOut(),
-        fetchFunction()]
-    ).catch(err => console.error('不可达的链接：' + request.url + '\n错误信息：' + err))
 }
 
 self.addEventListener('fetch', async event => {
@@ -176,29 +105,173 @@ self.addEventListener('fetch', async event => {
     const request = replace === null ? event.request : replace
     const cacheDist = findCache(request.url)
     if (cacheDist !== null) {
-        event.respondWith(caches.match(request)
-            .then(async (response) => fetchEvent(request, response, cacheDist))
-        )
+        event.respondWith(caches.match(request).then(response => fetchEvent(request, response)))
     } else if (replace !== null) {
         event.respondWith(fetch(request))
     }
 })
 
 self.addEventListener('message', function (event) {
-    //刷新缓存
-    if (event.data === 'refresh') {
-        caches.open(CACHE_NAME).then(function (cache) {
-            cache.keys().then(function (keys) {
+    switch (event.data) {
+        case 'refresh':
+            deleteAllCache().then(event.source.postMessage('refresh'))
+            break
+        case 'update':
+            updateJson('update').then(event.source.postMessage('update'))
+            break
+    }
+})
+
+/**
+ * 缓存更新匹配
+ * @param value 格式[flag:value]，其中flag可为"all"(全部)、"reg"(正则)、"str"(字符串)中任意一种，如果flag为all可以不写冒号
+ * @constructor
+ */
+function VersionListElement(value) {
+    this.all = false
+    this.reg = null
+    this.str = null
+    this.matchUrl = url => {
+        if (this.all) return findCache(url).clean
+        if (this.reg) return url.match(this.reg)
+        return url.match(this.str)
+    }
+    const flag = value.substring(0, 3)
+    switch (flag) {
+        case 'all':
+            this.all = true
+            break
+        case 'str':
+            this.str = value.substring(4)
+            break
+        case 'reg':
+            this.reg = new RegExp(value.substring(4))
+            break
+    }
+}
+
+/**
+ * 根据JSON删除缓存
+ * @param path 缓存地址
+ * @param top 是否是顶层调用，用于标记递归，保持默认即可
+ * @returns {Promise<Boolean>} 返回值中的类型对外界无意义，内部用于标识是否继续递归
+ */
+function updateJson(path, top = true) {
+    //匹配规则列表（VersionListElement）
+    const list = []
+    //根据list删除缓存
+    const deleteCache = () => {
+        caches.open(CACHE_NAME).then(cache => {
+            cache.keys().then(keys => {
                 for (let key of keys) {
-                    const value = findCache(key.url)
-                    if (value == null || value.clean || !dbAccess.check(key.url)) {
+                    let result = false
+                    for (let it of list) {
+                        if (it.matchUrl(key.url)) {
+                            result = true
+                            break
+                        }
+                    }
+                    if (result) {
                         // noinspection JSIgnoredPromiseFromCall
                         cache.delete(key)
-                        dbTime.delete(key)
                     }
                 }
-                event.source.postMessage('success')
             })
         })
     }
-})
+    //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
+    const parseJsonV1 = async json => {
+        const oldId = await dbID.read()
+        //如果oldId存在且与preId不相等说明出现跨版本的情况
+        if (oldId && json['preId'] !== oldId) {
+            //如果pre为stop说明引用链过长，直接刷新全站缓存
+            if (json['pre'] === 'stop') {
+                // noinspection ES6MissingAwait
+                deleteAllCache()
+                return false
+            } else {
+                //否则继续查找上一个版本的更新内容
+                const result = await updateJson(json['pre'], false)
+                if (!result) return false
+            }
+        }
+        //如果oldId不存在或oldId与id相等，说明不需要更新缓存，直接退出
+        if (!oldId || oldId === json['id']) return false
+        const jsonList = json['list']
+        for (let i = 0; i < jsonList.length; i++) {
+            list.push(new VersionListElement(jsonList[i]))
+            //如果出现all就没有必要继续计算了
+            if (list[i].all) return false
+        }
+        return true
+    }
+    //解析JSON内容
+    const parseJson = async (resolve, reject, json) => {
+        switch (json['version']) {
+            case 1:
+                const result = await parseJsonV1(json)
+                if (top) {  //如果是顶层调用就更新oldId
+                    // noinspection ES6MissingAwait
+                    dbID.write(json['id'])
+                }
+                resolve(result)
+                break
+            default:
+                console.error(`不支持的更新JSON版本：${json['version']}`)
+                reject(false)
+                break
+        }
+    }
+    const url = `/update/${path}.json`
+    return new Promise((resolve, reject) => {
+        fetch(new Request(url)).then(response => {
+            response.text().then(async text => {
+                const json = JSON.parse(text)
+                await parseJson(resolve, reject, json)
+                deleteCache()
+            })
+        })
+    })
+}
+
+/** 删除所有缓存 */
+function deleteAllCache() {
+    return caches.open(CACHE_NAME).then(function (cache) {
+        cache.keys().then(function (keys) {
+            for (let key of keys) {
+                const value = findCache(key.url)
+                if (value == null || value.clean) {
+                    // noinspection JSIgnoredPromiseFromCall
+                    cache.delete(key)
+                }
+            }
+        })
+    })
+}
+
+const dbHelper = {
+    read: (key) => {
+        return new Promise((resolve) => {
+            caches.match(key).then(function (res) {
+                if (!res) resolve(null)
+                res.text().then(text => resolve(text))
+            }).catch(() => {
+                resolve(null)
+            })
+        })
+    },
+    write: (key, value) => {
+        return new Promise((resolve, reject) => {
+            caches.open(VERSION_CACHE_NAME).then(function (cache) {
+                cache.put(key, new Response(value)).then(() => resolve())
+            }).catch(() => {
+                reject()
+            })
+        })
+    },
+    delete: (key) => {
+        caches.match(key).then(response => {
+            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(key))
+        })
+    }
+}
