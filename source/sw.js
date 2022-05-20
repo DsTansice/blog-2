@@ -98,7 +98,9 @@ self.addEventListener('message', function (event) {
             deleteAllCache().then(event.source.postMessage('refresh'))
             break
         case 'update':
-            updateJson('update')
+            updateJson('update').then(result => {
+                if (result['update']) event.source.postMessage('update')
+            })
             break
     }
 })
@@ -135,31 +137,30 @@ function VersionListElement(value) {
  * 根据JSON删除缓存
  * @param path 缓存地址
  * @param top 是否是顶层调用，用于标记递归，保持默认即可
- * @returns {Promise<Boolean>} 返回值中的类型对外界无意义，内部用于标识是否继续递归
+ * @returns {Promise} 返回值中result['update']用于标记是否删除了缓存
  */
 function updateJson(path, top = true) {
     //匹配规则列表（VersionListElement）
     const list = []
     //根据list删除缓存
-    const deleteCache = () => {
+    const deleteCache = () => new Promise(resolve => {
+        let update = false
         caches.open(CACHE_NAME).then(cache => {
             cache.keys().then(keys => {
                 for (let key of keys) {
-                    let result = false
                     for (let it of list) {
                         if (it.matchUrl(key.url)) {
-                            result = true
+                            // noinspection JSIgnoredPromiseFromCall
+                            cache.delete(key)
+                            update = true
                             break
                         }
-                    }
-                    if (result) {
-                        // noinspection JSIgnoredPromiseFromCall
-                        cache.delete(key)
                     }
                 }
             })
         })
-    }
+        resolve(update)
+    })
     //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
     const parseJsonV1 = async json => {
         const oldId = await dbID.read()
@@ -173,7 +174,7 @@ function updateJson(path, top = true) {
             } else {
                 //否则继续查找上一个版本的更新内容
                 const result = await updateJson(json['pre'], false)
-                if (!result) return false
+                if (!result['run']) return false
             }
         }
         //如果oldId不存在或oldId与id相等，说明不需要更新缓存，直接退出
@@ -208,8 +209,9 @@ function updateJson(path, top = true) {
         fetch(new Request(url)).then(response => {
             response.text().then(async text => {
                 const json = JSON.parse(text)
-                await parseJson(resolve, reject, json)
-                deleteCache()
+                const result = await parseJson(resolve, reject, json)
+                const update = await deleteCache()
+                resolve({'update': update, 'run': result})
             })
         })
     })
