@@ -55,7 +55,14 @@ function findCache(url) {
     return null
 }
 
-//检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null
+/**
+ * 检查连接是否需要重定向至另外的链接，如果需要则返回新的Request，否则返回null<br/>
+ * 该函数会顺序匹配{@link replaceList}中的所有项目，即使已经有可用的替换项<br/>
+ * 故该函数允许重复替换，例如：<br/>
+ * 如果第一个匹配项把链接由"http://abc.com/"改为了"https://abc.com/"<br/>
+ * 此时第二个匹配项可以以此为基础继续进行修改，替换为"https://abc.net/"<br/>
+ * @return {Request|null}
+ */
 function replaceRequest(request) {
     let url = request.url;
     let flag = false
@@ -71,10 +78,18 @@ function replaceRequest(request) {
     return flag ? new Request(url) : null
 }
 
+/**
+ * 是否跳过缓存
+ * @return boolean
+ */
+function skipCache(request) {
+    return request.url.match(/update\/.*\.json$/g)
+}
+
 self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
-    if (findCache(request.url) !== null) {
+    if (!skipCache(request) && findCache(request.url) !== null) {
         event.respondWith(caches.match(request).then(response => {
             //如果缓存存在则直接返回缓存内容
             if (response) return response
