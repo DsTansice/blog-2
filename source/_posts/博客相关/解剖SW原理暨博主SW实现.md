@@ -388,7 +388,7 @@ const cacheList = {
         url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
         clean: true
     }, update: {
-        url: /(^(https:\/\/kmar\.top).*((\/)|search\.xml)$)/g,
+        url: /.*((\/posts.*\/)|search\.xml)$/g,
         clean: true
     }, resources: {
         url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
@@ -481,15 +481,13 @@ self.addEventListener('fetch', async event => {
 })
 
 self.addEventListener('message', function (event) {
-    switch (event.data) {
-        case 'refresh':
-            deleteAllCache().then(event.source.postMessage('refresh'))
-            break
-        case 'update':
-            updateJson('update').then(result => {
-                if (result['update']) event.source.postMessage('update')
-            })
-            break
+    if (event.data.startsWith('update')) {
+        updateJson('update', event.data.substring(7)).then(result => {
+            console.log(result)
+            if (result['update']) event.source.postMessage('update')
+        })
+    } else if (event.data === 'refresh') {
+        deleteAllCache().then(event.source.postMessage('refresh'))
     }
 })
 
@@ -524,31 +522,30 @@ function VersionListElement(value) {
 /**
  * 根据JSON删除缓存
  * @param path 缓存地址
+ * @param page 当前页面地址
  * @param top 是否是顶层调用，用于标记递归，保持默认即可
  * @returns {Promise} 返回值中result['update']用于标记是否删除了缓存
  */
-function updateJson(path, top = true) {
+function updateJson(path, page, top = true) {
     //匹配规则列表（VersionListElement）
     const list = []
     //根据list删除缓存
     const deleteCache = () => new Promise(resolve => {
-        let update = false
-        caches.open(CACHE_NAME).then(cache => {
-            cache.keys().then(keys => {
-                for (let key of keys) {
-                    for (let it of list) {
-                        if (it.matchUrl(key.url)) {
-                            // noinspection JSIgnoredPromiseFromCall
-                            cache.delete(key)
-                            console.log(key.url)
-                            update = true
-                            break
+        caches.open(CACHE_NAME)
+            .then(cache => cache.keys().then(keys => {
+                    let flag = false
+                    for (let key of keys) {
+                        for (let it of list) {
+                            if (it.matchUrl(key.url)) {
+                                // noinspection JSIgnoredPromiseFromCall
+                                cache.delete(key)
+                                if (!flag && key.url === page) flag = true
+                            }
                         }
                     }
-                }
-            })
-        })
-        resolve(update)
+                    resolve(flag)
+                })
+            )
     })
     //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
     const parseJsonV1 = async json => {
@@ -581,7 +578,7 @@ function updateJson(path, top = true) {
         return true
     }
     //解析JSON内容
-    const parseJson = async (resolve, reject, json) => {
+    const parseJson = async json => {
         switch (json['version']) {
             case 1:
                 const result = await parseJsonV1(json)
@@ -589,23 +586,23 @@ function updateJson(path, top = true) {
                     // noinspection ES6MissingAwait
                     dbID.write(json['id'])
                 }
-                resolve(result)
-                break
+                return result
             default:
                 console.error(`不支持的更新JSON版本：${json['version']}`)
-                reject(false)
-                break
+                return false
         }
     }
     const url = `/update/${path}.json`
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         fetch(new Request(url)).then(response => {
             response.text().then(async text => {
                 const json = JSON.parse(text)
-                const result = await parseJson(resolve, reject, json)
-                const update = await deleteCache()
-                resolve({'update': update, 'run': result})
+                const result = await parseJson(json)
+                deleteCache().then(update => resolve({'update': update, 'run': result}))
             })
+        }).catch(err => {
+            console.log(`未知故障导致更新失败：\n${err}`)
+            resolve({'update': false, 'run': false})
         })
     })
 }

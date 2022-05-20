@@ -25,7 +25,7 @@ function addFancyboxOpenMonitor() {
 
 // -------------------- sw通信 -------------------- //
 if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage("update")
+    navigator.serviceWorker.controller.postMessage(`update:${location.href}`)
 }
 navigator.serviceWorker.addEventListener('message', event => {
     switch (event.data) {
@@ -33,7 +33,7 @@ navigator.serviceWorker.addEventListener('message', event => {
             location.reload()
             break
         case 'update':
-            btf.snackbarShow('已经检测的新的更新，刷新页面以显示')
+            btf.snackbarShow('当前页面已更新，刷新页面以显示')
             break
     }
 })
