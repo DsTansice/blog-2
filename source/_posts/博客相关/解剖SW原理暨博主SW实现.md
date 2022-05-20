@@ -592,6 +592,7 @@ function updateJson(path, page, top = true) {
                 return false
         }
     }
+    //默认JSON都放在update目录下，有需要的自行修改
     const url = `/update/${path}.json`
     return new Promise((resolve) => {
         fetch(new Request(url)).then(response => {
