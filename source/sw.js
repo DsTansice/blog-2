@@ -140,7 +140,7 @@ function VersionListElement(value) {
             this.matchUrl = url => url.match(RegExp(value.substring(4)))
             break
         case 'pot':
-            this.matchUrl = url => url.match(`/posts/${value.substring(4)}/`)
+            this.matchUrl = url => url.match(`posts/${value.substring(4)}/`)
             break
         case 'htm':
             this.matchUrl = url => url.match(cacheList.update.url)
@@ -168,6 +168,7 @@ function updateJson(path, top = true) {
                         if (it.matchUrl(key.url)) {
                             // noinspection JSIgnoredPromiseFromCall
                             cache.delete(key)
+                            console.log(key.url)
                             update = true
                             break
                         }
@@ -180,22 +181,25 @@ function updateJson(path, top = true) {
     //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
     const parseJsonV1 = async json => {
         const oldId = await dbID.read()
+        const id = json['id']
+        if (oldId && oldId === id) return false
         const preId = json['preId']
         //如果oldId存在且与preId不相等说明出现跨版本的情况
         if (oldId && preId !== oldId) {
-            //如果pre为stop说明引用链过长，直接刷新全站缓存
-            if (!json['pre']) {
+            const prePath = json['pre']
+            //如果pre为null说明引用链过长，直接刷新全站缓存
+            if (!prePath || preId === id) {
                 // noinspection ES6MissingAwait
                 deleteAllCache()
                 return false
             } else {
                 //否则继续查找上一个版本的更新内容
-                const result = await updateJson(json['pre'], false)
+                const result = await updateJson(prePath, false)
                 if (!result['run']) return false
             }
         }
         //如果oldId不存在或oldId与id相等，说明不需要更新缓存，直接退出
-        if (!oldId || oldId === json['id']) return false
+        if (!oldId || oldId === id) return false
         const jsonList = json['list']
         for (let i = 0; i < jsonList.length; i++) {
             list.push(new VersionListElement(jsonList[i]))
@@ -240,7 +244,7 @@ function deleteAllCache() {
         cache.keys().then(function (keys) {
             for (let key of keys) {
                 const value = findCache(key.url)
-                if (value == null || value.clean) {
+                if (value && value.clean) {
                     // noinspection JSIgnoredPromiseFromCall
                     cache.delete(key)
                 }
