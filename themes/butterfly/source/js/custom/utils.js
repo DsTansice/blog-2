@@ -24,11 +24,9 @@ function addFancyboxOpenMonitor() {
 }
 
 // -------------------- sw通信 -------------------- //
-document.addEventListener('DOMContentLoaded', () => {
-    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage("update")
-    }
-})
+if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage("update")
+}
 navigator.serviceWorker.addEventListener('message', event => {
     switch (event.data) {
         case 'refresh':

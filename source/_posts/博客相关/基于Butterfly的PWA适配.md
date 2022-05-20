@@ -370,7 +370,7 @@ self.addEventListener('fetch', async event => {
 +    if ('serviceWorker' in navigator) {
 +      window.addEventListener('load', function () {
 +        navigator.serviceWorker.register('/sw.js')
-+      }).them(() => {
++      }).then(() => {
 +        //这里我是用的这种粗暴的方式检测SW是否安装成功
 +        //不过大佬说这么检测不太靠谱
 +        //保守的小伙伴可以用另一个方案

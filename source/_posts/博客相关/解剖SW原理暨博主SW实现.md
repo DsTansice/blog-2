@@ -379,20 +379,8 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
-    font: {
-        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
-        clean: false
-    }, static: {
-        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
-        clean: true
-    }, update: {
-        url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
-        clean: true
-    }, resources: {
-        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
-        clean: true
-    }, stand: {
-        url: /^https:\/\/image\.kmar\.top\/indexBg/g,
+    simple: {
+        url: /[这里填写正则表达式]/g,
         clean: true
     }
 }
@@ -493,7 +481,6 @@ self.addEventListener('message', function (event) {
 
 /**
  * 缓存更新匹配
- * 如果你要自定义JSON匹配项就在这里修改
  * @param value 格式[flag:value]
  * @constructor
  */
@@ -551,10 +538,11 @@ function updateJson(path, top = true) {
     //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
     const parseJsonV1 = async json => {
         const oldId = await dbID.read()
+        const preId = json['preId']
         //如果oldId存在且与preId不相等说明出现跨版本的情况
-        if (oldId && json['preId'] !== oldId) {
+        if (oldId && preId !== oldId) {
             //如果pre为stop说明引用链过长，直接刷新全站缓存
-            if (json['pre'] === 'stop') {
+            if (!json['pre']) {
                 // noinspection ES6MissingAwait
                 deleteAllCache()
                 return false
@@ -637,7 +625,7 @@ const dbID = {
 }
 ```
 
-&emsp;&emsp;最后，我们说明一下JSON的格式：
+&emsp;&emsp;我们说明一下JSON的格式：
 
 ```json
 {
@@ -652,16 +640,36 @@ const dbID = {
 1. `version`: json文件版本，目前仅可为`1`
 2. `id`: 当前网页版本，可为任意不重复的字符串
 3. `pre`: 上一版的JSON的文件名（不带拓展名），为`null`表明该文件是最后一个
-4. `preId`: 上一版的网页版本，不存在则填`null`
+4. `preId`: 上一版的网页版本，与`id`一致表明不存在上一个
 5. `list`: 更改文件列表
 
-#### 文件列表格式
+&emsp;&emsp;其中，文件列表（`list`）格式为：
 
 1. `all`: 表明全站刷新（clean为true的项）
 2. `reg:(...)`: 正则表达式，不需要带两边的`/`
 3. `str:(...)`: 字符串匹配
 4. `pot:(abbrlink)`: 删除指定博文，需要SW支持，抄写我的方案时记得修改`VersionListElement`
 5. `htm`: 所有`html`页面，需要SW支持，抄写我的方案时记得修改`VersionListElement`
+
+&emsp;&emsp;可能已经有小伙伴迫不及待地把我的SW复制过去实操了，结果发现缓存更新并没有生效，这是因为没有在DOM中编写对应代码。
+
+&emsp;&emsp;我们需要DOM在加载页面地时候发送信息到SW，告知SW开始根据JSON更新缓存，所以我们需要在DOM中添加如下JS：
+
+```javascript
+if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage("update")
+}
+navigator.serviceWorker.addEventListener('message', event => {
+    switch (event.data) {
+        case 'refresh': //这个是右下角刷新缓存按钮对应地功能，在SW刷新完毕后就会执行这里
+            location.reload()
+            break
+        case 'update':  //如果SW检测到缓存更新就会触发这里
+            btf.snackbarShow('已经检测的新的更新，刷新页面以显示')
+            break
+    }
+})
+```
 
 ---
 

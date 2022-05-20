@@ -1,4 +1,4 @@
-//缓存库名称
+/** 缓存库名称 */
 const CACHE_NAME = 'kmarCache'
 
 self.addEventListener('install', () => self.skipWaiting())
@@ -180,10 +180,11 @@ function updateJson(path, top = true) {
     //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
     const parseJsonV1 = async json => {
         const oldId = await dbID.read()
+        const preId = json['preId']
         //如果oldId存在且与preId不相等说明出现跨版本的情况
-        if (oldId && json['preId'] !== oldId) {
+        if (oldId && preId !== oldId) {
             //如果pre为stop说明引用链过长，直接刷新全站缓存
-            if (json['pre'] === 'stop') {
+            if (!json['pre']) {
                 // noinspection ES6MissingAwait
                 deleteAllCache()
                 return false
