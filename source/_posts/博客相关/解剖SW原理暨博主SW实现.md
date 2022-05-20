@@ -367,6 +367,8 @@ self.addEventListener('fetch', async event => {
 
 &emsp;&emsp;这里，我选择了对经常访问的用户更加友好的第二种方案：
 
+{% tip warning %}<p style='text-align:center;'>当前方案还处于测试阶段，抄写SW前请三思</p>{% endtip %}
+
 ```javascript
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarCache'
