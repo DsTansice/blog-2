@@ -19,24 +19,15 @@ self.addEventListener('install', () => self.skipWaiting())
  */
 const cacheList = {
     font: {
-        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
-        clean: false
-    },
-    static: {
-        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
-        clean: true
-    },
-    update: {
-        url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
-        clean: true
-    },
-    resources: {
-        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
-        clean: true
-    },
-    stand: {
-        url: /^https:\/\/image\.kmar\.top\/indexBg/g,
-        clean: true
+        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g, clean: false
+    }, static: {
+        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g, clean: true
+    }, update: {
+        url: /(^(https:\/\/kmar\.top).*(\/)$)/g, clean: true
+    }, resources: {
+        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g, clean: true
+    }, stand: {
+        url: /^https:\/\/image\.kmar\.top\/indexBg/g, clean: true
     }
 }
 
@@ -47,19 +38,11 @@ const cacheList = {
  */
 const replaceList = {
     gh: {
-        source: ['//cdn.jsdelivr.net/gh'],
-        dist: '//cdn1.tianli0.top/gh'
-    },
-    npm: {
-        source: [
-            '//cdn.jsdelivr.net/npm',
-            '//unpkg.zhimg.com'
-        ],
-        dist: '//npm.elemecdn.com'
-    },
-    emoji: {
-        source: ['/gh/EmptyDreams/resources/icon'],
-        dist: '/gh/EmptyDreams/twikoo-emoji'
+        source: ['//cdn.jsdelivr.net/gh'], dist: '//cdn1.tianli0.top/gh'
+    }, npm: {
+        source: ['//cdn.jsdelivr.net/npm', '//unpkg.zhimg.com'], dist: '//npm.elemecdn.com'
+    }, emoji: {
+        source: ['/gh/EmptyDreams/resources/icon'], dist: '/gh/EmptyDreams/twikoo-emoji'
     }
 }
 
@@ -258,8 +241,7 @@ const dbHelper = {
                 resolve(null)
             })
         })
-    },
-    write: (key, value) => {
+    }, write: (key, value) => {
         return new Promise((resolve, reject) => {
             caches.open(CACHE_NAME).then(function (cache) {
                 cache.put(key, new Response(value)).then(() => resolve())
@@ -267,8 +249,7 @@ const dbHelper = {
                 reject()
             })
         })
-    },
-    delete: (key) => {
+    }, delete: (key) => {
         caches.match(key).then(response => {
             if (response) caches.open(CACHE_NAME).then(cache => cache.delete(key))
         })
