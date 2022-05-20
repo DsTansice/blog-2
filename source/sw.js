@@ -1,6 +1,5 @@
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
-const VERSION_CACHE_NAME = 'kmarCacheTime'
 
 function time() {
     return new Date().getTime()
@@ -262,7 +261,7 @@ const dbHelper = {
     },
     write: (key, value) => {
         return new Promise((resolve, reject) => {
-            caches.open(VERSION_CACHE_NAME).then(function (cache) {
+            caches.open(CACHE_NAME).then(function (cache) {
                 cache.put(key, new Response(value)).then(() => resolve())
             }).catch(() => {
                 reject()
@@ -271,7 +270,7 @@ const dbHelper = {
     },
     delete: (key) => {
         caches.match(key).then(response => {
-            if (response) caches.open(VERSION_CACHE_NAME).then(cache => cache.delete(key))
+            if (response) caches.open(CACHE_NAME).then(cache => cache.delete(key))
         })
     }
 }
