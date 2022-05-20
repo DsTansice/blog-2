@@ -14,7 +14,7 @@ function recoverHtmlScrollBar() {
 
 // -------------------- fancybox监听 -------------------- //
 function addFancyboxOpenMonitor() {
-    addEventListener('load', () => {
+    document.addEventListener('load', () => {
         document.addEventListener('DOMSubtreeModified', () => {
             const fancybox = document.getElementsByClassName('fancybox__container is-animated')
             if (fancybox.length === 0) recoverHtmlScrollBar()
@@ -24,10 +24,18 @@ function addFancyboxOpenMonitor() {
 }
 
 // -------------------- sw通信 -------------------- //
+document.addEventListener('DOMContentLoaded', () => {
+    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage("update")
+    }
+})
 navigator.serviceWorker.addEventListener('message', event => {
     switch (event.data) {
-        case 'success':
+        case 'refresh':
             location.reload()
+            break
+        case 'update':
+            btf.snackbarShow('已经检测的新的更新，刷新页面以显示')
             break
     }
 })
@@ -35,17 +43,17 @@ navigator.serviceWorker.addEventListener('message', event => {
 // -------------------- fixed-card-widget -------------------- //
 // 固定卡片点击动作
 function FixedCardWidget(type, name, index) {
-    let tempcard;
+    let tmpCard;
     // 根据id或class选择元素
     if (type === "id") {
-        tempcard = document.getElementById(name);
+        tmpCard = document.getElementById(name);
     } else {
-        tempcard = document.getElementsByClassName(name)[index];
+        tmpCard = document.getElementsByClassName(name)[index];
     }
     // 若元素存在
-    if (tempcard) {
+    if (tmpCard) {
         // 首先判断是否存在fixed-card-widget类
-        if (tempcard.className.indexOf('fixed-card-widget') > -1) {
+        if (tmpCard.className.indexOf('fixed-card-widget') > -1) {
             // 存在则移除
             RemoveFixedCardWidget();
         } else {
@@ -54,7 +62,7 @@ function FixedCardWidget(type, name, index) {
             //新建退出蒙版
             CreateQuitBox();
             // 再添加固定卡片样式
-            tempcard.classList.add('fixed-card-widget');
+            tmpCard.classList.add('fixed-card-widget');
         }
     }
 }
@@ -68,10 +76,10 @@ function CreateQuitBox() {
 
 // 移除卡片方法
 function RemoveFixedCardWidget() {
-    const activedItems = document.querySelectorAll('.fixed-card-widget');
-    if (activedItems) {
-        for (i = 0; i < activedItems.length; i++) {
-            activedItems[i].classList.remove('fixed-card-widget');
+    const activeItems = document.querySelectorAll('.fixed-card-widget');
+    if (activeItems) {
+        for (let it of activeItems) {
+            it.classList.remove('fixed-card-widget')
         }
     }
     //移除退出蒙版
