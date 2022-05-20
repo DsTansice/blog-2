@@ -1,15 +1,6 @@
 //缓存库名称
 const CACHE_NAME = 'kmarCache'
 
-function time() {
-    return new Date().getTime()
-}
-
-const dbID = {
-    write: (id) => dbHelper.write(new Request('http://id.record'), id),
-    read: () => dbHelper.read(new Request('https://id.record'))
-}
-
 self.addEventListener('install', () => self.skipWaiting())
 
 /**
@@ -19,15 +10,20 @@ self.addEventListener('install', () => self.skipWaiting())
  */
 const cacheList = {
     font: {
-        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g, clean: false
+        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
+        clean: false
     }, static: {
-        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g, clean: true
+        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
+        clean: true
     }, update: {
-        url: /(^(https:\/\/kmar\.top).*(\/)$)/g, clean: true
+        url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
+        clean: true
     }, resources: {
-        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g, clean: true
+        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
+        clean: true
     }, stand: {
-        url: /^https:\/\/image\.kmar\.top\/indexBg/g, clean: true
+        url: /^https:\/\/image\.kmar\.top\/indexBg/g,
+        clean: true
     }
 }
 
@@ -38,15 +34,20 @@ const cacheList = {
  */
 const replaceList = {
     gh: {
-        source: ['//cdn.jsdelivr.net/gh'], dist: '//cdn1.tianli0.top/gh'
+        source: ['//cdn.jsdelivr.net/gh'],
+        dist: '//cdn1.tianli0.top/gh'
     }, npm: {
-        source: ['//cdn.jsdelivr.net/npm', '//unpkg.zhimg.com'], dist: '//npm.elemecdn.com'
+        source: [
+            '//cdn.jsdelivr.net/npm',
+            '//unpkg.zhimg.com'
+        ], dist: '//npm.elemecdn.com'
     }, emoji: {
-        source: ['/gh/EmptyDreams/resources/icon'], dist: '/gh/EmptyDreams/twikoo-emoji'
+        source: ['/gh/EmptyDreams/resources/icon'],
+        dist: '/gh/EmptyDreams/twikoo-emoji'
     }
 }
 
-//判断指定url击中了哪一种缓存，都没有击中则返回null
+/** 判断指定url击中了哪一种缓存，都没有击中则返回null */
 function findCache(url) {
     for (let key in cacheList) {
         const value = cacheList[key]
@@ -122,29 +123,29 @@ self.addEventListener('message', function (event) {
 
 /**
  * 缓存更新匹配
- * @param value 格式[flag:value]，其中flag可为"all"(全部)、"reg"(正则)、"str"(字符串)中任意一种，如果flag为all可以不写冒号
+ * @param value 格式[flag:value]
  * @constructor
  */
 function VersionListElement(value) {
     this.all = false
-    this.reg = null
-    this.str = null
-    this.matchUrl = url => {
-        if (this.all) return findCache(url).clean
-        if (this.reg) return url.match(this.reg)
-        return url.match(this.str)
-    }
-    const flag = value.substring(0, 3)
-    switch (flag) {
+    switch (value.substring(0, 3)) {
         case 'all':
             this.all = true
+            this.matchUrl = url => findCache(url).clean
             break
         case 'str':
-            this.str = value.substring(4)
+            this.matchUrl = url => url.match(value.substring(4))
             break
         case 'reg':
-            this.reg = new RegExp(value.substring(4))
+            this.matchUrl = url => url.match(RegExp(value.substring(4)))
             break
+        case 'pot':
+            this.matchUrl = url => url.match(`/posts/${value.substring(4)}/`)
+            break
+        case 'htm':
+            this.matchUrl = url => url.match(cacheList.update.url)
+            break
+        default: console.error(`不支持的表达式：${value}`)
     }
 }
 
@@ -247,27 +248,19 @@ function deleteAllCache() {
     })
 }
 
-const dbHelper = {
-    read: (key) => {
-        return new Promise((resolve) => {
-            caches.match(key).then(function (res) {
-                if (!res) resolve(null)
-                res.text().then(text => resolve(text))
-            }).catch(() => {
-                resolve(null)
-            })
-        })
-    }, write: (key, value) => {
-        return new Promise((resolve, reject) => {
-            caches.open(CACHE_NAME).then(function (cache) {
-                cache.put(key, new Response(value)).then(() => resolve())
-            }).catch(() => {
-                reject()
-            })
-        })
-    }, delete: (key) => {
-        caches.match(key).then(response => {
-            if (response) caches.open(CACHE_NAME).then(cache => cache.delete(key))
-        })
-    }
+const dbID = {
+    write: (id) => new Promise((resolve, reject) => {
+        caches.open(CACHE_NAME).then(function (cache) {
+            cache.put(
+                new Request('https://id.record'),
+                new Response(id)
+            ).then(() => resolve())
+        }).catch(() => reject())
+    }), read: (src = null) => new Promise((resolve) => {
+        caches.match(new Request('https://id.record'))
+            .then(function (response) {
+                if (!response) resolve(src)
+                response.text().then(text => resolve(text))
+            }).catch(() => resolve(src))
+    })
 }
