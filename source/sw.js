@@ -71,23 +71,22 @@ function replaceRequest(request) {
     return flag ? new Request(url) : null
 }
 
-async function fetchEvent(request, response) {
-    if (response) return response
-    return fetch(request).then(response => {
-        if (response.ok || response.status === 0) {
-            const clone = response.clone()
-            caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
-        }
-        return response
-    })
-}
-
 self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
-    const cacheDist = findCache(request.url)
-    if (cacheDist !== null) {
-        event.respondWith(caches.match(request).then(response => fetchEvent(request, response)))
+    if (findCache(request.url) !== null) {
+        event.respondWith(caches.match(request).then(response => {
+            //如果缓存存在则直接返回缓存内容
+            if (response) return response
+            return fetch(request).then(response => {
+                //检查获取到的状态码
+                if ((response.status >= 200 && response.status < 400) || response.status === 0) {
+                    const clone = response.clone()
+                    caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+                }
+                return response
+            })
+        }))
     } else if (replace !== null) {
         event.respondWith(fetch(request))
     }
