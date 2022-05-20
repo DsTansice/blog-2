@@ -16,7 +16,7 @@ const cacheList = {
         url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
         clean: true
     }, update: {
-        url: /(^(https:\/\/kmar\.top).*(\/)$)/g,
+        url: /(^(https:\/\/kmar\.top).*((\/)|search\.xml)$)/g,
         clean: true
     }, resources: {
         url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
