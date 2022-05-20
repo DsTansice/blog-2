@@ -1,10 +1,9 @@
 {
   "version": 1,
-  "id": "8",
-  "pre": "pre1",
-  "preId": "7",
+  "id": "9",
+  "pre": "pre2",
+  "preId": "8",
   "list": [
-    "pot:bcfe8408",
-    "str:custom/utils.js"
+    "pot:bcfe8408"
   ]
 }

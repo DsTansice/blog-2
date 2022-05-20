@@ -483,7 +483,6 @@ self.addEventListener('fetch', async event => {
 self.addEventListener('message', function (event) {
     if (event.data.startsWith('update')) {
         updateJson('update', event.data.substring(7)).then(result => {
-            console.log(result)
             if (result['update']) event.source.postMessage('update')
         })
     } else if (event.data === 'refresh') {
