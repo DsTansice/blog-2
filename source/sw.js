@@ -98,7 +98,7 @@ self.addEventListener('message', function (event) {
             deleteAllCache().then(event.source.postMessage('refresh'))
             break
         case 'update':
-            updateJson('update').then(event.source.postMessage('update'))
+            updateJson('update')
             break
     }
 })
