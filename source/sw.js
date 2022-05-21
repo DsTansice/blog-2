@@ -1,5 +1,7 @@
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarCache'
+/** 版本名称存储地址 */
+const VERSION_PATH = 'https://version.id/'
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -110,8 +112,8 @@ self.addEventListener('fetch', async event => {
 
 self.addEventListener('message', function (event) {
     if (event.data.startsWith('update')) {
-        updateJson('update', event.data.substring(7)).then(result => {
-            if (result['update']) event.source.postMessage('update')
+        updateJson(event.data.substring(7)).then(result => {
+            if (result) event.source.postMessage('update')
         })
     } else if (event.data === 'refresh') {
         deleteAllCache().then(event.source.postMessage('refresh'))
@@ -120,119 +122,157 @@ self.addEventListener('message', function (event) {
 
 /**
  * 缓存更新匹配
+ *
+ *  1. `all`: 刷新所有标记为`clean=true`的缓存
+ *  2. `htm`: 刷新所有HTML缓存
+ *  3. `str:value`: 刷新所有包含指定字符串的缓存
+ *  4. `reg:value`: 刷新所有满足指定正则表达式的缓存
+ *  5. `pot:abbrlink`: 刷新指定博文缓存
+ *
  * @param value 格式[flag:value]
  * @constructor
  */
-function VersionListElement(value) {
+function CacheChangeExpression(value) {
     this.all = false
     switch (value.substring(0, 3)) {
         case 'all':
             this.all = true
-            this.matchUrl = url => findCache(url).clean
+            this.matchUrl = url => {
+                const cache = findCache(url)
+                return cache ? cache.clean : url !== VERSION_PATH
+            }
             break
         case 'str':
-            this.matchUrl = url => url.match(value.substring(4))
+            this.matchUrl = url => url.match(value.substring(4)) !== null
             break
         case 'reg':
-            this.matchUrl = url => url.match(RegExp(value.substring(4)))
+            this.matchUrl = url => url.match(RegExp(value.substring(4))) !== null
             break
         case 'pot':
-            this.matchUrl = url => url.match(`posts/${value.substring(4)}/`)
+            this.matchUrl = url => url.match(`posts/${value.substring(4)}/`) !== null
             break
         case 'htm':
-            this.matchUrl = url => url.match(cacheList.update.url)
+            this.matchUrl = url => url.match(cacheList.update.url) !== null
             break
         default: console.error(`不支持的表达式：${value}`)
     }
 }
 
 /**
- * 根据JSON删除缓存
- * @param path 缓存地址
- * @param page 当前页面地址
- * @param top 是否是顶层调用，用于标记递归，保持默认即可
- * @returns {Promise} 返回值中result['update']用于标记是否删除了缓存
+ * 通过JSON构建一个版本信息
+ *
+ * 调用格式：
+ *
+ * 1. (json, null): 前者为有效数据，后者为无效数据，
+ *          其中JSON格式见[我的博客](https://kmar.top/posts/bcfe8408/#缓存控制)
+ * 2. (*, string): 前者为任意值，后者为匹配规则，格式见{@link CacheChangeExpression}
+ *
+ * 第一种格式用来通过JSON构建对象，第二种格式用来通过代码直接构建一个仅包含一个匹配规则的对象
+ *
+ * **注意：通过第二种方法构建的对象不含有`stop`、`version`这两个属性**
+ *
+ * @constructor
  */
-function updateJson(path, page, top = true) {
-    //匹配规则列表（VersionListElement）
-    const list = []
-    //根据list删除缓存
-    const deleteCache = () => new Promise(resolve => {
-        caches.open(CACHE_NAME)
-            .then(cache => cache.keys().then(keys => {
-                let flag = false
-                for (let key of keys) {
-                    for (let it of list) {
-                        if (it.matchUrl(key.url)) {
-                            // noinspection JSIgnoredPromiseFromCall
-                            cache.delete(key)
-                            if (!flag && key.url === page) flag = true
-                            console.log(`delete(调试信息)：${key.url}`)
-                        }
-                    }
-                }
-                resolve(flag)
-            })
-        )
-    })
-    //解析JSON数据，返回值对外无意义，对内用于标识是否继续执行
-    const parseJsonV1 = async json => {
-        const oldId = await dbID.read()
-        const id = json['id']
-        if (oldId && oldId === id) return false
-        const preId = json['preId']
-        //如果oldId存在且与preId不相等说明出现跨版本的情况
-        if (oldId && preId !== oldId) {
-            const prePath = json['pre']
-            //如果pre为null说明引用链过长，直接刷新全站缓存
-            if (!prePath || preId === id) {
-                // noinspection ES6MissingAwait
-                deleteAllCache()
-                return false
-            } else {
-                //否则继续查找上一个版本的更新内容
-                const result = await updateJson(prePath, false)
-                if (!result['run']) return false
+function VersionElement(json, str = null) {
+    if (str) {
+        this.list = [new CacheChangeExpression(str)]
+    } else {
+        this.stop = false
+        this.version = json['version']
+        this.list = []
+        const jsonList = json['change']
+        if (jsonList) {
+            for (let it of jsonList) {
+                const value = new CacheChangeExpression(it)
+                if (value.all) this.stop = true
+                this.list.push(value)
             }
         }
-        //如果oldId不存在或oldId与id相等，说明不需要更新缓存，直接退出
-        if (!oldId || oldId === id) return false
-        const jsonList = json['list']
-        for (let i = 0; i < jsonList.length; i++) {
-            list.push(new VersionListElement(jsonList[i]))
-            //如果出现all就没有必要继续计算了
-            if (list[i].all) return false
+    }
+    /**
+     * 判断与输入的url是否匹配
+     * @param url 字符串（String）
+     * @return {Promise} resolve表明匹配成功，reject表明匹配失败
+     */
+    this.matchUrl = url => new Promise((resolve, reject) => {
+        for (let it of this.list) {
+            if (it.matchUrl(url)) {
+                resolve()
+                return
+            }
         }
+        reject()
+    })
+}
+
+/**
+ * 根据JSON删除缓存
+ * @param page 当前页面地址
+ * @returns {Promise<boolean>} 返回值用于标记当前页是否被刷新
+ */
+function updateJson(page) {
+    //根据list删除缓存
+    const deleteCache = (list) => new Promise(resolve => {
+        caches.open(CACHE_NAME).then(cache =>
+            cache.keys().then(keys =>
+                Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+                    list.matchUrl(it.url).then(result => {
+                        if (result) {
+                            // noinspection JSIgnoredPromiseFromCall
+                            cache.delete(it)
+                            //该SW还处于试验阶段，该信息用来获取删除了哪些缓存
+                            console.log(`debug-delete:${it.url}`)
+                            if (it.url === page) resolve1()
+                            else reject1()
+                        } else reject1()
+                    }).catch(() => reject1())
+                }))).then(() => resolve(true)).catch(() => resolve(false))
+            ))
+    })
+    /**
+     * 解析elements，并把结果输出到list中
+     * @return boolean 是否刷新全站缓存
+     */
+    const parseChange = (list, elements, version) => {
+        for (let element of elements) {
+            const value = new VersionElement(element)
+            if (value.version === version) return false
+            list.push(value)
+            if (value.stop) return false
+        }
+        //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
+        //说明跨版本幅度过大，直接清理全站
         return true
     }
-    //解析JSON内容
-    const parseJson = async json => {
-        switch (json['version']) {
-            case 1:
-                const result = await parseJsonV1(json)
-                if (top) {  //如果是顶层调用就更新oldId
-                    // noinspection ES6MissingAwait
-                    dbID.write(json['id'])
-                }
-                return result
-            default:
-                console.error(`不支持的更新JSON版本：${json['version']}`)
-                return false
-        }
-    }
-    const url = `/update/${path}.json`
-    return new Promise((resolve) => {
-        fetch(new Request(url)).then(response => {
-            response.text().then(async text => {
-                const json = JSON.parse(text)
-                const result = await parseJson(json)
-                deleteCache().then(update => resolve({'update': update, 'run': result}))
-            })
-        }).catch(err => {
-            console.log(`未知故障导致更新失败：\n${err}`)
-            resolve({'update': false, 'run': false})
+    /** 解析字符串 */
+    const parseJson = json => new Promise((resolve, reject) => {
+        const list = []
+        list.matchUrl = (url) => new Promise((resolve1) => {
+            Promise.any(list.map(it => it.matchUrl(url)))
+                .then(() => resolve1(true))
+                .catch(() => resolve1(false))
+        })
+        dbVersion.read().then(version => {
+            const elementList = json['info']
+            if (elementList.length > 0) {
+                // noinspection JSIgnoredPromiseFromCall
+                dbVersion.write(elementList[0].version)
+            }
+            //判断是否存在版本
+            if (!version) return reject()
+            const refresh = parseChange(list, elementList, version)
+            if (refresh) {  //如果需要清理全站
+                list.length = 0 //清空列表
+                list.push(new VersionElement(null, 'all'))
+            }
+            resolve(list)
         })
     })
+    const url = `/update.json` //需要修改JSON地址的在这里改
+    return new Promise(resolve => fetch(url).then(response => response.text().then(text => {
+        const json = JSON.parse(text)
+        parseJson(json).then(list => deleteCache(list).then(result => resolve(result))).catch(() => {})
+    })))
 }
 
 /** 删除所有缓存 */
@@ -250,16 +290,16 @@ function deleteAllCache() {
     })
 }
 
-const dbID = {
+const dbVersion = {
     write: (id) => new Promise((resolve, reject) => {
         caches.open(CACHE_NAME).then(function (cache) {
             cache.put(
-                new Request('https://id.record'),
+                new Request(VERSION_PATH),
                 new Response(id)
             ).then(() => resolve())
         }).catch(() => reject())
     }), read: (src = null) => new Promise((resolve) => {
-        caches.match(new Request('https://id.record'))
+        caches.match(new Request(VERSION_PATH))
             .then(function (response) {
                 if (!response) resolve(src)
                 response.text().then(text => resolve(text))
