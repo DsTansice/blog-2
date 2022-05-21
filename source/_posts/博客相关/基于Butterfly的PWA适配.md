@@ -15,7 +15,16 @@ abbrlink: 94a0f26f
 date: 2022-02-17 15:07:55
 updated: 2022-05-17 09:33:40
 ---
-  
+
+{% tip warning %}
+<p style="text-align: center;">
+    本文中的SW经过一段时间测试应该是没有BUG了，不过我本人已经不再使用本文中编写的SW，故不再维护<br/>
+    对SW有兴趣的可以去看新版实现
+</p>
+{% endtip %}
+
+{% link 解剖SW原理暨博主SW实现, https://kmar.top/posts/bcfe8408/, /favicon.ico %}
+
 ## 更新内容
 
 {% checkbox green checked, 删除长时间未访问的缓存 %}
