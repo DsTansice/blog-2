@@ -657,7 +657,7 @@ function deleteAllCache() {
     })
 }
 
-const fetchNoCache = request => fetch(request, {cache: "no-cache"})
+const fetchNoCache = request => fetch(request, {cache: "no-store"})
 
 const dbVersion = {
     write: (id) => new Promise((resolve, reject) => {
