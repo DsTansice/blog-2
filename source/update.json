@@ -1,8 +1,12 @@
 {
   "info": [
     {
+      "version": "12",
+      "change": [{"flag": "all"}]
+    },
+    {
       "version": "11",
-      "change": ["all"]
+      "change": []
     }
   ]
 }
