@@ -463,7 +463,7 @@ function replaceRequest(request) {
  * @return boolean
  */
 function skipCache(request) {
-    return request.url.match(/update\/.*\.json$/g)
+    return request.url.match('update.json') !== null
 }
 
 self.addEventListener('fetch', async event => {
@@ -473,7 +473,7 @@ self.addEventListener('fetch', async event => {
         event.respondWith(caches.match(request).then(response => {
             //如果缓存存在则直接返回缓存内容
             if (response) return response
-            return fetch(request).then(response => {
+            return fetch(request, {cache: "no-cache"}).then(response => {
                 //检查获取到的状态码
                 if ((response.status >= 200 && response.status < 400) || response.status === 0) {
                     const clone = response.clone()
@@ -499,19 +499,14 @@ self.addEventListener('message', function (event) {
 
 /**
  * 缓存更新匹配
- *
- *  1. `all`: 刷新所有标记为`clean=true`的缓存
- *  2. `htm`: 刷新所有HTML缓存
- *  3. `str:value`: 刷新所有包含指定字符串的缓存
- *  4. `reg:value`: 刷新所有满足指定正则表达式的缓存
- *  5. `pot:abbrlink`: 刷新指定博文缓存
- *
- * @param value 格式[flag:value]
+ * @param json 格式{"flag": ..., "value": ...}
  * @constructor
+ * @see https://kmar.top/posts/bcfe8408/#JSON格式
  */
-function CacheChangeExpression(value) {
+function CacheChangeExpression(json) {
     this.all = false
-    switch (value.substring(0, 3)) {
+    const value = json['value']
+    switch (json['flag']) {
         case 'all':
             this.all = true
             this.matchUrl = url => {
@@ -520,18 +515,21 @@ function CacheChangeExpression(value) {
             }
             break
         case 'str':
-            this.matchUrl = url => url.match(value.substring(4)) !== null
+            this.matchUrl = url => url.match(value) !== null
             break
         case 'reg':
-            this.matchUrl = url => url.match(RegExp(value.substring(4))) !== null
+            this.matchUrl = url => url.match(RegExp(value)) !== null
             break
-        case 'pot':
-            this.matchUrl = url => url.match(`posts/${value.substring(4)}/`) !== null
+        case 'post':
+            this.matchUrl = url => url.match(`posts/${value}`) !== null
             break
-        case 'htm':
-            this.matchUrl = url => url.match(cacheList.update.url) !== null
+        case 'type':
+            this.matchUrl = url => url.endsWith(`.${value}`)
             break
-        default: console.error(`不支持的表达式：${value}`)
+        case 'html':
+            this.matchUrl = url => url.endsWith('/')
+            break
+        default: console.error(`不支持的表达式：${json}`)
     }
 }
 
@@ -542,7 +540,7 @@ function CacheChangeExpression(value) {
  *
  * 1. (json, null): 前者为有效数据，后者为无效数据，
  *          其中JSON格式见[我的博客](https://kmar.top/posts/bcfe8408/#缓存控制)
- * 2. (*, string): 前者为任意值，后者为匹配规则，格式见{@link CacheChangeExpression}
+ * 2. (*, {flag, value}): 前者为任意值，后者为匹配规则，格式见{@link CacheChangeExpression}
  *
  * 第一种格式用来通过JSON构建对象，第二种格式用来通过代码直接构建一个仅包含一个匹配规则的对象
  *
@@ -550,9 +548,9 @@ function CacheChangeExpression(value) {
  *
  * @constructor
  */
-function VersionElement(json, str = null) {
-    if (str) {
-        this.list = [new CacheChangeExpression(str)]
+function VersionElement(json, value = null) {
+    if (value) {
+        this.list = [new CacheChangeExpression(value)]
     } else {
         this.stop = false
         this.version = json['version']
@@ -640,7 +638,7 @@ function updateJson(page) {
             const refresh = parseChange(list, elementList, version)
             if (refresh) {  //如果需要清理全站
                 list.length = 0 //清空列表
-                list.push(new VersionElement(null, 'all'))
+                list.push(new VersionElement(null, {'flag': 'all'}))
             }
             resolve(list)
         })

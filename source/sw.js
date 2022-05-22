@@ -86,7 +86,7 @@ function replaceRequest(request) {
  * @return boolean
  */
 function skipCache(request) {
-    return request.url.match(/update\/.*\.json$/g)
+    return request.url.match('update.json') !== null
 }
 
 self.addEventListener('fetch', async event => {
@@ -96,7 +96,7 @@ self.addEventListener('fetch', async event => {
         event.respondWith(caches.match(request).then(response => {
             //如果缓存存在则直接返回缓存内容
             if (response) return response
-            return fetch(request).then(response => {
+            return fetch(request, {cache: "no-cache"}).then(response => {
                 //检查获取到的状态码
                 if ((response.status >= 200 && response.status < 400) || response.status === 0) {
                     const clone = response.clone()
