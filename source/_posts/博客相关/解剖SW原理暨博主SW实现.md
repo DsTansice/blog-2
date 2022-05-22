@@ -160,6 +160,8 @@ self.addEventListener('fetch', event => {
 
 ### 缓存控制
 
+#### 老版实现
+
 &emsp;&emsp;接下来就是我们今天的重点，缓存控制。看过我前面的文章的读者可能已经对我的缓存规则有了了解：
 
 1. 每个缓存有固定的存活时间
@@ -342,6 +344,8 @@ self.addEventListener('fetch', async event => {
     }
 })
 ```
+
+#### 新版实现
 
 &emsp;&emsp;那么我们新版的方案换成了什么呢？
 
@@ -683,35 +687,62 @@ const dbVersion = {
 
 &emsp;&emsp;代码中有多个`Promise`的`reject`用来传递结果以搭配`Promise.any`使用，我不清楚使用`reject`传递结果而非异常是否有性能损失，有知道的小伙伴可以在评论区说明一下。
 
-&emsp;&emsp;我们说明一下JSON的格式：
+##### JSON格式
+
+&emsp;&emsp;示例：
 
 ```json
 {
   "info": [
     {
-      "version": "任意不重复的字符串",
+      "version": "任意不重复的字符串0",
       "change": [
-        "匹配规则1",
-        "匹配规则2"
+        {"flag": "[flag0]", "value": "[value0]"},
+        {"flag": "[flag1]", "value": "[value1]"}
       ]
     },
     {
-      ...
-    },
-    ...
+      "version": "任意不重复的字符串1",
+      "change": [
+        {"flag": "[flag0]", "value": "[value0]"},
+        {"flag": "[flag1]", "value": "[value1]"}
+      ]
+    }
   ]
 }
 ```
 
-&emsp;&emsp;其中，更新列表列表（`change`）格式为：
+&emsp;&emsp;`change`列表内容：
 
-1. `all`: 表明全站刷新（clean为true的项）
-2. `reg:...`: 正则表达式，不需要带两边的`/`
-3. `str:...`: 字符串匹配
-4. `pot:abbrlink`: 删除指定博文
-5. `htm`: 所有`html`页面
+|  flag  | value | 功能                          |
+|:------:|:-----:|:----------------------------|
+| `all`  |   无   | 刷新所有标记为`clean=true`的缓存      |
+| `html` |   无   | 刷新所有HTML文件                  |
+| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`） |
+| `post` |   有   | 刷新abbrlink为`value`的博文       |
+| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）       |
+| `str`  |   有   | 根据字符串匹配                     |
 
-{% p red center, 注意：<code>pot</code>和<code>htm</code>均是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
+{% p red center, 注意：<code>post</code>和<code>html</code>均是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
+
+##### 注意事项：
+
++ 同时存在于JSON的版本数量可以有无限个，但是请注意，过大的JSON会损耗性能，所以不要让同时存在的版本数量过多
++ SW在匹配JSON信息时采用顺序匹配，所以写在`info`里面的版本信息越靠上表明越新，第一个即最新的版本，最后一个为保存的最旧的版本
++ `change`列表中匹配规则的数量也没有上限，同样因为性能问题尽量合并一下同类项
++ 如果某一次更新的`change`出现了`all`，那么后面的内容都将是不必要的，因为SW在解析到`all`后就会停止解析
++ 如果相邻两个版本更新的内容是一样的，请勿删除其中某一个版本，可以把老版本的`change`列表置空
++ 尽量不要重复利用`version`的字符串，避免出现意料之外的问题
+
+##### CDN缓存问题
+
+&emsp;&emsp;如果你的网站接入了CDN并启用了缓存，请务必注意缓存问题，因为该方案要求当JSON在CDN缓存中更新时`change`中包含的文件同样更新，否则就会导致客户端拉取到旧的内容。
+
+&emsp;&emsp;目前我还没有实现CDN缓存的自动刷新（不会写`hexo/gulp`插件），所以我选择了另外一种暴力但是简单的方法：CDN缓存时间拉到最长，每次更新时手动刷新CDN缓存。
+
+&emsp;&emsp;各家CDN的情况可能不太一样，各位读者根据自己的情况选择处理方法即可。
+
+##### DOM端
 
 &emsp;&emsp;可能已经有小伙伴迫不及待地把我的SW复制过去实操了，结果发现缓存更新并没有生效，这是因为没有在DOM中编写对应代码。
 
