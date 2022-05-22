@@ -426,6 +426,37 @@ const replaceList = {
     }
 }
 
+self.addEventListener('fetch', async event => {
+    const replace = replaceRequest(event.request)
+    const request = replace === null ? event.request : replace
+    if (findCache(request.url) !== null) {
+        event.respondWith(caches.match(request).then(response => {
+            //如果缓存存在则直接返回缓存内容
+            if (response) return response
+            return fetchNoCache(request).then(response => {
+                //检查获取到的状态码
+                if ((response.status >= 200 && response.status < 400) || response.status === 0) {
+                    const clone = response.clone()
+                    caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+                }
+                return response
+            })
+        }))
+    } else if (replace !== null) {
+        event.respondWith(fetch(request))
+    }
+})
+
+self.addEventListener('message', function (event) {
+    if (event.data.startsWith('update')) {
+        updateJson(event.data.substring(7)).then(result => {
+            if (result) event.source.postMessage('update')
+        })
+    } else if (event.data === 'refresh') {
+        deleteAllCache().then(event.source.postMessage('refresh'))
+    }
+})
+
 /** 判断指定url击中了哪一种缓存，都没有击中则返回null */
 function findCache(url) {
     for (let key in cacheList) {
@@ -456,81 +487,6 @@ function replaceRequest(request) {
         }
     }
     return flag ? new Request(url) : null
-}
-
-/**
- * 是否跳过缓存
- * @return boolean
- */
-function skipCache(request) {
-    return request.url.match('update.json') !== null
-}
-
-self.addEventListener('fetch', async event => {
-    const replace = replaceRequest(event.request)
-    const request = replace === null ? event.request : replace
-    if (!skipCache(request) && findCache(request.url) !== null) {
-        event.respondWith(caches.match(request).then(response => {
-            //如果缓存存在则直接返回缓存内容
-            if (response) return response
-            return fetch(request, {cache: "no-cache"}).then(response => {
-                //检查获取到的状态码
-                if ((response.status >= 200 && response.status < 400) || response.status === 0) {
-                    const clone = response.clone()
-                    caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
-                }
-                return response
-            })
-        }))
-    } else if (replace !== null) {
-        event.respondWith(fetch(request))
-    }
-})
-
-self.addEventListener('message', function (event) {
-    if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(result => {
-            if (result) event.source.postMessage('update')
-        })
-    } else if (event.data === 'refresh') {
-        deleteAllCache().then(event.source.postMessage('refresh'))
-    }
-})
-
-/**
- * 缓存更新匹配
- * @param json 格式{"flag": ..., "value": ...}
- * @constructor
- * @see https://kmar.top/posts/bcfe8408/#JSON格式
- */
-function CacheChangeExpression(json) {
-    this.all = false
-    const value = json['value']
-    switch (json['flag']) {
-        case 'all':
-            this.all = true
-            this.matchUrl = url => {
-                const cache = findCache(url)
-                return cache ? cache.clean : url !== VERSION_PATH
-            }
-            break
-        case 'str':
-            this.matchUrl = url => url.match(value) !== null
-            break
-        case 'reg':
-            this.matchUrl = url => url.match(RegExp(value)) !== null
-            break
-        case 'post':
-            this.matchUrl = url => url.match(`posts/${value}`) !== null
-            break
-        case 'type':
-            this.matchUrl = url => url.endsWith(`.${value}`)
-            break
-        case 'html':
-            this.matchUrl = url => url.endsWith('/')
-            break
-        default: console.error(`不支持的表达式：${json}`)
-    }
 }
 
 /**
@@ -644,10 +600,46 @@ function updateJson(page) {
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
-    return new Promise(resolve => fetch(url).then(response => response.text().then(text => {
+    return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
         parseJson(json).then(list => deleteCache(list).then(result => resolve(result))).catch(() => {})
     })))
+}
+
+/**
+ * 缓存更新匹配
+ * @param json 格式{"flag": ..., "value": ...}
+ * @constructor
+ * @see https://kmar.top/posts/bcfe8408/#JSON格式
+ */
+function CacheChangeExpression(json) {
+    this.all = false
+    const value = json['value']
+    switch (json['flag']) {
+        case 'all':
+            this.all = true
+            this.matchUrl = url => {
+                const cache = findCache(url)
+                return cache ? cache.clean : url !== VERSION_PATH
+            }
+            break
+        case 'str':
+            this.matchUrl = url => url.match(value) !== null
+            break
+        case 'reg':
+            this.matchUrl = url => url.match(RegExp(value)) !== null
+            break
+        case 'post':
+            this.matchUrl = url => url.match(`posts/${value}`) !== null
+            break
+        case 'type':
+            this.matchUrl = url => url.endsWith(`.${value}`)
+            break
+        case 'html':
+            this.matchUrl = url => url.endsWith('/')
+            break
+        default: console.error(`不支持的表达式：${json}`)
+    }
 }
 
 /** 删除所有缓存 */
@@ -664,6 +656,8 @@ function deleteAllCache() {
         })
     })
 }
+
+const fetchNoCache = request => fetch(request, {cache: "no-cache"})
 
 const dbVersion = {
     write: (id) => new Promise((resolve, reject) => {
