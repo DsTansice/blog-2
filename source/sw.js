@@ -259,7 +259,7 @@ function CacheChangeExpression(json) {
             this.matchUrl = url => url.endsWith(`.${value}`)
             break
         case 'html':
-            this.matchUrl = url => url.endsWith('/')
+            this.matchUrl = url => url.endsWith('/') && url !== VERSION_PATH
             break
         default: console.error(`不支持的表达式：${json}`)
     }
