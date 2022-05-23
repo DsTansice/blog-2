@@ -45,6 +45,7 @@ const kmarUtils = {
                 actionDiv.className = 'select'
                 const actionButton = document.createElement('button')
                 actionButton.className = 'action'
+                actionButton.addEventListener('click', action)
                 if (icon) {
                     const actionIcon = document.createElement('i')
                     actionIcon.className = icon
@@ -63,10 +64,26 @@ const kmarUtils = {
                 actionDiv.appendChild(descrDiv)
                 div.appendChild(actionDiv)
             }
-
             body.appendChild(div)
             resolve()
-            setTimeout(() => kmarUtils.closeWin(div.id), time)
+            div.onmouseover = () => div.setAttribute('over', true)
+            div.onmouseleave = () => div.removeAttribute('over')
+            div.setAttribute('age', 0)
+            const task = setInterval(() => {
+                console.log('a')
+                const win = document.getElementById(div.id)
+                if (win) {
+                    if (win.hasAttribute('over')) {
+                        win.setAttribute('age', 0)
+                        return
+                    }
+                    const age = parseInt(win.getAttribute('age')) + 200
+                    win.setAttribute('age', age)
+                    if (age < time) return
+                }
+                clearInterval(task)
+                kmarUtils.closeWin(div.id)
+            }, 200)
             kmarUtils.moveDown(div.id)
             kmarUtils.closeRedundantWin(3)
         })
