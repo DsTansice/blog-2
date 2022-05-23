@@ -16,7 +16,7 @@ const cacheList = {
         clean: false
     }, static: {
         url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
-        clean: true
+        clean: false
     }, update: {
         url: /.*((\/posts.*\/)|search\.xml)$/g,
         clean: true
