@@ -33,7 +33,8 @@ navigator.serviceWorker.addEventListener('message', event => {
             location.reload()
             break
         case 'update':
-            btf.snackbarShow('当前页面已更新，刷新页面以显示')
+            kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示',
+                'fa fa-refresh fa-spin', '刷新', '点击刷新页面', () => location.reload())
             break
     }
 })

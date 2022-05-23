@@ -1,5 +1,9 @@
 // noinspection JSIgnoredPromiseFromCall
 
+btf.snackbarShow = (text, time = 3500) => {
+    kmarUtils.popClockWin(text, time)
+}
+
 const kmarUtils = {
 
     winCode: 0,
@@ -35,13 +39,17 @@ const kmarUtils = {
 
             div.appendChild(exitButton)
             div.appendChild(textDiv)
-            if (icon && buttonText && action) {
+            if (buttonText && action) {
+                div.classList.add('click')
                 const actionDiv = document.createElement('div')
                 actionDiv.className = 'select'
                 const actionButton = document.createElement('button')
                 actionButton.className = 'action'
-                const actionIcon = document.createElement('i')
-                actionIcon.className = icon
+                if (icon) {
+                    const actionIcon = document.createElement('i')
+                    actionIcon.className = icon
+                    actionButton.appendChild(actionIcon)
+                }
                 const actionText = document.createElement('p')
                 actionText.className = `text`
                 actionText.innerText = '刷新'
@@ -50,7 +58,6 @@ const kmarUtils = {
                 const descrText = document.createElement('p')
                 descrText.innerText = describe
                 descrDiv.appendChild(descrText)
-                actionButton.appendChild(actionIcon)
                 actionButton.appendChild(actionText)
                 actionDiv.appendChild(actionButton)
                 actionDiv.appendChild(descrDiv)
