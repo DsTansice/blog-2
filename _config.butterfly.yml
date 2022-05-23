@@ -770,9 +770,10 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
+    - <script async src="/js/custom/utils.js"></script>
+    - <script async src="/js/custom/floatWin.js"></script>
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
-    - <script async src="/js/custom/utils.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
     - <script async src="/js/custom/share.js"></script>
     - <script data-pjax async src="/js/custom/no-pjax.js"></script>
