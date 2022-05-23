@@ -12,16 +12,19 @@
   animation win-entrance 1.3s forwards
 
   & > .text
-    width 250px
+    position relative
+    max-width 84%
+    margin-left 8%
     text-align center
-    margin-left 25px
-    margin-top 17px
+    margin-top 20px
     word-break keep-all
     word-wrap break-word
 
   & > .exit
+    position absolute
     color var(--km-globle-font)
-    float right
+    right 0
+    top 0
     width 30px
     height 30px
     transition all 0.5s
@@ -100,9 +103,6 @@
 @media screen and (max-width: 250px)
   .float-win
     width calc(50%)
-
-    & > .text
-      width calc(50%)
 
     & > .select > .descr
       color transparent
