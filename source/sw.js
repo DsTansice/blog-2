@@ -1,5 +1,5 @@
 /** 缓存库名称 */
-const CACHE_NAME = 'kmarCache'
+const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址 */
 const VERSION_PATH = 'https://version.id/'
 
@@ -161,10 +161,13 @@ function updateJson(page) {
 
 /** 删除指定缓存 */
 function deleteCache(list, page = null) {
+    // noinspection JSIgnoredPromiseFromCall
+    new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
+        names => names.filter(() => true).map(it => cache.delete(it))
+    )))
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
-            cache.keys().then(keys =>
-                Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+            cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
                     list.match(it.url).then(result => {
                         if (result) {
                             // noinspection JSIgnoredPromiseFromCall
