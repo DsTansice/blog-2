@@ -76,7 +76,9 @@ self.addEventListener('message', function (event) {
             if (result) event.source.postMessage('update')
         })
     } else if (event.data === 'refresh') {
-        deleteAllCache().then(event.source.postMessage('refresh'))
+        const list = new VersionList()
+        list.push(new VersionElement(null, {'flag': 'all'}))
+        deleteCache(list).then(event.source.postMessage('refresh'))
     }
 })
 
@@ -111,6 +113,97 @@ function replaceRequest(request) {
     }
     return flag ? new Request(url) : null
 }
+
+/**
+ * 根据JSON删除缓存
+ * @param page 当前页面地址
+ * @returns {Promise<boolean>} 返回值用于标记当前页是否被刷新
+ */
+function updateJson(page) {
+    /**
+     * 解析elements，并把结果输出到list中
+     * @return boolean 是否刷新全站缓存
+     */
+    const parseChange = (list, elements, version) => {
+        for (let element of elements) {
+            const value = new VersionElement(element)
+            if (value.version === version) return false
+            list.push(value)
+            if (value.stop) return false
+        }
+        //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
+        //说明跨版本幅度过大，直接清理全站
+        return true
+    }
+    /** 解析字符串 */
+    const parseJson = json => new Promise((resolve, reject) => {
+        const list = new VersionList()
+        dbVersion.read().then(version => {
+            const elementList = json['info']
+            if (elementList.length > 0) {
+                // noinspection JSIgnoredPromiseFromCall
+                dbVersion.write(elementList[0].version)
+            }
+            //判断是否存在版本
+            if (!version) return reject()
+            const refresh = parseChange(list, elementList, version)
+            //如果需要清理全站
+            if (refresh) list.clean(new VersionElement(null, {'flag': 'all'}))
+            resolve(list)
+        })
+    })
+    const url = `/update.json` //需要修改JSON地址的在这里改
+    return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
+        const json = JSON.parse(text)
+        parseJson(json).then(list => deleteCache(list, page).then(result => resolve(result))).catch(() => {})
+    })))
+}
+
+/** 删除指定缓存 */
+function deleteCache(list, page = null) {
+    return new Promise(resolve => {
+        caches.open(CACHE_NAME).then(cache =>
+            cache.keys().then(keys =>
+                Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+                    list.match(it.url).then(result => {
+                        if (result) {
+                            // noinspection JSIgnoredPromiseFromCall
+                            cache.delete(it)
+                            //该SW还处于试验阶段，该信息用来获取删除了哪些缓存
+                            console.log(`debug-delete:${it.url}`)
+                            if (it.url === page) resolve1()
+                            else reject1()
+                        } else reject1()
+                    }).catch(() => reject1())
+                }))).then(() => resolve(true)).catch(() => resolve(false))
+            ))
+    })
+}
+
+class VersionList {
+
+    list = []
+
+    push(element) {
+        this.list.push(element)
+    }
+
+    clean(element = null) {
+        this.list.length = 0
+        if (!element) this.push(element)
+    }
+
+    match(url) {
+        return new Promise((resolve) => {
+            Promise.any(this.list.map(it => it.matchUrl(url)))
+                .then(() => resolve(true))
+                .catch(() => resolve(false))
+        })
+    }
+
+}
+
+
 
 /**
  * 通过JSON构建一个版本信息
@@ -160,76 +253,6 @@ function VersionElement(json, value = null) {
 }
 
 /**
- * 根据JSON删除缓存
- * @param page 当前页面地址
- * @returns {Promise<boolean>} 返回值用于标记当前页是否被刷新
- */
-function updateJson(page) {
-    //根据list删除缓存
-    const deleteCache = (list) => new Promise(resolve => {
-        caches.open(CACHE_NAME).then(cache =>
-            cache.keys().then(keys =>
-                Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
-                    list.matchUrl(it.url).then(result => {
-                        if (result) {
-                            // noinspection JSIgnoredPromiseFromCall
-                            cache.delete(it)
-                            //该SW还处于试验阶段，该信息用来获取删除了哪些缓存
-                            console.log(`debug-delete:${it.url}`)
-                            if (it.url === page) resolve1()
-                            else reject1()
-                        } else reject1()
-                    }).catch(() => reject1())
-                }))).then(() => resolve(true)).catch(() => resolve(false))
-            ))
-    })
-    /**
-     * 解析elements，并把结果输出到list中
-     * @return boolean 是否刷新全站缓存
-     */
-    const parseChange = (list, elements, version) => {
-        for (let element of elements) {
-            const value = new VersionElement(element)
-            if (value.version === version) return false
-            list.push(value)
-            if (value.stop) return false
-        }
-        //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
-        //说明跨版本幅度过大，直接清理全站
-        return true
-    }
-    /** 解析字符串 */
-    const parseJson = json => new Promise((resolve, reject) => {
-        const list = []
-        list.matchUrl = (url) => new Promise((resolve1) => {
-            Promise.any(list.map(it => it.matchUrl(url)))
-                .then(() => resolve1(true))
-                .catch(() => resolve1(false))
-        })
-        dbVersion.read().then(version => {
-            const elementList = json['info']
-            if (elementList.length > 0) {
-                // noinspection JSIgnoredPromiseFromCall
-                dbVersion.write(elementList[0].version)
-            }
-            //判断是否存在版本
-            if (!version) return reject()
-            const refresh = parseChange(list, elementList, version)
-            if (refresh) {  //如果需要清理全站
-                list.length = 0 //清空列表
-                list.push(new VersionElement(null, {'flag': 'all'}))
-            }
-            resolve(list)
-        })
-    })
-    const url = `/update.json` //需要修改JSON地址的在这里改
-    return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
-        const json = JSON.parse(text)
-        parseJson(json).then(list => deleteCache(list).then(result => resolve(result))).catch(() => {})
-    })))
-}
-
-/**
  * 缓存更新匹配
  * @param json 格式{"flag": ..., "value": ...}
  * @constructor
@@ -263,21 +286,6 @@ function CacheChangeExpression(json) {
             break
         default: console.error(`不支持的表达式：${json}`)
     }
-}
-
-/** 删除所有缓存 */
-function deleteAllCache() {
-    return caches.open(CACHE_NAME).then(function (cache) {
-        cache.keys().then(function (keys) {
-            for (let key of keys) {
-                const value = findCache(key.url)
-                if (value && value.clean) {
-                    // noinspection JSIgnoredPromiseFromCall
-                    cache.delete(key)
-                }
-            }
-        })
-    })
 }
 
 const fetchNoCache = request => fetch(request, {cache: "no-store"})
