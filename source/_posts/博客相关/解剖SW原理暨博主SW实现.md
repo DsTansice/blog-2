@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-update: 2022-05-21 17:31:25
+update: 2022-05-23 22:14:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -69,7 +69,7 @@ simple().then((args) => {
 
 &emsp;&emsp;`fetchAPI`和`XMLHttpRequest`类似，都是用于发起网络请求，获取网络资源的接口，不过`fetchAPI`提供了更强大、更灵活的功能，也更容易上手。
 
-&emsp;&emsp`fetchAPI`是一个异步接口，其也是使用了`Promise`，具体内容我不再赘述，只说明基本用法：
+&emsp;&emsp;`fetchAPI`是一个异步接口，其也是使用了`Promise`，具体内容我不再赘述，只说明基本用法：
 
 ```javascript
 fetch(new Request(url)).then(response => {
