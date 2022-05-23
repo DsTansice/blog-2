@@ -4,9 +4,10 @@
   top 70px
   width 300px
   z-index 9997
-  background-color whitesmoke
+  background-color var(--km-float-win-bg)
+  color var(--km-globle-font)
   border-radius 15px
-  box-shadow 3px 4px 5px black
+  box-shadow 3px 4px 5px var(--km-button-shadow)
   transition all 1s
   animation win-entrance 1.3s forwards
 
@@ -14,14 +15,20 @@
     width 250px
     text-align center
     margin-left 25px
-    margin-top 26px
+    margin-top 17px
     word-break keep-all
     word-wrap break-word
 
   & > .exit
+    color var(--km-globle-font)
     float right
     width 30px
     height 30px
+    transition all 0.5s
+
+    &:hover
+      color deepskyblue
+      transform rotate(90deg)
 
   & > .select
     position relative
@@ -54,7 +61,8 @@
       height 30px
       margin-right 10px
       background-color var(--km-button-dark-bg)
-      box-shadow 1px 1px 2px black
+      color var(--km-button-font)
+      box-shadow 1px 1px 2px var(--km-button-shadow)
       padding 10px
       border-radius 7px
       transition all 0.5s
@@ -83,6 +91,7 @@
 .float-win.click
   & > .text
     margin-bottom 0
+    margin-top 26px
 
 @media screen and (max-width: 550px) and (min-width: 250px)
   .float-win

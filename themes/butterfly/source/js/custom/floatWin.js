@@ -6,8 +6,8 @@ btf.snackbarShow = (text, time = 3500) => {
 
 const kmarUtils = {
 
+    /** 记录悬浮窗编号，外界切勿修改 */
     winCode: 0,
-
     /**
      * 在右上角弹出带按钮的悬浮窗
      * @param text 要显示的文本
@@ -70,7 +70,6 @@ const kmarUtils = {
             div.onmouseleave = () => div.removeAttribute('over')
             div.setAttribute('age', 0)
             const task = setInterval(() => {
-                console.log('a')
                 const win = document.getElementById(div.id)
                 if (win) {
                     if (win.hasAttribute('over')) {
@@ -94,7 +93,7 @@ const kmarUtils = {
      * @param time 默认持续时间
      */
     popClockWin: (text, time = 3500) =>
-        kmarUtils.popClickClockWin(text, null, null, null, time),
+        kmarUtils.popClickClockWin(text, null, null, null, null, time),
     /**
      * 移动指定悬浮窗
      * @param id 悬浮窗ID
