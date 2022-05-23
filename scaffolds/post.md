@@ -6,6 +6,6 @@ categories:
 
 tags:
 
-cover: https://image.kmar.top/bg/b.jpg!/fw/550
+cover: https://image.kmar.top/bg/b.jpg!/fw/700
 description:
 ---

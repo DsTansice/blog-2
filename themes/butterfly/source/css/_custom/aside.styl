@@ -17,7 +17,13 @@
       &:hover
         background var(--km-link-bg) !important
 
-#aside-content
+.aside-content
+
+  //相关推荐
+  .aside-list
+    img
+      border-radius 5px
+
   // 右侧标签
   .card-tag-cloud
     a
@@ -42,6 +48,25 @@
           color var(--km-toc-active-font) !important
           border-radius 10px
           background var(--km-toc-active) !important
+
+  // 作者信息背景图片
+  .card-widget.card-info
+    background-image url("https://image.kmar.top/indexBg/side.png!/fw/800") !important
+    background-repeat no-repeat !important
+    background-attachment inherit !important
+    background-size 100% !important
+    .avatar-img
+      margin-top 20px
+      img
+        transition all 0.5s !important
+        &:hover
+          transform unset !important
+          opacity 0
+      &:hover
+        & + .author-info__name
+          opacity 0
+    .author-info__name
+      transition all 0.5s
 
 #sidebar-menus
   .menus_items
