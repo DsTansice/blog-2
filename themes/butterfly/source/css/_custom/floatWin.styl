@@ -28,6 +28,7 @@
     text-align right
     margin-bottom 10px
     height 30px
+
     & > .descr
       position relative
       margin-top 0
@@ -35,6 +36,7 @@
       display inline-block
       height 30px
       overflow hidden
+
       & > p
         left 100px
         opacity 0
@@ -43,6 +45,7 @@
         height 30px
         z-index 9998
         transition all 1s
+
     & > .action
       display inline-block
       position relative
@@ -55,17 +58,21 @@
       padding 10px
       border-radius 7px
       transition all 0.5s
+
       & > .text
         display inline
         position relative
         bottom 4px
         font-weight bold
         margin-left 2px
+
       & > i
         position relative
         bottom 4px
+
       &:hover
         background-color var(--km-button-dark-hover)
+
         & + .descr > p
           left 0
           opacity 1
@@ -84,8 +91,10 @@
 @media screen and (max-width: 250px)
   .float-win
     width calc(50%)
+
     & > .text
       width calc(50%)
+
     & > .select > .descr
       color transparent
 
