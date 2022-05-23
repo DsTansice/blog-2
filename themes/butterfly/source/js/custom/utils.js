@@ -30,7 +30,7 @@ if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
 navigator.serviceWorker.addEventListener('message', event => {
     switch (event.data) {
         case 'refresh':
-            location.reload()
+            location.reload(true)
             break
         case 'update':
             kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示',

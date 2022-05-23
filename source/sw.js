@@ -126,7 +126,7 @@ function updateJson(page) {
      */
     const parseChange = (list, elements, version) => {
         for (let element of elements) {
-            const value = VersionElement.valueOf(elements)
+            const value = VersionElement.valueOf(element)
             if (value.version === version) return false
             list.push(value)
             if (value.stop) return false
@@ -183,20 +183,20 @@ function deleteCache(list, page = null) {
 /** 版本列表 */
 class VersionList {
 
-    list = []
+    _list = []
 
     push(element) {
-        this.list.push(element)
+        this._list.push(element)
     }
 
     clean(element = null) {
-        this.list.length = 0
+        this._list.length = 0
         if (!element) this.push(element)
     }
 
     match(url) {
         return new Promise((resolve) => {
-            Promise.any(this.list.map(it => it.matchUrl(url)))
+            Promise.any(this._list.map(it => it.matchUrl(url)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
         })
