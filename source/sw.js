@@ -77,7 +77,7 @@ self.addEventListener('message', function (event) {
         })
     } else if (event.data === 'refresh') {
         const list = new VersionList()
-        list.push(new VersionElement(null, {'flag': 'all'}))
+        list.push(VersionElement.buildAll())
         deleteCache(list).then(event.source.postMessage('refresh'))
     }
 })
@@ -126,7 +126,7 @@ function updateJson(page) {
      */
     const parseChange = (list, elements, version) => {
         for (let element of elements) {
-            const value = new VersionElement(element)
+            const value = VersionElement.valueOf(elements)
             if (value.version === version) return false
             list.push(value)
             if (value.stop) return false
@@ -148,7 +148,7 @@ function updateJson(page) {
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) list.clean(new VersionElement(null, {'flag': 'all'}))
+            if (refresh) list.clean(VersionElement.buildAll())
             resolve(list)
         })
     })
@@ -180,6 +180,7 @@ function deleteCache(list, page = null) {
     })
 }
 
+/** 版本列表 */
 class VersionList {
 
     list = []
@@ -203,89 +204,102 @@ class VersionList {
 
 }
 
-
-
 /**
  * 通过JSON构建一个版本信息
- *
- * 调用格式：
- *
- * 1. (json, null): 前者为有效数据，后者为无效数据，
- *          其中JSON格式见[我的博客](https://kmar.top/posts/bcfe8408/#缓存控制)
- * 2. (*, {flag, value}): 前者为任意值，后者为匹配规则，格式见{@link CacheChangeExpression}
- *
- * 第一种格式用来通过JSON构建对象，第二种格式用来通过代码直接构建一个仅包含一个匹配规则的对象
- *
- * **注意：通过第二种方法构建的对象不含有`stop`、`version`这两个属性**
- *
  * @constructor
  */
-function VersionElement(json, value = null) {
-    if (value) {
-        this.list = [new CacheChangeExpression(value)]
-    } else {
-        this.stop = false
-        this.version = json['version']
-        this.list = []
+class VersionElement {
+
+    static buildAll() {
+        const result = new VersionElement()
+        result._list.push(CacheChangeExpression.buildAllExpression())
+        return result
+    }
+
+    /** 通过完整信息构建一个完整的元素 */
+    static valueOf(json) {
+        const result = new VersionElement()
+        result.version = json['version']
         const jsonList = json['change']
         if (jsonList) {
             for (let it of jsonList) {
                 const value = new CacheChangeExpression(it)
-                if (value.all) this.stop = true
-                this.list.push(value)
+                if (value.all) result.stop = true
+                result._list.push(value)
             }
         }
+        return result
     }
+
+    /** 匹配规则列表 */
+    _list = []
+    /** 是否停止解析 */
+    stop = false
+    /** 版本信息 */
+    version = null
+
     /**
      * 判断与输入的url是否匹配
      * @param url 字符串（String）
      * @return {Promise} resolve表明匹配成功，reject表明匹配失败
      */
-    this.matchUrl = url => new Promise((resolve, reject) => {
-        for (let it of this.list) {
-            if (it.matchUrl(url)) {
-                resolve()
-                return
+    matchUrl(url) {
+        return new Promise((resolve, reject) => {
+            for (let it of this._list) {
+                if (it.matchUrl(url)) {
+                    resolve()
+                    return
+                }
             }
-        }
-        reject()
-    })
+            reject()
+        })
+    }
+
 }
 
 /**
- * 缓存更新匹配
+ * 缓存更新匹配规则表达式
  * @param json 格式{"flag": ..., "value": ...}
- * @constructor
  * @see https://kmar.top/posts/bcfe8408/#JSON格式
  */
-function CacheChangeExpression(json) {
-    this.all = false
-    const value = json['value']
-    switch (json['flag']) {
-        case 'all':
-            this.all = true
-            this.matchUrl = url => {
-                const cache = findCache(url)
-                return cache ? cache.clean : url !== VERSION_PATH
-            }
-            break
-        case 'str':
-            this.matchUrl = url => url.match(value) !== null
-            break
-        case 'reg':
-            this.matchUrl = url => url.match(RegExp(value)) !== null
-            break
-        case 'post':
-            this.matchUrl = url => url.match(`posts/${value}`) !== null
-            break
-        case 'type':
-            this.matchUrl = url => url.endsWith(`.${value}`)
-            break
-        case 'html':
-            this.matchUrl = url => url.endsWith('/') && url !== VERSION_PATH
-            break
-        default: console.error(`不支持的表达式：${json}`)
+class CacheChangeExpression {
+
+    static buildAllExpression() {
+        return new CacheChangeExpression({'flag': 'all'})
     }
+
+    all = false
+    matchUrl = null
+
+    constructor(json) {
+        const value = json['value']
+        switch (json['flag']) {
+            case 'all':
+                this.all = true
+                this.matchUrl = url => {
+                    const cache = findCache(url)
+                    return cache ? cache.clean : url !== VERSION_PATH
+                }
+                break
+            case 'str':
+                this.matchUrl = url => url.match(value) !== null
+                break
+            case 'reg':
+                this.matchUrl = url => url.match(RegExp(value)) !== null
+                break
+            case 'post':
+                this.matchUrl = url => url.match(`posts/${value}`) !== null
+                break
+            case 'type':
+                this.matchUrl = url => url.endsWith(`.${value}`)
+                break
+            case 'html':
+                this.matchUrl = url => url.endsWith('/') && url !== VERSION_PATH
+                break
+            default: console.error(`不支持的表达式：${json}`)
+        }
+    }
+
 }
 
 const fetchNoCache = request => fetch(request, {cache: "no-store"})
