@@ -3,7 +3,7 @@ title: 解剖SW原理暨博主SW实现
 top_img: false
 cover: 'https://image.kmar.top/bg/b20.jpg!/fw/550'
 categories:
-  - 随心记
+  - 博客
 tags:
   - Hexo
   - ServiceWorker

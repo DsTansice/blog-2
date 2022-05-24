@@ -3,7 +3,7 @@ title: 基于Butterfly的PWA适配
 top_img: false
 cover: 'https://image.kmar.top/bg/b40.jpg!/fw/550'
 categories:
-  - 随心记
+  - 博客
 tags:
   - Hexo
   - PWA
