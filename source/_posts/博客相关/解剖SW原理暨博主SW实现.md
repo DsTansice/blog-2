@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-update: 2022-05-23 22:14:25
+updated: 2022-05-24 23:38:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -376,7 +376,7 @@ self.addEventListener('fetch', async event => {
 
 ```javascript
 /** 缓存库名称 */
-const CACHE_NAME = 'kmarCache'
+const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址（必须以`/`结尾） */
 const VERSION_PATH = 'https://version.id/'
 
@@ -389,8 +389,8 @@ self.addEventListener('install', () => self.skipWaiting())
  */
 const cacheList = {
     simple: {
-        url: [正则表达式],
-        clean: true
+        clean: false,
+        match: url => false
     }
 }
 
@@ -451,7 +451,7 @@ self.addEventListener('message', function (event) {
 function findCache(url) {
     for (let key in cacheList) {
         const value = cacheList[key]
-        if (url.match(value.url)) return value
+        if (value.match(url)) return value
     }
     return null
 }
@@ -491,7 +491,7 @@ function updateJson(page) {
      */
     const parseChange = (list, elements, version) => {
         for (let element of elements) {
-            const value = VersionElement.valueOf(elements)
+            const value = VersionElement.valueOf(element)
             if (value.version === version) return false
             list.push(value)
             if (value.stop) return false
@@ -528,8 +528,7 @@ function updateJson(page) {
 function deleteCache(list, page = null) {
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
-            cache.keys().then(keys =>
-                Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+            cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
                     list.match(it.url).then(result => {
                         if (result) {
                             // noinspection JSIgnoredPromiseFromCall
@@ -548,20 +547,20 @@ function deleteCache(list, page = null) {
 /** 版本列表 */
 class VersionList {
 
-    list = []
+    _list = []
 
     push(element) {
-        this.list.push(element)
+        this._list.push(element)
     }
 
     clean(element = null) {
-        this.list.length = 0
+        this._list.length = 0
         if (!element) this.push(element)
     }
 
     match(url) {
         return new Promise((resolve) => {
-            Promise.any(this.list.map(it => it.matchUrl(url)))
+            Promise.any(this._list.map(it => it.matchUrl(url)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
         })
@@ -638,13 +637,14 @@ class CacheChangeExpression {
 
     constructor(json) {
         const value = json['value']
+        const checkCache = url => {
+            const cache = findCache(url)
+            return cache || cache.clean
+        }
         switch (json['flag']) {
             case 'all':
                 this.all = true
-                this.matchUrl = url => {
-                    const cache = findCache(url)
-                    return cache ? cache.clean : url !== VERSION_PATH
-                }
+                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'str':
                 this.matchUrl = url => url.match(value) !== null
@@ -656,10 +656,13 @@ class CacheChangeExpression {
                 this.matchUrl = url => url.match(`posts/${value}`) !== null
                 break
             case 'type':
-                this.matchUrl = url => url.endsWith(`.${value}`)
+                this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
                 break
-            case 'html':
-                this.matchUrl = url => url.endsWith('/') && url !== VERSION_PATH
+            case 'js':
+                this.matchUrl = url => url.endsWith(`${value}.js`)
+                break
+            case 'css':
+                this.matchUrl = url => url.endsWith(`${value}.css`)
                 break
             default: console.error(`不支持的表达式：${json}`)
         }
@@ -667,6 +670,7 @@ class CacheChangeExpression {
 
 }
 
+/** 忽略浏览器HTTP缓存的请求指定request */
 const fetchNoCache = request => fetch(request, {cache: "no-store"})
 
 const dbVersion = {
@@ -716,16 +720,17 @@ const dbVersion = {
 
 &emsp;&emsp;`change`列表内容：
 
-|  flag  | value | 功能                          |
-|:------:|:-----:|:----------------------------|
-| `all`  |   无   | 刷新所有标记为`clean=true`的缓存      |
-| `html` |   无   | 刷新所有HTML文件                  |
-| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`） |
-| `post` |   有   | 刷新abbrlink为`value`的博文       |
-| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）       |
-| `str`  |   有   | 根据字符串匹配                     |
+|  flag  | value | 功能                           |
+|:------:|:-----:|:-----------------------------|
+| `all`  |   无   | 刷新所有标记为`clean=true`的缓存       |
+| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`）  |
+| `post` |   有   | 刷新abbrlink为`value`的博文        |
+| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）        |
+| `str`  |   有   | 根据字符串匹配                      |
+|  `js`  |   有   | 刷新名为`value`的JS文件缓存（不需要带拓展名）  |
+| `css`  |   有   | 刷新名为`value`的CSS文件缓存（不需要带拓展名） |
 
-{% p red center, 注意：<code>post</code>和<code>html</code>均是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
+{% p red center, 注意：<code>post</code>是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
 
 ##### 注意事项：
 

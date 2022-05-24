@@ -1,6 +1,13 @@
 {
   "info": [
     {
+      "version": "22",
+      "change": [
+        {"flag": "html"},
+        {"flag": "css", "value": "index"}
+      ]
+    },
+    {
       "version": "21",
       "change": [{"flag": "all"}]
     }

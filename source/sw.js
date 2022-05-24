@@ -1,6 +1,6 @@
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
-/** 版本名称存储地址 */
+/** 版本名称存储地址（必须以`/`结尾） */
 const VERSION_PATH = 'https://version.id/'
 
 self.addEventListener('install', () => self.skipWaiting())
@@ -11,21 +11,24 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
-    font: {
-        url: /(jet|HarmonyOS)\.(woff2|woff|ttf)$/g,
-        clean: false
-    }, static: {
-        url: /(^(https:\/\/npm\.elemecdn\.com).*@\d.*)|((jinrishici\.js|\.cur)$)/g,
-        clean: false
-    }, update: {
-        url: /.*((\/posts.*\/)|search\.xml)$/g,
-        clean: true
-    }, resources: {
-        url: /(^(https:\/\/(image\.kmar\.top|kmar\.top))).*\.(css|js|woff2|woff|ttf|json|svg)$/g,
-        clean: true
-    }, stand: {
-        url: /^https:\/\/image\.kmar\.top\/indexBg/g,
-        clean: true
+    static: {
+        clean: false,
+        match: url => {
+            if (url.match(/(jet|HarmonyOS)\.(woff2|woff|ttf)$/g)) return true
+            // noinspection SpellCheckingInspection
+            if (url.endsWith('jinrishici.js') || url.endsWith('.cur')) return true
+            return url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
+        }
+    }, html: {
+        clean: true,
+        match: url => (url.endsWith('/') && url.match(`kmar.top`)) || url.endsWith('kmar.top')
+    }, resource: {
+        clean: true,
+        match: url => {
+            if (url.match('kmar.top/') === null) return false
+            if (url.endsWith('search.xml')) return true
+            return url.match('/indexBg/') || url.match(/\.(css|js|woff2|woff|ttf|json|svg)$/g)
+        }
     }
 }
 
@@ -86,7 +89,7 @@ self.addEventListener('message', function (event) {
 function findCache(url) {
     for (let key in cacheList) {
         const value = cacheList[key]
-        if (url.match(value.url)) return value
+        if (value.match(url)) return value
     }
     return null
 }
@@ -276,13 +279,14 @@ class CacheChangeExpression {
 
     constructor(json) {
         const value = json['value']
+        const checkCache = url => {
+            const cache = findCache(url)
+            return cache || cache.clean
+        }
         switch (json['flag']) {
             case 'all':
                 this.all = true
-                this.matchUrl = url => {
-                    const cache = findCache(url)
-                    return cache ? cache.clean : url !== VERSION_PATH
-                }
+                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'str':
                 this.matchUrl = url => url.match(value) !== null
@@ -294,10 +298,16 @@ class CacheChangeExpression {
                 this.matchUrl = url => url.match(`posts/${value}`) !== null
                 break
             case 'type':
-                this.matchUrl = url => url.endsWith(`.${value}`)
+                this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
                 break
             case 'html':
-                this.matchUrl = url => url.endsWith('/') && url !== VERSION_PATH
+                this.matchUrl = cacheList.html.match
+                break
+            case 'js':
+                this.matchUrl = url => url.endsWith(`${value}.js`)
+                break
+            case 'css':
+                this.matchUrl = url => url.endsWith(`${value}.css`)
                 break
             default: console.error(`不支持的表达式：${json}`)
         }
@@ -305,6 +315,7 @@ class CacheChangeExpression {
 
 }
 
+/** 忽略浏览器HTTP缓存的请求指定request */
 const fetchNoCache = request => fetch(request, {cache: "no-store"})
 
 const dbVersion = {
