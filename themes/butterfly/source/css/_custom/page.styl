@@ -58,17 +58,7 @@ html
 ::-moz-selection
   background var(--km-text-select) !important
 
-// 顶部通知栏
-.snackbar-pos
-  &.top-center
-    border-radius 8px
-    text-align center
-    min-width 0 !important
-
-    p
-      font-weight bold !important
-
-@media (max-width: 640px)
-  .snackbar-pos.top-center
-    p
-      width: -webkit-fill-available
+// 修正搜索按钮位置
+#nav
+  #search-button
+    line-height 1 !important
