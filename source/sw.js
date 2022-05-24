@@ -303,11 +303,8 @@ class CacheChangeExpression {
             case 'html':
                 this.matchUrl = cacheList.html.match
                 break
-            case 'js':
-                this.matchUrl = url => url.endsWith(`${value}.js`)
-                break
-            case 'css':
-                this.matchUrl = url => url.endsWith(`${value}.css`)
+            case 'file':
+                this.matchUrl = url => url.endsWith(value)
                 break
             default: console.error(`不支持的表达式：${json}`)
         }

@@ -658,11 +658,8 @@ class CacheChangeExpression {
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
                 break
-            case 'js':
-                this.matchUrl = url => url.endsWith(`${value}.js`)
-                break
-            case 'css':
-                this.matchUrl = url => url.endsWith(`${value}.css`)
+            case 'file':
+                this.matchUrl = url => url.endsWith(value)
                 break
             default: console.error(`不支持的表达式：${json}`)
         }
@@ -720,15 +717,14 @@ const dbVersion = {
 
 &emsp;&emsp;`change`列表内容：
 
-|  flag  | value | 功能                           |
-|:------:|:-----:|:-----------------------------|
-| `all`  |   无   | 刷新所有标记为`clean=true`的缓存       |
-| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`）  |
-| `post` |   有   | 刷新abbrlink为`value`的博文        |
-| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）        |
-| `str`  |   有   | 根据字符串匹配                      |
-|  `js`  |   有   | 刷新名为`value`的JS文件缓存（不需要带拓展名）  |
-| `css`  |   有   | 刷新名为`value`的CSS文件缓存（不需要带拓展名） |
+|  flag  | value | 功能                          |
+|:------:|:-----:|:----------------------------|
+| `all`  |   无   | 刷新所有标记为`clean=true`的缓存      |
+| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`） |
+| `post` |   有   | 刷新abbrlink为`value`的博文       |
+| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）       |
+| `str`  |   有   | 根据字符串匹配                     |
+| `file` |   有   | 刷新名为`value`的文件缓存（需要带拓展名）    |
 
 {% p red center, 注意：<code>post</code>是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
 
