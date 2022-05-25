@@ -45,7 +45,10 @@ const kmarUtils = {
                 actionDiv.className = 'select'
                 const actionButton = document.createElement('button')
                 actionButton.className = 'action'
-                actionButton.addEventListener('click', action)
+                actionButton.addEventListener('click', () => {
+                    action()
+                    kmarUtils.closeWin(div.id)
+                })
                 if (icon) {
                     const actionIcon = document.createElement('i')
                     actionIcon.className = icon
@@ -53,7 +56,7 @@ const kmarUtils = {
                 }
                 const actionText = document.createElement('p')
                 actionText.className = `text`
-                actionText.innerText = '刷新'
+                actionText.innerText = buttonText
                 const descrDiv = document.createElement('div')
                 descrDiv.className = 'descr'
                 const descrText = document.createElement('p')
