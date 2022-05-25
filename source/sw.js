@@ -21,12 +21,12 @@ const cacheList = {
         }
     }, html: {
         clean: true,
-        match: url => (url.endsWith('/') && url.match(`kmar.top`)) || url.endsWith('kmar.top')
+        match: url => (url.endsWith('/') && url.match(`kmar.top`)) ||
+                        url.endsWith('kmar.top') || url.endsWith('search.xml')
     }, resource: {
         clean: true,
         match: url => {
             if (url.match('kmar.top/') === null) return false
-            if (url.endsWith('search.xml')) return true
             return url.match('/indexBg/') || url.match(/\.(css|js|woff2|woff|ttf|json|svg)$/g)
         }
     }
@@ -286,7 +286,7 @@ class CacheChangeExpression {
                 this.matchUrl = url => url.match(RegExp(value)) !== null
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) !== null
+                this.matchUrl = url => url.match(`posts/${value}`) !== null || url.endsWith('search.xml')
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
