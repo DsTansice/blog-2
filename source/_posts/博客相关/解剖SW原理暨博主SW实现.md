@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-05-24 23:38:25
+updated: 2022-05-25 16:31:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -388,9 +388,24 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
-    simple: {
+    static: {
         clean: false,
-        match: url => false
+        match: url => {
+            if (url.match(/(jet|HarmonyOS)\.(woff2|woff|ttf)$/g)) return true
+            // noinspection SpellCheckingInspection
+            if (url.endsWith('jinrishici.js') || url.endsWith('.cur')) return true
+            return url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
+        }
+    }, html: {
+        clean: true,
+        match: url => (url.endsWith('/') && url.match(`kmar.top`)) || url.endsWith('kmar.top')
+    }, resource: {
+        clean: true,
+        match: url => {
+            if (url.match('kmar.top/') === null) return false
+            if (url.endsWith('search.xml')) return true
+            return url.match('/indexBg/') || url.match(/\.(css|js|woff2|woff|ttf|json|svg)$/g)
+        }
     }
 }
 
@@ -494,7 +509,6 @@ function updateJson(page) {
             const value = VersionElement.valueOf(element)
             if (value.version === version) return false
             list.push(value)
-            if (value.stop) return false
         }
         //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
         //说明跨版本幅度过大，直接清理全站
@@ -526,6 +540,10 @@ function updateJson(page) {
 
 /** 删除指定缓存 */
 function deleteCache(list, page = null) {
+    // noinspection JSIgnoredPromiseFromCall
+    new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
+        names => names.filter(() => true).map(it => cache.delete(it))
+    )))
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
@@ -588,7 +606,6 @@ class VersionElement {
         if (jsonList) {
             for (let it of jsonList) {
                 const value = new CacheChangeExpression(it)
-                if (value.all) result.stop = true
                 result._list.push(value)
             }
         }
@@ -597,8 +614,6 @@ class VersionElement {
 
     /** 匹配规则列表 */
     _list = []
-    /** 是否停止解析 */
-    stop = false
     /** 版本信息 */
     version = null
 
@@ -632,7 +647,6 @@ class CacheChangeExpression {
         return new CacheChangeExpression({'flag': 'all'})
     }
 
-    all = false
     matchUrl = null
 
     constructor(json) {
@@ -642,10 +656,6 @@ class CacheChangeExpression {
             return cache || cache.clean
         }
         switch (json['flag']) {
-            case 'all':
-                this.all = true
-                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
-                break
             case 'str':
                 this.matchUrl = url => url.match(value) !== null
                 break
@@ -657,6 +667,9 @@ class CacheChangeExpression {
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
+                break
+            case 'html':
+                this.matchUrl = cacheList.html.match
                 break
             case 'file':
                 this.matchUrl = url => url.endsWith(value)
@@ -719,7 +732,6 @@ const dbVersion = {
 
 |  flag  | value | 功能                          |
 |:------:|:-----:|:----------------------------|
-| `all`  |   无   | 刷新所有标记为`clean=true`的缓存      |
 | `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`） |
 | `post` |   有   | 刷新abbrlink为`value`的博文       |
 | `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）       |
@@ -733,9 +745,9 @@ const dbVersion = {
 + 同时存在于JSON的版本数量可以有无限个，但是请注意，过大的JSON会损耗性能，所以不要让同时存在的版本数量过多
 + SW在匹配JSON信息时采用顺序匹配，所以写在`info`里面的版本信息越靠上表明越新，第一个即最新的版本，最后一个为保存的最旧的版本
 + `change`列表中匹配规则的数量也没有上限，同样因为性能问题尽量合并一下同类项
-+ 如果某一次更新的`change`出现了`all`，那么后面的内容都将是不必要的，因为SW在解析到`all`后就会停止解析
 + 如果相邻两个版本更新的内容是一样的，请勿删除其中某一个版本，可以把老版本的`change`列表置空
 + 尽量不要重复利用`version`的字符串，避免出现意料之外的问题
++ 如果需要清除所有缓存，把旧版本号全部删掉就可以了
 
 ##### CDN缓存问题
 

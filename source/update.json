@@ -6,10 +6,6 @@
         {"flag": "html"},
         {"flag": "file", "value": "index.css"}
       ]
-    },
-    {
-      "version": "21",
-      "change": [{"flag": "all"}]
     }
   ]
 }

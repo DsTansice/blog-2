@@ -132,7 +132,6 @@ function updateJson(page) {
             const value = VersionElement.valueOf(element)
             if (value.version === version) return false
             list.push(value)
-            if (value.stop) return false
         }
         //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
         //说明跨版本幅度过大，直接清理全站
@@ -230,7 +229,6 @@ class VersionElement {
         if (jsonList) {
             for (let it of jsonList) {
                 const value = new CacheChangeExpression(it)
-                if (value.all) result.stop = true
                 result._list.push(value)
             }
         }
@@ -239,8 +237,6 @@ class VersionElement {
 
     /** 匹配规则列表 */
     _list = []
-    /** 是否停止解析 */
-    stop = false
     /** 版本信息 */
     version = null
 
@@ -274,7 +270,6 @@ class CacheChangeExpression {
         return new CacheChangeExpression({'flag': 'all'})
     }
 
-    all = false
     matchUrl = null
 
     constructor(json) {
@@ -284,10 +279,6 @@ class CacheChangeExpression {
             return cache || cache.clean
         }
         switch (json['flag']) {
-            case 'all':
-                this.all = true
-                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
-                break
             case 'str':
                 this.matchUrl = url => url.match(value) !== null
                 break
