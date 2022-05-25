@@ -79,9 +79,7 @@ self.addEventListener('message', function (event) {
             if (result) event.source.postMessage('update')
         })
     } else if (event.data === 'refresh') {
-        const list = new VersionList()
-        list.push(VersionElement.buildAll())
-        deleteCache(list).then(event.source.postMessage('refresh'))
+        deleteAllCache().then(() => event.source.postMessage('refresh'))
     }
 })
 
@@ -150,23 +148,37 @@ function updateJson(page) {
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) list.clean(VersionElement.buildAll())
-            resolve(list)
+            if (refresh) deleteAllCache().then(() => resolve(null))
+            else resolve(list)
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
-        parseJson(json).then(list => deleteCache(list, page).then(result => resolve(result))).catch(() => {})
+        parseJson(json).then(list => {
+            if (list) deleteCache(list, page).then(result => resolve(result))
+            else resolve(true)
+        }).catch(() => {})
     })))
 }
 
-/** 删除指定缓存 */
-function deleteCache(list, page = null) {
+function deleteAllCache() {
     // noinspection JSIgnoredPromiseFromCall
     new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
         names => names.filter(() => true).map(it => cache.delete(it))
     )))
+    return new Promise(resolve => caches.open(CACHE_NAME)
+        .then(cache => cache.keys()
+            .then(names => Promise.all(names.filter(it => {
+                const data = findCache(it.url)
+                return data ? data.clean : it.url !== VERSION_PATH
+            }).map(it => cache.delete(it))))
+        ).then(() => resolve())
+    )
+}
+
+/** 删除指定缓存 */
+function deleteCache(list, page = null) {
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
@@ -215,12 +227,6 @@ class VersionList {
  */
 class VersionElement {
 
-    static buildAll() {
-        const result = new VersionElement()
-        result._list.push(CacheChangeExpression.buildAllExpression())
-        return result
-    }
-
     /** 通过完整信息构建一个完整的元素 */
     static valueOf(json) {
         const result = new VersionElement()
@@ -266,10 +272,6 @@ class VersionElement {
  */
 class CacheChangeExpression {
 
-    static buildAllExpression() {
-        return new CacheChangeExpression({'flag': 'all'})
-    }
-
     matchUrl = null
 
     constructor(json) {
@@ -297,7 +299,7 @@ class CacheChangeExpression {
             case 'file':
                 this.matchUrl = url => url.endsWith(value)
                 break
-            default: console.error(`不支持的表达式：${json}`)
+            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}`)
         }
     }
 

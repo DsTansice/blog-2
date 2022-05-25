@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-05-25 16:31:25
+updated: 2022-05-25 20:31:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -388,24 +388,9 @@ self.addEventListener('install', () => self.skipWaiting())
  * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
-    static: {
-        clean: false,
-        match: url => {
-            if (url.match(/(jet|HarmonyOS)\.(woff2|woff|ttf)$/g)) return true
-            // noinspection SpellCheckingInspection
-            if (url.endsWith('jinrishici.js') || url.endsWith('.cur')) return true
-            return url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
-        }
-    }, html: {
+    simple: {
         clean: true,
-        match: url => (url.endsWith('/') && url.match(`kmar.top`)) || url.endsWith('kmar.top')
-    }, resource: {
-        clean: true,
-        match: url => {
-            if (url.match('kmar.top/') === null) return false
-            if (url.endsWith('search.xml')) return true
-            return url.match('/indexBg/') || url.match(/\.(css|js|woff2|woff|ttf|json|svg)$/g)
-        }
+        match: url => true
     }
 }
 
@@ -456,9 +441,7 @@ self.addEventListener('message', function (event) {
             if (result) event.source.postMessage('update')
         })
     } else if (event.data === 'refresh') {
-        const list = new VersionList()
-        list.push(VersionElement.buildAll())
-        deleteCache(list).then(event.source.postMessage('refresh'))
+        deleteAllCache().then(() => event.source.postMessage('refresh'))
     }
 })
 
@@ -527,23 +510,33 @@ function updateJson(page) {
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) list.clean(VersionElement.buildAll())
-            resolve(list)
+            if (refresh) deleteAllCache().then(() => resolve(null))
+            else resolve(list)
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
-        parseJson(json).then(list => deleteCache(list, page).then(result => resolve(result))).catch(() => {})
+        parseJson(json).then(list => {
+            if (list) deleteCache(list, page).then(result => resolve(result))
+            else resolve(true)
+        }).catch(() => {})
     })))
+}
+
+function deleteAllCache() {
+    return new Promise(resolve => caches.open(CACHE_NAME)
+        .then(cache => cache.keys()
+            .then(names => Promise.all(names.filter(it => {
+                const data = findCache(it.url)
+                return data ? data.clean : it.url !== VERSION_PATH
+            }).map(it => cache.delete(it))))
+        ).then(() => resolve())
+    )
 }
 
 /** 删除指定缓存 */
 function deleteCache(list, page = null) {
-    // noinspection JSIgnoredPromiseFromCall
-    new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
-        names => names.filter(() => true).map(it => cache.delete(it))
-    )))
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
@@ -592,12 +585,6 @@ class VersionList {
  */
 class VersionElement {
 
-    static buildAll() {
-        const result = new VersionElement()
-        result._list.push(CacheChangeExpression.buildAllExpression())
-        return result
-    }
-
     /** 通过完整信息构建一个完整的元素 */
     static valueOf(json) {
         const result = new VersionElement()
@@ -643,10 +630,6 @@ class VersionElement {
  */
 class CacheChangeExpression {
 
-    static buildAllExpression() {
-        return new CacheChangeExpression({'flag': 'all'})
-    }
-
     matchUrl = null
 
     constructor(json) {
@@ -663,7 +646,7 @@ class CacheChangeExpression {
                 this.matchUrl = url => url.match(RegExp(value)) !== null
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) !== null
+                this.matchUrl = url => url.match(`posts/${value}`) !== null || url.endsWith('search.xml')
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
@@ -674,7 +657,7 @@ class CacheChangeExpression {
             case 'file':
                 this.matchUrl = url => url.endsWith(value)
                 break
-            default: console.error(`不支持的表达式：${json}`)
+            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}`)
         }
     }
 
