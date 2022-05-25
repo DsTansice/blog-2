@@ -1,9 +1,5 @@
 // noinspection JSIgnoredPromiseFromCall
 
-btf.snackbarShow = (text, time = 3500) => {
-    kmarUtils.popClockWin(text, time)
-}
-
 const kmarUtils = {
 
     /** 记录悬浮窗编号，外界切勿修改 */
@@ -76,7 +72,7 @@ const kmarUtils = {
                 const win = document.getElementById(div.id)
                 if (win) {
                     if (win.hasAttribute('over')) {
-                        sessionStorage.setItem(div.id, 0)
+                        sessionStorage.setItem(win.id, 0)
                         return
                     }
                     const age = parseInt(sessionStorage.getItem(win.id)) + 100
