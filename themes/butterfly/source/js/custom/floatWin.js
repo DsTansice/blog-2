@@ -68,21 +68,21 @@ const kmarUtils = {
             resolve()
             div.onmouseover = () => div.setAttribute('over', true)
             div.onmouseleave = () => div.removeAttribute('over')
-            div.setAttribute('age', 0)
+            sessionStorage.setItem(div.id, 0)
             const task = setInterval(() => {
                 const win = document.getElementById(div.id)
                 if (win) {
                     if (win.hasAttribute('over')) {
-                        win.setAttribute('age', 0)
+                        sessionStorage.setItem(div.id, 0)
                         return
                     }
-                    const age = parseInt(win.getAttribute('age')) + 200
-                    win.setAttribute('age', age)
+                    const age = parseInt(sessionStorage.getItem(win.id)) + 100
+                    sessionStorage.setItem(win.id, age)
                     if (age < time) return
                 }
                 clearInterval(task)
                 kmarUtils.closeWin(div.id)
-            }, 200)
+            }, 100)
             kmarUtils.moveDown(div.id)
             kmarUtils.closeRedundantWin(3)
         })
@@ -123,10 +123,11 @@ const kmarUtils = {
     closeWin: (id, move = true) => new Promise(resolve => {
         const body = document.getElementsByTagName('body')[0]
         const div = document.getElementById(id)
-        if (!div) return
+        if (!div || div.classList.contains('delete')) return
         setTimeout(() => {
             const div = document.getElementById(id)
-            if (div) body.removeChild(div)
+            sessionStorage.removeItem(div.id)
+            body.removeChild(div)
         }, 2000)
         div.classList.add('delete')
         if (move) kmarUtils.moveUp(id)

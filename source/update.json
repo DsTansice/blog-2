@@ -1,9 +1,15 @@
 {
   "info": [
     {
-      "version": "22",
+      "version": "23",
       "change": [
         {"flag": "html"},
+        {"flag": "file", "value": "floatWin.js"}
+      ]
+    },
+    {
+      "version": "22",
+      "change": [
         {"flag": "file", "value": "index.css"}
       ]
     }
