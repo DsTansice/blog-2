@@ -1,9 +1,15 @@
 {
   "info": [
     {
-      "version": "24",
+      "version": "25",
       "change": [
         {"flag": "type", "value": "js"},
+        {"flag": "post", "value": "de06ec72"}
+      ]
+    },
+    {
+      "version": "24",
+      "change": [
         {"flag": "type", "value": "css"},
         {"flag": "html"}
       ]
