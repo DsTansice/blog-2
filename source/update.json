@@ -3,6 +3,7 @@
     {
       "version": "25",
       "change": [
+        {"flag": "file", "value": "index.css"},
         {"flag": "type", "value": "js"},
         {"flag": "post", "value": "de06ec72"}
       ]
