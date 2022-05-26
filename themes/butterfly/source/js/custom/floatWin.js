@@ -3,7 +3,7 @@
 const kmarUtils = {
 
     /** 记录悬浮窗编号，外界切勿修改 */
-    winCode: 0,
+    _winCode: 0,
     /**
      * 在右上角弹出带按钮的悬浮窗
      * @param text 要显示的文本
@@ -18,7 +18,7 @@ const kmarUtils = {
         new Promise(resolve => {
             const body = document.getElementsByTagName('body')[0]
             const div = kmarUtils._createElement('div', 'float-win')
-            div.id = `float-win-${kmarUtils.winCode++}`
+            div.id = `float-win-${kmarUtils._winCode++}`
             div.setAttribute('move', '0')
             //关闭按钮
             const exitButton = kmarUtils._createElement('button', 'exit')
