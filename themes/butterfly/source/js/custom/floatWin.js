@@ -1,5 +1,7 @@
 // noinspection JSIgnoredPromiseFromCall
 
+const _isFirefox = navigator.userAgent.indexOf('Firefox') >= 0
+
 const kmarUtils = {
 
     /** 记录悬浮窗编号，外界切勿修改 */
@@ -27,7 +29,7 @@ const kmarUtils = {
             exitButton.addEventListener('click', () => kmarUtils._closeWin(div.id))
             //文本
             const textDiv = kmarUtils._createElement('p', 'text')
-            textDiv.innerText = text
+            kmarUtils._setText(textDiv, text)
 
             div.appendChild(exitButton)
             div.appendChild(textDiv)
@@ -45,10 +47,10 @@ const kmarUtils = {
                     actionButton.appendChild(actionIcon)
                 }
                 const actionText = kmarUtils._createElement('p', 'text')
-                actionText.innerText = buttonText
+                kmarUtils._setText(actionText, buttonText)
                 const descrDiv = kmarUtils._createElement('div', 'descr')
                 const descrText = kmarUtils._createElement('p')
-                descrText.innerText = describe
+                kmarUtils._setText(descrText, describe)
                 descrDiv.appendChild(descrText)
                 actionButton.appendChild(actionText)
                 actionDiv.appendChild(actionButton)
@@ -140,5 +142,10 @@ const kmarUtils = {
         const result = document.createElement(tag)
         result.className = className
         return result
+    },
+    /** 给一个元素设置文本 */
+    _setText: (element, text) => {
+        if (_isFirefox) element.textContent = text
+        else element.innerText = text
     }
 }

@@ -1,3 +1,24 @@
+// -------------------- 工具栏 -------------------- //
+/** 刷新缓存 */
+function refreshCache() {
+    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
+        if (confirm('是否确定刷新博文缓存')) navigator.serviceWorker.controller.postMessage("refresh")
+    } else {
+        btf.snackbarShow('ServiceWorker未激活')
+    }
+}
+/** 获取客户端最近一次更新时间 */
+function readLastUpdateTime() {
+    const time = sessionStorage.getItem('update')
+    console.log(time ? time : '暂无更新')
+    return time ? time : '暂无更新'
+}
+/** 写入客户端最近一次更新时间 */
+function writeLastUpdateTime() {
+    const time = new Date().toLocaleTimeString()
+    sessionStorage.setItem('update', time)
+}
+
 // -------------------- 滚动条操作 -------------------- //
 /** 移除页面滚动条 */
 function removeHtmlScrollBar() {
