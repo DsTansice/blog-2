@@ -26,17 +26,16 @@
 
 // 超链接
 #post ol a:not(.no-custom), #post ul a:not(.no-custom),
-#post p a, .bangumi-title a, .announcement_content a
+#post p a, #post .post-copyright a,
+.bangumi-title a, .announcement_content a,
+#settings .helper a
   border-bottom 2px solid var(--km-link-underline)
-
-#post ol a:not(.no-custom):hover, #post ul a:not(.no-custom):hover,
-#post p a:hover, #post .post-copyright a:hover,
-.bangumi-title a:hover, .announcement_content a:hover
-  text-decoration unset !important
-  background var(--km-link-bg)
-  border-radius 6px
-  color white !important
-  padding 3px
+  &:hover
+    text-decoration unset !important
+    background var(--km-link-bg)
+    border-radius 6px
+    color white !important
+    padding 3px
 
 // 底部版权声明
 [data-theme="dark"]

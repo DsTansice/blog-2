@@ -1,3 +1,5 @@
+// noinspection JSIgnoredPromiseFromCall
+
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址（必须以`/`结尾） */
@@ -73,11 +75,9 @@ self.addEventListener('fetch', async event => {
     }
 })
 
-self.addEventListener('message', function (event) {
+self.addEventListener('message', event => {
     if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(result => {
-            if (result) event.source.postMessage('update')
-        })
+        updateJson(event.data.substring(7)).then(result => event.source.postMessage(result))
     } else if (event.data === 'refresh') {
         deleteAllCache().then(() => event.source.postMessage('refresh'))
     }
@@ -140,30 +140,35 @@ function updateJson(page) {
         const list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            if (elementList.length > 0) {
-                // noinspection JSIgnoredPromiseFromCall
-                dbVersion.write(elementList[0].version)
-            }
+            if (elementList.length === 0) reject()
+            const newVersion = elementList[0].version
+            dbVersion.write(newVersion)
             //判断是否存在版本
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) deleteAllCache().then(() => resolve(null))
-            else resolve(list)
+            if (refresh) {
+                deleteAllCache()
+                resolve({list: null, version: newVersion, old: version})
+            } else resolve({list: list, version: newVersion, old: version})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
-        parseJson(json).then(list => {
-            if (list) deleteCache(list, page).then(result => resolve(result))
-            else resolve(true)
+        parseJson(json).then(result => {
+            if (result.list) {
+                deleteCache(result.list, page).then(result => resolve({
+                    update: result,
+                    version: result.version,
+                    old: result.old
+                }))
+            } else resolve({update: false, version: result.version})
         }).catch(() => {})
     })))
 }
 
 function deleteAllCache() {
-    // noinspection JSIgnoredPromiseFromCall
     new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
         names => names.filter(() => true).map(it => cache.delete(it))
     )))
@@ -184,10 +189,7 @@ function deleteCache(list, page = null) {
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
                     list.match(it.url).then(result => {
                         if (result) {
-                            // noinspection JSIgnoredPromiseFromCall
                             cache.delete(it)
-                            //该SW还处于试验阶段，该信息用来获取删除了哪些缓存
-                            console.log(`debug-delete:${it.url}`)
                             if (it.url === page) resolve1()
                             else reject1()
                         } else reject1()

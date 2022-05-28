@@ -509,8 +509,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  document.getElementById('rightside').addEventListener('click', function (e) {
-    const $target = e.target.id ? e.target : e.target.parentNode
+  const rightSideButtonTask = event => {
+    const $target = event.target.id ? event.target : event.target.parentNode
     switch ($target.id) {
       case 'go-up':
         rightSideFn.scrollToTop()
@@ -533,7 +533,10 @@ document.addEventListener('DOMContentLoaded', function () {
       default:
         break
     }
-  })
+  }
+
+  document.getElementById('rightside').addEventListener('click', rightSideButtonTask)
+  document.getElementById('setting-button').addEventListener('click', rightSideButtonTask)
 
   /**
    * menu

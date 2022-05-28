@@ -11,6 +11,23 @@
   transition all 1s
   animation win-entrance 1.3s forwards
 
+  &.delete
+    animation win-exit 1.2s forwards
+
+  &.click
+    & > .text
+      margin-bottom 0
+      margin-top 26px
+
+  @media screen and (max-width: 550px) and (min-width: 250px)
+    width calc(65%)
+
+  @media screen and (max-width: 250px)
+    width calc(80%)
+
+    & > .select > .descr
+      color transparent
+
   & > .text
     position relative
     max-width 84%
@@ -92,25 +109,6 @@
   .float-win
     box-shadow 3px 4px 6px 5px var(--km-button-shadow)
 
-.float-win.delete
-  animation win-exit 1s forwards
-
-.float-win.click
-  & > .text
-    margin-bottom 0
-    margin-top 26px
-
-@media screen and (max-width: 550px) and (min-width: 250px)
-  .float-win
-    width calc(65%)
-
-@media screen and (max-width: 250px)
-  .float-win
-    width calc(80%)
-
-    & > .select > .descr
-      color transparent
-
 @keyframes win-entrance
   from
     right -310px
@@ -123,5 +121,5 @@
   from
     right 20px
   to
-    right -310px
+    right -500px
     opacity 0.3

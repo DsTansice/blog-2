@@ -1,0 +1,51 @@
+mixin buildButton(name)
+    case name
+        when 'read'
+            if is_post() && readmode
+                button#readmode(title=_p('rightside.readmode_title'))
+                    i.fas.fa-book-open
+        when 'lang'
+            if translate.enable
+                button#translateLink(title=_p('rightside.translate_title'))= translate.default
+        when 'theme'
+            if darkmode.enable && darkmode.button
+                button#darkmode(title=_p('rightside.night_mode_title'))
+                    i.fas.fa-adjust
+        when 'menu'
+            if aside.enable && aside.button && page.aside !== false
+                button#hide-aside-btn(title=_p('rightside.aside'))
+                    i.fas.fa-arrows-alt-h
+        when 'refresh'
+            button#refresh-cache(onclick="refreshCache()" title='刷新缓存')
+                i.fas.fa-refresh.fa-spin
+
+div#settings(class='close')
+
+    div(class='header')
+        p 工具栏
+        button(class='close' onclick='closeToolsWin()')
+            i(class='fa fa-times')
+
+    div#setting-button
+        - const buttonList = ['read', 'lang', 'theme', 'menu', 'refresh']
+        each item in buttonList
+            +buildButton(item)
+
+    if (is_post())
+        div(class='descr')
+            p(id='setting-post-title') 文章简介
+            p(id='setting-post-descr')= page.description
+
+    div(class='info')
+        div(class='update')
+            p 客户端最近更新
+            p(id='setting-info-update')
+        div(class='version')
+            p 当前版本号
+            p(id='setting-info-version')
+
+    div(class='helper')
+        p 编程求助 & BUG反馈：
+        a(href='mailto:minedreams@qq.com') minedreams@qq.com
+
+div#quit-mask(onclick='closeToolsWin()')

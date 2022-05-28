@@ -42,33 +42,24 @@ mixin rightsideItem(array)
   - const showArray = enable ? show && show.split(',') : ['toc','chat','comment', 'share']
   
   #rightside-config-hide
-    if hideArray
+    //if hideArray
       +rightsideItem(hideArray)
   #rightside-config-show
     if enable
       if hide
-        button#rightside_config(type="button" title=_p("rightside.setting"))
-          i.fas.fa-cog.fa-spin
+        button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+          i.fa.fa-wrench
     else
       if is_post()
         if (readmode || translate.enable || (darkmode.enable && darkmode.button))
-          button#rightside_config(type="button" title=_p("rightside.setting"))
-            i.fas.fa-cog.fa-spin
+          button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+            i.fa.fa-wrench
       else if translate.enable || (darkmode.enable && darkmode.button)
-        button#rightside_config(type="button" title=_p("rightside.setting"))
-          i.fas.fa-cog.fa-spin
+        button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+          i.fa.fa-wrench
 
     if showArray
       +rightsideItem(showArray)
 
     button#go-up(type="button" title=_p("rightside.back_to_top"))
       i.fas.fa-arrow-up
-
-script.
-  function refreshCache() {
-    if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-      if (confirm('是否确定刷新博文缓存')) navigator.serviceWorker.controller.postMessage("refresh")
-    } else {
-      btf.snackbarShow('ServiceWorker未激活')
-    }
-  }

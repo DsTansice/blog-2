@@ -1,4 +1,42 @@
 // -------------------- 工具栏 -------------------- //
+/** 按下ESC时关闭工具栏 */
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeToolsWin()
+})
+/** 打开工具栏 */
+function openToolsWin() {
+    const div = document.getElementById('settings')
+    if (div.style.display === 'block') return
+    div.style.display = 'block'
+    div.classList.remove('close')
+    const mask = document.getElementById('quit-mask')
+    mask.style.display = 'block'
+    const update = document.getElementById('setting-info-update')
+    kmarUtils._setText(update, readLastUpdateTime())
+    const version = document.getElementById('setting-info-version')
+    kmarUtils._setText(version, readVersion())
+    removeHtmlScrollBar()
+    closeRightSide()
+}
+/** 关闭工具栏 */
+function closeToolsWin() {
+    const div = document.getElementById('settings')
+    if (div.style.display !== 'block') return
+    setTimeout(() => div.style.display = '', 600)
+    div.classList.add('close')
+    const mask = document.getElementById('quit-mask')
+    mask.style.display = ''
+    recoverHtmlScrollBar()
+    openRightSide()
+}
+function closeRightSide() {
+    const div = document.getElementById('rightside')
+    div.style.cssText = ''
+}
+function openRightSide() {
+    const div = document.getElementById('rightside')
+    div.style.cssText = 'opacity: 1; transform: translateX(-58px)'
+}
 /** 刷新缓存 */
 function refreshCache() {
     if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
@@ -7,38 +45,41 @@ function refreshCache() {
         btf.snackbarShow('ServiceWorker未激活')
     }
 }
+/** 读取版本号 */
+function readVersion() {
+    return localStorage.getItem('version')
+}
+function writeVersion(version) {
+    localStorage.setItem('version', version)
+}
 /** 获取客户端最近一次更新时间 */
 function readLastUpdateTime() {
-    const time = sessionStorage.getItem('update')
-    console.log(time ? time : '暂无更新')
-    return time ? time : '暂无更新'
+    const time = localStorage.getItem('update')
+    return time ? time : '暂无更新记录'
 }
 /** 写入客户端最近一次更新时间 */
 function writeLastUpdateTime() {
-    const time = new Date().toLocaleTimeString()
-    sessionStorage.setItem('update', time)
+    const time = new Date().toLocaleString()
+    localStorage.setItem('update', time)
 }
 
 // -------------------- 滚动条操作 -------------------- //
 /** 移除页面滚动条 */
 function removeHtmlScrollBar() {
-    for (let element of document.getElementsByTagName("html")) {
-        element.style.overflow = 'hidden'
-    }
+    document.getElementsByTagName('html')[0].style.overflow = 'hidden'
 }
 /** 还原页面滚动条 */
 function recoverHtmlScrollBar() {
-    for (let element of document.getElementsByTagName("html")) {
-        element.style.overflow = ''
-    }
+    document.getElementsByTagName('html')[0].style.overflow = ''
 }
-
-// -------------------- fancybox监听 -------------------- //
-function addFancyboxOpenMonitor() {
-    document.addEventListener('DOMSubtreeModified', () => {
-        const fancybox = document.getElementsByClassName('fancybox__container is-animated')
-        if (fancybox.length === 0) recoverHtmlScrollBar()
-        else removeHtmlScrollBar()
+function addScrollOperatorMonitor() {
+    document.addEventListener('DOMNodeInserted', event => {
+        const list = event.target.classList
+        if (list && list.contains('fancybox__content')) removeHtmlScrollBar()
+    })
+    document.addEventListener('DOMNodeRemoved', event => {
+        const list = event.target.classList
+        if (list && list.contains('fancybox__image')) recoverHtmlScrollBar()
     })
 }
 
@@ -47,13 +88,20 @@ if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage(`update:${location.href}`)
 }
 navigator.serviceWorker.addEventListener('message', event => {
-    switch (event.data) {
+    const data = event.data
+    switch (data) {
         case 'refresh':
             location.reload(true)
             break
-        case 'update':
-            kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示',
-                'fa fa-refresh fa-spin', '刷新', '点击刷新页面', () => location.reload())
+        default:
+            if (data.update) {
+                kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
+                    '刷新', '点击刷新页面', () => location.reload())
+            }
+            if (data.old !== data.version) {
+                writeLastUpdateTime()
+                writeVersion(data.version)
+            }
             break
     }
 })
