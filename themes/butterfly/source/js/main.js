@@ -480,8 +480,8 @@ document.addEventListener('DOMContentLoaded', function () {
       typeof FB === 'object' && window.loadFBComment()
       window.DISQUS && document.getElementById('disqus_thread').children.length && setTimeout(() => window.disqusReset(), 200)
       typeof runMermaid === 'function' && window.runMermaid()
-    },
-    showOrHideBtn: (e) => { // rightside 點擊設置 按鈕 展開
+    }
+    /*showOrHideBtn: (e) => { // rightside 點擊設置 按鈕 展開
       const rightsideHideClassList = document.getElementById('rightside-config-hide').classList
       rightsideHideClassList.toggle('show')
       if (e.classList.contains('show')) {
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 300)
       }
       e.classList.toggle('show')
-    },
+    }*/,
     scrollToTop: () => { // Back to top
       btf.scrollToDest(0, 500)
     },
@@ -515,9 +515,9 @@ document.addEventListener('DOMContentLoaded', function () {
       case 'go-up':
         rightSideFn.scrollToTop()
         break
-      case 'rightside_config':
+      /*case 'rightside_config':
         rightSideFn.showOrHideBtn($target)
-        break
+        break*/
       case 'mobile-toc-button':
         rightSideFn.runMobileToc()
         break

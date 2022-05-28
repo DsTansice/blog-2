@@ -41,8 +41,8 @@ mixin rightsideItem(array)
   - const hideArray = enable ? hide && hide.split(',') : ['readmode','translate','darkmode','hideAside', 'refresh']
   - const showArray = enable ? show && show.split(',') : ['toc','chat','comment', 'share']
   
-  #rightside-config-hide
-    //if hideArray
+  //#rightside-config-hide
+    if hideArray
       +rightsideItem(hideArray)
   #rightside-config-show
     if enable
