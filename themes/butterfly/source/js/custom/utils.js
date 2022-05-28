@@ -95,13 +95,13 @@ navigator.serviceWorker.addEventListener('message', event => {
             location.reload(true)
             break
         default:
-            if (data.update) {
-                kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
-                    '刷新', '点击刷新页面', () => location.reload())
-            }
             if (data.old !== data.version) {
                 writeLastUpdateTime()
                 writeVersion(data.version)
+            }
+            if (data.update) {
+                kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
+                    '刷新', '点击刷新页面', () => location.reload())
             }
             break
     }

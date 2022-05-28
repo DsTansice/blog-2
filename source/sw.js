@@ -158,8 +158,8 @@ function updateJson(page) {
         const json = JSON.parse(text)
         parseJson(json).then(result => {
             if (result.list) {
-                deleteCache(result.list, page).then(result => resolve({
-                    update: result,
+                deleteCache(result.list, page).then(update => resolve({
+                    update: update,
                     version: result.version,
                     old: result.old
                 }))
