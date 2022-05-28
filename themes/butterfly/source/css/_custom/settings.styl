@@ -57,6 +57,10 @@
       &:hover
         background-color: var(--btn-hover-color)
 
+    @media screen and (max-width 900px)
+      #hide-aside-btn
+        display none
+
   .info
     div
       border-top #66ccff80 solid
@@ -73,6 +77,7 @@
   .helper
     text-align center
     border-top #66ccff80 solid
+
     & > p
     & > a
       display inline-block
@@ -100,7 +105,7 @@
 
 #quit-mask
   position fixed
-  background rgba(23,23,23,0.5)
+  background rgba(23, 23, 23, 0.5)
   display none
   top 0
   left 0

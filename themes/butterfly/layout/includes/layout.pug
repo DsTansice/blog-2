@@ -28,20 +28,13 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
       #web_bg
         if page.defaultbg || page.darkmodebg
           style.
-            #web_bg{
-              background: #{DefaultBg} !important;
-              background-attachment: local!important;
-              background-position: center!important;
-              background-size: cover!important;
-              background-repeat: no-repeat!important;
+            #web_bg {
+              background-size: cover !important;
+              background: #{DefaultBg} no-repeat local center !important;
             }
-            [data-theme="dark"]
-              #web_bg{
-                background: #{DarkmodeBg} !important;
-                background-attachment: local!important;
-                background-position: center!important;
-                background-size: cover!important;
-                background-repeat: no-repeat!important;
+            [data-theme="dark"] #web_bg {
+              background-size: cover !important;
+              background-image: #{DarkmodeBg} !important;
             }
 
     !=partial('includes/sidebar', {}, {cache: true})
@@ -76,4 +69,4 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
     include ./rightside.pug
     !=partial('includes/third-party/search/index', {}, {cache: true})
     include ./additional-js.pug
-    include ./settings
+    include ./settings.pug

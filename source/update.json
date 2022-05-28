@@ -1,21 +1,5 @@
 {
   "info": [
-    {
-      "version": "25",
-      "change": [
-        {"flag": "file", "value": "index.css"},
-        {"flag": "type", "value": "js"},
-        {"flag": "post", "value": "de06ec72"}
-      ]
-    },
-    {
-      "version": "24",
-      "change": [
-        {"flag": "type", "value": "css"},
-        {"flag": "html"}
-      ]
-    },
-    {"version": "23"},
-    {"version": "22"}
+    {"version": "26"}
   ]
 }

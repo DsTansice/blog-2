@@ -1,4 +1,5 @@
 // -------------------- 工具栏 -------------------- //
+
 /** 按下ESC时关闭工具栏 */
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeToolsWin()
