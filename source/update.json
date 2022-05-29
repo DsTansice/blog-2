@@ -1,9 +1,12 @@
 {
   "info": [
     {
+      "version": "28",
+      "change": [{"flag": "html"}]
+    },
+    {
       "version": "27",
       "change": [{"flag": "file", "value": "custom/utils.js"}]
-    },
-    {"version": "26"}
+    }
   ]
 }
