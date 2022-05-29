@@ -13,9 +13,9 @@ function openToolsWin() {
     const mask = document.getElementById('quit-mask')
     mask.style.display = 'block'
     const update = document.getElementById('setting-info-update')
-    kmarUtils._setText(update, readLastUpdateTime())
+    setText(update, localStorage.getItem('update'))
     const version = document.getElementById('setting-info-version')
-    kmarUtils._setText(version, readVersion())
+    setText(version, localStorage.getItem('version'))
     removeHtmlScrollBar()
     closeRightSide()
 }
@@ -46,22 +46,12 @@ function refreshCache() {
         btf.snackbarShow('ServiceWorker未激活')
     }
 }
-/** 读取版本号 */
-function readVersion() {
-    return localStorage.getItem('version')
-}
-function writeVersion(version) {
-    localStorage.setItem('version', version)
-}
-/** 获取客户端最近一次更新时间 */
-function readLastUpdateTime() {
-    const time = localStorage.getItem('update')
-    return time ? time : '暂无更新记录'
-}
-/** 写入客户端最近一次更新时间 */
-function writeLastUpdateTime() {
-    const time = new Date().toLocaleString()
-    localStorage.setItem('update', time)
+/** 是否是火狐浏览器 */
+const _isFirefox = navigator.userAgent.indexOf('Firefox') >= 0
+/** 给一个元素设置文本 */
+function setText(element, text) {
+    if (_isFirefox) element.textContent = text
+    else element.innerText = text
 }
 
 // -------------------- 滚动条操作 -------------------- //
@@ -96,8 +86,8 @@ navigator.serviceWorker.addEventListener('message', event => {
             break
         default:
             if (data.old !== data.version) {
-                writeLastUpdateTime()
-                writeVersion(data.version)
+                localStorage.setItem('update', new Date().toLocaleString())
+                localStorage.setItem('version', data.version)
             }
             if (data.update) {
                 kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
@@ -110,14 +100,15 @@ navigator.serviceWorker.addEventListener('message', event => {
 // -------------------- fixed-card-widget -------------------- //
 // 固定卡片点击动作
 function FixedCardWidget(type, name, index) {
-    let tmpCard;
-    // 根据id或class选择元素
-    if (type === "id") {
-        tmpCard = document.getElementById(name);
-    } else {
-        tmpCard = document.getElementsByClassName(name)[index];
+    //创建一个蒙版，作为退出键使用
+    const CreateQuitBox = () => {
+        const quitBox = `<div id="quit-box" onclick="RemoveFixedCardWidget()"></div>`;
+        const asideContent = document.getElementById('aside-content');
+        asideContent.insertAdjacentHTML("beforebegin", quitBox)
     }
+    // 根据id或class选择元素
     // 若元素存在
+    let tmpCard = type === 'id' ? document.getElementById(name) : document.getElementsByClassName(name)[index]
     if (tmpCard) {
         // 首先判断是否存在fixed-card-widget类
         if (tmpCard.className.indexOf('fixed-card-widget') > -1) {
@@ -132,13 +123,6 @@ function FixedCardWidget(type, name, index) {
             tmpCard.classList.add('fixed-card-widget');
         }
     }
-}
-
-//创建一个蒙版，作为退出键使用
-function CreateQuitBox() {
-    const quitBox = `<div id="quit-box" onclick="RemoveFixedCardWidget()"></div>`;
-    const asideContent = document.getElementById('aside-content');
-    asideContent.insertAdjacentHTML("beforebegin", quitBox)
 }
 
 // 移除卡片方法

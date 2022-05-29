@@ -1,7 +1,5 @@
 // noinspection JSIgnoredPromiseFromCall
 
-const _isFirefox = navigator.userAgent.indexOf('Firefox') >= 0
-
 const kmarUtils = {
 
     /** 记录悬浮窗编号，外界切勿修改 */
@@ -16,41 +14,76 @@ const kmarUtils = {
      * @param time 持续时间
      */
     popClickClockWin: (text, icon, buttonText, describe, action, time = 3500) => {
+        /** 构建一个元素 */
+        const createElement = (tag, className) => {
+            const result = document.createElement(tag)
+            result.className = className
+            return result
+        }
+        /**
+         * 关闭指定悬浮窗
+         * @param id 悬浮窗ID
+         * @param move 是否移动其余悬浮窗
+         */
+        const closeWin = (id, move = true) => new Promise(resolve => {
+            const body = document.getElementsByTagName('body')[0]
+            const div = document.getElementById(id)
+            if (!div || div.classList.contains('delete')) return
+            setTimeout(() => {
+                const div = document.getElementById(id)
+                sessionStorage.removeItem(div.id)
+                body.removeChild(div)
+            }, 2000)
+            div.classList.add('delete')
+            if (move) kmarUtils._moveWin(id, true)
+            resolve()
+        })
+        /** 关闭多余的悬浮窗 */
+        const closeRedundantWin = (maxCount) => new Promise(resolve => {
+            const list = document.getElementsByClassName('float-win')
+            if (list && list.length > maxCount) {
+                const count = list.length - maxCount
+                for (let i = 0; i !== count; ++i) {
+                    closeWin(list[i].id, false)
+                }
+            }
+            resolve()
+        })
         // noinspection JSIgnoredPromiseFromCall
         new Promise(resolve => {
             const body = document.getElementsByTagName('body')[0]
-            const div = kmarUtils._createElement('div', 'float-win')
+            const div = createElement('div', 'float-win')
             div.id = `float-win-${kmarUtils._winCode++}`
             div.setAttribute('move', '0')
             //关闭按钮
-            const exitButton = kmarUtils._createElement('button', 'exit')
-            const exitIcon = kmarUtils._createElement('i', 'fa fa-times')
+            const exitButton = createElement('button', 'exit')
+            const exitIcon = createElement('i', 'fa fa-times')
             exitButton.appendChild(exitIcon)
-            exitButton.addEventListener('click', () => kmarUtils._closeWin(div.id))
+            exitButton.addEventListener('click', () => closeWin(div.id))
             //文本
-            const textDiv = kmarUtils._createElement('p', 'text')
-            kmarUtils._setText(textDiv, text)
+            const textDiv = createElement('p', 'text')
+            setText(textDiv, text)
 
             div.appendChild(exitButton)
             div.appendChild(textDiv)
             if (buttonText && action) {
                 div.classList.add('click')
-                const actionDiv = kmarUtils._createElement('div', 'select')
+                const actionDiv = createElement('div', 'select')
                 const actionButton = document.createElement('button')
                 actionButton.className = 'action'
                 actionButton.addEventListener('click', () => {
                     action()
-                    kmarUtils._closeWin(div.id)
+                    closeWin(div.id)
                 })
                 if (icon) {
-                    const actionIcon = kmarUtils._createElement('i', icon)
+                    const actionIcon = createElement('i', icon)
                     actionButton.appendChild(actionIcon)
                 }
-                const actionText = kmarUtils._createElement('p', 'text')
-                kmarUtils._setText(actionText, buttonText)
-                const descrDiv = kmarUtils._createElement('div', 'descr')
-                const descrText = kmarUtils._createElement('p')
-                kmarUtils._setText(descrText, describe)
+                const actionText = createElement('p', 'text')
+                setText(actionText, buttonText)
+                const descrDiv = createElement('div', 'descr')
+                const descrText = createElement('p')
+                setText(descrText, describe)
                 descrDiv.appendChild(descrText)
                 actionButton.appendChild(actionText)
                 actionDiv.appendChild(actionButton)
@@ -74,10 +107,10 @@ const kmarUtils = {
                     if (age < time) return
                 }
                 clearInterval(task)
-                kmarUtils._closeWin(div.id)
+                closeWin(div.id)
             }, 100)
-            kmarUtils._moveDown(div.id)
-            kmarUtils._closeRedundantWin(3)
+            kmarUtils._moveWin(div.id, false)
+            closeRedundantWin(3)
         })
     },
     /**
@@ -103,49 +136,6 @@ const kmarUtils = {
             div.style.transform = `translateY(${value}px)`
         }
         resolve()
-    }),
-    /** 将指定ID前的悬浮窗向下移动 */
-    _moveDown: (id) => kmarUtils._moveWin(id, false),
-    /** 将指定index后的悬浮窗向上移动 */
-    _moveUp: (id) => kmarUtils._moveWin(id, true),
-    /**
-     * 关闭指定悬浮窗
-     * @param id 悬浮窗ID
-     * @param move 是否移动其余悬浮窗
-     */
-    _closeWin: (id, move = true) => new Promise(resolve => {
-        const body = document.getElementsByTagName('body')[0]
-        const div = document.getElementById(id)
-        if (!div || div.classList.contains('delete')) return
-        setTimeout(() => {
-            const div = document.getElementById(id)
-            sessionStorage.removeItem(div.id)
-            body.removeChild(div)
-        }, 2000)
-        div.classList.add('delete')
-        if (move) kmarUtils._moveUp(id)
-        resolve()
-    }),
-    /** 关闭多余的悬浮窗 */
-    _closeRedundantWin: (maxCount) => new Promise(resolve => {
-        const list = document.getElementsByClassName('float-win')
-        if (list && list.length > maxCount) {
-            const count = list.length - maxCount
-            for (let i = 0; i !== count; ++i) {
-                kmarUtils._closeWin(list[i].id, false)
-            }
-        }
-        resolve()
-    }),
-    /** 创建一个元素 */
-    _createElement: (tag, className) => {
-        const result = document.createElement(tag)
-        result.className = className
-        return result
-    },
-    /** 给一个元素设置文本 */
-    _setText: (element, text) => {
-        if (_isFirefox) element.textContent = text
-        else element.innerText = text
-    }
+    })
+
 }
