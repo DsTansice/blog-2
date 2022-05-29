@@ -68,7 +68,7 @@ self.addEventListener('fetch', async event => {
                     caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
                 }
                 return response
-            })
+            }).catch(err => console.error(`访问 ${request.url} 时出现错误：\n${err}`))
         }))
     } else if (replace !== null) {
         event.respondWith(fetch(request))

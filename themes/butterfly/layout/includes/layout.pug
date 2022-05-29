@@ -1,14 +1,3 @@
-script.
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js').then(function () {
-        if (!navigator.serviceWorker.controller) {
-          location.reload()
-        }
-      })
-    })
-  }
-
 - var htmlClassHideAside = theme.aside.enable && theme.aside.hide ? 'hide-aside' : ''
 - var hideAside = !theme.aside.enable || page.aside === false ? 'hide-aside' : ''
 - var pageType = is_post() ? 'post' : 'page'
@@ -16,6 +5,16 @@ script.
 doctype html
 html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside)
   head
+    script.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').then(function () {
+            if (!navigator.serviceWorker.controller) {
+              location.reload()
+            }
+          })
+        })
+      }
     include ./head.pug
   body
     if theme.preloader
