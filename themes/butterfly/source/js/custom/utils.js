@@ -4,6 +4,7 @@
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeToolsWin()
 })
+// noinspection JSUnusedGlobalSymbols
 /** 打开工具栏 */
 function openToolsWin() {
     const div = document.getElementById('settings')
@@ -38,6 +39,7 @@ function openRightSide() {
     const div = document.getElementById('rightside')
     div.style.cssText = 'opacity: 1; transform: translateX(-58px)'
 }
+// noinspection JSUnusedGlobalSymbols
 /** 刷新缓存 */
 function refreshCache() {
     if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
@@ -99,11 +101,13 @@ navigator.serviceWorker.addEventListener('message', event => {
 
 // -------------------- fixed-card-widget -------------------- //
 // 固定卡片点击动作
+// noinspection JSUnusedGlobalSymbols
 function FixedCardWidget(type, name, index) {
     //创建一个蒙版，作为退出键使用
     const CreateQuitBox = () => {
         const quitBox = `<div id="quit-box" onclick="RemoveFixedCardWidget()"></div>`;
         const asideContent = document.getElementById('aside-content');
+        // noinspection SpellCheckingInspection
         asideContent.insertAdjacentHTML("beforebegin", quitBox)
     }
     // 根据id或class选择元素
