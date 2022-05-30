@@ -1,3 +1,5 @@
+kmarTask()
+
 function kmarTask() {
     /** 隐藏右下角菜单 */
     function closeRightSide() {
