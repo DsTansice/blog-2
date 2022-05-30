@@ -38,11 +38,11 @@ function kmarTask() {
     function hideRightSide() {
         let _hideTask = null
         const _isMobile = 'ontouchstart' in document.documentElement
-        document.addEventListener('scroll', (event) => {
+        document.addEventListener('scroll', event => {
             if (_isMobile && event.timeStamp > 2600) {
                 closeRightSide()
                 if (_hideTask) clearTimeout(_hideTask)
-                _hideTask = setTimeout(openRightSide, 1500)
+                _hideTask = setTimeout(openRightSide, 1250)
             } else {
                 const currentTop = window.scrollY || document.documentElement.scrollTop
                 if (currentTop > 56) openRightSide()
