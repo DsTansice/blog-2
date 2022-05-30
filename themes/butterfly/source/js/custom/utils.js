@@ -1,3 +1,20 @@
+// -------------------- 右下角菜单 -------------------- //
+let _hideTask = null
+const _isMobile = 'ontouchstart' in document.documentElement
+document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('scroll', (event) => {
+        if (_isMobile && event.timeStamp > 2600) {
+            closeRightSide()
+            if (_hideTask) clearTimeout(_hideTask)
+            _hideTask = setTimeout(openRightSide, 1500)
+        } else {
+            const currentTop = window.scrollY || document.documentElement.scrollTop
+            if (currentTop > 56) openRightSide()
+            else closeRightSide()
+        }
+    })
+})
+
 // -------------------- 工具栏 -------------------- //
 
 /** 按下ESC时关闭工具栏 */
