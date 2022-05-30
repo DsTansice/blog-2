@@ -872,7 +872,7 @@ CDN:
   canvas_nest:
 
   lazyload:
-  instantpage:
+  instantpage: https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js
   typed:
   pangu:
 
