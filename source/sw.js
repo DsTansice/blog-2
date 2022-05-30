@@ -79,7 +79,7 @@ self.addEventListener('message', event => {
     if (event.data.startsWith('update')) {
         updateJson(event.data.substring(7)).then(result => event.source.postMessage(result))
     } else if (event.data === 'refresh') {
-        deleteAllCache().then(() => event.source.postMessage('refresh'))
+        deleteCache(VersionList.empty()).then(() => event.source.postMessage('refresh'))
     }
 })
 
@@ -137,7 +137,7 @@ function updateJson(page) {
     }
     /** 解析字符串 */
     const parseJson = json => new Promise((resolve, reject) => {
-        const list = new VersionList()
+        let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
             if (elementList.length === 0) reject()
@@ -147,39 +147,22 @@ function updateJson(page) {
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) {
-                deleteAllCache()
-                resolve({list: null, version: newVersion, old: version})
-            } else resolve({list: list, version: newVersion, old: version})
+            if (refresh) list = VersionList.empty()
+            resolve({list: list, version: newVersion, old: version})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
         parseJson(json).then(result => {
-            if (result.list) {
-                deleteCache(result.list, page).then(update => resolve({
-                    update: update,
-                    version: result.version,
-                    old: result.old
-                }))
-            } else resolve({update: false, version: result.version})
+            console.log(result.list)
+            deleteCache(result.list, page).then(update => resolve({
+                update: update,
+                version: result.version,
+                old: result.old
+            }))
         }).catch(() => {})
     })))
-}
-
-function deleteAllCache() {
-    new Promise(() => caches.open('kmarCache').then(cache => cache.keys().then(
-        names => names.filter(() => true).map(it => cache.delete(it))
-    )))
-    return new Promise(resolve => caches.open(CACHE_NAME)
-        .then(cache => cache.keys()
-            .then(names => Promise.all(names.filter(it => {
-                const data = findCache(it.url)
-                return data ? data.clean : it.url !== VERSION_PATH
-            }).map(it => cache.delete(it))))
-        ).then(() => resolve())
-    )
 }
 
 /** 删除指定缓存 */
@@ -201,6 +184,14 @@ function deleteCache(list, page = null) {
 
 /** 版本列表 */
 class VersionList {
+
+    static empty() {
+        const result = new VersionList()
+        const element = new VersionElement()
+        element._list.push(new CacheChangeExpression({'flag': 'all'}))
+        result.push(element)
+        return result
+    }
 
     _list = []
 
@@ -283,14 +274,11 @@ class CacheChangeExpression {
             return cache || cache.clean
         }
         switch (json['flag']) {
-            case 'str':
-                this.matchUrl = url => url.match(value) !== null
-                break
-            case 'reg':
-                this.matchUrl = url => url.match(RegExp(value)) !== null
+            case 'all':
+                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) !== null || url.endsWith('search.xml')
+                this.matchUrl = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
