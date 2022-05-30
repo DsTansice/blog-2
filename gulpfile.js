@@ -63,5 +63,3 @@ gulp.task('cdn', async () => {
 
 //压缩
 gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html', 'min-json'))
-//转换
-gulp.task("convert", gulp.parallel('cdn'))
