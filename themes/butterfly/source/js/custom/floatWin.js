@@ -1,5 +1,11 @@
 // noinspection JSIgnoredPromiseFromCall
 
+/** 给一个元素设置文本 */
+function setText(element, text) {
+    if (navigator.userAgent.indexOf('Firefox') < 0) element.innerText = text
+    else element.textContent = text
+}
+
 const kmarUtils = {
 
     /** 记录悬浮窗编号，外界切勿修改 */

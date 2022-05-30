@@ -29,16 +29,13 @@ mixin rightsideItem(array)
         if commentsJsLoad
           a#to_comment(href="#post-comment" title=_p("rightside.scroll_to_comment"))
             i.fas.fa-comments
-      when 'refresh'
-        button#refresh-cache(type="button" title='刷新缓存' onclick="refreshCache()")
-          i.fas.fa-refresh.fa-spin
       when 'share'
         button#share-link(type="button" title='分享链接')
           i.fa.fa-share-alt
 
 #rightside
   - const { enable, hide, show } = theme.rightside_item_order
-  - const hideArray = enable ? hide && hide.split(',') : ['readmode','translate','darkmode','hideAside', 'refresh']
+  - const hideArray = enable ? hide && hide.split(',') : ['readmode','translate','darkmode','hideAside']
   - const showArray = enable ? show && show.split(',') : ['toc','chat','comment', 'share']
   
   //#rightside-config-hide
@@ -47,15 +44,15 @@ mixin rightsideItem(array)
   #rightside-config-show
     if enable
       if hide
-        button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+        button#rightside_config(type="button" title=_p("rightside.setting"))
           i.fa.fa-wrench
     else
       if is_post()
         if (readmode || translate.enable || (darkmode.enable && darkmode.button))
-          button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+          button#rightside_config(type="button" title=_p("rightside.setting"))
             i.fa.fa-wrench
       else if translate.enable || (darkmode.enable && darkmode.button)
-        button#rightside_config(type="button" title=_p("rightside.setting") onclick='openToolsWin()')
+        button#rightside_config(type="button" title=_p("rightside.setting"))
           i.fa.fa-wrench
 
     if showArray

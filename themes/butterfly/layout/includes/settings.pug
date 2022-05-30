@@ -16,14 +16,14 @@ mixin buildButton(name)
                 button#hide-aside-btn(title=_p('rightside.aside'))
                     i.fas.fa-arrows-alt-h
         when 'refresh'
-            button#refresh-cache(onclick="refreshCache()" title='刷新缓存')
+            button#refresh-cache(title='刷新缓存')
                 i.fas.fa-refresh.fa-spin
 
 div#settings(class='close')
 
     div(class='header')
         p 工具栏
-        button(class='close' onclick='closeToolsWin()')
+        button(class='close' id='settings-button-close')
             i(class='fa fa-times')
 
     div#setting-button
@@ -48,4 +48,4 @@ div#settings(class='close')
         p 编程求助 & BUG反馈：
         a(href='mailto:minedreams@qq.com') minedreams@qq.com
 
-div#quit-mask(onclick='closeToolsWin()')
+div#quit-mask

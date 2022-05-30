@@ -770,13 +770,13 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <script async src="/js/custom/utils.js"></script>
+    - <script async src="/js/custom/zip.js"></script>
+    - <script async src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
     - <script async src="/js/custom/floatWin.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
-    - <script async src="/js/custom/share.js"></script>
-    - <script data-pjax defer src="/js/custom/no-pjax.js"></script>
+    - <script data-pjax>kmarTask()</script>
 
 #侧栏悬浮卡片控制按钮
 #https://akilar.top/posts/451ac5f8/
