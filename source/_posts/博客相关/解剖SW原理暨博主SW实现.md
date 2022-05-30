@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-05-25 20:31:25
+updated: 2022-05-30 09:44:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -372,8 +372,6 @@ self.addEventListener('fetch', async event => {
 
 &emsp;&emsp;原本我是想实现第二个方案的，但是写出来代码实在有些复杂，不好排查错误，就采用了第一种方案：
 
-{% tip warning %}<p style='text-align:center;'>当前方案还处于测试阶段，抄写SW前请三思</p>{% endtip %}
-
 ```javascript
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
@@ -400,17 +398,12 @@ const cacheList = {
  * @param dist 目标链接
  */
 const replaceList = {
-    gh: {
-        source: ['//cdn.jsdelivr.net/gh'],
-        dist: '//cdn1.tianli0.top/gh'
-    }, npm: {
+    simple: {
         source: [
-            '//cdn.jsdelivr.net/npm',
-            '//unpkg.zhimg.com'
-        ], dist: '//npm.elemecdn.com'
-    }, emoji: {
-        source: ['/gh/EmptyDreams/resources/icon'],
-        dist: '/gh/EmptyDreams/twikoo-emoji'
+            '源链接1',
+            '源链接2'
+        ],
+        dist: '目标链接'
     }
 }
 
@@ -650,9 +643,6 @@ class CacheChangeExpression {
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
-                break
-            case 'html':
-                this.matchUrl = cacheList.html.match
                 break
             case 'file':
                 this.matchUrl = url => url.endsWith(value)
