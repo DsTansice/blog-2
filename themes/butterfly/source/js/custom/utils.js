@@ -101,6 +101,7 @@ navigator.serviceWorker.addEventListener('message', event => {
     const data = event.data
     switch (data) {
         case 'refresh':
+            localStorage.setItem('update', new Date().toLocaleString())
             location.reload(true)
             break
         default:
