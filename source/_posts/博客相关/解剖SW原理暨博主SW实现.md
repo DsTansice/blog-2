@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-05-30 09:44:25
+updated: 2022-05-30 19:24:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -373,6 +373,8 @@ self.addEventListener('fetch', async event => {
 &emsp;&emsp;原本我是想实现第二个方案的，但是写出来代码实在有些复杂，不好排查错误，就采用了第一种方案：
 
 ```javascript
+// noinspection JSIgnoredPromiseFromCall
+
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址（必须以`/`结尾） */
@@ -382,7 +384,7 @@ self.addEventListener('install', () => self.skipWaiting())
 
 /**
  * 缓存列表
- * @param url 匹配规则
+ * @param match 匹配规则
  * @param clean 清理全站时是否删除其缓存
  */
 const cacheList = {
@@ -399,11 +401,8 @@ const cacheList = {
  */
 const replaceList = {
     simple: {
-        source: [
-            '源链接1',
-            '源链接2'
-        ],
-        dist: '目标链接'
+        source: ['//cdn.jsdelivr.net/gh'],
+        dist: '//cdn1.tianli0.top/gh'
     }
 }
 
@@ -421,22 +420,31 @@ self.addEventListener('fetch', async event => {
                     caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
                 }
                 return response
-            })
+            }).catch(err => console.error(`访问 ${request.url} 时出现错误：\n${err}`))
         }))
     } else if (replace !== null) {
         event.respondWith(fetch(request))
     }
 })
 
-self.addEventListener('message', function (event) {
+self.addEventListener('message', event => {
     if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(result => {
-            if (result) event.source.postMessage('update')
+        updateJson(event.data.substring(7)).then(info => {
+            // noinspection JSUnresolvedVariable
+            event.source.postMessage({
+                type: 'update',
+                update: info.update,
+                version: info.version,
+                old: info.old
+            })
         })
     } else if (event.data === 'refresh') {
-        deleteAllCache().then(() => event.source.postMessage('refresh'))
+        deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
     }
 })
+
+/** 忽略浏览器HTTP缓存的请求指定request */
+const fetchNoCache = request => fetch(request, {cache: "no-store"})
 
 /** 判断指定url击中了哪一种缓存，都没有击中则返回null */
 function findCache(url) {
@@ -492,40 +500,48 @@ function updateJson(page) {
     }
     /** 解析字符串 */
     const parseJson = json => new Promise((resolve, reject) => {
-        const list = new VersionList()
+        /** 版本号读写操作 */
+        const dbVersion = {
+            write: (id) => new Promise((resolve, reject) => {
+                caches.open(CACHE_NAME).then(function (cache) {
+                    cache.put(
+                        new Request(VERSION_PATH),
+                        new Response(id)
+                    ).then(() => resolve())
+                }).catch(() => reject())
+            }), read: () => new Promise((resolve) => {
+                caches.match(new Request(VERSION_PATH))
+                    .then(function (response) {
+                        if (!response) resolve(null)
+                        response.text().then(text => resolve(text))
+                    }).catch(() => resolve(null))
+            })
+        }
+        let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            if (elementList.length > 0) {
-                // noinspection JSIgnoredPromiseFromCall
-                dbVersion.write(elementList[0].version)
-            }
+            if (elementList.length === 0) reject()
+            const newVersion = elementList[0].version
+            dbVersion.write(newVersion)
             //判断是否存在版本
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) deleteAllCache().then(() => resolve(null))
-            else resolve(list)
+            if (refresh) list = VersionList.empty()
+            resolve({list: list, version: newVersion, old: version})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
-        parseJson(json).then(list => {
-            if (list) deleteCache(list, page).then(result => resolve(result))
-            else resolve(true)
+        parseJson(json).then(result => {
+            deleteCache(result.list, page).then(update => resolve({
+                update: update,
+                version: result.version,
+                old: result.old
+            }))
         }).catch(() => {})
     })))
-}
-
-function deleteAllCache() {
-    return new Promise(resolve => caches.open(CACHE_NAME)
-        .then(cache => cache.keys()
-            .then(names => Promise.all(names.filter(it => {
-                const data = findCache(it.url)
-                return data ? data.clean : it.url !== VERSION_PATH
-            }).map(it => cache.delete(it))))
-        ).then(() => resolve())
-    )
 }
 
 /** 删除指定缓存 */
@@ -535,10 +551,7 @@ function deleteCache(list, page = null) {
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
                     list.match(it.url).then(result => {
                         if (result) {
-                            // noinspection JSIgnoredPromiseFromCall
                             cache.delete(it)
-                            //该SW还处于试验阶段，该信息用来获取删除了哪些缓存
-                            console.log(`debug-delete:${it.url}`)
                             if (it.url === page) resolve1()
                             else reject1()
                         } else reject1()
@@ -550,6 +563,14 @@ function deleteCache(list, page = null) {
 
 /** 版本列表 */
 class VersionList {
+
+    static empty() {
+        const result = new VersionList()
+        const element = new VersionElement()
+        element._list.push(new CacheChangeExpression({'flag': 'all'}))
+        result.push(element)
+        return result
+    }
 
     _list = []
 
@@ -632,14 +653,11 @@ class CacheChangeExpression {
             return cache || cache.clean
         }
         switch (json['flag']) {
-            case 'str':
-                this.matchUrl = url => url.match(value) !== null
-                break
-            case 'reg':
-                this.matchUrl = url => url.match(RegExp(value)) !== null
+            case 'all':
+                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) !== null || url.endsWith('search.xml')
+                this.matchUrl = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
                 break
             case 'type':
                 this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
@@ -651,26 +669,6 @@ class CacheChangeExpression {
         }
     }
 
-}
-
-/** 忽略浏览器HTTP缓存的请求指定request */
-const fetchNoCache = request => fetch(request, {cache: "no-store"})
-
-const dbVersion = {
-    write: (id) => new Promise((resolve, reject) => {
-        caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(
-                new Request(VERSION_PATH),
-                new Response(id)
-            ).then(() => resolve())
-        }).catch(() => reject())
-    }), read: (src = null) => new Promise((resolve) => {
-        caches.match(new Request(VERSION_PATH))
-            .then(function (response) {
-                if (!response) resolve(src)
-                response.text().then(text => resolve(text))
-            }).catch(() => resolve(src))
-    })
 }
 ```
 
@@ -703,13 +701,12 @@ const dbVersion = {
 
 &emsp;&emsp;`change`列表内容：
 
-|  flag  | value | 功能                          |
-|:------:|:-----:|:----------------------------|
-| `type` |   有   | 刷新所有拓展名为`value`的文件（不需要带`.`） |
-| `post` |   有   | 刷新abbrlink为`value`的博文       |
-| `reg`  |   有   | 根据正则表达式匹配（不需要带两边的`/`）       |
-| `str`  |   有   | 根据字符串匹配                     |
-| `file` |   有   | 刷新名为`value`的文件缓存（需要带拓展名）    |
+|  flag  | value | 功能                                         |
+|:------:|:-----:|:-------------------------------------------|
+| `type` |   有   | 刷新所有拓展名为`value`且`clean = true`的文件（不需要带`.`） |
+| `file` |   有   | 刷新名为`value`的文件缓存（需要带拓展名）                   |
+| `post` |   有   | 刷新abbrlink为`value`的博文及`search.xml`         |
+| `all`  |   无   | 刷新全部`clean = true`的缓存                      |
 
 {% p red center, 注意：<code>post</code>是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
 
@@ -720,7 +717,7 @@ const dbVersion = {
 + `change`列表中匹配规则的数量也没有上限，同样因为性能问题尽量合并一下同类项
 + 如果相邻两个版本更新的内容是一样的，请勿删除其中某一个版本，可以把老版本的`change`列表置空
 + 尽量不要重复利用`version`的字符串，避免出现意料之外的问题
-+ 如果需要清除所有缓存，把旧版本号全部删掉就可以了
++ 如果需要清除所有缓存，可以不使用`all`，把旧版本号全部删掉就可以了
 
 ##### CDN缓存问题
 
@@ -741,13 +738,24 @@ if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
     navigator.serviceWorker.controller.postMessage("update")
 }
 navigator.serviceWorker.addEventListener('message', event => {
-    switch (event.data) {
-        case 'refresh': //这个是右下角刷新缓存按钮对应地功能，在SW刷新完毕后就会执行这里
-            location.reload()
+    const data = event.data
+    switch (data.type) {
+        case 'update':
+            if (data.old !== data.version) {
+                localStorage.setItem('update', new Date().toLocaleString())
+                localStorage.setItem('version', data.version)
+            }
+            if (data.update) {
+                kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
+                    '刷新', '点击刷新页面', () => location.reload())
+            }
             break
-        case 'update':  //如果SW检测到缓存更新就会触发这里
-            btf.snackbarShow('已经检测的新的更新，刷新页面以显示')
+        case 'refresh':
+            localStorage.setItem('update', new Date().toLocaleString())
+            location.reload(true)
             break
+        default:
+            console.error(`未知事件：${data.type}`)
     }
 })
 ```

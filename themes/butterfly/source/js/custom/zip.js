@@ -83,9 +83,9 @@ function kmarTask() {
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') closeToolsWin()
         })
-        document.getElementById('rightside_config').addEventListener('click', openToolsWin)
-        document.getElementById('quit-mask').addEventListener('click', closeToolsWin)
-        document.getElementById('settings-button-close').addEventListener('click', closeToolsWin)
+        document.getElementById('rightside_config').onclick = openToolsWin
+        document.getElementById('quit-mask').onclick = closeToolsWin
+        document.getElementById('settings-button-close').onclick = closeToolsWin
     }
 
     /** SW互操作 */
@@ -98,18 +98,13 @@ function kmarTask() {
                 btf.snackbarShow('ServiceWorker未激活')
             }
         }
-
         if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
             navigator.serviceWorker.controller.postMessage(`update:${location.href}`)
         }
         navigator.serviceWorker.addEventListener('message', event => {
             const data = event.data
-            switch (data) {
-                case 'refresh':
-                    localStorage.setItem('update', new Date().toLocaleString())
-                    location.reload(true)
-                    break
-                default:
+            switch (data.type) {
+                case 'update':
                     if (data.old !== data.version) {
                         localStorage.setItem('update', new Date().toLocaleString())
                         localStorage.setItem('version', data.version)
@@ -119,9 +114,15 @@ function kmarTask() {
                             '刷新', '点击刷新页面', () => location.reload())
                     }
                     break
+                case 'refresh':
+                    localStorage.setItem('update', new Date().toLocaleString())
+                    location.reload(true)
+                    break
+                default:
+                    console.error(`未知事件：${data.type}`)
             }
         })
-        document.getElementById('refresh-cache').addEventListener('click', refreshCache)
+        document.getElementById('refresh-cache').onclick = refreshCache
     }
 
     /** 滚动条监视 */

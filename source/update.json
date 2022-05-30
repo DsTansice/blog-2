@@ -1,10 +1,5 @@
 {
   "info": [
-    {
-      "version": "125",
-      "change": [
-        {"flag": "file", "value": "waifu.css"}
-      ]
-    }
+    {"version": "126"}
   ]
 }

@@ -32,7 +32,7 @@ div#settings(class='close')
             +buildButton(item)
 
     if (is_post())
-        div(class='descr')
+        div(class='descr' id='settings-descr')
             p(id='setting-post-title') 文章简介
             p(id='setting-post-descr')= page.description
 

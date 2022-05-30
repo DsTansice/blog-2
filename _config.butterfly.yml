@@ -773,8 +773,8 @@ inject:
     - <script async src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
     # - <link rel="stylesheet" href="/xxx.css">
   bottom:
+    - <script defer data-pjax src="/js/custom/zip.js"></script>
     - <script async src="/js/custom/floatWin.js"></script>
-    - <script async src="/js/custom/zip.js"></script>
     - <script async src="/live2d-widget/autoload.js"></script>
 
 #侧栏悬浮卡片控制按钮

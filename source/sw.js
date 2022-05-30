@@ -77,11 +77,22 @@ self.addEventListener('fetch', async event => {
 
 self.addEventListener('message', event => {
     if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(result => event.source.postMessage(result))
+        updateJson(event.data.substring(7)).then(info => {
+            // noinspection JSUnresolvedVariable
+            event.source.postMessage({
+                type: 'update',
+                update: info.update,
+                version: info.version,
+                old: info.old
+            })
+        })
     } else if (event.data === 'refresh') {
-        deleteCache(VersionList.empty()).then(() => event.source.postMessage('refresh'))
+        deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
     }
 })
+
+/** 忽略浏览器HTTP缓存的请求指定request */
+const fetchNoCache = request => fetch(request, {cache: "no-store"})
 
 /** 判断指定url击中了哪一种缓存，都没有击中则返回null */
 function findCache(url) {
@@ -137,6 +148,23 @@ function updateJson(page) {
     }
     /** 解析字符串 */
     const parseJson = json => new Promise((resolve, reject) => {
+        /** 版本号读写操作 */
+        const dbVersion = {
+            write: (id) => new Promise((resolve, reject) => {
+                caches.open(CACHE_NAME).then(function (cache) {
+                    cache.put(
+                        new Request(VERSION_PATH),
+                        new Response(id)
+                    ).then(() => resolve())
+                }).catch(() => reject())
+            }), read: () => new Promise((resolve) => {
+                caches.match(new Request(VERSION_PATH))
+                    .then(function (response) {
+                        if (!response) resolve(null)
+                        response.text().then(text => resolve(text))
+                    }).catch(() => resolve(null))
+            })
+        }
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
@@ -155,7 +183,6 @@ function updateJson(page) {
     return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
         const json = JSON.parse(text)
         parseJson(json).then(result => {
-            console.log(result.list)
             deleteCache(result.list, page).then(update => resolve({
                 update: update,
                 version: result.version,
@@ -293,24 +320,4 @@ class CacheChangeExpression {
         }
     }
 
-}
-
-/** 忽略浏览器HTTP缓存的请求指定request */
-const fetchNoCache = request => fetch(request, {cache: "no-store"})
-
-const dbVersion = {
-    write: (id) => new Promise((resolve, reject) => {
-        caches.open(CACHE_NAME).then(function (cache) {
-            cache.put(
-                new Request(VERSION_PATH),
-                new Response(id)
-            ).then(() => resolve())
-        }).catch(() => reject())
-    }), read: (src = null) => new Promise((resolve) => {
-        caches.match(new Request(VERSION_PATH))
-            .then(function (response) {
-                if (!response) resolve(src)
-                response.text().then(text => resolve(text))
-            }).catch(() => resolve(src))
-    })
 }
