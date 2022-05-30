@@ -799,8 +799,6 @@ fixed_card_widget:
       name: card-announcement
       index: 0
       icon: fas fa-bullhorn
-    - code: openToolsWin()
-      icon: fa fa-wrench
     - type: class #侧栏卡片选择器类型
       name: card-info #侧栏卡片选择器名称
       index: 0 #侧栏卡片选择器序列
@@ -814,8 +812,6 @@ fixed_card_widget:
       name: card-recommend-post
       index: 0
       icon: iconfont icon-tuijian
-    - code: openToolsWin()
-      icon: fa fa-wrench
     - type: class
       name: card-info
       index: 0
@@ -876,7 +872,7 @@ CDN:
   canvas_nest:
 
   lazyload:
-  instantpage: https://npm.elemecdn.com/instant.page/instantpage.js
+  instantpage:
   typed:
   pangu:
 
