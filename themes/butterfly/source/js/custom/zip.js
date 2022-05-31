@@ -83,9 +83,12 @@ function kmarTask() {
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') closeToolsWin()
         })
-        document.getElementById('rightside_config').onclick = openToolsWin
         document.getElementById('quit-mask').onclick = closeToolsWin
         document.getElementById('settings-button-close').onclick = closeToolsWin
+        document.getElementById('rightside').addEventListener('click', event => {
+            const element = event.target.id ? event.target : event.target.parentNode
+            if (element.id === 'rightside_config') openToolsWin()
+        })
     }
 
     /** SW互操作 */

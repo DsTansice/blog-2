@@ -31,8 +31,9 @@ div#settings(class='close')
         each item in buttonList
             +buildButton(item)
 
-    if (is_post())
-        div(class='descr' id='settings-descr')
+
+    div(id='settings-descr')
+        if (is_post())
             p(id='setting-post-title') 文章简介
             p(id='setting-post-descr')= page.description
 
