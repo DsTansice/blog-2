@@ -210,14 +210,12 @@ function kmarTask() {
         if (!(list && checkServiceWorker())) return
         const preId = sessionStorage.getItem('preload')
         if (preId) clearTimeout(preId)
-        const id = setTimeout(async () => {
+        const id = setTimeout(() => {
             for (let element of list) {
-                if (element.href.endsWith('/') && element.href.match('/posts/')) {
-                    await fetch(new Request(element.href)).catch(err => console.error(err))
-                }
+                if (!element.href.match('/posts/')) continue
+                fetch(new Request(element.href)).then(() => element.classList.add('loaded')).catch(err => console.error(err))
             }
-            sessionStorage.removeItem('preload')
-        }, 4000)
+        }, 3600)
         sessionStorage.setItem('preload', id)
     }
 

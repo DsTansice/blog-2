@@ -1,4 +1,3 @@
-// 代码框
 #post
   #article-container
     figure
@@ -19,6 +18,15 @@
         border 2px solid var(--km-tab-border)
       th, td
         border-color var(--km-tab-border)
+
+    & > p > a.loaded:before,
+    & > .tag.link > .loaded > .right > .text:before
+      content '\f0ed'
+      font-family var(--fa-style-family, "Font Awesome 6 Free")
+      font-weight var(--fa-style, 900)
+
+    & > .tag.link > .loaded > .right > .text:before
+      margin-right 4px
 
   // 文章页头部信息栏
   #post-info
