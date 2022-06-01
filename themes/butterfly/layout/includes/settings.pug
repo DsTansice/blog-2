@@ -18,6 +18,9 @@ mixin buildButton(name)
         when 'refresh'
             button#refresh-cache(title='刷新缓存')
                 i.fas.fa-refresh.fa-spin
+        when 'preload'
+            button#preload-switch(title='预加载开关')
+                i.fa.fa-cloud-download
 
 div#settings(class='close')
 
@@ -27,7 +30,7 @@ div#settings(class='close')
             i(class='fa fa-times')
 
     div#setting-button
-        - const buttonList = ['read', 'lang', 'theme', 'menu', 'refresh']
+        - const buttonList = ['read', 'lang', 'theme', 'menu', 'preload', 'refresh']
         each item in buttonList
             +buildButton(item)
 

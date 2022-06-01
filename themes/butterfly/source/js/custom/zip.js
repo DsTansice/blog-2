@@ -33,6 +33,14 @@ function kmarTask() {
         }
         return actualTop;
     }
+    /** 检查SW是否可用 */
+    function checkServiceWorker() {
+        return 'serviceWorker' in window.navigator && navigator.serviceWorker.controller
+    }
+    /** 发送信息到sw */
+    function postMessage2SW(type, value) {
+        navigator.serviceWorker.controller.postMessage({type: type, value: value})
+    }
 
     /** 右下角菜单 */
     function hideRightSide() {
@@ -89,21 +97,30 @@ function kmarTask() {
             const element = event.target.id ? event.target : event.target.parentNode
             if (element.id === 'rightside_config') openToolsWin()
         })
+        const preloadButton = document.getElementById('preload-switch')
+        preloadButton.onclick = () => {
+            const now = localStorage.getItem('preload')
+            if (now === 'false') {
+                localStorage.setItem('preload', 'true')
+                preloadButton.classList.remove('close')
+            } else {
+                localStorage.setItem('preload', 'false')
+                preloadButton.classList.add('close')
+            }
+        }
     }
 
     /** SW互操作 */
     function swOperator() {
         /** 刷新缓存 */
         function refreshCache() {
-            if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-                if (confirm('是否确定刷新博文缓存')) navigator.serviceWorker.controller.postMessage("refresh")
+            if (checkServiceWorker()) {
+                if (confirm('是否确定刷新博文缓存')) postMessage2SW('refresh', null)
             } else {
                 btf.snackbarShow('ServiceWorker未激活')
             }
         }
-        if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-            navigator.serviceWorker.controller.postMessage(`update:${location.href}`)
-        }
+        if (checkServiceWorker()) postMessage2SW('update', location.href)
         navigator.serviceWorker.addEventListener('message', event => {
             const data = event.data
             switch (data.type) {
@@ -152,6 +169,7 @@ function kmarTask() {
         }
     }
 
+    /** 分享按钮 */
     function shareButton() {
         /* 获取本页链接地址（不包含参数） */
         function getNowURL() {
@@ -180,19 +198,47 @@ function kmarTask() {
         });
     }
 
+    /** 预加载当前页链接 */
+    function preload() {
+        const button = document.getElementById('preload-switch')
+        const isPreload = localStorage.getItem('preload')
+        if (isPreload === 'false') {
+            button.classList.add('close')
+            return
+        }
+        const list = document.getElementsByTagName('a')
+        if (!(list && checkServiceWorker())) return
+        const preId = sessionStorage.getItem('preload')
+        if (preId) clearTimeout(preId)
+        const id = setTimeout(async () => {
+            for (let element of list) {
+                if (element.href.endsWith('/') && element.href.match('/posts/')) {
+                    await fetch(new Request(element.href)).catch(err => console.error(err))
+                }
+            }
+            sessionStorage.removeItem('preload')
+        }, 4000)
+        sessionStorage.setItem('preload', id)
+    }
+
+    function runTaskList(list) {
+        // noinspection JSIgnoredPromiseFromCall
+        Promise.all(list.map(it => new Promise(resolve => {
+            it()
+            resolve()
+        })))
+    }
+
     //仅执行一次的任务
     document.addEventListener('DOMContentLoaded', () => {
         btf.snackbarShow = (text, time = 3500) => kmarUtils.popClockWin(text, time)
-        hideRightSide()
-        kmarSettings()
-        swOperator()
-        shareButton()
+        const taskList = [hideRightSide, kmarSettings, swOperator, shareButton]
+        runTaskList(taskList)
     })
 
     //每次加载页面都执行的操作
-    addScrollOperatorMonitor()
-    removeFixedCardWidget()
-    repairBangumis()
+    const taskList = [addScrollOperatorMonitor, removeFixedCardWidget, repairBangumis, preload]
+    runTaskList(taskList)
 }
 
 // 固定卡片点击动作

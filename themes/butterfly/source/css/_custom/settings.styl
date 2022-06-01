@@ -57,6 +57,12 @@
       &:hover
         background-color: var(--btn-hover-color)
 
+    #preload-switch
+      i:before
+        transition all .2s
+      &.close > i:before
+        color red
+
     @media screen and (max-width 900px)
       #hide-aside-btn
         display none

@@ -76,18 +76,22 @@ self.addEventListener('fetch', async event => {
 })
 
 self.addEventListener('message', event => {
-    if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(info => {
-            // noinspection JSUnresolvedVariable
-            event.source.postMessage({
-                type: 'update',
-                update: info.update,
-                version: info.version,
-                old: info.old
+    const data = event.data
+    switch (data.type) {
+        case 'update':
+            updateJson(data.value).then(info => {
+                // noinspection JSUnresolvedVariable
+                event.source.postMessage({
+                    type: 'update',
+                    update: info.update,
+                    version: info.version,
+                    old: info.old
+                })
             })
-        })
-    } else if (event.data === 'refresh') {
-        deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            break
+        case 'refresh':
+            deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            break
     }
 })
 
