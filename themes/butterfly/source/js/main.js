@@ -568,6 +568,38 @@ document.addEventListener('DOMContentLoaded', function () {
       const publishDate = $runtimeCount.getAttribute('data-publishDate')
       const date = new Date(publishDate)
       date.setHours(0)
+      /**
+       * 计算当前日期距离创建日期有多少年多少天
+       * @param start 起始日期
+       * @returns {string}
+       */
+      function getRemainderTime(start) {
+        const isLeap = (year) => year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)
+        const afterFeb = (date) => {
+          if (isLeap(date.getFullYear())) {
+            if (date.getMonth() > 2) return true
+            else if (date.getMonth() === 2) return date.getDate() === 29
+            return false
+          } else return false
+        }
+
+        const end = new Date()
+        const startYear = start.getFullYear()
+        const endYear = end.getFullYear()
+        let leapAmount = afterFeb(end) ? 1 : 0
+        for (let i = startYear + 1; i !== endYear; ++i) {
+          if (isLeap(i)) ++leapAmount
+        }
+        let difDay = Math.floor((end - start) / 1000 / 24 / 60 / 60)
+        let difYear = endYear - startYear - 1
+        difDay -= difYear * 365 + leapAmount
+        if (difDay >= 365) {
+          difDay -= 365
+          ++difYear
+        }
+        if (difDay === 0) return difYear + ' 周 年'
+        else return difYear + ' 年 ' + difDay + ' 天 '
+      }
       $runtimeCount.innerText = getRemainderTime(date)
     }
   }
@@ -766,36 +798,3 @@ document.addEventListener('DOMContentLoaded', function () {
   refreshFn()
   unRefreshFn()
 })
-
-/**
- * 计算当前日期距离创建日期有多少年多少天
- * @param start 起始日期
- * @returns {string}
- */
-function getRemainderTime(start) {
-  const isLeap = (year) => year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)
-  const afterFeb = (date) => {
-    if (isLeap(date.getFullYear())) {
-      if (date.getMonth() > 2) return true
-      else if (date.getMonth() === 2) return date.getDate() === 29
-      return false
-    } else return false
-  }
-
-  const end = new Date()
-  const startYear = start.getFullYear()
-  const endYear = end.getFullYear()
-  let leapAmount = afterFeb(end) ? 1 : 0
-  for (let i = startYear + 1; i !== endYear; ++i) {
-    if (isLeap(i)) ++leapAmount
-  }
-  let difDay = Math.floor((end - start) / 1000 / 24 / 60 / 60)
-  let difYear = endYear - startYear - 1
-  difDay -= difYear * 365 + leapAmount
-  if (difDay >= 365) {
-    difDay -= 365
-    ++difYear
-  }
-  if (difDay === 0) return difYear + ' 周 年'
-  else return difYear + ' 年 ' + difDay + ' 天 '
-}

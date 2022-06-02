@@ -12,6 +12,7 @@ tags:
 description: 修改了页面滚动条后，主题以及外部JS自带的隐藏滚动条来防止页面滚动的代码失效了，最终通过JS修复了这一问题。
 abbrlink: 6a968095
 date: 2022-05-19 00:01:35
+updated: 2022-06-02 18:34:30
 ---
 
 ## 问题描述
@@ -104,13 +105,13 @@ function recoverHtmlScrollBar() {
 
 ```javascript
 function addFancyboxOpenMonitor() {
-    //外层套一个load事件是为了让代码在页面加载完毕后再执行，优化一下性能
-    addEventListener('load', () => {
-        document.addEventListener('DOMSubtreeModified', () => {
-            const fancybox = document.getElementsByClassName('fancybox__container is-animated')
-            if (fancybox.length === 0) recoverHtmlScrollBar()
-            else removeHtmlScrollBar()
-        })
+    document.addEventListener('DOMNodeInserted', event => {
+        const list = event.target.classList
+        if (list && list.contains('fancybox__content')) removeHtmlScrollBar()
+    })
+    document.addEventListener('DOMNodeRemoved', event => {
+        const list = event.target.classList
+        if (list && list.contains('fancybox__image')) recoverHtmlScrollBar()
     })
 }
 ```

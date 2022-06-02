@@ -578,7 +578,7 @@ aside:
     content: <p>本站将于 <code>2022-04-04</code> 日起统计收入，累计收入达到 100RMB 咱们就抽一波奖哦~<small>（进度：51/100）</small><p>建议需要通知的小伙伴把<a href="mailto:blog.kmar@gmail.com">blog.kmar@gmail.com</a>加入到邮箱的白名单中防止被拦截。
   card_recent_post:
     enable: true
-    limit: 4 # if set 0 will show all
+    limit: 5 # if set 0 will show all
     sort: updated # date or updated
     sort_order: # Don't modify the setting unless you know how it works
   card_categories:

@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-05-30 19:24:25
+updated: 2022-06-02 18:16:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -31,6 +31,10 @@ updated: 2022-05-30 19:24:25
 &emsp;&emsp;实际上，SW代理的本质就是让我们自己返回一个资源回去。所以不论我们通过什么手段，只需要能够返回资源就可以了（实际上啥都不返回也没问题，不过控制台会有警告）。
 
 &emsp;&emsp;了解了这个原理，我们就能很轻易地想到一个SW经常用的功能：客户端缓存控制。在发起网络请求的时候，如果本地已经存在其对应的结果，那么我们直接把本地的缓存内容返回给浏览器就可以了，这是减轻服务器压力、提高客户端体验的一种最直接的方案。
+
+#### 注册SW
+
+&emsp;&emsp;有关SW注册的内容我们在[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/#%E6%B3%A8%E5%86%8CSW) 中已经进行了详细的说明，这里就不再赘述。
 
 ### 异步程序
 
@@ -384,8 +388,8 @@ self.addEventListener('install', () => self.skipWaiting())
 
 /**
  * 缓存列表
- * @param match 匹配规则
  * @param clean 清理全站时是否删除其缓存
+ * @param match 匹配规则
  */
 const cacheList = {
     simple: {
@@ -428,18 +432,22 @@ self.addEventListener('fetch', async event => {
 })
 
 self.addEventListener('message', event => {
-    if (event.data.startsWith('update')) {
-        updateJson(event.data.substring(7)).then(info => {
-            // noinspection JSUnresolvedVariable
-            event.source.postMessage({
-                type: 'update',
-                update: info.update,
-                version: info.version,
-                old: info.old
+    const data = event.data
+    switch (data.type) {
+        case 'update':
+            updateJson(data.value).then(info => {
+                // noinspection JSUnresolvedVariable
+                event.source.postMessage({
+                    type: 'update',
+                    update: info.update,
+                    version: info.version,
+                    old: info.old
+                })
             })
-        })
-    } else if (event.data === 'refresh') {
-        deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            break
+        case 'refresh':
+            deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            break
     }
 })
 
@@ -735,29 +743,28 @@ class CacheChangeExpression {
 
 ```javascript
 if ('serviceWorker' in window.navigator && navigator.serviceWorker.controller) {
-    navigator.serviceWorker.controller.postMessage("update")
-}
-navigator.serviceWorker.addEventListener('message', event => {
-    const data = event.data
-    switch (data.type) {
-        case 'update':
-            if (data.old !== data.version) {
-                localStorage.setItem('update', new Date().toLocaleString())
-                localStorage.setItem('version', data.version)
-            }
-            if (data.update) {
-                kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
-                    '刷新', '点击刷新页面', () => location.reload())
-            }
-            break
-        case 'refresh':
-            localStorage.setItem('update', new Date().toLocaleString())
-            location.reload(true)
-            break
-        default:
-            console.error(`未知事件：${data.type}`)
+    /** 发送信息到sw */
+    function postMessage2SW(type, value) {
+        navigator.serviceWorker.controller.postMessage({type: type, value: value})
     }
-})
+    postMessage2SW('update', null)
+    navigator.serviceWorker.addEventListener('message', event => {
+        const data = event.data
+        switch (data.type) {
+            case 'update':
+                if (data.update) {
+                    kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
+                        '刷新', '点击刷新页面', () => location.reload())
+                }
+                break
+            case 'refresh':
+                location.reload(true)
+                break
+            default:
+                console.error(`未知事件：${data.type}`)
+        }
+    })
+}
 ```
 
 ---

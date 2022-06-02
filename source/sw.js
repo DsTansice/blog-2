@@ -9,8 +9,8 @@ self.addEventListener('install', () => self.skipWaiting())
 
 /**
  * 缓存列表
- * @param url 匹配规则
  * @param clean 清理全站时是否删除其缓存
+ * @param match 匹配规则
  */
 const cacheList = {
     static: {

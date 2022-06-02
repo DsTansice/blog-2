@@ -212,7 +212,7 @@ function kmarTask() {
         if (preId) clearTimeout(preId)
         const id = setTimeout(() => {
             for (let element of list) {
-                if (!element.href.match('/posts/')) continue
+                if (!element.href.match('kmar.top/posts/')) continue
                 fetch(new Request(element.href)).then(() => element.classList.add('loaded')).catch(err => console.error(err))
             }
         }, 3600)

@@ -1,16 +1,20 @@
 {
   "info": [
     {
-      "version": "129",
+      "version": "130",
       "change": [
         {"flag": "file", "value": "zip.js"},
-        {"flag": "file", "value": "index.css"}
+        {"flag": "file", "value": "main.js"},
+        {"flag": "html"}
       ]
     },
     {
-      "version": "128",
-      "change": [{"flag": "html"}]
+      "version": "129",
+      "change": [
+        {"flag": "file", "value": "index.css"}
+      ]
     },
+    {"version": "128"},
     {"version": "127"},
     {"version": "126"}
   ]
