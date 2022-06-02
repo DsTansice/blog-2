@@ -1,7 +1,7 @@
 ---
 title: 在低版本Forge中玩转FG5！
 top_img: false
-cover: 'https://image.kmar.top/bg/b17.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b17.jpg!/fw/700'
 categories:
   - Java
 tags:

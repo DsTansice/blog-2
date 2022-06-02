@@ -5,7 +5,7 @@ categories:
   - C/C++
 tags:
   - 规范
-cover: 'https://image.kmar.top/bg/b12.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b12.jpg!/fw/700'
 description: 简单总结一下我对一些代码的建议。
 abbrlink: 51979312
 date: 2021-10-12 20:14:05

@@ -6,7 +6,7 @@ categories:
 tags:
   - 教程
   - 环境
-cover: 'https://image.kmar.top/bg/b5.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b5.jpg!/fw/700'
 description: 新手不知道如何安装Anaconda3和PyCharm？来这里寻找答案吧。
 abbrlink: 63e7b43c
 date: 2021-09-05 13:58:13

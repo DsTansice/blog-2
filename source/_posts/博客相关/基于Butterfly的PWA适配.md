@@ -1,7 +1,7 @@
 ---
 title: 基于Butterfly的PWA适配
 top_img: false
-cover: 'https://image.kmar.top/bg/b40.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b40.jpg!/fw/700'
 categories:
   - 博客
 tags:

@@ -1,7 +1,7 @@
 ---
 title: 解剖SW原理暨博主SW实现
 top_img: false
-cover: 'https://image.kmar.top/bg/b20.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b20.jpg!/fw/700'
 categories:
   - 博客
 tags:

@@ -6,7 +6,7 @@ categories:
 tags:
   - 题解
   - PTA
-cover: 'https://image.kmar.top/bg/b18.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b18.jpg!/fw/700'
 description: PTA-网安、人工智能21级班级团体训练欢乐赛（一）详细题解
 abbrlink: 78ce6948
 date: 2021-11-15 20:31:10

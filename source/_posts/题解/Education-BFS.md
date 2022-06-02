@@ -1,7 +1,7 @@
 ---
 title: Education BFS
 top_img: false
-cover: 'https://image.kmar.top/bg/b33.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b33.jpg!/fw/700'
 categories:
   - C/C++
 tags:

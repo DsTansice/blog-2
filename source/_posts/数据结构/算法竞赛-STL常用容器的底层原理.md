@@ -1,7 +1,7 @@
 ---
 title: 算法竞赛-STL常用容器的底层原理
 top_img: false
-cover: 'https://image.kmar.top/bg/b6.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b6.jpg!/fw/700'
 categories:
   - 通用
 tags:

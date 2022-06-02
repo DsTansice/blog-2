@@ -1,7 +1,7 @@
 ---
 title: Invitation Cards 题解
 top_img: false
-cover: 'https://image.kmar.top/bg/b5.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b5.jpg!/fw/700'
 categories:
   - C/C++
 tags:

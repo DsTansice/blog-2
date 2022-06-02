@@ -1,7 +1,7 @@
 ---
 title: PTA-21期末基本功训练（二）题解
 top_img: false
-cover: 'https://image.kmar.top/bg/b27.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b27.jpg!/fw/700'
 categories:
   - C/C++
 tags:

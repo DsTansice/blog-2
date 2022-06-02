@@ -5,7 +5,7 @@ tags:
   - MC
 categories:
   - 随心记
-cover: 'https://image.kmar.top/bg/b2.jpg!/fw/550'
+cover: 'https://image.kmar.top/bg/b2.jpg!/fw/700'
 description: 经过漫长的等待终于拿到书了，迫不及待地大致的把书翻看了一遍，今天就简单的谈一下阅读时发现的问题
 abbrlink: 51cab89d
 date: 2020-07-23 17:54:24
