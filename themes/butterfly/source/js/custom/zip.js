@@ -213,7 +213,7 @@ function kmarTask() {
         const id = setTimeout(() => {
             const record = new Map()
             for (let element of list) {
-                if (!element.href.match('kmar.top/posts/') || record.has(element.href)) continue
+                if (!element.href.match('/kmar.top/posts') || record.has(element.href)) continue
                 record.set(element.href, element)
                 fetch(new Request(element.href)).then(() => element.classList.add('loaded')).catch(err => console.error(err))
             }
