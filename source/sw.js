@@ -170,11 +170,11 @@ function updateJson(page) {
         dbVersion.read().then(version => {
             const elementList = json['info']
             if (elementList.length === 0) reject()
-            const newVersion = elementList[0].version
-            dbVersion.write(newVersion)
             //判断是否存在版本
             if (!version) return reject()
             const refresh = parseChange(list, elementList, version)
+            const newVersion = elementList[0].version
+            dbVersion.write(newVersion)
             //如果需要清理全站
             if (refresh) list = VersionList.empty()
             resolve({list: list, version: newVersion, old: version})
