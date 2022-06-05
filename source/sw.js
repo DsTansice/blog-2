@@ -16,7 +16,6 @@ const cacheList = {
     static: {
         clean: false,
         match: url => {
-            if (url.match(/(jet|HarmonyOS)\.(woff2|woff|ttf)$/g)) return true
             // noinspection SpellCheckingInspection
             if (url.endsWith('jinrishici.js') || url.endsWith('.cur')) return true
             return url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
@@ -29,7 +28,7 @@ const cacheList = {
         clean: true,
         match: url => {
             if (url.match('kmar.top/') === null) return false
-            return url.match('/indexBg/') || url.match(/\.(css|js|woff2|woff|ttf|json|svg)$/g)
+            return url.match('/indexBg/') || url.match(/\.(css|js|json)$/g)
         }
     }
 }
@@ -44,10 +43,8 @@ const replaceList = {
         source: ['//cdn.jsdelivr.net/gh'],
         dist: '//cdn1.tianli0.top/gh'
     }, npm: {
-        source: [
-            '//cdn.jsdelivr.net/npm',
-            '//unpkg.zhimg.com'
-        ], dist: '//npm.elemecdn.com'
+        source: ['//cdn.jsdelivr.net/npm'],
+        dist: '//npm.elemecdn.com'
     }, emoji: {
         source: ['/gh/EmptyDreams/resources/icon'],
         dist: '/gh/EmptyDreams/twikoo-emoji'
@@ -319,6 +316,9 @@ class CacheChangeExpression {
                 break
             case 'file':
                 this.matchUrl = url => url.endsWith(value)
+                break
+            case 'reg':
+                this.matchUrl = url => url.match(new RegExp(value))
                 break
             default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}`)
         }

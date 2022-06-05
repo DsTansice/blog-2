@@ -157,46 +157,6 @@ jsonContent:
       categories: false
       tags: true
 
-# Configuration for hexo-font-minify
-# All paths are resolved relative to theme's base dir
-# The following are default configuration
-font:
-  # Source path/pattern of font files
-  src: "./fonts/*.ttf"
-  # Configuration script
-  script: "config.js"
-  # URL base for generated font assets
-  urlBase: "fonts/" # -> http://yoursite.com/fonts/font.css
-  # Cache base
-  # Minified font files will be cached in cacheBase/#{hash}
-  cacheBase: "./.font-cache"
-  # Generate .eot font file
-  eot: true
-  # Generate .woff font file
-  woff: true
-  # Generate .svg font file
-  svg: true
-  # Merge all .css files into one
-  mergeCss: true
-  # Merged .css file name
-  mergeCssName: 'all.css'
-  # CSS config, see also https://github.com/akfish/fontmin#css
-  css:
-    #`location of font file `
-    fontPath: './'
-    # inject base64 data:application/x-font-ttf; (gzip font with css).
-    base64: false
-    # generate class for each glyph. default = false
-    glyph: false
-    # class prefix, only work when glyph is `true`. default to "icon"
-    iconPrefix: 'icon'
-    # custom fontFamily, default to filename or get from analysed ttf file
-    fontFamily: 'myfont'
-    # rewrite fontFamily as filename force. default = false
-    asFileName: false
-    # boolean to add local font. default = false
-    local: false
-
 graphviz:
   enable: true
 
@@ -286,26 +246,26 @@ footer_beautify:
   swiperpara: 0 #若非0，则开启轮播功能，每行徽标个数
   bdageitem:
     - link: https://beian.miit.gov.cn
-      shields: /footer/icp.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/icp.svg
       message: 本站已经在工信部备案，豫ICP备2021031313号
     - link: https://hexo.io/ #徽标指向网站链接
-      shields: /footer/hexo.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/hexo.svg
       message: 博客框架为Hexo-v6.0.0 #徽标提示语
     - link: https://butterfly.js.org/
-      shields: /footer/butterfly.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/butterfly.svg
       message: 主题版本Butterfly-v4.1.0
     - link: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
-      shields: /footer/upyun.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/upyun.svg
       message: 本网站又又拍云提供CDN加速及云存储服务
     - link: https://github.com/EmptyDreams/blog
-      shields: /footer/github.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/github.svg
       message: 本站项目由Gtihub托管
     - link: https://icp.gov.moe/?keyword=20219494
-      shields: /footer/cute.svg
+      shields: https://npm.elemecdn.com/@kmar/fonts/footer/cute.svg
       message: 本站已添加萌ICP豪华套餐，萌ICP备20219494号
-  swiper_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper@1.0.11/lib/swiper.min.css
-  swiper_js: https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper@1.0.11/lib/swiper.min.js
-  swiperbdage_init_js: https://cdn.jsdelivr.net/npm/hexo-butterfly-footer-beautify@1.0.6/lib/swiperbdage_init.min.js
+  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper@1.0.11/lib/swiper.min.css
+  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper@1.0.11/lib/swiper.min.js
+  swiperbdage_init_js: https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.6/lib/swiperbdage_init.min.js
 
 # 追番设置
 bangumi:
