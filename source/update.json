@@ -3,7 +3,7 @@
     {
       "version": "132",
       "change": [
-        {"flag": "reg", "value": ".*kmar\.top.*(font|footer)\/.*"},
+        {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
         {"flag": "file", "value": "zip.js"}
       ]
     },
