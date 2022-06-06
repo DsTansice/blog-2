@@ -269,6 +269,7 @@ function fixedCardWidget(type, name, index) {
             document.getElementById('fixed-card-mask').classList.add('open')
             // 再添加固定卡片样式
             tmpCard.classList.add('fixed-card-widget');
+            document.getElementsByTagName('html')[0].style.overflow = 'hidden'
         }
     }
 }
@@ -284,6 +285,7 @@ function removeFixedCardWidget(closeMask = true) {
     //移除退出蒙版
     const mask = document.getElementById('fixed-card-mask')
     if (!(closeMask && mask.classList.contains('open'))) return
+    document.getElementsByTagName('html')[0].style.overflow = ''
     mask.addEventListener('animationend', function f () {
         mask.removeEventListener('animationend', f)
         mask.style.cssText = ''
