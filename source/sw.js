@@ -15,19 +15,19 @@ self.addEventListener('install', () => self.skipWaiting())
 const cacheList = {
     static: {
         clean: false,
-        match: url => {
-            // noinspection SpellCheckingInspection
-            if (url.endsWith('jinrishici.js') || url.endsWith('.cur')) return true
-            return url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
-        }
+        match: url => url.endsWith('jinrishici.js') || url.endsWith('.cur') ||
+                    url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
     }, html: {
         clean: true,
-        match: url => (url.endsWith('/') && url.match(`kmar.top`)) ||
-                        url.endsWith('kmar.top') || url.endsWith('search.xml')
+        match: url => {
+            if (!url.match('kmar.top')) return false
+            return url.endsWith('/') || url.endsWith('kmar.top') ||
+                url.match('kmar.top/page/') || url.endsWith('search.xml')
+        }
     }, resource: {
         clean: true,
         match: url => {
-            if (url.match('kmar.top/') === null) return false
+            if (!url.match('kmar.top/')) return false
             return url.match('/indexBg/') || url.match(/\.(css|js|json)$/g)
         }
     }
@@ -169,9 +169,8 @@ function updateJson(page) {
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            if (elementList.length === 0) reject()
-            //判断是否存在版本
-            if (!version) return reject()
+            //如果没有版本信息或是新用户则不进行任何更新操作
+            if (elementList.length === 0 || !version) return reject()
             const refresh = parseChange(list, elementList, version)
             const newVersion = elementList[0].version
             dbVersion.write(newVersion)
@@ -181,16 +180,18 @@ function updateJson(page) {
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
-    return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
-        const json = JSON.parse(text)
-        parseJson(json).then(result => {
-            deleteCache(result.list, page).then(update => resolve({
-                update: update,
-                version: result.version,
-                old: result.old
-            }))
-        }).catch(() => {})
-    })))
+    return new Promise(resolve => fetchNoCache(url)
+        .then(response => response.text().then(text => {
+            const json = JSON.parse(text)
+            parseJson(json).then(result => {
+                deleteCache(result.list, page).then(update => resolve({
+                    update: update,
+                    version: result.version,
+                    old: result.old
+                }))
+            }).catch(() => {})
+        }))
+    )
 }
 
 /** 删除指定缓存 */
@@ -234,7 +235,7 @@ class VersionList {
 
     match(url) {
         return new Promise((resolve) => {
-            Promise.any(this._list.map(it => it.matchUrl(url)))
+            Promise.any(this._list.map(it => it.match(url)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
         })
@@ -272,10 +273,10 @@ class VersionElement {
      * @param url 字符串（String）
      * @return {Promise} resolve表明匹配成功，reject表明匹配失败
      */
-    matchUrl(url) {
+    match(url) {
         return new Promise((resolve, reject) => {
             for (let it of this._list) {
-                if (it.matchUrl(url)) {
+                if (it.match(url)) {
                     resolve()
                     return
                 }
@@ -293,7 +294,7 @@ class VersionElement {
  */
 class CacheChangeExpression {
 
-    matchUrl = null
+    match = null
 
     constructor(json) {
         const value = json['value']
@@ -303,24 +304,24 @@ class CacheChangeExpression {
         }
         switch (json['flag']) {
             case 'all':
-                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
+                this.match = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
+                this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
                 break
             case 'type':
-                this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
+                this.match = url => url.endsWith(`.${value}`) && checkCache(url)
                 break
             case 'html':
-                this.matchUrl = cacheList.html.match
+                this.match = cacheList.html.match
                 break
             case 'file':
-                this.matchUrl = url => url.endsWith(value)
+                this.match = url => url.endsWith(value)
                 break
             case 'reg':
-                this.matchUrl = url => url.match(new RegExp(value))
+                this.match = url => url.match(new RegExp(value))
                 break
-            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}`)
+            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
         }
     }
 
