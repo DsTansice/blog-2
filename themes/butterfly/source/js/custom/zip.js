@@ -87,7 +87,7 @@ function kmarTask() {
             btf.animateOut(document.getElementById('quit-mask'), 'to_hide 0.5s')
             recoverHtmlScrollBar()
         }
-        /** 按下ESC时关闭工具栏 */
+        //按下ESC时关闭工具栏
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') closeToolsWin()
         })

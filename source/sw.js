@@ -175,7 +175,7 @@ function updateJson(page) {
             const newVersion = elementList[0].version
             dbVersion.write(newVersion)
             //如果需要清理全站
-            if (refresh) list = VersionList.empty()
+            if (refresh) list.push(new CacheChangeExpression({'flag': 'all'}))
             resolve({list: list, version: newVersion, old: version})
         })
     })
@@ -213,14 +213,6 @@ function deleteCache(list, page = null) {
 
 /** 版本列表 */
 class VersionList {
-
-    static empty() {
-        const result = new VersionList()
-        const element = new VersionElement()
-        element._list.push(new CacheChangeExpression({'flag': 'all'}))
-        result.push(element)
-        return result
-    }
 
     _list = []
 
