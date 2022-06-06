@@ -1,12 +1,16 @@
 {
   "info": [
     {
-      "version": "134",
+      "version": "135",
       "change": [
         {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
-        {"flag": "html"},
-        {"flag": "file", "value": "index.css"}
+        {"flag": "file", "value": "index.css"},
+        {"flag": "file", "value": "main.js"}
       ]
+    },
+    {
+      "version": "134",
+      "change": [{"flag": "html"}]
     },
     {"version": "133"}
   ]
