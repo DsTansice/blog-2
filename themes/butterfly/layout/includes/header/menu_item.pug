@@ -32,5 +32,6 @@ script.
     $body.style.overflow = ''
     $body.style.paddingRight = ''
     btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
+    document.getElementsByTagName('html')[0].style.overflow = ''
     document.getElementById('sidebar-menus').classList.remove('open')
   }

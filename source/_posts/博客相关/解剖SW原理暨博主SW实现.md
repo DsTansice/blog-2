@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-06-06 17:32:25
+updated: 2022-06-06 18:59:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -711,6 +711,7 @@ class CacheChangeExpression {
 | `file` |   有   | 刷新名为`value`的文件缓存（需要带拓展名）                   |
 | `post` |   有   | 刷新abbrlink为`value`的博文及`search.xml`         |
 | `all`  |   无   | 刷新全部`clean = true`的缓存                      |
+| `reg`  |   有   | 刷新与输入的正则表达式想匹配的所有缓存（不需要带两边的`/`）            |
 
 {% p red center, 注意：<code>post</code>是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
 

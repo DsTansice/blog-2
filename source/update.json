@@ -1,10 +1,12 @@
 {
   "info": [
     {
-      "version": "133",
+      "version": "134",
       "change": [
-        {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"}
+        {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
+        {"flag": "html"}
       ]
-    }
+    },
+    {"version": "133"}
   ]
 }
