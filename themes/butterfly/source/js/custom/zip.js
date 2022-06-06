@@ -67,8 +67,7 @@ function kmarTask() {
             if (div.style.display === 'block') return
             div.style.display = 'block'
             div.classList.remove('close')
-            const mask = document.getElementById('quit-mask')
-            mask.style.display = 'block'
+            btf.animateIn(document.getElementById('quit-mask'), 'to_show 0.5s')
             const update = document.getElementById('setting-info-update')
             setText(update, localStorage.getItem('update'))
             const version = document.getElementById('setting-info-version')
@@ -85,8 +84,7 @@ function kmarTask() {
                 openRightSide()
             }, 600)
             div.classList.add('close')
-            const mask = document.getElementById('quit-mask')
-            mask.style.display = ''
+            btf.animateOut(document.getElementById('quit-mask'), 'to_hide 0.5s')
             recoverHtmlScrollBar()
         }
         /** 按下ESC时关闭工具栏 */
@@ -255,26 +253,15 @@ function kmarTask() {
 // 固定卡片点击动作
 // noinspection JSUnusedGlobalSymbols
 function fixedCardWidget(type, name, index) {
-    //创建一个蒙版，作为退出键使用
-    const CreateQuitBox = () => {
-        const quitBox = `<div id="quit-box" onclick="removeFixedCardWidget()"></div>`
-        const asideContent = document.getElementById('aside-content')
-        // noinspection SpellCheckingInspection
-        asideContent.insertAdjacentHTML("beforebegin", quitBox)
-    }
     // 根据id或class选择元素
     // 若元素存在
     let tmpCard = type === 'id' ? document.getElementById(name) : document.getElementsByClassName(name)[index]
     if (tmpCard) {
+        removeFixedCardWidget(false);
         // 首先判断是否存在fixed-card-widget类
-        if (tmpCard.className.indexOf('fixed-card-widget') > -1) {
-            // 存在则移除
-            removeFixedCardWidget();
-        } else {
-            // 不存在则先初始化防止卡片叠加
-            removeFixedCardWidget();
+        if (tmpCard.className.indexOf('fixed-card-widget') < 0) {
             //新建退出蒙版
-            CreateQuitBox();
+            document.getElementById('fixed-card-mask').classList.add('open')
             // 再添加固定卡片样式
             tmpCard.classList.add('fixed-card-widget');
         }
@@ -282,7 +269,7 @@ function fixedCardWidget(type, name, index) {
 }
 
 // 移除卡片方法
-function removeFixedCardWidget() {
+function removeFixedCardWidget(closeMask = true) {
     const activeItems = document.querySelectorAll('.fixed-card-widget');
     if (activeItems) {
         for (let it of activeItems) {
@@ -290,6 +277,12 @@ function removeFixedCardWidget() {
         }
     }
     //移除退出蒙版
-    const quitBox = document.getElementById('quit-box');
-    if (quitBox) quitBox.remove();
+    const mask = document.getElementById('fixed-card-mask')
+    if (!(closeMask && mask.classList.contains('open'))) return
+    mask.addEventListener('animationend', function f () {
+        mask.removeEventListener('animationend', f)
+        mask.style.cssText = ''
+        mask.classList.remove('open')
+    })
+    mask.style.cssText='animation: 0.5s ease 0s 1 normal none running to_hide;'
 }
