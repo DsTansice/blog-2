@@ -4,7 +4,8 @@
       "version": "134",
       "change": [
         {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
-        {"flag": "html"}
+        {"flag": "html"},
+        {"flag": "file", "value": "index.css"}
       ]
     },
     {"version": "133"}

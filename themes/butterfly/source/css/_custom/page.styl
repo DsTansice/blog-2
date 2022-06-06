@@ -58,11 +58,22 @@ html
 ::-moz-selection
   background var(--km-text-select) !important
 
-// 修正搜索按钮位置
 #nav
+  // 修正搜索按钮位置
   #search-button
     line-height 1 !important
 
+  // 修改标题样式
   #blog_name
+    overflow hidden
+
     a:hover
       color var(--km-button-dark-hover)
+
+    // 标题超过隐藏并显示省略号
+    #site-name
+      text-overflow ellipsis
+      white-space nowrap
+      display block
+      width 100%
+      overflow hidden
