@@ -178,6 +178,7 @@ function kmarTask() {
             return location.protocol + '//' + location.host + location.pathname
         }
 
+        // noinspection JSUnresolvedFunction
         const clipboard = new ClipboardJS('button#share-link', {
             text: function () {
                 return document.title + '：\r\n' + getNowURL()
@@ -185,14 +186,18 @@ function kmarTask() {
         });
 
         clipboard.on('success', function () {
+            // noinspection JSUnresolvedVariable
             if (GLOBAL_CONFIG.Snackbar) {
+                // noinspection JSUnresolvedVariable
                 btf.snackbarShow(GLOBAL_CONFIG.copy.success)
             } else {
                 console.log("复制成功")
             }
         });
         clipboard.on('error', function () {
+            // noinspection JSUnresolvedVariable
             if (GLOBAL_CONFIG.Snackbar) {
+                // noinspection JSUnresolvedVariable
                 btf.snackbarShow(GLOBAL_CONFIG.copy.error)
             } else {
                 console.error("复制失败")
