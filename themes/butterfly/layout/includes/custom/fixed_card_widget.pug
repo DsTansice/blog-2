@@ -1,15 +1,15 @@
 mixin addButton(value)
-    button.fixedcard-activebtn(onclick=`fixedCardWidget("` + value.type + `","` + value.name + `","` + value.index + `")`)
+    button.fixed-card-active-btn(onclick=`fixedCardWidget("` + value.type + `","` + value.name + `","` + value.index + `")`)
       i(class=value.icon)
 
-#fixedcard-dashboard
+#fixed-card-dashboard
   if is_post()
     each poitem in theme.fixed_card_widget.post
       +addButton(poitem)
   else
     each paitem in theme.fixed_card_widget.page
       +addButton(paitem)
-  .fixedcard-user-avatar.fixedcard-activebtn(onclick="removeFixedCardWidget()")
-    img.fixedcard-user-avatar-img(src=url_for(theme.avatar.img) title=config.author)
+  .fixed-card-user-avatar.fixedcard-active-btn(onclick="removeFixedCardWidget()")
+    img.fixed-card-user-avatar-img(src=url_for(theme.avatar.img) title=config.author)
 
 div#fixed-card-mask(onclick='removeFixedCardWidget()')
