@@ -1,26 +1,23 @@
 {
   "info": [
     {
-      "version": "132",
+      "version": "133",
       "change": [
         {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
-        {"flag": "file", "value": "zip.js"}
+        {"flag": "file", "value": "zip.js"},
+        {"flag": "file", "value": "main.js"},
+        {"flag": "file", "value": "index.css"}
       ]
     },
+    {"version": "132"},
     {
       "version": "131",
       "change": [
         {"flag": "html"}
       ]
     },
-    {
-      "version": "130",
-      "change": [{"flag": "file", "value": "main.js"}]
-    },
-    {
-      "version": "129",
-      "change": [{"flag": "file", "value": "index.css"}]
-    },
+    {"version": "130"},
+    {"version": "129"},
     {"version": "128"},
     {"version": "127"},
     {"version": "126"}

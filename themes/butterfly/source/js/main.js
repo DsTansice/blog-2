@@ -34,17 +34,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const sidebarFn = {
     open: () => {
       btf.sidebarPaddingR()
-      document.body.style.overflow = 'hidden'
+      //document.body.style.overflow = 'hidden'
       btf.animateIn(document.getElementById('menu-mask'), 'to_show 0.5s')
       document.getElementById('sidebar-menus').classList.add('open')
+      document.getElementsByTagName('html')[0].style.overflow = 'hidden'
       mobileSidebarOpen = true
     },
     close: () => {
       const $body = document.body
-      $body.style.overflow = ''
+      //$body.style.overflow = ''
       $body.style.paddingRight = ''
       btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
       document.getElementById('sidebar-menus').classList.remove('open')
+      document.getElementsByTagName('html')[0].style.overflow = ''
       mobileSidebarOpen = false
     }
   }
