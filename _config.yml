@@ -189,6 +189,9 @@ wowjs:
       delay: 150ms
       offset: 50
       iteration: 1
+  animate_css: https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css
+  wow_js: https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js
+  wow_init_js: /js/custom/wow-init.js
 
 # tag-plugins-plus
 # see https://akilar.top/posts/615e2dec/
