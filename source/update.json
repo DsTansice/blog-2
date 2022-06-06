@@ -6,16 +6,12 @@
         {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"},
         {"flag": "file", "value": "zip.js"},
         {"flag": "file", "value": "main.js"},
-        {"flag": "file", "value": "index.css"}
-      ]
-    },
-    {"version": "132"},
-    {
-      "version": "131",
-      "change": [
+        {"flag": "file", "value": "index.css"},
         {"flag": "html"}
       ]
     },
+    {"version": "132"},
+    {"version": "131"},
     {"version": "130"},
     {"version": "129"},
     {"version": "128"},
