@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-06-02 18:16:25
+updated: 2022-06-06 17:32:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -528,28 +528,29 @@ function updateJson(page) {
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            if (elementList.length === 0) reject()
+            //如果没有版本信息或是新用户则不进行任何更新操作
+            if (elementList.length === 0 || !version) return reject()
+            const refresh = parseChange(list, elementList, version)
             const newVersion = elementList[0].version
             dbVersion.write(newVersion)
-            //判断是否存在版本
-            if (!version) return reject()
-            const refresh = parseChange(list, elementList, version)
             //如果需要清理全站
-            if (refresh) list = VersionList.empty()
+            if (refresh) list.push(new CacheChangeExpression({'flag': 'all'}))
             resolve({list: list, version: newVersion, old: version})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
-    return new Promise(resolve => fetchNoCache(url).then(response => response.text().then(text => {
-        const json = JSON.parse(text)
-        parseJson(json).then(result => {
-            deleteCache(result.list, page).then(update => resolve({
-                update: update,
-                version: result.version,
-                old: result.old
-            }))
-        }).catch(() => {})
-    })))
+    return new Promise(resolve => fetchNoCache(url)
+        .then(response => response.text().then(text => {
+            const json = JSON.parse(text)
+            parseJson(json).then(result => {
+                deleteCache(result.list, page).then(update => resolve({
+                    update: update,
+                    version: result.version,
+                    old: result.old
+                }))
+            }).catch(() => {})
+        }))
+    )
 }
 
 /** 删除指定缓存 */
@@ -572,14 +573,6 @@ function deleteCache(list, page = null) {
 /** 版本列表 */
 class VersionList {
 
-    static empty() {
-        const result = new VersionList()
-        const element = new VersionElement()
-        element._list.push(new CacheChangeExpression({'flag': 'all'}))
-        result.push(element)
-        return result
-    }
-
     _list = []
 
     push(element) {
@@ -593,7 +586,7 @@ class VersionList {
 
     match(url) {
         return new Promise((resolve) => {
-            Promise.any(this._list.map(it => it.matchUrl(url)))
+            Promise.any(this._list.map(it => it.match(url)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
         })
@@ -631,10 +624,10 @@ class VersionElement {
      * @param url 字符串（String）
      * @return {Promise} resolve表明匹配成功，reject表明匹配失败
      */
-    matchUrl(url) {
+    match(url) {
         return new Promise((resolve, reject) => {
             for (let it of this._list) {
-                if (it.matchUrl(url)) {
+                if (it.match(url)) {
                     resolve()
                     return
                 }
@@ -652,7 +645,7 @@ class VersionElement {
  */
 class CacheChangeExpression {
 
-    matchUrl = null
+    match = null
 
     constructor(json) {
         const value = json['value']
@@ -662,18 +655,21 @@ class CacheChangeExpression {
         }
         switch (json['flag']) {
             case 'all':
-                this.matchUrl = url => checkCache(url) && url !== VERSION_PATH
+                this.match = url => checkCache(url) && url !== VERSION_PATH
                 break
             case 'post':
-                this.matchUrl = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
+                this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
                 break
             case 'type':
-                this.matchUrl = url => url.endsWith(`.${value}`) && checkCache(url)
+                this.match = url => url.endsWith(`.${value}`) && checkCache(url)
                 break
             case 'file':
-                this.matchUrl = url => url.endsWith(value)
+                this.match = url => url.endsWith(value)
                 break
-            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}`)
+            case 'reg':
+                this.match = url => url.match(new RegExp(value))
+                break
+            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
         }
     }
 
