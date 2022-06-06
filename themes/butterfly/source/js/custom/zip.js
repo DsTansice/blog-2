@@ -80,12 +80,14 @@ function kmarTask() {
         const closeToolsWin = () => {
             const div = document.getElementById('settings')
             if (div.style.display !== 'block') return
-            setTimeout(() => div.style.display = '', 600)
+            setTimeout(() => {
+                div.style.display = ''
+                openRightSide()
+            }, 600)
             div.classList.add('close')
             const mask = document.getElementById('quit-mask')
             mask.style.display = ''
             recoverHtmlScrollBar()
-            openRightSide()
         }
         /** 按下ESC时关闭工具栏 */
         document.addEventListener('keydown', (event) => {
@@ -103,9 +105,11 @@ function kmarTask() {
             if (now === 'false') {
                 localStorage.setItem('preload', 'true')
                 preloadButton.classList.remove('close')
+                kmarUtils.popClockWin('博文预加载功能已经开启')
             } else {
                 localStorage.setItem('preload', 'false')
                 preloadButton.classList.add('close')
+                kmarUtils.popClockWin('博文预加载功能已经关闭')
             }
         }
     }
@@ -211,11 +215,18 @@ function kmarTask() {
         const preId = sessionStorage.getItem('preload')
         if (preId) clearTimeout(preId)
         const id = setTimeout(() => {
-            const record = new Map()
+            const record = new Set()
             for (let element of list) {
-                if (!element.href.match('/kmar.top/posts') || record.has(element.href)) continue
-                record.set(element.href, element)
-                fetch(new Request(element.href)).then(() => element.classList.add('loaded')).catch(err => console.error(err))
+                const url = element.href
+                if (!url.match('/kmar.top/posts')) continue
+                const key = url.endsWith('/') ? url : url.substring(0, url.indexOf('#'))
+                //console.log(key)
+                if (record.has(key)) {
+                    element.classList.add('loaded')
+                    continue
+                }
+                record.add(key)
+                fetch(new Request(key)).then(() => element.classList.add('loaded')).catch(err => console.error(err))
             }
         }, 3600)
         sessionStorage.setItem('preload', id)
