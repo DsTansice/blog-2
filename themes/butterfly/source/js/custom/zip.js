@@ -114,37 +114,38 @@ function kmarTask() {
 
     /** SW互操作 */
     function swOperator() {
-        /** 刷新缓存 */
-        function refreshCache() {
+        if (checkServiceWorker()) {
+            postMessage2SW('update', location.href)
+            navigator.serviceWorker.addEventListener('message', event => {
+                const data = event.data
+                switch (data.type) {
+                    case 'update':
+                        if (data.old !== data.version.local) {
+                            localStorage.setItem('update', new Date().toLocaleString())
+                            localStorage.setItem('version', `${data.version.global}.${data.version.local}`)
+                        }
+                        if (data.update) {
+                            kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
+                                '刷新', '点击刷新页面', () => location.reload(), 6000)
+                        }
+                        break
+                    case 'refresh':
+                        localStorage.setItem('update', new Date().toLocaleString())
+                        location.reload(true)
+                        break
+                }
+            })
+        }
+        // 刷新缓存的按钮
+        document.getElementById('refresh-cache').onclick = () => {
             if (checkServiceWorker()) {
-                if (confirm('是否确定刷新博文缓存')) postMessage2SW('refresh', null)
+                kmarUtils.popClickClockWin('是否刷新本地缓存', 'fa fa-refresh fa-spin',
+                    '刷新', '点击刷新页面',
+                    () => postMessage2SW('refresh', null), 5000)
             } else {
-                btf.snackbarShow('ServiceWorker未激活')
+                kmarUtils.popClockWin('ServiceWorker未激活')
             }
         }
-        if (checkServiceWorker()) postMessage2SW('update', location.href)
-        navigator.serviceWorker.addEventListener('message', event => {
-            const data = event.data
-            switch (data.type) {
-                case 'update':
-                    if (data.old !== data.version.local) {
-                        localStorage.setItem('update', new Date().toLocaleString())
-                        localStorage.setItem('version', `${data.version.global}.${data.version.local}`)
-                    }
-                    if (data.update) {
-                        kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
-                            '刷新', '点击刷新页面', () => location.reload())
-                    }
-                    break
-                case 'refresh':
-                    localStorage.setItem('update', new Date().toLocaleString())
-                    location.reload(true)
-                    break
-                default:
-                    console.error(`未知事件：${data.type}`)
-            }
-        })
-        document.getElementById('refresh-cache').onclick = refreshCache
     }
 
     /** 滚动条监视 */
