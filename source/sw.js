@@ -87,7 +87,9 @@ self.addEventListener('message', event => {
             })
             break
         case 'refresh':
-            deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            const list = new VersionList()
+            list.push(new CacheChangeExpression({'flag': 'all'}))
+            deleteCache(list).then(() => event.source.postMessage({type: 'refresh'}))
             break
     }
 })
