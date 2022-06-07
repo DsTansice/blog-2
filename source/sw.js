@@ -3,7 +3,7 @@
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址（必须以`/`结尾） */
-const VERSION_PATH = 'https://version.id/'
+const VERSION_PATH = 'https://id.v2/'
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -141,9 +141,13 @@ function updateJson(page) {
      */
     const parseChange = (list, elements, version) => {
         for (let element of elements) {
-            const value = VersionElement.valueOf(element)
-            if (value.version === version) return false
-            list.push(value)
+            const ver = element['version']
+            if (ver === version) return false
+            const jsonList = element['change']
+            if (jsonList) {
+                for (let it of jsonList)
+                    list.push(new CacheChangeExpression(it))
+            }
         }
         //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
         //说明跨版本幅度过大，直接清理全站
@@ -171,14 +175,19 @@ function updateJson(page) {
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            //如果没有版本信息或是新用户则不进行任何更新操作
-            if (elementList.length === 0 || !version) return reject()
-            const refresh = parseChange(list, elementList, version)
-            const newVersion = elementList[0].version
-            dbVersion.write(newVersion)
+            const global = json['version']
+            const newVersion = {global: global, local: elementList[0].version}
+            dbVersion.write(`${global}-${newVersion.local}`)
+            //新用户不进行更新操作
+            if (!version) return reject()
+            const oldVersion = version.split('-')
+            const refresh = parseChange(list, elementList, oldVersion[1])
             //如果需要清理全站
-            if (refresh) list.push(new CacheChangeExpression({'flag': 'all'}))
-            resolve({list: list, version: newVersion, old: version})
+            if (refresh) {
+                if (global === oldVersion[0]) list.push(new CacheChangeExpression({'flag': 'all'}))
+                else list.refresh = true
+            }
+            resolve({list: list, version: newVersion, old: oldVersion[1]})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
@@ -187,10 +196,11 @@ function updateJson(page) {
             const json = JSON.parse(text)
             parseJson(json).then(result => {
                 deleteCache(result.list, page).then(update => resolve({
-                    update: update,
-                    version: result.version,
-                    old: result.old
-                }))
+                        update: update,
+                        version: result.version,
+                        old: result.old
+                    })
+                )
             }).catch(() => {})
         }))
     )
@@ -201,12 +211,13 @@ function deleteCache(list, page = null) {
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+                    if (it.url === VERSION_PATH) return reject1()
                     list.match(it.url).then(result => {
                         if (result) {
                             cache.delete(it)
-                            if (it.url === page) resolve1()
-                            else reject1()
-                        } else reject1()
+                            if (it.url === page) return resolve1()
+                        }
+                        reject1()
                     }).catch(() => reject1())
                 }))).then(() => resolve(true)).catch(() => resolve(false))
             ))
@@ -217,6 +228,7 @@ function deleteCache(list, page = null) {
 class VersionList {
 
     _list = []
+    refresh = false
 
     push(element) {
         this._list.push(element)
@@ -228,54 +240,15 @@ class VersionList {
     }
 
     match(url) {
-        return new Promise((resolve) => {
-            Promise.any(this._list.map(it => it.match(url)))
+        const check = it => new Promise((resolve, reject) => {
+            if (it.match(url)) resolve()
+            else reject()
+        })
+        return new Promise(async resolve => {
+            if (this.refresh) resolve(true)
+            else Promise.any(this._list.map(it => check(it)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
-        })
-    }
-
-}
-
-/**
- * 通过JSON构建一个版本信息
- * @constructor
- */
-class VersionElement {
-
-    /** 通过完整信息构建一个完整的元素 */
-    static valueOf(json) {
-        const result = new VersionElement()
-        result.version = json['version']
-        const jsonList = json['change']
-        if (jsonList) {
-            for (let it of jsonList) {
-                const value = new CacheChangeExpression(it)
-                result._list.push(value)
-            }
-        }
-        return result
-    }
-
-    /** 匹配规则列表 */
-    _list = []
-    /** 版本信息 */
-    version = null
-
-    /**
-     * 判断与输入的url是否匹配
-     * @param url 字符串（String）
-     * @return {Promise} resolve表明匹配成功，reject表明匹配失败
-     */
-    match(url) {
-        return new Promise((resolve, reject) => {
-            for (let it of this._list) {
-                if (it.match(url)) {
-                    resolve()
-                    return
-                }
-            }
-            reject()
         })
     }
 
@@ -294,11 +267,11 @@ class CacheChangeExpression {
         const value = json['value']
         const checkCache = url => {
             const cache = findCache(url)
-            return cache || cache.clean
+            return !cache || cache.clean
         }
         switch (json['flag']) {
             case 'all':
-                this.match = url => checkCache(url) && url !== VERSION_PATH
+                this.match = checkCache
                 break
             case 'post':
                 this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')

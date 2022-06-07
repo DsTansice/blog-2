@@ -127,9 +127,9 @@ function kmarTask() {
             const data = event.data
             switch (data.type) {
                 case 'update':
-                    if (data.old !== data.version) {
+                    if (data.old !== data.version.local) {
                         localStorage.setItem('update', new Date().toLocaleString())
-                        localStorage.setItem('version', data.version)
+                        localStorage.setItem('version', `${data.version.global}.${data.version.local}`)
                     }
                     if (data.update) {
                         kmarUtils.popClickClockWin('当前页面已更新，刷新页面以显示', 'fa fa-refresh fa-spin',
