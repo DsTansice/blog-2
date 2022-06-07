@@ -12,7 +12,7 @@ tags:
 description: 修改了页面滚动条后，主题以及外部JS自带的隐藏滚动条来防止页面滚动的代码失效了，最终通过JS修复了这一问题。
 abbrlink: 6a968095
 date: 2022-05-19 00:01:35
-updated: 2022-06-02 18:34:30
+updated: 2022-06-07 22:04:30
 ---
 
 ## 问题描述
@@ -91,6 +91,37 @@ function recoverHtmlScrollBar() {
    }
 ```
 
+### 修复移动端侧边栏
+
+&emsp;&emsp;窄屏模式下打开侧边栏后仍然可以滚动页面，我们如何修复这一问题呢？
+
+&emsp;&emsp;很简单，打开`main.js`，修改一下内容：
+
+```diff
+    // sidebar menus
+    const sidebarFn = {
+      open: () => {
+        btf.sidebarPaddingR()
+-       document.body.style.overflow = 'hidden'
++       //document.body.style.overflow = 'hidden'
+        btf.animateIn(document.getElementById('menu-mask'), 'to_show 0.5s')
+        document.getElementById('sidebar-menus').classList.add('open')
++       recoverHtmlScrollBar()
+        mobileSidebarOpen = true
+      },
+      close: () => {
+        const $body = document.body
+-       $body.style.overflow = ''
++       //$body.style.overflow = ''
+        $body.style.paddingRight = ''
+        btf.animateOut(document.getElementById('menu-mask'), 'to_hide 0.5s')
+        document.getElementById('sidebar-menus').classList.remove('open')
++       recoverHtmlScrollBar()
+        mobileSidebarOpen = false
+      }
+    }
+```
+
 ### 修复灯箱
 
 &emsp;&emsp;但是对于灯箱就不太好办了，因为其JS是从CDN中获取的。现在就有两种方案，要么把JS下载下来保存在本地，要么附加JS进行修改。
@@ -117,8 +148,6 @@ function addFancyboxOpenMonitor() {
 ```
 
 &emsp;&emsp;下面，只需要在每次加载页面的时候调用这个函数即可。
-
-&emsp;&emsp;不过修复后灯箱仍然存在BUG，无法通过滚轮放大缩小图片，这个问题我还没有找到原因，知道的小伙伴可以在评论区分享一下。
 
 ---
 

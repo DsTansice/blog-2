@@ -2,9 +2,12 @@
   "global": 1,
   "info": [
     {
+      "version": "137",
+      "change": [{"flag": "html"}]
+    },
+    {
       "version": "136",
       "change": [
-        {"flag": "html"},
         {"flag": "file", "value": "zip.js"},
         {"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"}
       ]
