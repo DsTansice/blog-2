@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-06-06 18:59:25
+updated: 2022-06-07 19:02:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -164,9 +164,56 @@ self.addEventListener('fetch', event => {
 
 ### 缓存控制
 
-#### 老版实现
+&emsp;&emsp;通过sw实现本地缓存的思路非常简单，如果本地已经缓存了内容，那么客户端在发起网络请求的时候我们就不再通过网络下载，直接返回本地存储的内容即可；如果本地并没有缓存内容，那么就根据需求选择是否将指定内容缓存到本地。
 
-&emsp;&emsp;接下来就是我们今天的重点，缓存控制。看过我前面的文章的读者可能已经对我的缓存规则有了了解：
+&emsp;&emsp;下面是一个简单的例子：
+
+```javascript
+/**
+ * 缓存列表
+ * @param clean 清理全站时是否删除其缓存
+ * @param match 匹配规则
+ */
+const cacheList = {
+    simple: {
+        clean: true,
+        match: url => url.endsWith('/')
+    }
+}
+
+self.addEventListener('fetch', async event => {
+    const request = event.request
+    if (!findCache(request.url)) return
+    event.respondWith(caches.match(request).then(response => {
+        //如果缓存存在则直接返回缓存内容
+        if (response) return response
+        return fetchNoCache(request).then(response => {
+            //检查获取到的状态码
+            if ((response.status >= 200 && response.status < 400) || response.status === 0) {
+                const clone = response.clone()
+                caches.open(CACHE_NAME).then(cache => cache.put(request, clone))
+            }
+            return response
+        }).catch(err => console.error(`访问 ${request.url} 时出现错误：\n${err}`))
+    }))
+})
+
+/** 忽略浏览器HTTP缓存的请求指定request */
+const fetchNoCache = request => fetch(request, {cache: "no-store"})
+
+/** 判断指定url击中了哪一种缓存，都没有击中则返回null */
+function findCache(url) {
+    for (let key in cacheList) {
+        const value = cacheList[key]
+        if (value.match(url)) return value
+    }
+    return null
+}
+```
+
+## 老版实现
+
+&emsp;&emsp;接下来就是我们今天的重点——本人的SW实现。看过我前面的文章的读者可能已经对我的缓存规则有了了解：
 
 1. 每个缓存有固定的存活时间
 2. 缓存过期后再次发送请求时会尝试通过网络请求获取新内容，如果超过指定时间没有下载完毕就先返回缓存内容，后台继续下载，下载完毕后替换缓存
@@ -349,7 +396,9 @@ self.addEventListener('fetch', async event => {
 })
 ```
 
-#### 新版实现
+---
+
+## 新版实现
 
 &emsp;&emsp;那么我们新版的方案换成了什么呢？
 
@@ -382,7 +431,7 @@ self.addEventListener('fetch', async event => {
 /** 缓存库名称 */
 const CACHE_NAME = 'kmarBlogCache'
 /** 版本名称存储地址（必须以`/`结尾） */
-const VERSION_PATH = 'https://version.id/'
+const VERSION_PATH = 'https://id.v2/'
 
 self.addEventListener('install', () => self.skipWaiting())
 
@@ -446,7 +495,9 @@ self.addEventListener('message', event => {
             })
             break
         case 'refresh':
-            deleteCache(VersionList.empty()).then(() => event.source.postMessage({type: 'refresh'}))
+            const list = new VersionList()
+            list.push(new CacheChangeExpression({'flag': 'all'}))
+            deleteCache(list).then(() => event.source.postMessage({type: 'refresh'}))
             break
     }
 })
@@ -498,9 +549,13 @@ function updateJson(page) {
      */
     const parseChange = (list, elements, version) => {
         for (let element of elements) {
-            const value = VersionElement.valueOf(element)
-            if (value.version === version) return false
-            list.push(value)
+            const ver = element['version']
+            if (ver === version) return false
+            const jsonList = element['change']
+            if (jsonList) {
+                for (let it of jsonList)
+                    list.push(new CacheChangeExpression(it))
+            }
         }
         //读取了已存在的所有版本信息依然没有找到客户端当前的版本号
         //说明跨版本幅度过大，直接清理全站
@@ -528,14 +583,21 @@ function updateJson(page) {
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            //如果没有版本信息或是新用户则不进行任何更新操作
-            if (elementList.length === 0 || !version) return reject()
-            const refresh = parseChange(list, elementList, version)
-            const newVersion = elementList[0].version
-            dbVersion.write(newVersion)
+            const global = json['global']
+            const newVersion = {global: global, local: elementList[0].version}
+            dbVersion.write(`${global}-${newVersion.local}`)
+            //新用户不进行更新操作
+            if (!version) return reject()
+            const oldVersion = version.split('-')
+            const refresh = parseChange(list, elementList, oldVersion[1])
             //如果需要清理全站
-            if (refresh) list.push(new CacheChangeExpression({'flag': 'all'}))
-            resolve({list: list, version: newVersion, old: version})
+            if (refresh) {
+                if (global === oldVersion[0]) {
+                    list._list.length = 0
+                    list.push(new CacheChangeExpression({'flag': 'all'}))
+                } else list.refresh = true
+            }
+            resolve({list: list, version: newVersion, old: oldVersion[1]})
         })
     })
     const url = `/update.json` //需要修改JSON地址的在这里改
@@ -544,10 +606,11 @@ function updateJson(page) {
             const json = JSON.parse(text)
             parseJson(json).then(result => {
                 deleteCache(result.list, page).then(update => resolve({
-                    update: update,
-                    version: result.version,
-                    old: result.old
-                }))
+                        update: update,
+                        version: result.version,
+                        old: result.old
+                    })
+                )
             }).catch(() => {})
         }))
     )
@@ -558,12 +621,13 @@ function deleteCache(list, page = null) {
     return new Promise(resolve => {
         caches.open(CACHE_NAME).then(cache =>
             cache.keys().then(keys => Promise.any(keys.map(it => new Promise((resolve1, reject1) => {
+                    if (it.url === VERSION_PATH) return reject1()
                     list.match(it.url).then(result => {
                         if (result) {
                             cache.delete(it)
-                            if (it.url === page) resolve1()
-                            else reject1()
-                        } else reject1()
+                            if (it.url === page) return resolve1()
+                        }
+                        reject1()
                     }).catch(() => reject1())
                 }))).then(() => resolve(true)).catch(() => resolve(false))
             ))
@@ -574,6 +638,7 @@ function deleteCache(list, page = null) {
 class VersionList {
 
     _list = []
+    refresh = false
 
     push(element) {
         this._list.push(element)
@@ -585,54 +650,15 @@ class VersionList {
     }
 
     match(url) {
-        return new Promise((resolve) => {
-            Promise.any(this._list.map(it => it.match(url)))
+        const check = it => new Promise((resolve, reject) => {
+            if (it.match(url)) resolve()
+            else reject()
+        })
+        return new Promise(async resolve => {
+            if (this.refresh) resolve(true)
+            else Promise.any(this._list.map(it => check(it)))
                 .then(() => resolve(true))
                 .catch(() => resolve(false))
-        })
-    }
-
-}
-
-/**
- * 通过JSON构建一个版本信息
- * @constructor
- */
-class VersionElement {
-
-    /** 通过完整信息构建一个完整的元素 */
-    static valueOf(json) {
-        const result = new VersionElement()
-        result.version = json['version']
-        const jsonList = json['change']
-        if (jsonList) {
-            for (let it of jsonList) {
-                const value = new CacheChangeExpression(it)
-                result._list.push(value)
-            }
-        }
-        return result
-    }
-
-    /** 匹配规则列表 */
-    _list = []
-    /** 版本信息 */
-    version = null
-
-    /**
-     * 判断与输入的url是否匹配
-     * @param url 字符串（String）
-     * @return {Promise} resolve表明匹配成功，reject表明匹配失败
-     */
-    match(url) {
-        return new Promise((resolve, reject) => {
-            for (let it of this._list) {
-                if (it.match(url)) {
-                    resolve()
-                    return
-                }
-            }
-            reject()
         })
     }
 
@@ -651,11 +677,11 @@ class CacheChangeExpression {
         const value = json['value']
         const checkCache = url => {
             const cache = findCache(url)
-            return cache || cache.clean
+            return !cache || cache.clean
         }
         switch (json['flag']) {
             case 'all':
-                this.match = url => checkCache(url) && url !== VERSION_PATH
+                this.match = checkCache
                 break
             case 'post':
                 this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
@@ -666,9 +692,6 @@ class CacheChangeExpression {
             case 'file':
                 this.match = url => url.endsWith(value)
                 break
-            case 'reg':
-                this.match = url => url.match(new RegExp(value))
-                break
             default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
         }
     }
@@ -678,12 +701,42 @@ class CacheChangeExpression {
 
 &emsp;&emsp;代码中有多个`Promise`的`reject`用来传递结果以搭配`Promise.any`使用，我不清楚使用`reject`传递结果而非异常是否有性能损失，有知道的小伙伴可以在评论区说明一下。
 
-##### JSON格式
+### 版本更新过程
+
+&emsp;&emsp;当SW更新缓存时，会严格按照下列步骤进行：
+
+1. 获取JSON文件
+2. 读取JSON文件中的外部版本信息（`global`）
+3. 将JSON中的版本号与本地版本号对比，一致则跳过剩余步骤
+4. 解析`info`中的内容
+5. 根据解析结果删除缓存
+
+&emsp;&emsp;对于其中可能遇到的各种情况我们做了如下处理：
+
+#### 版本号对比
+
+&emsp;&emsp;如果本地版本号不存在，则视其为新用户，不进行任何操作，跳过剩余步骤
+
+#### 解析JSON错误
+
+&emsp;&emsp;如果解析JSON的过程中出现错误，则会停止解析并不进行任何操作
+
+#### 本地版本过期
+
+&emsp;&emsp;如果JSON的版本列表中没有包含本地版本对应的版本号，那么就视为本地版本过期（即和最新版本跨越版本数量过多）。
+
+&emsp;&emsp;本地版本过期时，会将本地存储的外部版本号与JSON中的外部版本号进行对比：
+
++ 如果一致，则清除所有标记`clean = true`的缓存
++ 如果不一致，则清除所有（除版本信息以外）缓存
+
+### JSON格式
 
 &emsp;&emsp;示例：
 
 ```json
 {
+  "global": 0,
   "info": [
     {
       "version": "任意不重复的字符串0",
@@ -711,12 +764,13 @@ class CacheChangeExpression {
 | `file` |   有   | 刷新名为`value`的文件缓存（需要带拓展名）                   |
 | `post` |   有   | 刷新abbrlink为`value`的博文及`search.xml`         |
 | `all`  |   无   | 刷新全部`clean = true`的缓存                      |
-| `reg`  |   有   | 刷新与输入的正则表达式想匹配的所有缓存（不需要带两边的`/`）            |
 
 {% p red center, 注意：<code>post</code>是给我的目录结构订制的，如果需要使用或想要订制自己的匹配规则，请修改SW中的<code>CacheChangeExpression</code> %}
 
-##### 注意事项：
+### 注意事项
 
++ `version`中不能包含`-`
++ 如果没有删除`clean = false`的缓存，就不要修改`global`
 + 同时存在于JSON的版本数量可以有无限个，但是请注意，过大的JSON会损耗性能，所以不要让同时存在的版本数量过多
 + SW在匹配JSON信息时采用顺序匹配，所以写在`info`里面的版本信息越靠上表明越新，第一个即最新的版本，最后一个为保存的最旧的版本
 + `change`列表中匹配规则的数量也没有上限，同样因为性能问题尽量合并一下同类项
@@ -724,7 +778,7 @@ class CacheChangeExpression {
 + 尽量不要重复利用`version`的字符串，避免出现意料之外的问题
 + 如果需要清除所有缓存，可以不使用`all`，把旧版本号全部删掉就可以了
 
-##### CDN缓存问题
+### CDN缓存问题
 
 &emsp;&emsp;如果你的网站接入了CDN并启用了缓存，请务必注意缓存问题，因为该方案要求当JSON在CDN缓存中更新时`change`中包含的文件同样更新，否则就会导致客户端拉取到旧的内容。
 
@@ -732,7 +786,7 @@ class CacheChangeExpression {
 
 &emsp;&emsp;各家CDN的情况可能不太一样，各位读者根据自己的情况选择处理方法即可。
 
-##### DOM端
+### DOM端
 
 &emsp;&emsp;可能已经有小伙伴迫不及待地把我的SW复制过去实操了，结果发现缓存更新并没有生效，这是因为没有在DOM中编写对应代码。
 

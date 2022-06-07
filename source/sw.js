@@ -54,7 +54,7 @@ const replaceList = {
 self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
-    if (findCache(request.url) !== null) {
+    if (findCache(request.url)) {
         event.respondWith(caches.match(request).then(response => {
             //如果缓存存在则直接返回缓存内容
             if (response) return response
@@ -175,17 +175,22 @@ function updateJson(page) {
         let list = new VersionList()
         dbVersion.read().then(version => {
             const elementList = json['info']
-            const global = json['version']
+            const global = json['global']
             const newVersion = {global: global, local: elementList[0].version}
-            dbVersion.write(`${global}-${newVersion.local}`)
             //新用户不进行更新操作
-            if (!version) return reject()
+            if (!version) {
+                dbVersion.write(`${global}-${newVersion.local}`)
+                return reject()
+            }
             const oldVersion = version.split('-')
             const refresh = parseChange(list, elementList, oldVersion[1])
+            dbVersion.write(`${global}-${newVersion.local}`)
             //如果需要清理全站
             if (refresh) {
-                if (global === oldVersion[0]) list.push(new CacheChangeExpression({'flag': 'all'}))
-                else list.refresh = true
+                if (global === oldVersion[0]) {
+                    list._list.length = 0
+                    list.push(new CacheChangeExpression({'flag': 'all'}))
+                } else list.refresh = true
             }
             resolve({list: list, version: newVersion, old: oldVersion[1]})
         })
