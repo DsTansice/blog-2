@@ -17,6 +17,7 @@ hexo.extend.generator.register('buildPostJson', async () => {
         resultJson.recent = []
         for (let post of sorted) {
             const info = {}
+            info.abbrlink = post.abbrlink.toString()
             info.title = post.title
             info.img = post.cover
             info.time = getTime(post)
@@ -27,8 +28,10 @@ hexo.extend.generator.register('buildPostJson', async () => {
     /** 构建相关推荐信息 */
     const buildRelatedJsonInfo = () => {
         if (!config.related_post.enable) return
-        resultJson.related = []
+        resultJson.related = {}
         const maxCount = config.related_post.limit
+        resultJson.related.count = maxCount
+        resultJson.related.list = {}
         const getTime = config.related_post.date_type === 'updated' ?
             post => post.updated ? post.updated : post.date : post => post.date
         const categories = hexo.locals.get('categories').data
@@ -56,28 +59,26 @@ hexo.extend.generator.register('buildPostJson', async () => {
         // 处理文章
         const handle = post => {
             const map = new Map()
-            const plusValue = abbrlink => {
-                if (map.has(abbrlink)) map.set(abbrlink, map.get(abbrlink) + 1)
-                else map.set(abbrlink, 1)
+            const plusValue = value => {
+                if (map.has(value)) map.set(value, map.get(value) + 1)
+                else map.set(value, 1)
             }
             for (let tag of post.tags.data) {
                 const list = getPostsByTags(tag)
-                for (let value of list) plusValue(value.abbrlink)
+                for (let value of list) plusValue(value)
             }
             for (let cat of post.categories.data) {
                 const list = getPostsByCategories(cat)
-                for (let value of list) plusValue(value.abbrlink)
+                for (let value of list) plusValue(value)
             }
             const result = []
-            map.forEach((value, key) => result.push({abbrlink: key, count: value}))
+            map.forEach((value, key) => result.push({post: key, count: value}))
             result.sort((a, b) => b.count - a.count)
             return result
         }
         for (let post of list) {
             const info = handle(post)
             const json = {}
-            json.abbrlink = post.abbrlink
-            json.time = getTime(post)
             json.list = []
             let amount = 0
             let preCount = -1
@@ -87,9 +88,15 @@ hexo.extend.generator.register('buildPostJson', async () => {
                     ++amount
                     preCount = value.count
                 }
-                json.list.push(value.abbrlink)
+                const info = {
+                    abbrlink: value.post.abbrlink.toString(),
+                    title: value.post.title,
+                    time: getTime(value.post),
+                    img: value.post.cover
+                }
+                json.list.push(info)
             }
-            resultJson.related.push(json)
+            resultJson.related.list[post.abbrlink] = json
         }
     }
 

@@ -1,3 +1,5 @@
+var jsonCache = null
+
 kmarTask()
 
 function kmarTask() {
@@ -236,9 +238,11 @@ function kmarTask() {
         sessionStorage.setItem('preload', id)
     }
 
-    function syncRecentPosts() {
-        function creater(abbrlink, title, img, date) {
-            return `<div class="aside-list-item">
+    function syncJsonInfo() {
+        /** 构建最新文章 */
+        function syncRecentPosts(json) {
+            function create(abbrlink, title, img, date) {
+                return `<div class="aside-list-item">
                         <a class="thumbnail" href="/posts/${abbrlink}/" 
                                 title="${title}" data-pjax-state="" one-link-mark="yes">
                             <img src="${img}" onerror="this.onerror=null;
@@ -255,18 +259,65 @@ function kmarTask() {
                             </time>
                         </div>
                     </div>`
+            }
+            const list = json['recent']
+            const div = document.getElementById('recent-list')
+            if (!div) return
+            for (let value of list) {
+                const html = create(value['abbrlink'], value['title'], value['img'], new Date(value['time']))
+                div.insertAdjacentHTML('beforeend', html)
+            }
         }
-        fetch('postsInfo.json').then(response => {
-            response.json().then(json => {
-                const list = json['recent']
-                const div = document.getElementById('aside-list')
-                for (let value of list) {
-                    const html = creater(value['abbrlink'], value['title'], value['img'], new Date(value['time']))
-                    console.log(html)
-                    div.insertAdjacentHTML('beforeend', html)
-                }
+
+        /** 构建相关文章 */
+        function syncRelatedPosts(json) {
+            function create(abbrlink, title, img, date) {
+                return `<div class="aside-list-item">
+                        <a class="thumbnail" href="/posts/${abbrlink}/" 
+                                title="${title}" data-pjax-state="">
+                            <img alt="${title}" class="entered loading" 
+                                src="${img}" data-ll-status="loading">
+                        </a>
+                        <div class="content">
+                            <a class="title" href="/posts/${abbrlink}/" 
+                                    title="${title}" data-pjax-state="">
+                                ${title}
+                            </a>
+                            <time title="发表于 ${date.toLocaleDateString()}">
+                                ${date.toLocaleDateString()}
+                            </time>
+                        </div>
+                    </div>`
+            }
+            const related = json['related']
+            const div = document.getElementById('related-list')
+            if (!div) return
+            const href = location.href.substring(0, location.href.length - 1)
+            const abbrlink = href.substring(href.lastIndexOf('/') + 1)
+            const count = related['count']
+            const list = related['list'][abbrlink]['list']
+            const end = list.length - count
+            const start = Math.round(Math.random() * end)
+            for (let i = 0; i !== count; ++i) {
+                const index = start + i
+                const info = list[index]
+                const html = create(info['abbrlink'], info['title'], info['img'], new Date(info['time']))
+                div.insertAdjacentHTML("beforeend", html)
+            }
+        }
+
+        if (!jsonCache) {
+            fetch(`/postsInfo.json`).then(response => {
+                response.json().then(json => {
+                    jsonCache = json
+                    syncRecentPosts(json)
+                    syncRelatedPosts(json)
+                })
             })
-        })
+        } else {
+            syncRecentPosts(jsonCache)
+            syncRelatedPosts(jsonCache)
+        }
     }
 
     function runTaskList(list) {
@@ -280,12 +331,12 @@ function kmarTask() {
     //仅执行一次的任务
     document.addEventListener('DOMContentLoaded', () => {
         btf.snackbarShow = (text, time = 3500) => kmarUtils.popClockWin(text, time)
-        const taskList = [hideRightSide, kmarSettings, swOperator, shareButton, syncRecentPosts]
+        const taskList = [hideRightSide, kmarSettings, swOperator, shareButton]
         runTaskList(taskList)
     })
 
     //每次加载页面都执行的操作
-    const taskList = [addScrollOperatorMonitor, removeFixedCardWidget, repairBangumis, preload]
+    const taskList = [addScrollOperatorMonitor, removeFixedCardWidget, repairBangumis, preload, syncJsonInfo]
     runTaskList(taskList)
 }
 

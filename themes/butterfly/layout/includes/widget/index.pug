@@ -16,6 +16,7 @@
           if theme.related_post && theme.related_post.enable
             != related_posts(page,site.posts)
         //!=partial('includes/widget/card_recent_post', {}, {cache: true})
+        !=partial('includes/widget/card-related-post', {}, {cache: true})
         !=partial('includes/widget/card_ad', {}, {cache: true})
   else
     //- page
@@ -33,7 +34,5 @@
         !=partial('includes/widget/card_categories', {}, {cache: true})
         !=partial('includes/widget/card_tags', {}, {cache: true})
         !=partial('includes/widget/card_archives', {}, {cache: true})
-        !=partial('includes/widget/card_webinfo', {}, {cache: true})
         !=partial('includes/widget/card_bottom_self', {}, {cache: true})
-      else
-        !=partial('includes/widget/card_webinfo', {}, {cache: true})
+      !=partial('includes/widget/card_webinfo', {}, {cache: true})

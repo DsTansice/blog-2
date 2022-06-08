@@ -7,6 +7,7 @@
 'use strict'
 
 hexo.extend.helper.register('related_posts', function (currentPost, allPosts) {
+  return ''
   let relatedPosts = []
   currentPost.tags.forEach(function (tag) {
     allPosts.forEach(function (post) {
