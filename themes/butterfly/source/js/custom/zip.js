@@ -236,6 +236,39 @@ function kmarTask() {
         sessionStorage.setItem('preload', id)
     }
 
+    function syncRecentPosts() {
+        function creater(abbrlink, title, img, date) {
+            return `<div class="aside-list-item">
+                        <a class="thumbnail" href="/posts/${abbrlink}/" 
+                                title="${title}" data-pjax-state="" one-link-mark="yes">
+                            <img src="${img}" onerror="this.onerror=null;
+                                this.src='/img/404.jpg'" alt="${title}" 
+                                data-ll-status="loaded" class="entered loaded">
+                        </a>
+                        <div class="content">
+                            <a class="title" href="/posts/${abbrlink}/" title="${title}" 
+                                    data-pjax-state="" one-link-mark="yes">
+                                ${title}
+                            </a>
+                            <time title="更新于 ${date.toLocaleString()}">
+                                ${date.toLocaleDateString()}
+                            </time>
+                        </div>
+                    </div>`
+        }
+        fetch('postsInfo.json').then(response => {
+            response.json().then(json => {
+                const list = json['recent']
+                const div = document.getElementById('aside-list')
+                for (let value of list) {
+                    const html = creater(value['abbrlink'], value['title'], value['img'], new Date(value['time']))
+                    console.log(html)
+                    div.insertAdjacentHTML('beforeend', html)
+                }
+            })
+        })
+    }
+
     function runTaskList(list) {
         // noinspection JSIgnoredPromiseFromCall
         Promise.all(list.map(it => new Promise(resolve => {
@@ -247,7 +280,7 @@ function kmarTask() {
     //仅执行一次的任务
     document.addEventListener('DOMContentLoaded', () => {
         btf.snackbarShow = (text, time = 3500) => kmarUtils.popClockWin(text, time)
-        const taskList = [hideRightSide, kmarSettings, swOperator, shareButton]
+        const taskList = [hideRightSide, kmarSettings, swOperator, shareButton, syncRecentPosts]
         runTaskList(taskList)
     })
 
