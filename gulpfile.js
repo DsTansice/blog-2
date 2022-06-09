@@ -14,16 +14,16 @@ gulp.task('compress', () =>
         .pipe(gulp.dest('./public'))
 )
 //压缩css
-gulp.task('minify-css', () => {
-    return gulp.src(['./public/**/*.css'])
+gulp.task('minify-css', () =>
+    gulp.src(['./public/**/*.css'])
         .pipe(cssnano({
             mergeIdents: false,
             reduceIdents: false
         })).pipe(gulp.dest('./public'))
-})
+)
 //压缩html
-gulp.task('minify-html', () => {
-    return gulp.src('./public/**/*.html')
+gulp.task('minify-html', () =>
+    gulp.src('./public/**/*.html')
         .pipe(htmlClean())
         .pipe(htmlMin({
             removeComments: true, //清除html注释
@@ -45,22 +45,22 @@ gulp.task('minify-html', () => {
             minifyURLs: true  //压缩页面URL
         }))
         .pipe(gulp.dest('./public'))
-})
+)
 
 //压缩json
-gulp.task('min-json', () => {
-    return gulp.src('./src/**/*.json')
+gulp.task('min-json', () =>
+    gulp.src('./src/**/*.json')
         .pipe(jsonMin())
         .pipe(gulp.dest('./dist'))
-});
+)
 
 //替换CDN
-gulp.task('cdn', () => {
+gulp.task('cdn', () =>
     gulp.src('./public/**/*.*')
         .pipe(replace('https://cdn.jsdelivr.net/npm', 'https://npm.elemecdn.com'))
         .pipe(replace('https://cdn.jsdelivr.net/gh', 'https://cdn1.tianli0.top/gh'))
         .pipe(gulp.dest('./public/')), {overwrite: true}
-})
+)
 
 //压缩
 gulp.task("zip", gulp.parallel('compress', 'minify-css', 'minify-html', 'min-json'))
