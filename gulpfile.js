@@ -1,6 +1,5 @@
 const gulp = require("gulp")
 //用到的各个插件
-//const cleanCSS = require('gulp-clean-css')
 const htmlMin = require('gulp-html-minifier-terser')
 const htmlClean = require('gulp-htmlclean')
 const replace = require('gulp-replace')
@@ -18,12 +17,9 @@ gulp.task('compress', () =>
 gulp.task('minify-css', () => {
     return gulp.src(['./public/**/*.css'])
         .pipe(cssnano({
-            preset: 'default',
-            zIndex: true
+            mergeIdents: false,
+            reduceIdents: false
         })).pipe(gulp.dest('./public'))
-    /*return gulp.src(['./public/!**!/!*.css'])
-        .pipe(cleanCSS({level: 1}))
-        .pipe(gulp.dest('./public'))*/
 })
 //压缩html
 gulp.task('minify-html', () => {
