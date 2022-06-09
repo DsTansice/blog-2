@@ -2,11 +2,10 @@
   "global": 2,
   "info": [
     {
-      "version": "143",
-      "change": [
-        {"flag": "type", "value": "css"}
-      ]
+      "version": "144",
+      "change": [{"flag": "type", "value": "css"}]
     },
+    {"version": "143"},
     {
       "version": "142",
       "change": [
@@ -24,15 +23,6 @@
       ]
     },
     {"version": "140"},
-    {"version": "139"},
-    {
-      "version": "138",
-      "change": [{"flag": "html"}]
-    },
-    {"version": "137"},
-    {
-      "version": "136",
-      "change": [{"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"}]
-    }
+    {"version": "139"}
   ]
 }

@@ -19,7 +19,8 @@ gulp.task('minify-css', () =>
         .pipe(cssnano({
             mergeIdents: false,
             reduceIdents: false,
-            discardUnused: false
+            discardUnused: false,
+            zIndex: false
         })).pipe(gulp.dest('./public'))
 )
 //压缩html
