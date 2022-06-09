@@ -61,22 +61,26 @@ hexo.extend.generator.register('buildPostJson', async () => {
         }
         // 获取指定标签的文章列表
         const getPostsByTags = tag => {
-            const result = new Set()
-            for (let value of findObj(tags, tag.name)) result.add(value)
+            const result = []
+            for (let value of findObj(tags, tag.name)) result.push(value)
             return result
         }
         // 获取指定分类的文章列表
         const getPostsByCategories = cat => {
-            const result = new Set()
-            for (let value of findObj(categories, cat.name)) result.add(value)
+            const result = []
+            for (let value of findObj(categories, cat.name)) result.push(value)
             return result
         }
-        // 处理文章
+        /**
+         * 获取和指定文章相关的文章列表，根据有关程度从大到小排序
+         * @param post
+         * @return {[{post, value}]} 其中value是有关程度，post是文章对象
+         */
         const handle = post => {
             const map = new Map()
-            const plusValue = (value, plus = 1) => {
-                if (map.has(value)) map.set(value, map.get(value) + plus)
-                else map.set(value, plus)
+            const plusValue = (post, plus = 1) => {
+                if (map.has(post)) map.set(post, map.get(post) + plus)
+                else map.set(post, plus)
             }
             for (let tag of post.tags.data) {
                 const list = getPostsByTags(tag)
@@ -87,8 +91,8 @@ hexo.extend.generator.register('buildPostJson', async () => {
                 for (let value of list) plusValue(value, 2)
             }
             const result = []
-            map.forEach((value, key) => result.push({post: key, count: value}))
-            result.sort((a, b) => b.count - a.count)
+            map.forEach((value, key) => result.push({post: key, value: value}))
+            result.sort((a, b) => b.value - a.value)
             return result
         }
 
@@ -99,6 +103,13 @@ hexo.extend.generator.register('buildPostJson', async () => {
                 if (value.post.abbrlink === post.abbrlink) continue
                 if (json.length === maxCount) break
                 json.push(value.post.abbrlink.toString())
+            }
+            //如果相关推荐数量不够就随机推一些文章上去
+            for (; json.length !== maxCount;) {
+                const index = Math.floor(Math.random() * list.length)
+                const abbrlink = list[index].abbrlink.toString()
+                if (abbrlink === post.abbrlink.toString() || json.indexOf(abbrlink) > -1) continue
+                json.push(abbrlink)
             }
             resultJson.related.list[post.abbrlink] = json
         }
