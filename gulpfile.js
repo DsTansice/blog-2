@@ -1,11 +1,12 @@
 const gulp = require("gulp")
 //用到的各个插件
-const cleanCSS = require('gulp-clean-css')
+//const cleanCSS = require('gulp-clean-css')
 const htmlMin = require('gulp-html-minifier-terser')
 const htmlClean = require('gulp-htmlclean')
 const replace = require('gulp-replace')
 const terser = require('gulp-terser')
 const jsonMin = require('gulp-jsonmin')
+const cssnano = require('gulp-cssnano')
 
 // 压缩js
 gulp.task('compress', () =>
@@ -16,8 +17,13 @@ gulp.task('compress', () =>
 //压缩css
 gulp.task('minify-css', () => {
     return gulp.src(['./public/**/*.css'])
+        .pipe(cssnano({
+            preset: 'default',
+            zIndex: true
+        })).pipe(gulp.dest('./public'))
+    /*return gulp.src(['./public/!**!/!*.css'])
         .pipe(cleanCSS({level: 1}))
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./public'))*/
 })
 //压缩html
 gulp.task('minify-html', () => {
@@ -55,7 +61,6 @@ gulp.task('min-json', async () => {
 //替换CDN
 gulp.task('cdn', async () => {
     gulp.src('./public/**/*.*')
-        .pipe(replace('https://unpkg.zhimg.com', 'https://npm.elemecdn.com'))
         .pipe(replace('https://cdn.jsdelivr.net/npm', 'https://npm.elemecdn.com'))
         .pipe(replace('https://cdn.jsdelivr.net/gh', 'https://cdn1.tianli0.top/gh'))
         .pipe(gulp.dest('./public/')), {overwrite: true}
