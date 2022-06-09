@@ -2,6 +2,12 @@
   "global": 2,
   "info": [
     {
+      "version": "143",
+      "change": [
+        {"flag": "type", "value": "css"}
+      ]
+    },
+    {
       "version": "142",
       "change": [
         {"flag": "post", "value": "3bc89eb"},
