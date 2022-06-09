@@ -1,5 +1,3 @@
-var jsonCache = null
-
 kmarTask()
 
 function kmarTask() {
@@ -239,6 +237,8 @@ function kmarTask() {
     }
 
     function syncJsonInfo() {
+        /** 读取某一个文章的信息 */
+        const readAbbrlink = (json, abbrlink) => json['info'][abbrlink]
         /** 构建最新文章 */
         function syncRecentPosts(json) {
             function create(abbrlink, title, img, date) {
@@ -263,8 +263,10 @@ function kmarTask() {
             const list = json['recent']
             const div = document.getElementById('recent-list')
             if (!div) return
-            for (let value of list) {
-                const html = create(value['abbrlink'], value['title'], value['img'], new Date(value['time']))
+            for (let abbrlink of list) {
+                const info = readAbbrlink(json, abbrlink)
+                const html = create(abbrlink, info['title'], info['img'],
+                                    new Date(info['sort'] ? info['sort'] : info['time']))
                 div.insertAdjacentHTML('beforeend', html)
             }
         }
@@ -295,28 +297,28 @@ function kmarTask() {
             const href = location.href.substring(0, location.href.length - 1)
             const abbrlink = href.substring(href.lastIndexOf('/') + 1)
             const count = related['count']
-            const list = related['list'][abbrlink]['list']
-            const end = list.length - count
-            const start = Math.round(Math.random() * end)
-            for (let i = 0; i !== count; ++i) {
-                const index = start + i
-                const info = list[index]
-                const html = create(info['abbrlink'], info['title'], info['img'], new Date(info['time']))
+            const list = related['list'][abbrlink]
+            for (let i = 0; i !== count && i !== list.length; ++i) {
+                const info = readAbbrlink(json, list[i])
+                const html = create(list[i], info['title'], info['img'],
+                                    new Date(info['date'] ? info['date'] : info['time']))
                 div.insertAdjacentHTML("beforeend", html)
             }
         }
 
-        if (!jsonCache) {
+        const jsonCache = sessionStorage.getItem('postsInfo')
+        if (jsonCache) {
+            const json = JSON.parse(jsonCache)
+            syncRecentPosts(json)
+            syncRelatedPosts(json)
+        } else {
             fetch(`/postsInfo.json`).then(response => {
                 response.json().then(json => {
-                    jsonCache = json
+                    sessionStorage.setItem('postsInfo', JSON.stringify(json))
                     syncRecentPosts(json)
                     syncRelatedPosts(json)
                 })
             })
-        } else {
-            syncRecentPosts(jsonCache)
-            syncRelatedPosts(jsonCache)
         }
     }
 

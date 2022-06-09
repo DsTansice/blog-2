@@ -8,9 +8,7 @@
         {"flag": "file", "value": "zip.js"}
       ]
     },
-    {
-      "version": "137"
-    },
+    {"version": "137"},
     {
       "version": "136",
       "change": [{"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"}]
