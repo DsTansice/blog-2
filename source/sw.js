@@ -16,13 +16,13 @@ const cacheList = {
     static: {
         clean: false,
         match: url => url.endsWith('jinrishici.js') || url.endsWith('.cur') ||
-                    url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g)
+                    (url.match(/^(https:\/\/npm\.elemecdn\.com).*@\d.*/g) && !url.match(/\.(png|jpg)$/g))
     }, html: {
         clean: true,
         match: url => {
             if (!url.match('kmar.top')) return false
             return url.endsWith('/') || url.endsWith('kmar.top') ||
-                url.match('kmar.top/page/') || url.endsWith('search.xml')
+                url.match('kmar.top/page/') || url.endsWith('search.xml') || url.endsWith('postsInfo.json')
         }
     }, resource: {
         clean: true,
@@ -279,7 +279,8 @@ class CacheChangeExpression {
                 this.match = checkCache
                 break
             case 'post':
-                this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
+                this.match = url => url.match(`posts/${value}`) ||
+                    url.endsWith('search.xml') || url.endsWith('postsInfo.json')
                 break
             case 'type':
                 this.match = url => url.endsWith(`.${value}`) && checkCache(url)
