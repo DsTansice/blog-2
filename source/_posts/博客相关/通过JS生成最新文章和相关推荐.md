@@ -14,6 +14,15 @@ abbrlink: 4cde9f86
 date: 2022-06-09 15:33:21
 ---
 
+{% timeline 更新日志,blue %}
+
+<!-- timeline 2022/06/09 -->
+1. 修复文章自我推荐的问题
+2. 相关推荐列表数量不够时随机选取文章填充
+<!-- endtimeline -->
+
+{% endtimeline %}
+
 ## 魔改思路
 
 &emsp;&emsp;默认的最新文章和相关推荐的生成方式是在构建博客时直接写入到`html`文件中，而我的 [SW缓存策略](https://kmar.top/posts/bcfe8408/#新版实现) 就导致更新博文时也要刷新全部或部分`html`缓存，以此更新最新文章和相关推荐列表（下文简称“列表”）。
@@ -178,22 +187,26 @@ hexo.extend.generator.register('buildPostJson', async () => {
         }
         // 获取指定标签的文章列表
         const getPostsByTags = tag => {
-            const result = new Set()
-            for (let value of findObj(tags, tag.name)) result.add(value)
+            const result = []
+            for (let value of findObj(tags, tag.name)) result.push(value)
             return result
         }
         // 获取指定分类的文章列表
         const getPostsByCategories = cat => {
-            const result = new Set()
-            for (let value of findObj(categories, cat.name)) result.add(value)
+            const result = []
+            for (let value of findObj(categories, cat.name)) result.push(value)
             return result
         }
-        // 处理文章
+        /**
+         * 获取和指定文章相关的文章列表，根据有关程度从大到小排序
+         * @param post
+         * @return {[{post, value}]} 其中value是有关程度，post是文章对象
+         */
         const handle = post => {
             const map = new Map()
-            const plusValue = (value, plus = 1) => {
-                if (map.has(value)) map.set(value, map.get(value) + plus)
-                else map.set(value, plus)
+            const plusValue = (post, plus = 1) => {
+                if (map.has(post)) map.set(post, map.get(post) + plus)
+                else map.set(post, plus)
             }
             for (let tag of post.tags.data) {
                 const list = getPostsByTags(tag)
@@ -204,8 +217,8 @@ hexo.extend.generator.register('buildPostJson', async () => {
                 for (let value of list) plusValue(value, 2)
             }
             const result = []
-            map.forEach((value, key) => result.push({post: key, count: value}))
-            result.sort((a, b) => b.count - a.count)
+            map.forEach((value, key) => result.push({post: key, value: value}))
+            result.sort((a, b) => b.value - a.value)
             return result
         }
 
@@ -213,8 +226,16 @@ hexo.extend.generator.register('buildPostJson', async () => {
             const info = handle(post)
             const json = []
             for (let value of info) {
+                if (value.post.abbrlink === post.abbrlink) continue
                 if (json.length === maxCount) break
                 json.push(value.post.abbrlink.toString())
+            }
+            //如果相关推荐数量不够就随机推一些文章上去
+            for (; json.length !== maxCount;) {
+                const index = Math.floor(Math.random() * list.length)
+                const abbrlink = list[index].abbrlink.toString()
+                if (abbrlink === post.abbrlink.toString() || json.indexOf(abbrlink) > -1) continue
+                json.push(abbrlink)
             }
             resultJson.related.list[post.abbrlink] = json
         }
@@ -247,28 +268,11 @@ function syncJsonInfo() {
     function readAbbrlink(json, abbrlink) {
         return json['info'][abbrlink]
     }
-
     /** 构建最新文章 */
     function syncRecentPosts(json) {
         function create(abbrlink, title, img, date) {
-            return `<div class="aside-list-item">
-                        <a class="thumbnail" href="/posts/${abbrlink}/" 
-                                title="${title}" data-pjax-state="" one-link-mark="yes">
-                            <img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" 
-                                alt="${title}" data-ll-status="loaded" class="entered loaded">
-                        </a>
-                        <div class="content">
-                            <a class="title" href="/posts/${abbrlink}/" title="${title}" 
-                                    data-pjax-state="" one-link-mark="yes">
-                                ${title}
-                            </a>
-                            <time title="更新于 ${date.toLocaleString()}">
-                                ${date.toLocaleDateString()}
-                            </time>
-                        </div>
-                    </div>`
+            return `<div class="aside-list-item">\<a class="thumbnail" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes"><img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="${title}" data-ll-status="loaded" class="entered loaded"></a><div class="content"><a class="title" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes">${title}</a><time title="更新于 ${date.toLocaleString()}">${date.toLocaleDateString()}</time></div></div>`
         }
-
         const list = json['recent']
         const div = document.getElementById('recent-list')
         if (!div) return
@@ -279,28 +283,11 @@ function syncJsonInfo() {
             div.insertAdjacentHTML('beforeend', html)
         }
     }
-
     /** 构建相关文章 */
     function syncRelatedPosts(json) {
         function create(abbrlink, title, img, date) {
-            return `<div class="aside-list-item">
-                        <a class="thumbnail" href="/posts/${abbrlink}/" 
-                                title="${title}" data-pjax-state="">
-                            <img alt="${title}" class="entered loading" 
-                                src="${img}" data-ll-status="loading">
-                        </a>
-                        <div class="content">
-                            <a class="title" href="/posts/${abbrlink}/" 
-                                    title="${title}" data-pjax-state="">
-                                ${title}
-                            </a>
-                            <time title="发表于 ${date.toLocaleDateString()}">
-                                ${date.toLocaleDateString()}
-                            </time>
-                        </div>
-                    </div>`
+            return `<div class="aside-list-item"><a class="thumbnail" href="/posts/${abbrlink}/" title="${title}" data-pjax-state=""><img alt="${title}" class="entered loading" src="${img}" data-ll-status="loading"></a><div class="content"><a class="title" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="">${title}</a><time title="发表于 ${date.toLocaleDateString()}">${date.toLocaleDateString()}</time></div></div>`
         }
-
         const related = json['related']
         const div = document.getElementById('related-list')
         if (!div) return
@@ -314,7 +301,7 @@ function syncJsonInfo() {
             div.insertAdjacentHTML("beforeend", html)
         }
     }
-    
+
     const jsonCache = sessionStorage.getItem('postsInfo')
     if (jsonCache) {
         const json = JSON.parse(jsonCache)

@@ -93,6 +93,7 @@ function kmarTask() {
         })
         document.getElementById('quit-mask').onclick = closeToolsWin
         document.getElementById('settings-button-close').onclick = closeToolsWin
+        document.getElementById('setting-button').addEventListener('click', () => closeToolsWin())
         document.getElementById('rightside').addEventListener('click', event => {
             const element = event.target.id ? event.target : event.target.parentNode
             if (element.id === 'rightside_config') openToolsWin()
@@ -256,7 +257,6 @@ function kmarTask() {
                 div.insertAdjacentHTML('beforeend', html)
             }
         }
-
         /** 构建相关文章 */
         function syncRelatedPosts(json) {
             function create(abbrlink, title, img, date) {

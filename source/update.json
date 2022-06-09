@@ -2,11 +2,18 @@
   "global": 2,
   "info": [
     {
+      "version": "142",
+      "change": [
+        {"flag": "post", "value": "3bc89eb"},
+        {"flag": "post", "value": "4cde9f86"},
+        {"flag": "file", "value": "zip.js"}
+      ]
+    },
+    {
       "version": "141",
       "change": [
         {"flag": "file", "value": "/link/"},
         {"flag": "reg", "value": "^(https:\\/\\/npm\\.elemecdn\\.com).*@\\d.*\\.(png|jpg)$"},
-        {"flag": "file", "value": "zip.js"},
         {"flag": "new"}
       ]
     },
