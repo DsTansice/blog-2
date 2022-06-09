@@ -2,7 +2,7 @@
   "global": 2,
   "info": [
     {
-      "version": "140",
+      "version": "141",
       "change": [
         {"flag": "file", "value": "/link/"},
         {"flag": "reg", "value": "^(https:\\/\\/npm\\.elemecdn\\.com).*@\\d.*\\.(png|jpg)$"},
@@ -10,6 +10,7 @@
         {"flag": "new"}
       ]
     },
+    {"version": "140"},
     {"version": "139"},
     {
       "version": "138",

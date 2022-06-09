@@ -295,7 +295,7 @@ class CacheChangeExpression {
             case 'new':
                 this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top)$/) || url.match('/page/')
                 break
-            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
+            default: throw `不支持的表达式：{flag=${json['flag']}, value=${value}}`
         }
     }
 
