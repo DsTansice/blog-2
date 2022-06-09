@@ -2,10 +2,16 @@
   "global": 1,
   "info": [
     {
+      "version": "139",
+      "change": [
+        {"flag": "file", "value": "zip.js"},
+        {"flag": "file", "value": "postsInfo.json"}
+      ]
+    },
+    {
       "version": "138",
       "change": [
-        {"flag": "html"},
-        {"flag": "file", "value": "zip.js"}
+        {"flag": "html"}
       ]
     },
     {"version": "137"},
