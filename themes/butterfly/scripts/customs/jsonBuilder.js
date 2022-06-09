@@ -49,7 +49,6 @@ hexo.extend.generator.register('buildPostJson', async () => {
         if (!config.related_post.enable) return
         resultJson.related = {}
         const maxCount = config.related_post.limit
-        resultJson.related.count = maxCount
         resultJson.related.list = {}
         const categories = hexo.locals.get('categories').data
         const tags = hexo.locals.get('tags').data
@@ -72,7 +71,6 @@ hexo.extend.generator.register('buildPostJson', async () => {
             for (let value of findObj(categories, cat.name)) result.add(value)
             return result
         }
-
         // 处理文章
         const handle = post => {
             const map = new Map()
@@ -93,6 +91,7 @@ hexo.extend.generator.register('buildPostJson', async () => {
             result.sort((a, b) => b.count - a.count)
             return result
         }
+
         for (let post of list) {
             const info = handle(post)
             const json = []
@@ -109,7 +108,7 @@ hexo.extend.generator.register('buildPostJson', async () => {
         it()
         resolve()
     })))
-    logger.info('文章JSON构建成功')
+    logger.info(`文章JSON构建成功(${list.length})`)
     return {
         path: 'postsInfo.json',
         data: JSON.stringify(resultJson)

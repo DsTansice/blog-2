@@ -1,38 +1,24 @@
 {
-  "global": 1,
+  "global": 2,
   "info": [
     {
       "version": "140",
       "change": [
-        {"flag": "file", "value": "/link/"}
-      ]
-    },
-    {
-      "version": "139",
-      "change": [
+        {"flag": "file", "value": "/link/"},
+        {"flag": "reg", "value": "^(https:\\/\\/npm\\.elemecdn\\.com).*@\\d.*\\.(png|jpg)$"},
         {"flag": "file", "value": "zip.js"},
-        {"flag": "file", "value": "postsInfo.json"}
+        {"flag": "new"}
       ]
     },
+    {"version": "139"},
     {
       "version": "138",
-      "change": [
-        {"flag": "html"}
-      ]
+      "change": [{"flag": "html"}]
     },
     {"version": "137"},
     {
       "version": "136",
       "change": [{"flag": "reg", "value": ".*kmar\\.top.*(font|footer)\\/.*"}]
-    },
-    {
-      "version": "135",
-      "change": [
-        {"flag": "file", "value": "index.css"},
-        {"flag": "file", "value": "main.js"}
-      ]
-    },
-    {"version": "134"},
-    {"version": "133"}
+    }
   ]
 }

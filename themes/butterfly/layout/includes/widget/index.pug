@@ -14,9 +14,9 @@
         if showToc
           include ./card_post_toc.pug
           if theme.related_post && theme.related_post.enable
-            != related_posts(page,site.posts)
+            !=partial('includes/widget/card-related-post', {}, {cache: true})
+            //!= related_posts(page,site.posts)
         //!=partial('includes/widget/card_recent_post', {}, {cache: true})
-        !=partial('includes/widget/card-related-post', {}, {cache: true})
         !=partial('includes/widget/card_ad', {}, {cache: true})
   else
     //- page

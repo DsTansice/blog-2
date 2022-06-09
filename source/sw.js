@@ -20,9 +20,8 @@ const cacheList = {
     }, html: {
         clean: true,
         match: url => {
-            if (!url.match('kmar.top')) return false
-            return url.endsWith('/') || url.endsWith('kmar.top') ||
-                url.match('kmar.top/page/') || url.endsWith('search.xml') || url.endsWith('postsInfo.json')
+            if (!url.match('/kmar.top')) return false
+            return url.match(/(\/|\.top|search\.xml|postsInfo\.json)$/) || url.match('/page/')
         }
     }, resource: {
         clean: true,
@@ -279,8 +278,7 @@ class CacheChangeExpression {
                 this.match = checkCache
                 break
             case 'post':
-                this.match = url => url.match(`posts/${value}`) ||
-                    url.endsWith('search.xml') || url.endsWith('postsInfo.json')
+                this.match = url => url.match(`posts/${value}`) || url.match(/\/(search\.xml|postsInfo\.json)$/)
                 break
             case 'type':
                 this.match = url => url.endsWith(`.${value}`) && checkCache(url)
@@ -293,6 +291,9 @@ class CacheChangeExpression {
                 break
             case 'reg':
                 this.match = url => url.match(new RegExp(value))
+                break
+            case 'new':
+                this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top)$/) || url.match('/page/')
                 break
             default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
         }

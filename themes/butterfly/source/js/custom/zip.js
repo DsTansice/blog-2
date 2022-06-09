@@ -238,16 +238,17 @@ function kmarTask() {
 
     function syncJsonInfo() {
         /** 读取某一个文章的信息 */
-        const readAbbrlink = (json, abbrlink) => json['info'][abbrlink]
+        function readAbbrlink(json, abbrlink) {
+            return json['info'][abbrlink]
+        }
         /** 构建最新文章 */
         function syncRecentPosts(json) {
             function create(abbrlink, title, img, date) {
                 return `<div class="aside-list-item">
                         <a class="thumbnail" href="/posts/${abbrlink}/" 
                                 title="${title}" data-pjax-state="" one-link-mark="yes">
-                            <img src="${img}" onerror="this.onerror=null;
-                                this.src='/img/404.jpg'" alt="${title}" 
-                                data-ll-status="loaded" class="entered loaded">
+                            <img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" 
+                                alt="${title}" data-ll-status="loaded" class="entered loaded">
                         </a>
                         <div class="content">
                             <a class="title" href="/posts/${abbrlink}/" title="${title}" 
@@ -296,9 +297,8 @@ function kmarTask() {
             if (!div) return
             const href = location.href.substring(0, location.href.length - 1)
             const abbrlink = href.substring(href.lastIndexOf('/') + 1)
-            const count = related['count']
             const list = related['list'][abbrlink]
-            for (let i = 0; i !== count && i !== list.length; ++i) {
+            for (let i = 0; i !== list.length; ++i) {
                 const info = readAbbrlink(json, list[i])
                 const html = create(list[i], info['title'], info['img'],
                                     new Date(info['date'] ? info['date'] : info['time']))

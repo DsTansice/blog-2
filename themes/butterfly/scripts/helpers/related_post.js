@@ -4,10 +4,10 @@
  * According the tag
  */
 
+/*
 'use strict'
 
 hexo.extend.helper.register('related_posts', function (currentPost, allPosts) {
-  return ''
   let relatedPosts = []
   currentPost.tags.forEach(function (tag) {
     allPosts.forEach(function (post) {
@@ -97,4 +97,4 @@ function compare (attr) {
     const val2 = b[attr]
     return val2 - val1
   }
-}
+}*/
