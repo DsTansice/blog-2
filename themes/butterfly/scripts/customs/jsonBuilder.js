@@ -96,6 +96,7 @@ hexo.extend.generator.register('buildPostJson', async () => {
             const info = handle(post)
             const json = []
             for (let value of info) {
+                if (value.post.abbrlink === post.abbrlink) continue
                 if (json.length === maxCount) break
                 json.push(value.post.abbrlink.toString())
             }

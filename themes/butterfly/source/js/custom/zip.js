@@ -244,22 +244,7 @@ function kmarTask() {
         /** 构建最新文章 */
         function syncRecentPosts(json) {
             function create(abbrlink, title, img, date) {
-                return `<div class="aside-list-item">
-                        <a class="thumbnail" href="/posts/${abbrlink}/" 
-                                title="${title}" data-pjax-state="" one-link-mark="yes">
-                            <img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" 
-                                alt="${title}" data-ll-status="loaded" class="entered loaded">
-                        </a>
-                        <div class="content">
-                            <a class="title" href="/posts/${abbrlink}/" title="${title}" 
-                                    data-pjax-state="" one-link-mark="yes">
-                                ${title}
-                            </a>
-                            <time title="更新于 ${date.toLocaleString()}">
-                                ${date.toLocaleDateString()}
-                            </time>
-                        </div>
-                    </div>`
+                return `<div class="aside-list-item">\<a class="thumbnail" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes"><img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="${title}" data-ll-status="loaded" class="entered loaded"></a><div class="content"><a class="title" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes">${title}</a><time title="更新于 ${date.toLocaleString()}">${date.toLocaleDateString()}</time></div></div>`
             }
             const list = json['recent']
             const div = document.getElementById('recent-list')
@@ -275,22 +260,7 @@ function kmarTask() {
         /** 构建相关文章 */
         function syncRelatedPosts(json) {
             function create(abbrlink, title, img, date) {
-                return `<div class="aside-list-item">
-                        <a class="thumbnail" href="/posts/${abbrlink}/" 
-                                title="${title}" data-pjax-state="">
-                            <img alt="${title}" class="entered loading" 
-                                src="${img}" data-ll-status="loading">
-                        </a>
-                        <div class="content">
-                            <a class="title" href="/posts/${abbrlink}/" 
-                                    title="${title}" data-pjax-state="">
-                                ${title}
-                            </a>
-                            <time title="发表于 ${date.toLocaleDateString()}">
-                                ${date.toLocaleDateString()}
-                            </time>
-                        </div>
-                    </div>`
+                return `<div class="aside-list-item"><a class="thumbnail" href="/posts/${abbrlink}/" title="${title}" data-pjax-state=""><img alt="${title}" class="entered loading" src="${img}" data-ll-status="loading"></a><div class="content"><a class="title" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="">${title}</a><time title="发表于 ${date.toLocaleDateString()}">${date.toLocaleDateString()}</time></div></div>`
             }
             const related = json['related']
             const div = document.getElementById('related-list')
