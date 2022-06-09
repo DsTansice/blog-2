@@ -52,14 +52,14 @@ gulp.task('minify-html', () => {
 })
 
 //压缩json
-gulp.task('min-json', async () => {
-    gulp.src('./src/**/*.json')
+gulp.task('min-json', () => {
+    return gulp.src('./src/**/*.json')
         .pipe(jsonMin())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist'))
 });
 
 //替换CDN
-gulp.task('cdn', async () => {
+gulp.task('cdn', () => {
     gulp.src('./public/**/*.*')
         .pipe(replace('https://cdn.jsdelivr.net/npm', 'https://npm.elemecdn.com'))
         .pipe(replace('https://cdn.jsdelivr.net/gh', 'https://cdn1.tianli0.top/gh'))
