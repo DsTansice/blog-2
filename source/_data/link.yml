@@ -6,13 +6,13 @@
       descr: 来探索我正在开发的项目吧~
     - name: Bilibili
       link: https://space.bilibili.com/66951474
-      avatar: https://image.kmar.top/links/bilibili.png!/max/200
+      avatar: https://npm.elemecdn.com/@kmar/fonts/avatar/bilibili.png
       descr: 探索我的视频~
 - class_name: 至尊阁
   link_list:
     - name: Akilar店长
       link: https://akilar.top/
-      avatar: https://akilar.top/img/siteicon/favicon.png
+      avatar: https://npm.elemecdn.com/akilar-candyassets/image/siteicon/favicon.png
       descr: 欢迎光临糖果屋
     - name: There,hello大大
       link: https://blog.therehello.top/
@@ -22,15 +22,16 @@
       link: https://www.ijinse.cn/
       avatar: https://www.ijinse.cn/logo.png
       descr: 锦瑟无端五十弦，一弦一柱思华年
-      siteshot: https://image.kmar.top/links/jinse.jpg!/fw/300
+      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/jinse.jpg
     - name: Tianli
       link: https://tianli-blog.club/
       avatar: https://img1.tianli0.top/logo.png
       descr: 惟其不可能，所以才相信。
     - name: 陈YF的博客
       link: https://blog.cyfan.top/
-      avatar: https://cdn.jsdelivr.net/npm/chenyfan-oss@3
+      avatar: https://npm.elemecdn.com/chenyfan-oss@3
       descr: 一个在互联网角落挣扎的小小博客，很小很小
+      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/cyfan.jpg
     - name: Gahotx
       link: https://gahotx.cn/
       avatar: https://pub.gahotx.cn/photo/cat.jpg
@@ -43,7 +44,7 @@
   link_list:
     - name: 探姬的小天地
       link: https://www.yuque.com/probius/
-      avatar: https://image.kmar.top/links/tj.png!/max/200
+      avatar: https://npm.elemecdn.com/@kmar/fonts/avatar/tj.png
       descr: 妄想全栈的fw探姬酱（
     - name: kaiboshi
       link: https://kaiboshi.gitee.io/
@@ -59,7 +60,7 @@
       descr: 干啥啥不行，干饭第一名
     - name: 花裱の博客
       link: https://dingzihang00.top
-      avatar: https://npm.elemecdn.com/ding-blogdemo@1.0.4/img/Favicon.png
+      avatar: https://npm.elemecdn.com/ding-blogdemo/img/Favicon.png
       descr: 为之则易，不为则难
       siteshot: https://npm.elemecdn.com/ding-blogdemo@1.0.2/img/siteImg.jpg
     - name: 贰猹的小窝
@@ -71,6 +72,15 @@
       link: https://www.chuckle.top
       avatar: https://www.chuckle.top/img/head.webp
       descr: 宁静致远,倾尘轻笑
+      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/chuckle.jpg
+    - name: 葱苓的小窝
+      link: https://www.ciraos.top/
+      avatar: https://www.ciraos.top/customized/avatar.webp
+      descr: DARE & DO
+    - name: Yuexin’s Blog
+      link: https://wyxogo.top/
+      avatar: https://wyxogo.top/images/avatar.webp
+      descr: KEEP WALKING
 - class_name: 待君归
   link_list:
     - name: Mark Blog
@@ -82,7 +92,3 @@
       link: https://blog.xinmouren.cn/
       avatar: https://info.xinmouren.cn/custom.gif
       descr: 嵌入式的日子真不好过！
-    - name: 葱苓的小窝
-      link: https://www.itciraos.cn/
-      avatar: https://www.itciraos.cn/customized/avatar.webp
-      descr: DARE & DO
