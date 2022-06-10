@@ -269,7 +269,7 @@ comments:
 # Twikoo
 # https://github.com/imaegoo/twikoo
 twikoo:
-  envId: https://twikoo-7dk9ndl08-emptydreams.vercel.app
+  envId: https://twikoo-c2zeg2al4-emptydreams.vercel.app
   region:
   visitor: true
   option:
@@ -839,7 +839,7 @@ CDN:
   disqusjs:
   disqusjs_css:
   utterances:
-  twikoo: https://cdn.jsdelivr.net/npm/twikoo@1.5.9/dist/twikoo.all.min.js
+  twikoo: https://cdn.jsdelivr.net/npm/twikoo@1.5.11/dist/twikoo.all.min.js
   waline:
   giscus:
 
