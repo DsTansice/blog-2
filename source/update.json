@@ -1,28 +1,6 @@
 {
-  "global": 2,
+  "global": 3,
   "info": [
-    {
-      "version": "144",
-      "change": [{"flag": "type", "value": "css"}]
-    },
-    {"version": "143"},
-    {
-      "version": "142",
-      "change": [
-        {"flag": "post", "value": "3bc89eb"},
-        {"flag": "post", "value": "4cde9f86"},
-        {"flag": "file", "value": "zip.js"}
-      ]
-    },
-    {
-      "version": "141",
-      "change": [
-        {"flag": "file", "value": "/link/"},
-        {"flag": "reg", "value": "^(https:\\/\\/npm\\.elemecdn\\.com).*@\\d.*\\.(png|jpg)$"},
-        {"flag": "new"}
-      ]
-    },
-    {"version": "140"},
-    {"version": "139"}
+    {"version": "145"}
   ]
 }
