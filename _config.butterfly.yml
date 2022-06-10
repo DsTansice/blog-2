@@ -775,7 +775,6 @@ inject:
   bottom:
     - <script defer data-pjax src="/js/custom/zip.js"></script>
     - <script async src="/js/custom/floatWin.js"></script>
-    - <script async src="/live2d-widget/autoload.js"></script>
 
 #侧栏悬浮卡片控制按钮
 #https://akilar.top/posts/451ac5f8/
