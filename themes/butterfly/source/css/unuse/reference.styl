@@ -4,7 +4,7 @@
   --referto-literature-background-color: #318efd
   --referto-title-background-color: #183153
   --referto-content-text-color: #f1f1ef
-  --referfrom-text-shadow: rgba(35,35,35,0.5)
+  --referfrom-text-shadow: rgba(35, 35, 35, 0.5)
   --referfrom-text-color: #f1f1ef
   --referfrom-text-hover-color: #f2b94b
   --referfrom-link-color: #403e3b
@@ -19,7 +19,7 @@
   --referto-literature-background-color: #5c6167
   --referto-title-background-color: #090a0b
   --referto-content-text-color: #f1f1ef
-  --referfrom-text-shadow: rgba(35,35,35,0.5)
+  --referfrom-text-shadow: rgba(35, 35, 35, 0.5)
   --referfrom-text-color: #f1f1ef
   --referfrom-text-hover-color: #f2b94b
   --referfrom-link-color: #f1f1ef
@@ -41,11 +41,13 @@
     color var(--referto-text-color) !important
     font-weight bold
     transition: all 0.2s ease-in-out
+
   &:hover
     a
       transition: all 0.2s ease-in-out
       text-decoration none !important
       color var(--referto-text-hover-color) !important
+
     & + .reference-bubble
       .reference-item
         transform translate(-40px, 10px) rotateX(0deg)
@@ -96,9 +98,9 @@
   box-shadow 1px 1px 1px var(--referfrom-text-shadow)
   border-radius 8px
   padding-right 10px
+
   pangu
     display: none
-
 
 
 a
@@ -111,14 +113,18 @@ a
     display inline-block
     width fit-content
     padding 0px 0px 0px 10px
+
     &:hover
       color var(--referfrom-text-hover-color) !important
       text-decoration none !important
+
       .reference-anchor-up
         color var(--referfrom-text-hover-color) !important
+
   &.reference-link
     color var(--referfrom-link-color) !important
     padding 0px 10px
+
     &:hover
       color var(--referfrom-link-hover-color) !important
       text-decoration none !important
@@ -132,4 +138,4 @@ a
   display inline-flex !important
   align-items center
   justify-content center
-  clip-path polygon(0 0,10px 50%,0 100%,100% 100%,100% 0)
+  clip-path polygon(0 0, 10px 50%, 0 100%, 100% 100%, 100% 0)

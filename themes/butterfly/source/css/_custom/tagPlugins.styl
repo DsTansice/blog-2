@@ -40,6 +40,29 @@
             background var(--km-tab-active) !important
             border-top 2px solid var(--km-tab-overline) !important
 
+  // 折叠框
+  details
+    &.folding-tag
+      border 0 solid #4c4c4c !important
+      background transparent !important
+
+      summary
+        border-radius 12px !important
+        transition .3s
+
+    &.folding-tag[open]
+      summary
+        border-bottom-right-radius unset !important
+        border-bottom-left-radius unset !important
+
+      & > div
+        &.content
+          background transparent !important
+          border 2px solid #e1e1e1
+          border-top unset
+          border-bottom-right-radius 25px
+          border-bottom-left-radius 25px
+
 [data-theme="dark"]
   #article-container
     a
@@ -55,20 +78,25 @@
           &.url
             color #d3d3d3 !important
 
-  // 折叠框
-  details
-    &.folding-tag
-      & > summary
-        background #3c3c3c
-        color #dadada
+    // 折叠框
+    details
+      &.folding-tag
+        & > summary
+          background #3c3c3c
+          color #dadada
 
-      summary
-        &:hover
-          color white
+        summary
+          &:hover
+            color white
 
-    &.folding-tag[open]
-      & > summary
-        color #dbdbdb
+      &.folding-tag[open]
+        & > summary
+          color #dbdbdb
+
+        & > div
+          &.content
+            border 2px solid #3c3c3c
+            border-top unset
 
 // 卡片遮罩
 [data-theme="dark"] .tip
@@ -80,27 +108,3 @@
     code
       background #2c2c2c30 !important
       color black !important
-
-// 折叠框
-details
-  &.folding-tag
-    border 0 solid #4c4c4c !important
-    background transparent !important
-
-    summary
-      border-radius 12px !important
-      transition .3s
-
-  &.folding-tag[open]
-    summary
-      border-bottom-right-radius unset !important
-      border-bottom-left-radius unset !important
-
-  &.folding-tag[open]
-    & > div
-      &.content
-        background transparent !important
-        border 1px solid #00a6ff
-        border-top unset
-        border-bottom-left-radius 25px
-        border-bottom-right-radius 25px
