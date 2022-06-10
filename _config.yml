@@ -193,19 +193,6 @@ wowjs:
   wow_js: https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js
   wow_init_js: /js/custom/wow-init.js
 
-# tag-plugins-plus
-# see https://akilar.top/posts/615e2dec/
-tag_plugins:
-  enable: true # 开关
-  priority: 5 #过滤器优先权
-  issues: false #issues标签依赖注入开关
-  CDN:
-    anima: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css #动画标签anima的依赖
-    jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js #issues标签依赖
-    issues: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/assets/issues.js #issues标签依赖
-    carousel: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js
-    tag_plugins_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css
-
 # envelope_comment
 envelope_comment:
   enable: true #开关
@@ -229,25 +216,9 @@ envelope_comment:
     comments: true
 
 # footer_beautify
-footer_beautify:
-  enable:
-    timer: false # 计时器开关
-    bdage: true # 徽标开关
-  priority: 5 #过滤器优先权
-  enable_page: all # 应用页面
-  exclude: #屏蔽页面
-    # - /posts/
-    # - /about/
-  layout: # 挂载容器类型
-    type: id
-    name: footer-wrap
-    index: 0
-  # 计时器部分配置项
-  runtime_js: https://cdn.jsdelivr.net/npm/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.js
-  runtime_css: https://cdn.jsdelivr.net/npm/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css
-  # 徽标部分配置项
-  swiperpara: 0 #若非0，则开启轮播功能，每行徽标个数
-  bdageitem:
+gh_bdage:
+  enable: true
+  items:
     - link: https://beian.miit.gov.cn
       shields: https://npm.elemecdn.com/@kmar/fonts/footer/icp.svg
       message: 本站已经在工信部备案，豫ICP备2021031313号
@@ -266,9 +237,6 @@ footer_beautify:
     - link: https://icp.gov.moe/?keyword=20219494
       shields: https://npm.elemecdn.com/@kmar/fonts/footer/cute.svg
       message: 本站已添加萌ICP豪华套餐，萌ICP备20219494号
-  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper@1.0.11/lib/swiper.min.css
-  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper@1.0.11/lib/swiper.min.js
-  swiperbdage_init_js: https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.6/lib/swiperbdage_init.min.js
 
 # 追番设置
 bangumi:
