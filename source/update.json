@@ -2,9 +2,14 @@
   "global": 3,
   "info": [
     {
-      "version": "147",
-      "change": [{"flag": "file", "value": "/link/"}]
+      "version": "148",
+      "change": [
+        {"flag": "file", "value": "/link/"},
+        {"flag": "file", "value": "/bangumis/"},
+        {"flag": "post", "value": "bcfe8408"}
+      ]
     },
+    {"version": "147"},
     {"version": "146"}
   ]
 }

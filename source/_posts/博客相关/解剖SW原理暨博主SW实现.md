@@ -11,7 +11,7 @@ tags:
 description: 之前我们写了一个PWA的实现，其中用到了SW，今天我们来解读一下其中SW的奥妙。
 abbrlink: bcfe8408
 date: 2022-05-20 21:31:25
-updated: 2022-06-07 19:02:25
+updated: 2022-06-11 14:09:25
 ---
 
 &emsp;&emsp;本文不会讲述PWA的内容，PWA内容请参考：[《基于Butterfly的PWA适配》](https://kmar.top/posts/94a0f26f/)。
@@ -462,7 +462,7 @@ const replaceList = {
 self.addEventListener('fetch', async event => {
     const replace = replaceRequest(event.request)
     const request = replace === null ? event.request : replace
-    if (findCache(request.url) !== null) {
+    if (findCache(request.url)) {
         event.respondWith(caches.match(request).then(response => {
             //如果缓存存在则直接返回缓存内容
             if (response) return response
@@ -585,11 +585,14 @@ function updateJson(page) {
             const elementList = json['info']
             const global = json['global']
             const newVersion = {global: global, local: elementList[0].version}
-            dbVersion.write(`${global}-${newVersion.local}`)
             //新用户不进行更新操作
-            if (!version) return reject()
+            if (!version) {
+                dbVersion.write(`${global}-${newVersion.local}`)
+                return reject()
+            }
             const oldVersion = version.split('-')
             const refresh = parseChange(list, elementList, oldVersion[1])
+            dbVersion.write(`${global}-${newVersion.local}`)
             //如果需要清理全站
             if (refresh) {
                 if (global === oldVersion[0]) {
@@ -684,7 +687,7 @@ class CacheChangeExpression {
                 this.match = checkCache
                 break
             case 'post':
-                this.match = url => url.match(`posts/${value}`) || url.endsWith('search.xml')
+                this.match = url => url.match(`posts/${value}`) || url.match(/\/(search\.xml|postsInfo\.json)$/)
                 break
             case 'type':
                 this.match = url => url.endsWith(`.${value}`) && checkCache(url)
@@ -692,7 +695,7 @@ class CacheChangeExpression {
             case 'file':
                 this.match = url => url.endsWith(value)
                 break
-            default: console.error(`不支持的表达式：{flag=${json['flag']}, value=${value}}`)
+            default: throw `不支持的表达式：{flag=${json['flag']}, value=${value}}`
         }
     }
 
