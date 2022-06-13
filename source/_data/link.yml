@@ -4,6 +4,7 @@
       link: https://afdian.net/@emptydreams
       avatar: https://pic1.afdiancdn.com/user/b8d1ee924d7411ea8b7b52540025c377/avatar/883197cee34dfb1648e36efd44df6787_w180_h180_s42.jpg?imageView2/1/w/240/h/240
       descr: 来探索我正在开发的项目吧~
+      siteshot: https://npm.elemecdn.com/@kmar/fonts@1.0.5/sc/own-afd.jpg
     - name: Bilibili
       link: https://space.bilibili.com/66951474
       avatar: https://npm.elemecdn.com/@kmar/fonts/avatar/bilibili.png
@@ -18,11 +19,6 @@
       link: https://blog.therehello.top/
       avatar: https://z3.ax1x.com/2021/11/04/IeChpF.jpg
       descr: 大一菜鸡，多多关注
-    - name: 锦瑟的糖果屋
-      link: https://www.ijinse.cn/
-      avatar: https://www.ijinse.cn/logo.png
-      descr: 锦瑟无端五十弦，一弦一柱思华年
-      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/jinse.jpg
     - name: Tianli
       link: https://tianli-blog.club/
       avatar: https://img1.tianli0.top/logo.png
@@ -31,7 +27,7 @@
       link: https://blog.cyfan.top/
       avatar: https://npm.elemecdn.com/chenyfan-oss@3
       descr: 一个在互联网角落挣扎的小小博客，很小很小
-      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/cyfan.jpg
+      siteshot: https://npm.elemecdn.com/@kmar/fonts@1.0.5/sc/cyfan.jpg
     - name: Gahotx
       link: https://gahotx.cn/
       avatar: https://pub.gahotx.cn/photo/cat.jpg
@@ -44,7 +40,7 @@
   link_list:
     - name: 探姬的小天地
       link: https://www.yuque.com/probius/
-      avatar: https://npm.elemecdn.com/@kmar/fonts/avatar/tj.png
+      avatar: https://npm.elemecdn.com/@kmar/fonts@1.0.5/avatar/tj.png
       descr: 妄想全栈的fw探姬酱（
     - name: kaiboshi
       link: https://kaiboshi.gitee.io/
@@ -72,7 +68,7 @@
       link: https://www.chuckle.top
       avatar: https://www.chuckle.top/img/head.webp
       descr: 宁静致远,倾尘轻笑
-      siteshot: https://npm.elemecdn.com/@kmar/fonts/sc/chuckle.jpg
+      siteshot: https://npm.elemecdn.com/@kmar/fonts@1.0.5/sc/chuckle.jpg
     - name: 葱苓的小窝
       link: https://www.ciraos.top/
       avatar: https://s2.loli.net/2022/05/24/mZAcl5qUHo4dkJw.png
