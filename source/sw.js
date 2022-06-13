@@ -265,8 +265,6 @@ class VersionList {
  */
 class CacheChangeExpression {
 
-    match = null
-
     constructor(json) {
         const value = json['value']
         const checkCache = url => {
@@ -293,9 +291,10 @@ class CacheChangeExpression {
                 this.match = url => url.match(new RegExp(value))
                 break
             case 'new':
-                this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top)$/) || url.match('/page/')
+                this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top)$/) ||
+                                    url.match(/.*\/(page|archives|categories|tags)\/.*/)
                 break
-            default: throw `不支持的表达式：{flag=${json['flag']}, value=${value}}`
+            default: throw `未知表达式：${JSON.stringify(json)}`
         }
     }
 
