@@ -291,7 +291,7 @@ class CacheChangeExpression {
                 this.match = url => url.match(new RegExp(value))
                 break
             case 'new':
-                this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top)$/) ||
+                this.match = url => url.match(/(search\.xml|postsInfo\.json|\.top|\.top\/)$/) ||
                                     url.match(/.*\/(page|archives|categories|tags)\/.*/)
                 break
             default: throw `未知表达式：${JSON.stringify(json)}`
