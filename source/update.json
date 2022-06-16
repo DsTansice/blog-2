@@ -5,7 +5,8 @@
       "version": "150",
       "change": [
         {"flag": "file", "value": "main.js"},
-        {"flag": "new"}
+        {"flag": "new"},
+        {"flag": "file", "value": "index.css"}
       ]
     },
     {
@@ -18,8 +19,6 @@
     {
       "version": "148",
       "change": [{"flag": "post", "value": "bcfe8408"}]
-    },
-    {"version": "147"},
-    {"version": "146"}
+    }
   ]
 }

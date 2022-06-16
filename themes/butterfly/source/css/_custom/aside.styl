@@ -1,13 +1,3 @@
-// 首页侧栏卡片
-[data-theme="light"] .card-widget
-  background: var(--km-global-bg) !important
-
-[data-theme="dark"] .card-widget
-  background: rgba(20, 20, 20, 0.9) !important
-
-  blockquote
-    background-color: rgba(30, 30, 30, 0.65) !important
-
 [data-theme="dark"]
   // 深色模式右侧标签
   #aside-content
@@ -42,12 +32,12 @@
 
         &:hover
           background var(--km-toc-hover)
-          color var(--km-font) !important
+          color var(--km-font)
 
         &.active
-          color var(--km-toc-active-font) !important
+          color var(--km-toc-active-font)
           border-radius 10px
-          background var(--km-toc-active) !important
+          background var(--km-toc-active)
 
     .item-headline
       .toc-percentage
@@ -55,16 +45,16 @@
 
   // 作者信息背景图片
   .card-widget.card-info
-    background-image url("https://image.kmar.top/indexBg/side.png!/fw/800") !important
-    background-repeat no-repeat !important
-    background-attachment inherit !important
-    background-size 100% !important
+    background-image url("https://image.kmar.top/indexBg/side.png!/fw/800")
+    background-repeat no-repeat
+    background-attachment inherit
+    background-size 100%
     .avatar-img
       margin-top 20px
       img
-        transition all 0.5s !important
+        transition all 0.5s
         &:hover
-          transform unset !important
+          transform unset
           opacity 0
       &:hover
         & + .author-info__name
