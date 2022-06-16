@@ -594,7 +594,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         let difDay = Math.floor((end - start) / 1000 / 24 / 60 / 60)
         let difYear = endYear - startYear - 1
-        difDay -= difYear * 365 + leapAmount
+        difDay -= difYear * 365 + leapAmount + 1
         if (difDay >= 365) {
           difDay -= 365
           ++difYear

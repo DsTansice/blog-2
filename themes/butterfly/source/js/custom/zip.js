@@ -245,6 +245,7 @@ function kmarTask() {
         /** 构建最新文章 */
         function syncRecentPosts(json) {
             function create(abbrlink, title, img, date) {
+                // noinspection HtmlUnknownAttribute,HtmlDeprecatedAttribute
                 return `<div class="aside-list-item">\<a class="thumbnail" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes"><img src="${img}" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="${title}" data-ll-status="loaded" class="entered loaded"></a><div class="content"><a class="title" href="/posts/${abbrlink}/" title="${title}" data-pjax-state="" one-link-mark="yes">${title}</a><time title="更新于 ${date.toLocaleString()}">${date.toLocaleDateString()}</time></div></div>`
             }
             const list = json['recent']
