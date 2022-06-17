@@ -103,7 +103,7 @@
                 span.gitalk-comment-count
           when 'Twikoo'
             +countBlock
-              a(href=url_for(page.path) + '#post-comment')
+              a#comment-count
                 span#twikoo-count
           when 'Facebook Comments'
             +countBlock

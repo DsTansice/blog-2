@@ -41,6 +41,12 @@ function kmarTask() {
     function postMessage2SW(type, value) {
         navigator.serviceWorker.controller.postMessage({type: type, value: value})
     }
+    /** 跳转到评论区 */
+    function jump2Comment() {
+        history.pushState('his', null, location.href + '#post-comment')
+        const comment = document.getElementById('post-comment')
+        btf.scrollToDest(getElementTop(comment), 800)
+    }
 
     /** 右下角菜单 */
     function hideRightSide() {
@@ -101,9 +107,7 @@ function kmarTask() {
                     openToolsWin()
                     break
                 case 'to_comment':
-                    history.pushState('his', null, location.href + '#post-comment')
-                    const comment = document.getElementById('post-comment')
-                    btf.scrollToDest(getElementTop(comment), 800)
+                    jump2Comment()
                     break
             }
         })
@@ -246,6 +250,7 @@ function kmarTask() {
         sessionStorage.setItem('preload', id)
     }
 
+    /** 同步最新文章及相关文章列表 */
     function syncJsonInfo() {
         /** 读取某一个文章的信息 */
         function readAbbrlink(json, abbrlink) {
@@ -302,6 +307,12 @@ function kmarTask() {
         }
     }
 
+    /** 评论按钮的平滑滚动 */
+    function smoothCommentJump() {
+        const element = document.getElementById('comment-count')
+        if (element) element.addEventListener('click', () => jump2Comment())
+    }
+
     function runTaskList(list) {
         // noinspection JSIgnoredPromiseFromCall
         Promise.all(list.map(it => new Promise(resolve => {
@@ -318,7 +329,8 @@ function kmarTask() {
     })
 
     //每次加载页面都执行的操作
-    const taskList = [addScrollOperatorMonitor, removeFixedCardWidget, repairBangumis, preload, syncJsonInfo]
+    const taskList = [addScrollOperatorMonitor, removeFixedCardWidget,
+                        repairBangumis, preload, syncJsonInfo, smoothCommentJump]
     runTaskList(taskList)
 }
 
