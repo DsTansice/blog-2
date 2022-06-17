@@ -1,25 +1,24 @@
 {
-  "global": 3,
+  "global": 4,
   "info": [
+    {
+      "version": "152",
+      "change": [
+        {"flag": "file", "value": "index.css"},
+        {"flag": "file", "value": "zip.js"},
+        {"flag": "html"},
+        {"flag": "file", "value": "Alternative2.cur"}
+      ]
+    },
     {
       "version": "151",
       "change": [
         {"flag": "file", "value": "main.js"},
-        {"flag": "new"},
-        {"flag": "file", "value": "index.css"}
+        {"flag": "new"}
       ]
     },
     {"version": "150"},
-    {
-      "version": "149",
-      "change": [
-        {"flag": "file", "value": "/link/"},
-        {"flag": "file", "value": "/bangumis/"}
-      ]
-    },
-    {
-      "version": "148",
-      "change": [{"flag": "post", "value": "bcfe8408"}]
-    }
+    {"version": "149"},
+    {"version": "148"}
   ]
 }

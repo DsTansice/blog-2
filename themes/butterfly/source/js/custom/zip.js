@@ -96,7 +96,16 @@ function kmarTask() {
         document.getElementById('setting-button').addEventListener('click', () => closeToolsWin())
         document.getElementById('rightside').addEventListener('click', event => {
             const element = event.target.id ? event.target : event.target.parentNode
-            if (element.id === 'rightside_config') openToolsWin()
+            switch (element.id) {
+                case 'rightside_config':
+                    openToolsWin()
+                    break
+                case 'to_comment':
+                    history.pushState('his', null, location.href + '#post-comment')
+                    const comment = document.getElementById('post-comment')
+                    btf.scrollToDest(getElementTop(comment), 800)
+                    break
+            }
         })
         const preloadButton = document.getElementById('preload-switch')
         preloadButton.onclick = () => {

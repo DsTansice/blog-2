@@ -27,7 +27,7 @@ mixin rightsideItem(array)
             i.fas.fa-sms
       when 'comment'
         if commentsJsLoad
-          a#to_comment(href="#post-comment" title=_p("rightside.scroll_to_comment"))
+          a#to_comment(title=_p("rightside.scroll_to_comment"))
             i.fas.fa-comments
       when 'share'
         button#share-link(type="button" title='分享链接')
