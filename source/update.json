@@ -2,9 +2,15 @@
   "global": 4,
   "info": [
     {
-      "version": "152",
+      "version": "153",
       "change": [
         {"flag": "file", "value": "index.css"},
+        {"flag": "post", "value": "7d9fb37e"}
+      ]
+    },
+    {
+      "version": "152",
+      "change": [
         {"flag": "file", "value": "zip.js"},
         {"flag": "html"},
         {"flag": "file", "value": "Alternative2.cur"}
@@ -16,9 +22,6 @@
         {"flag": "file", "value": "main.js"},
         {"flag": "new"}
       ]
-    },
-    {"version": "150"},
-    {"version": "149"},
-    {"version": "148"}
+    }
   ]
 }
