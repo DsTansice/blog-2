@@ -238,30 +238,6 @@ gh_bdage:
       shields: https://npm.elemecdn.com/@kmar/fonts/footer/cute.svg
       message: 本站已添加萌ICP豪华套餐，萌ICP备20219494号
 
-# 追番设置
-bangumi:
+bilibili:
   enable: true
-  source: bili
-  path:
   vmid: 66951474
-  title: '追番列表'
-  quote: '生命不息，追番不止！'
-  show: 1
-  lazyload: true
-  loading:
-  metaColor:
-  color:
-  webp:
-  progress:
-cinema: # 追剧设置
-  enable: false
-  path:
-  vmid:
-  title: '追番列表'
-  quote: '生命不息，追番不止！'
-  show: 1
-  loading:
-  metaColor:
-  color:
-  webp:
-  progress:

@@ -1,0 +1,191 @@
+#bangumis
+    .bangumi-tabs#bangumi-top
+        button#wantWatch 想看
+        button#watching 在看
+        button#watched 已看
+
+    div#inner
+        .card
+            img(src='https://i0.hdslb.com/bfs/bangumi/image/d6f6d0b103d4042e3eb0436914d08862a92a4afd.png' referrerpolicy="no-referrer")
+            .info
+                a.title 标题
+                .details
+                    span.total
+                        p 全12话
+                    span.area
+                        p 番剧
+                        em 日本
+                    span.play
+                        p 播放量
+                        em 1064.0万
+                    span.follow
+                        p 追番
+                        em 66.9万
+                    span.coin
+                        p 硬币
+                        em 100万
+                    span.danmaku
+                        p 弹幕
+                        em 11.1万
+                    span.score
+                        p 评分
+                        em 9.9
+                .descr
+                    p 啊啊速度进来法大师傅啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊无哦哦哦哦哦哦阿尔法我
+
+    .bangumi-tabs#bangumi-bottom
+        button#bottom-first 首页
+        button#bottom-pre 上一页
+        p#bottom-num 0/0
+        button#bottom-next 下一页
+        button#bottom-end 尾页
+
+.js-pjax
+    script.
+        document.addEventListener('DOMContentLoaded', () => {
+            const isSupportWebp = (function () {
+                try {
+                    return document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0;
+                } catch (err) {
+                    return false;
+                }
+            })()
+            // 单页卡片数量限制
+            const maxCount = 10
+            const packing = task => new Promise(resolve => resolve(task()))
+            /** 追加文本 */
+            function appendText(element, text, clean = false) {
+                text = `(${text})`
+                if (navigator.userAgent.indexOf('Firefox') < 0)
+                    element.innerText = clean ? text : element.innerText + text
+                else
+                    element.textContent = clean ? text : element.textContent + text
+            }
+            /** 处理参数 */
+            function parseArg() {
+                const url = location.href
+                let arg
+                if (url.endsWith('/')) {
+                    const info = JSON.parse(sessionStorage.getItem('bangumis'))
+                    arg = info || {id: 'watching', page: 1}
+                } else {
+                    arg = JSON.parse(decodeURIComponent(location.hash.substring(1)))
+                    // 校对参数
+                    if (!arg.id || (arg.id !== 'watching' &&
+                        arg.id !== 'wantWatch' && arg.id !== 'watched'))
+                        arg.id = 'watching'
+                    if (!arg.page || arg.page < 1) arg.page = 1
+                }
+                sessionStorage.setItem('bangumis', JSON.stringify(arg))
+                return arg
+            }
+            /** 加载JSON */
+            async function loadJson() {
+                const cache = sessionStorage.getItem('bangumis-json')
+                if (cache) return JSON.parse(cache)
+                const json = await (await fetch('/bilibili.json')).text()
+                sessionStorage.setItem('bangumis-json', json)
+                return JSON.parse(json)
+            }
+            /** 初始化页码信息 */
+            function initPageNumber(json) {
+                appendText(document.getElementById('wantWatch'), json.wantWatch.length)
+                appendText(document.getElementById('watching'), json.watching.length)
+                appendText(document.getElementById('watched'), json.watched.length)
+            }
+            /** 更新列表内容 */
+            function update(json, arg, updateURL = true) {
+                const content = json[arg.id]
+                const maxPage = Math.ceil(content.length / maxCount)
+                if (arg.page > maxPage) arg.page = maxPage
+
+                const pre = document.getElementById('bottom-pre').classList
+                const next = document.getElementById('bottom-next').classList
+                if (arg.page === 1) pre.add('disable')
+                else pre.remove('disable')
+                if (arg.page === maxPage) next.add('disable')
+                else next.remove('disable')
+
+                const pageNum = document.getElementById('bottom-num')
+                appendText(pageNum, `${arg.page} / ${maxPage}`, true)
+
+                function buildCard(title, img, href, total, follow, type, area, play, coin, danmaku, score, descr, index) {
+                    img = `https://i0.hdslb.com/bfs/bangumi/${img}${isSupportWebp ? '@220w_280h.webp' : ''}`
+                    return `<div id="inner" index="${index}"><div class="card"><img src="${img}" referrerpolicy="no-referrer" data-ll-status="loading" class="entered loading"><div class="info"><a class="title" target="_blank" one-link-mark="yes" href="${href}">${title}</a><div class="details"><span class="total"><p>${total}</p></span><span class="area"><p>${type}</p><em>${area}</em></span><span class="play"><p>播放量</p><em>${play}</em></span><span class="follow"><p>追番</p><em>${follow}</em></span><span class="coin"><p>硬币</p><em>${coin}</em></span><span class="danmaku"><p>弹幕</p><em>${danmaku}</em></span><span class="score"><p>评分</p><em>${score}</em></span></div><div class="descr"><p>${descr}</p></div></div></div></div>`
+                }
+                let newHTML = ''
+                for (let i = (arg.page - 1) * maxCount, k = 0;
+                        k !== maxCount && i !== content.length; ++k, ++i) {
+                    const value = content[i]
+                    const href = `https://www.bilibili.com/bangumi/media/md${value.id}/`
+                    newHTML += buildCard(value.title, value.cover, href, value.totalCount,
+                        value.follow, value.type, value.area, value.view,
+                        value.coin, value.danmaku, value.score, value.des, value.index)
+                }
+                document.getElementById('inner').innerHTML = newHTML
+
+                if (updateURL) location.hash = JSON.stringify(arg)
+                for (let value of document.getElementById('bangumi-top').children) {
+                    if (value.id === arg.id) value.classList.add('active')
+                    else value.classList.remove('active')
+                }
+                btf.loadLightbox(document.querySelectorAll('#bangumis img:not(.no-lightbox):not(.inline)'))
+            }
+            /** 注册点击事件 */
+            function initClick(json, arg) {
+                const top = document.getElementById('bangumi-top')
+                top.addEventListener('click', event => {
+                    const element = event.target.id ? event.target : event.target.parentNode
+                    if (element.nodeName !== 'BUTTON') return
+                    element.classList.add('active')
+                    for (let value of top.children) {
+                        if (value.id !== element.id) value.classList.remove('active')
+                    }
+                    arg.id = element.id
+                    arg.page = 1
+                    sessionStorage.setItem('bangumis', JSON.stringify(arg))
+                    update(json, arg)
+                })
+                const bottom = document.getElementById('bangumi-bottom')
+                const height = document.getElementById('page-header').clientHeight
+                bottom.addEventListener('click', event => {
+                    const element = event.target.id ? event.target : event.target.parentNode
+                    if (element.nodeName !== 'BUTTON' || element.classList.contains('disable')) return
+                    switch (element.id) {
+                        case 'bottom-first':
+                            arg.page = 1
+                            break
+                        case 'bottom-end':
+                            arg.page = Math.ceil(json[arg.id].length / maxCount)
+                            break
+                        case 'bottom-next':
+                            ++arg.page
+                            break
+                        case 'bottom-pre':
+                            --arg.page
+                            break
+                    }
+                    btf.scrollToDest(height)
+                    update(json, arg)
+                })
+            }
+            packing(parseArg).then(arg => {
+                packing(loadJson).then(json => {
+                    window.addEventListener('hashchange', event => {
+                        console.log(event.newURL)
+                        if (event.newURL.endsWith('bangumis/')) return history.forward()
+                        const newArg = parseArg()
+                        if (newArg !== arg) {
+                            arg.id = newArg.id
+                            arg.page = newArg.page
+                            update(json, arg, false)
+                        }
+                    })
+                    Promise.all([
+                        packing(() => initClick(json, arg)),
+                        packing(() => initPageNumber(json)),
+                        packing(() => update(json, arg))
+                    ])
+                })
+            })
+        })

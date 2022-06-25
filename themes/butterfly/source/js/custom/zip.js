@@ -170,7 +170,7 @@ function kmarTask() {
         })
         document.addEventListener('DOMNodeRemoved', event => {
             const list = event.target.classList
-            if (list && list.contains('fancybox__image')) recoverHtmlScrollBar()
+            if (list && list.contains('fancybox__container')) recoverHtmlScrollBar()
         })
     }
 
