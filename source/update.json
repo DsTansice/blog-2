@@ -2,27 +2,23 @@
   "global": 4,
   "info": [
     {
+      "version": "157",
+      "change": [
+        {"flag": "file", "value": "index.css"}
+      ]
+    },
+    {
       "version": "156",
       "change": [
         {"flag": "new"},
         {"flag": "html"}
       ]
     },
-    {
-      "version": "155",
-      "change": [{"flag": "file", "value": "index.css"}]
-    },
+    {"version": "155"},
     {
       "version": "154",
       "change": [{"flag": "file", "value": "zip.js"}]
     },
-    {"version": "153"},
-    {
-      "version": "152",
-      "change": [
-        {"flag": "html"},
-        {"flag": "file", "value": "Alternative2.cur"}
-      ]
-    }
+    {"version": "153"}
   ]
 }
