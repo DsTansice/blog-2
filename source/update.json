@@ -4,7 +4,8 @@
     {
       "version": "157",
       "change": [
-        {"flag": "file", "value": "index.css"}
+        {"flag": "file", "value": "index.css"},
+        {"flag": "post", "value": "456efd20"}
       ]
     },
     {

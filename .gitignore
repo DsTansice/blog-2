@@ -5,5 +5,5 @@ db.json
 .deploy*/
 public/
 node_modules/
-source/_data/bangumis.json
 search.xml
+source/_data/bilibili.json
