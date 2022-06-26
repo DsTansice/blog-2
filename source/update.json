@@ -2,12 +2,15 @@
   "global": 4,
   "info": [
     {
-      "version": "154",
+      "version": "155",
       "change": [
         {"flag": "file", "value": "index.css"},
-        {"flag": "file", "value": "bangumis/"},
-        {"flag": "file", "value": "zip.js"}
+        {"flag": "file", "value": "bangumis/"}
       ]
+    },
+    {
+      "version": "154",
+      "change": [{"flag": "file", "value": "zip.js"}]
     },
     {
       "version": "153",
@@ -18,13 +21,6 @@
       "change": [
         {"flag": "html"},
         {"flag": "file", "value": "Alternative2.cur"}
-      ]
-    },
-    {
-      "version": "151",
-      "change": [
-        {"flag": "file", "value": "main.js"},
-        {"flag": "new"}
       ]
     }
   ]
