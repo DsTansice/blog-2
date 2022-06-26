@@ -83,14 +83,14 @@
                 appendText(pageNum, `${arg.page} / ${maxPage}`, true)
 
                 function buildCard(title, img, href, total, follow, type, area, play, coin, danmaku, score, descr, index) {
-                    img = `https://i0.hdslb.com/bfs/bangumi/${img}${isSupportWebp ? '@220w_280h.webp' : ''}`
-                    return `<div id="inner" index="${index}"><div class="card"><img src="${img}" referrerpolicy="no-referrer" data-ll-status="loading" class="entered loading"><div class="info"><a class="title" target="_blank" one-link-mark="yes" href="${href}">${title}</a><div class="details"><span class="total"><p>${total}</p></span><span class="area"><p>${type}</p><em>${area}</em></span><span class="play"><p>播放量</p><em>${play}</em></span><span class="follow"><p>追番</p><em>${follow}</em></span><span class="coin"><p>硬币</p><em>${coin}</em></span><span class="danmaku"><p>弹幕</p><em>${danmaku}</em></span><span class="score"><p>评分</p><em>${score}</em></span></div><div class="descr"><p>${descr}</p></div></div></div></div>`
+                    if (!img.startsWith('http')) img = `https://i0.hdslb.com/bfs/bangumi/${img}${isSupportWebp ? '@220w_280h.webp' : ''}`
+                    return `<div class="card" link="${href}" index="${index}"><img src="${img}" referrerpolicy="no-referrer" data-ll-status="loading" class="entered loading"><div class="info"><a class="title">${title}</a><div class="details"><span class="total"><p>${total}</p></span><span class="area"><p>${type}</p><em>${area}</em></span><span class="play"><p>播放量</p><em>${play}</em></span><span class="follow"><p>追番</p><em>${follow}</em></span><span class="coin"><p>硬币</p><em>${coin}</em></span><span class="danmaku"><p>弹幕</p><em>${danmaku}</em></span><span class="score"><p>评分</p><em>${score}</em></span></div><div class="descr"><p>${descr}</p></div></div></div>`
                 }
                 let newHTML = ''
                 for (let i = (arg.page - 1) * maxCount, k = 0;
                         k !== maxCount && i !== content.length; ++k, ++i) {
                     const value = content[i]
-                    const href = `https://www.bilibili.com/bangumi/media/md${value.id}/`
+                    const href = value.id === 0 ? '' : (typeof value.id !== 'number' ? value.id : `https://www.bilibili.com/bangumi/media/md${value.id}/`)
                     newHTML += buildCard(value.title, value.cover, href, value.totalCount,
                         value.follow, value.type, value.area, value.view,
                         value.coin, value.danmaku, value.score, value.des, value.index)
@@ -139,6 +139,17 @@
                     }
                     btf.scrollToDest(height)
                     update(json, arg)
+                })
+                const card = document.getElementById('inner')
+                card.addEventListener('click', event => {
+                    let element = event.target.id ? event.target : event.target.parentNode
+                    console.log(card.attributes)
+                    if (!element.classList.contains('descr')) {
+                        while (!element.classList.contains('card')) element = element.parentElement
+                        const link = element.getAttribute('link')
+                        if (link.length > 0) window.open(link)
+                        else kmarUtils.popClockWin('博主没有为这个番剧设置链接~')
+                    }
                 })
             }
             packing(parseArg).then(arg => {

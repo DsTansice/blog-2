@@ -94,15 +94,18 @@ const getData = async (vmid, status, pn) => {
         for (const bangumi of list) {
             let cover = bangumi?.cover;
             if (cover) {
-                const href = new URL(cover);
-                href.protocol = 'https';
-                cover = href.href;
+                const href = new URL(cover)
+                href.protocol = 'https'
+                cover = href.href
+                if (cover.startsWith('https://i0.hdslb.com/bfs/bangumi/')) {
+                    cover = cover.substring(33)
+                }
             }
             $data.push({
                 title: bangumi?.title,
                 type: bangumi?.season_type_name,
                 area: bangumi?.areas?.[0]?.name,
-                cover: cover?.substring(cover?.lastIndexOf('bangumi/') + 8),
+                cover,
                 totalCount: total(bangumi?.total_count, 1),
                 id: bangumi?.media_id,
                 follow: count(bangumi?.stat?.follow),
