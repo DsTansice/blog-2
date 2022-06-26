@@ -2,18 +2,17 @@
   "global": 4,
   "info": [
     {
-      "version": "158",
-      "change": [
-        {"flag": "file", "value": "/link/"}
-      ]
-    },
-    {
-      "version": "157",
+      "version": "159",
       "change": [
         {"flag": "file", "value": "index.css"},
         {"flag": "post", "value": "456efd20"}
       ]
     },
+    {
+      "version": "158",
+      "change": [{"flag": "file", "value": "/link/"}]
+    },
+    {"version": "157"},
     {
       "version": "156",
       "change": [
