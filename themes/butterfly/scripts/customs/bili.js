@@ -3,8 +3,29 @@
 const logger = require('hexo-log')()
 const axios = require('axios')
 const fs = require('hexo-fs')
+const {source_dir} = require("hexo/lib/hexo/default_config")
 
-hexo.extend.generator.register('generateKmarBilibiliJson', async () => {
+const options = {
+    options: [
+        { name: '-u, --update', desc: 'Update data' },
+        { name: '-d, --delete', desc: 'Delete data' }
+    ]
+}
+
+hexo.extend.console.register('bangumi', '番剧JSON文件的相关操作', options, async args => {
+    const path = `${source_dir}/bilibili.json`
+    if (args.u) await writeJSON(path)
+    else if (args.d) {
+        if (fs.existsSync(path)) {
+            fs.deleteFile(path)
+            logger.info("成功删除JSON文件")
+        }
+    } else {
+        logger.info("未知参数，目前仅支持 -u 以及 -d")
+    }
+})
+
+async function writeJSON(path) {
     const config = hexo.config.bilibili || hexo.theme.config.bilibili
     if (!(config && config.enable)) return
     const readJson = (json, list) => {
@@ -15,7 +36,6 @@ hexo.extend.generator.register('generateKmarBilibiliJson', async () => {
     }
     const data = {
         vmid: config.vmid,
-        path: 'bilibili',
         extra: config.extra || 'extra_bangumis'
     }
     const wantWatch = await getBiliJson(data.vmid, 1)
@@ -48,11 +68,8 @@ hexo.extend.generator.register('generateKmarBilibiliJson', async () => {
     }
     const sum = info.watching.length + info.watched.length + info.wantWatch.length
     logger.info(`wantWatch(${info.wantWatch.length}) + watching(${info.watching.length}) + watched(${info.watched.length}) = ${sum}`)
-    return {
-        path: `${data.path}.json`,
-        data: JSON.stringify(info)
-    }
-})
+    fs.writeFileSync(path, JSON.stringify(info))
+}
 
 
 const getDataPage = async (vmid, status) => {
