@@ -36,6 +36,10 @@
       link: https://blog.zhheo.com/
       avatar: https://blog.zhheo.com/img/avatar.png
       descr: 分享设计与科技生活
+    - name: 小N同学
+      link: https://www.nesxc.com/
+      avatar: https://public.cdn.nesxc.com/avatar.jpg
+      descr: 青石落晚巷 故人未还乡
 - class_name: 笔趣楼
   link_list:
     - name: 探姬的小天地
@@ -77,6 +81,10 @@
       link: https://wyxogo.top/
       avatar: https://wyxogo.top/images/avatar.webp
       descr: KEEP WALKING
+    - name: 梦落の小屋
+      link: https://blog.dreamfall.cn/
+      avatar: https://home.dreamfall.cn/source/img/avatar.jpg
+      descr: 行走于苍穹之上，将星空献给你。
 - class_name: 待君归
   link_list:
     - name: Mark Blog
