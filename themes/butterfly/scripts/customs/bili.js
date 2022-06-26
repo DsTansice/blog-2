@@ -71,28 +71,33 @@ async function writeJSON(path) {
     fs.writeFileSync(path, JSON.stringify(info))
 }
 
+// eslint-disable-next-line no-nested-ternary
+const count = (e) =>  (e ? (e > 10000 && e < 100000000 ? `${(e / 10000).toFixed(1)} 万` : e > 100000000 ? `${(e / 100000000).toFixed(1)} 亿` : e) : '-')
+
+// eslint-disable-next-line no-nested-ternary
+const total = (e, typeNum) => (e ? (e === -1 ? '未完结' : `全${e}${typeNum === 1 ? '话' : '集'}`) : '-')
 
 const getDataPage = async (vmid, status) => {
-    const response = await axios.get(`https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=${status}&vmid=${vmid}&ps=1&pn=1`);
+    const response = await axios.get(`https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=${status}&vmid=${vmid}&ps=1&pn=1`)
     if (response?.data?.code === 0 && response?.data?.message === '0' && response?.data?.data && typeof response?.data?.data?.total !== 'undefined') {
-        return { success: true, data: Math.ceil(response.data.data.total / 30) + 1 };
+        return { success: true, data: Math.ceil(response.data.data.total / 30) + 1 }
     } else if (response && response.data && response.data.message !== '0') {
-        return { success: false, data: response.data.message };
+        return { success: false, data: response.data.message }
     } else if (response && response.data) {
-        return { success: false, data: response.data };
+        return { success: false, data: response.data }
     }
-    return { success: false, data: response };
-};
+    return { success: false, data: response }
+}
 // kmar edit point
 const getData = async (vmid, status, pn) => {
-    const response = await axios.get(`https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=${status}&vmid=${vmid}&ps=30&pn=${pn}`);
-    const $data = [];
+    const response = await axios.get(`https://api.bilibili.com/x/space/bangumi/follow/list?type=1&follow_status=${status}&vmid=${vmid}&ps=30&pn=${pn}`)
+    const $data = []
     if (response?.data?.code === 0) {
-        const data = response?.data?.data;
-        const list = data?.list || [];
+        const data = response?.data?.data
+        const list = data?.list || []
 
         for (const bangumi of list) {
-            let cover = bangumi?.cover;
+            let cover = bangumi?.cover
             if (cover) {
                 const href = new URL(cover)
                 href.protocol = 'https'
@@ -115,31 +120,25 @@ const getData = async (vmid, status, pn) => {
                 score: bangumi?.rating?.score ?? '-',
                 des: bangumi?.evaluate,
                 index: list.length - $data.length
-            });
+            })
         }
-        return $data;
+        return $data
     }
-};
-// eslint-disable-next-line no-nested-ternary
-const count = (e) =>  (e ? (e > 10000 && e < 100000000 ? `${(e / 10000).toFixed(1)} 万` : e > 100000000 ? `${(e / 100000000).toFixed(1)} 亿` : e) : '-');
+}
 
-// eslint-disable-next-line no-nested-ternary
-const total = (e, typeNum) => (e ? (e === -1 ? '未完结' : `全${e}${typeNum === 1 ? '话' : '集'}`) : '-');
-
-// kmar edit point
-const getBiliJson = async (vmid, status) => {
-    const page = await getDataPage(vmid, status);
+async function getBiliJson(vmid, status) {
+    const page = await getDataPage(vmid, status)
     if (page?.success) {
-        const list = [];
+        const list = []
         // eslint-disable-next-line no-plusplus
         for (let i = 1; i < page.data; i++) {
-            const data = await getData(vmid, status, i);
-            list.push(...data);
+            const data = await getData(vmid, status, i)
+            list.push(...data)
         }
-        return list;
+        return list
     }
-    return [];
-};
+    return []
+}
 
 function mergeSort(array) {
     function merge(left, right) {

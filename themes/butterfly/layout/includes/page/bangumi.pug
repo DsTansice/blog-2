@@ -1,3 +1,7 @@
+link(rel="preconnect" href="//i0.hdslb.com/")
+
+!=page.content
+
 #bangumis
     .bangumi-tabs#bangumi-top
         button#wantWatch 想看
@@ -148,7 +152,7 @@
                         while (!element.classList.contains('card')) element = element.parentElement
                         const link = element.getAttribute('link')
                         if (link.length > 0) window.open(link)
-                        else kmarUtils.popClockWin('博主没有为这个番剧设置链接~')
+                        else btf.snackbarShow('博主没有为这个番剧设置链接~')
                     }
                 })
             }
